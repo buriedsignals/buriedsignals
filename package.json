@@ -1,0 +1,32 @@
+{
+  "name": "buriedsignals",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@ekolabs/eko-react-sdk": "^0.1.0",
+    "@tryghost/content-api": "^1.11.1",
+    "framer-motion": "^6.5.1",
+    "mapbox-gl": "^2.9.1",
+    "next": "12.1.6",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "react-spring": "^9.4.5",
+    "react-youtube": "^9.0.3",
+    "styled-breakpoints": "^11.1.1",
+    "styled-components": "^5.3.5",
+    "zustand": "^4.0.0-rc.1"
+  },
+  "devDependencies": {
+    "eslint": "8.17.0",
+    "eslint-config-next": "12.1.6"
+  },
+  "resolutions": {
+    "styled-components": "^5"
+  }
+}

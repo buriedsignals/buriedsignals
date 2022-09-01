@@ -1,0 +1,454 @@
+/* Font-face */
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk-Regular.eot');
+  src: url('/fonts/SpaceGrotesk-Regular.eot?#iefix') format('embedded-opentype'),
+      url('/fonts/SpaceGrotesk-Regular.woff2') format('woff2'),
+      url('/fonts/SpaceGrotesk-Regular.woff') format('woff'),
+      url('/fonts/SpaceGrotesk-Regular.ttf') format('truetype'),
+      url('/fonts/SpaceGrotesk-Regular.svg#SpaceGrotesk-Regular') format('svg');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk-Light.eot');
+  src: url('/fonts/SpaceGrotesk-Light.eot?#iefix') format('embedded-opentype'),
+      url('/fonts/SpaceGrotesk-Light.woff2') format('woff2'),
+      url('/fonts/SpaceGrotesk-Light.woff') format('woff'),
+      url('/fonts/SpaceGrotesk-Light.ttf') format('truetype'),
+      url('/fonts/SpaceGrotesk-Light.svg#SpaceGrotesk-Light') format('svg');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk-Bold.eot');
+  src: url('/fonts/SpaceGrotesk-Bold.eot?#iefix') format('embedded-opentype'),
+      url('/fonts/SpaceGrotesk-Bold.woff2') format('woff2'),
+      url('/fonts/SpaceGrotesk-Bold.woff') format('woff'),
+      url('/fonts/SpaceGrotesk-Bold.ttf') format('truetype'),
+      url('/fonts/SpaceGrotesk-Bold.svg#SpaceGrotesk-Bold') format('svg');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk-Medium.eot');
+  src: url('/fonts/SpaceGrotesk-Medium.eot?#iefix') format('embedded-opentype'),
+      url('/fonts/SpaceGrotesk-Medium.woff2') format('woff2'),
+      url('/fonts/SpaceGrotesk-Medium.woff') format('woff'),
+      url('/fonts/SpaceGrotesk-Medium.ttf') format('truetype'),
+      url('/fonts/SpaceGrotesk-Medium.svg#SpaceGrotesk-Medium') format('svg');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Reset */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: none;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  cursor: pointer;
+}
+
+/* Theme */
+
+:root {
+  --color-black01: #16191B; 
+  --color-black02: #1C1E1F;
+  --color-black03: #1F2427;
+  --color-black04: #131414;
+  --color-grey01: #636363;
+  --color-grey02: #818181;
+  --color-grey03: #D0D0D0;
+  --color-white: #FFFFFF;
+  --color-green: #A0FFCC;
+  --color-blue: #475AFF;
+  --color-orange: #F86754;
+}
+
+/* Globals */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  background-color: var(--color-black01);
+  color: var(--color-white);
+  overflow-x: hidden;
+}
+
+button, a {
+  cursor: pointer;
+}
+
+.no-scroll {
+  overflow-y: hidden;
+}
+
+.html-container {
+  margin: 80px 0;
+}
+
+.html-container hr {
+  display: none;
+}
+
+.html-container h1, .html-container h2, .html-container h3, .html-container p, .html-container ul, .html-container ol {
+  /* .container-module-small */
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  /* ---------------------- */
+  padding-left: 25px;
+  padding-right: 25px;
+  color: var(--color-grey03);
+}
+.html-container h2:not(:first-child) {
+  padding-top: 40px;
+}
+.html-container h3:not(:first-child), .html-container p:not(:first-child), .html-container ul:not(:first-child), .html-container ol:not(:first-child) {
+  padding-top: 20px;
+}
+
+.html-container ul {
+  list-style-type: disc;
+}
+
+.html-container ol {
+  list-style-type: auto;
+}
+
+.html-container li {
+  margin-left: 25px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+}
+.html-container h2 {
+  padding-bottom: 20px;
+  /* .typographie-04 */
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 61px;
+  letter-spacing: -0.02em;
+  /* -------------- */
+}
+@media screen and (max-width: 905px) {
+  .html-container h2 {
+    font-size: 36px;
+    line-height: 130%;
+  }
+}
+
+.html-container h3 {
+  /* .typographie-14 */
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  /* -------------- */
+}
+
+.html-container p, .html-container li {
+  /* .typographie-07 */
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 25px;
+  /* -------------- */
+}
+
+.html-container a {
+  color: var(--color-grey03);
+  /* .typographie-16 */
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+  /* -------------- */
+  text-decoration: underline;
+  transition: all 0.25s ease-in;
+}
+.html-container a:hover {
+  color: var(--color-green);
+  transition: all 0.25s ease-out;
+}
+
+.html-container img {
+  display: block;
+  /* .container-module-medium */
+  width: auto;
+  max-width: 858px;
+  margin: 0 auto;
+  /* ----------------------- */
+  height: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 40px;
+}
+@media screen and (max-width: 858px) {
+  .html-container img {
+    max-width: 100%;
+  }
+}
+.html-container figure:not(:first-child) img {
+  padding-top: 60px;
+}
+
+/* Typography */
+
+.typography-01 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+}
+
+.typography-02 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.01em;
+}
+
+.typography-03 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.05em;
+}
+
+.typography-04 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 61px;
+  letter-spacing: -0.02em;
+}
+
+.typography-05 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.typography-06 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+}
+
+.typography-07 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.typography-08 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+}
+
+.typography-09 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 42px;
+}
+
+.typography-10 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.typography-11 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.typography-12 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.typography-12 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.typography-13 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 13px;
+  letter-spacing: 0.05em;
+}
+
+.typography-14 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.typography-15 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.typography-16 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.typography-17 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 25px;
+}
+
+/* Container */
+
+.container-module-large {
+  width: 100%;
+  max-width: 1078px;
+  margin: 0 auto;
+}
+
+.container-module-medium {
+  width: 100%;
+  max-width: 858px;
+  margin: 0 auto;
+}
+
+.container-module-small {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.container-module-extra-small {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
