@@ -9,8 +9,8 @@ export default function Awards({ buttonName = "", listActions = [], ...props }) 
   // Hooks
   const [modal, setModal] = useToggle(false) 
   return (
-    <AwardsStyle { ...props }>
-      <button className={ `modal${ modal ? ' is-open' : '' }` } onClick={ setModal }>
+    <AwardsStyle { ...props } onMouseEnter={ () => setModal(true) } onMouseLeave={ () => setModal(false) }>
+      <button className={ `modal${ modal ? ' is-open' : '' }` }>
         <ArrowIcon />
         <p className="typography-03">{ buttonName }</p>
       </button>

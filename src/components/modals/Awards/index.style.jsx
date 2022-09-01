@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const AwardsStyle = styled.div`
   position: relative;
-  z-index: 2;
+  z-index: 3;
   .modal {
     position: relative;
     display: flex;
@@ -51,6 +51,13 @@ export const AwardsStyle = styled.div`
             text-transform: uppercase;
             white-space: nowrap;
             pointer-events: none;
+            transition: all 0.25s ease-in;
+          }
+          &:hover {
+            p {
+              color: var(--color-white);
+              transition: all 0.25s ease-out;
+            }
           }
         }
       }

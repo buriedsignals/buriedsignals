@@ -43,8 +43,20 @@ export const InsightStyle = styled.a`
         text-transform: uppercase;
         .text-container {
           display: flex;
-          align-items: center;
+          flex-direction: column;
+          justify-content: center;
+          .categories-container {
+            order: 1;
+            margin-bottom: 7.5px;
+            display: flex;
+            .category {
+              &:not(:last-child) {
+                margin-right: 15px;
+              }
+            }
+          }
           .author {
+            order: 2;
             margin-right: 22.5px;
             color: var(--color-grey03);
           }

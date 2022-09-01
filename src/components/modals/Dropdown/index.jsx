@@ -11,8 +11,8 @@ export default function Dropdown({ buttonName = "", listActions = [], ...props }
   // Hooks
   const [modal, setModal] = useToggle(false) 
   return (
-    <DropdownStyle { ...props }>
-      <button className={ `modal${ modal ? ' is-open' : '' }` } onClick={ setModal }>
+    <DropdownStyle { ...props } onMouseEnter={ () => setModal(true) } onMouseLeave={ () => setModal(false) }>
+      <button className={ `modal${ modal ? ' is-open' : '' }` }>
         <ArrowIcon />
         <p className="typography-01">{ buttonName }</p>
       </button>
