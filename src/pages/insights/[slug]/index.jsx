@@ -1,7 +1,7 @@
-// Librairies
-import { getPost, getPosts } from '@/librairies/ghost-api';
+// Middlewares
+import { getPostsInsights, getPostInsight } from '@/middlewares/librairies/posts/insights';
 // Templates
-import InsightTemplate from "@/components/templates/Insights/Insight"
+import InsightTemplate from "@/components/templates/insights/Insight"
 
 export default function Insight({ insight, ...props }) {
   return (
@@ -10,7 +10,7 @@ export default function Insight({ insight, ...props }) {
 }
 
 export async function getStaticPaths() {
-  const insights = await getPosts("insights")
+  const insights = await getPostsInsights()
   const paths = insights.posts.map((post) => ({
     params: { slug: post.slug },
   }))
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params, ...context}) {
-  const insight = await getPost("insight", params.slug)
+  const insight = await getPostInsight(params.slug)
   if (!insight) {
     return {
       notFound: true,

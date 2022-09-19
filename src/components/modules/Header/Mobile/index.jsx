@@ -2,11 +2,12 @@
 import { HeaderMobileStyle } from "./index.style"
 // Next
 import Link from "next/link"
+import { useRouter } from "next/router"
 // Hooks
 import useStore from "@/hooks/useStore"
 import useToggle from "@/hooks/useToggle"
 // Links
-import ProfileLink from "@/components/links/Profile"
+// import ProfileLink from "@/components/links/Profile"
 // Icons
 import LogoIcon from "@/components/icons/Logo"
 import BurgerIcon from "@/components/icons/Burger"
@@ -14,8 +15,10 @@ import CrossIcon from "@/components/icons/Cross"
 import ArrowIcon from "@/components/icons/Arrow"
 
 export default function HeaderMobile() {
+  // Router
+  const router = useRouter()
   // Hooks
-  const [connected] = useStore((state) => [state.connected])
+  const [user] = useStore((state) => [state.user])
   const [modalMenu, setModalMenu] = useToggle(false) 
   const [modalDropdown, setModalDropdown] = useToggle(false) 
   return (
@@ -28,19 +31,19 @@ export default function HeaderMobile() {
             </a>
           </Link>
           <ul className="actions">
-            {  connected ?
+            {  user.connected ?
                 <li className="action">
                   {/* <ProfileLink imgURL="/images/img-profil.jpg" /> */}
-                  <Link href="/profile">
-                    <a>
+                  <Link href={ `/profiles/${ user.slug }` }>
+                    <a className={ router.asPath == `/profiles/${ user.slug }` ? "is-active" : "" }>
                       <p className="typography-01">Profile</p>
                     </a>
                   </Link>
                 </li>
               :
                 <li className="action">
-                  <Link href="/profile/signin">
-                    <a onClick={ setModalMenu }>
+                  <Link href="/profiles/signin">
+                    <a className={ router.pathname == "/profiles/signin" ? "is-active" : "" } onClick={ setModalMenu }>
                       <p className="typography-01">Sign In</p>
                     </a>
                   </Link>
@@ -62,27 +65,27 @@ export default function HeaderMobile() {
             <ul className="pages">
               <li className="page">
                 <Link href="/">
-                  <a onClick={ setModalMenu }>
+                  <a className={ router.pathname == "/" ? "is-active" : "" } onClick={ setModalMenu }>
                     <p className="typography-01">Visuals</p>
                   </a>
                 </Link>
               </li>
               <li className="page">
                 <Link href="/insights">
-                  <a onClick={ setModalMenu }>
+                  <a className={ router.pathname == "/insights" ? "is-active" : "" } onClick={ setModalMenu }>
                     <p className="typography-01">Insights</p>
                   </a>
                 </Link>
               </li>
               <li className="page">
                 <Link href="/resources">
-                  <a onClick={ setModalMenu }>
+                  <a className={ router.pathname == "/resources" ? "is-active" : "" } onClick={ setModalMenu }>
                     <p className="typography-01">Resources</p>
                   </a>
                 </Link>
               </li>
               <li className="page">
-                <button className={ `modal${ modalDropdown ? ' is-open' : '' }` } onClick={ setModalDropdown }>
+                <button className={ `modal${ modalDropdown ? ' is-open' : '' } ${ router.pathname.includes("/about") ? "is-active" : "" }` } onClick={ setModalDropdown }>
                   <ArrowIcon />
                   <p className="typography-01">About</p>
                 </button>
@@ -90,21 +93,21 @@ export default function HeaderMobile() {
                   <ul className="links">
                     <li className="link">
                       <Link href="/about/about-us">
-                        <a onClick={ () => { setModalDropdown(); setModalMenu(); } }>
+                        <a className={ router.pathname == "/about/about-u" ? "is-active" : "" } onClick={ () => { setModalDropdown(); setModalMenu(); } }>
                           <p className="typography-01">About us</p>
                         </a>
                       </Link>
                     </li>
                     <li className="link">
                       <Link href="/about/studio">
-                        <a onClick={ () => { setModalDropdown(); setModalMenu(); } }>
+                        <a className={ router.pathname == "/about/studio" ? "is-active" : "" } onClick={ () => { setModalDropdown(); setModalMenu(); } }>
                           <p className="typography-01">Studio</p>
                         </a>
                       </Link>
                     </li>
                     <li className="link">
                       <Link href="/about/jury">
-                        <a onClick={ () => { setModalDropdown(); setModalMenu(); } }>
+                        <a className={ router.pathname == "/about/jury" ? "is-active" : "" } onClick={ () => { setModalDropdown(); setModalMenu(); } }>
                           <p className="typography-01">Jury</p>
                         </a>
                       </Link>

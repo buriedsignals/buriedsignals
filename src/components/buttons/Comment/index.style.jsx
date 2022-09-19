@@ -6,6 +6,7 @@ export const CommentStyle = styled.button`
   border: 1.25px solid var(--color-grey01);
   border-radius: 5px;
   transition: all 0.25s ease-in;
+  cursor: auto;
   .comment-container {
     display: flex;
     align-items: center;
@@ -21,22 +22,22 @@ export const CommentStyle = styled.button`
       transition: all 0.25s ease-in;
     }
   }
-  &:hover {
-    background-color: var(--color-white);
-    transition: all 0.25s ease-out;
-    .comment-container {
-      svg {
-        path {
-          stroke: var(--color-black02);
-          transition: all 0.25s ease-out;
-        }
-      }
-      p {
-        color: var(--color-black02);
-        transition: all 0.25s ease-out;
-      }
-    }
-  }
+  // &:hover {
+  //   background-color: var(--color-white);
+  //   transition: all 0.25s ease-out;
+  //   .comment-container {
+  //     svg {
+  //       path {
+  //         stroke: var(--color-black02);
+  //         transition: all 0.25s ease-out;
+  //       }
+  //     }
+  //     p {
+  //       color: var(--color-black02);
+  //       transition: all 0.25s ease-out;
+  //     }
+  //   }
+  // }
   &.is-commented {
     background-color: var(--color-white);
     .comment-container {

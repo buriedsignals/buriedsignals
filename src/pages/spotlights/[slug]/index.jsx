@@ -1,5 +1,5 @@
-// Librairies
-import { getPost, getPosts } from '@/librairies/ghost-api';
+// Middlewares
+import { getPostsSpotlights, getPostSpotlight } from '@/middlewares/librairies/posts/spotlights';
 // Templates
 import SpotlightTemplate from "@/components/templates/Spotlights/Spotlight"
 
@@ -10,7 +10,7 @@ export default function Spotlight({ spotlight, ...props }) {
 }
 
 export async function getStaticPaths() {
-  const spotlights = await getPosts("spotlights")
+  const spotlights = await getPostsSpotlights()
   const paths = spotlights.posts.map((post) => ({
     params: { slug: post.slug },
   }))
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params, ...context}) {
-  const spotlight = await getPost("spotlight", params.slug)
+  const spotlight = await getPostSpotlight(params.slug)
   if (!spotlight) {
     return {
       notFound: true,

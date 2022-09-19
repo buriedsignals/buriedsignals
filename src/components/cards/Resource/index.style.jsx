@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { down } from "styled-breakpoints";
 
 export const ResourceStyle = styled.a`
   display: block;
@@ -15,7 +14,6 @@ export const ResourceStyle = styled.a`
     .visual-container {
       position: relative;
       height: 172px;
-      background: red;
       img {
         position: absolute;
         top: 50%; left: 50%;

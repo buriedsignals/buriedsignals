@@ -2,7 +2,10 @@ import create from 'zustand'
 
 const useStore = create((set) => {
   return {
-    connected: true,
+    user: {
+      connected: true,
+      slug: "remy-dumas",
+    },
     scroll: true,
   }
 })

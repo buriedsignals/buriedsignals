@@ -19,7 +19,7 @@ export default function StudioTemplate({ studio, projects, ...props }) {
         </div>
         <div className="html-container" dangerouslySetInnerHTML={{ __html: studio.content }} />
         <div className="contact-container">
-          <ThirstyLink href="" >Contact us</ThirstyLink>
+          <ThirstyLink href="">Contact us</ThirstyLink>
         </div>
       </StudioTemplateStyle>
     </Layout>

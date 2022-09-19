@@ -12,7 +12,7 @@ import ExternalLinkIcon from "@/components/icons/ExternalLink"
 export default function Insight({ post, ...props }) {
   return (
     <>
-      { post.source ?
+      { post.source.url ?
         <InsightStyle href={ post.source.url } target="_blank" rel="noopener noreferrer" { ...props }>
           <div className="insight-container">
             <div className="visual-container">
@@ -21,14 +21,14 @@ export default function Insight({ post, ...props }) {
             <div className="content-container">
               <div className="extras-container">
                 <div className="text-container">
-                  <p className="author typography-03">{ post.author }</p>
+                  <p className="author typography-03">{ post.source.author }</p>
                   <div className="categories-container">
                     { post.categories.map((category, index) => {
                       return <p key={ `category-${index}` } className="category typography-03">{ category }</p>
                     }) }
                   </div>
                 </div>
-                <BookmarkButton />
+                <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id }  />
               </div>
               <div className="informations-container">
                 <h3 className="title typography-06">{ limitSizeText(post.title, 40) }</h3>
@@ -54,14 +54,14 @@ export default function Insight({ post, ...props }) {
               <div className="content-container">
                 <div className="extras-container">
                   <div className="text-container">
-                    <p className="author typography-03">{ post.author }</p>
+                    <p className="author typography-03">{ post.source.author }</p>
                     <div className="categories-container">
                       { post.categories.map((category, index) => {
                         return <p key={ `category-${index}` } className="category typography-03">{ category }</p>
                       }) }
                     </div>
                   </div>
-                  <BookmarkButton />
+                  <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } />
                 </div>
                 <div className="informations-container">
                   <h3 className="title typography-06">{ limitSizeText(post.title, 40) }</h3>

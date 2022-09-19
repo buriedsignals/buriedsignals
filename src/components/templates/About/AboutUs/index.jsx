@@ -4,6 +4,7 @@ import { AboutUsTemplateStyle } from "./index.style"
 import Layout from "@/components/layouts"
 // Modules
 import NewsletterModule from "@/components/modules/Newsletter"
+import FlexibleContent from "@/components/modules/FlexibleContent"
 
 export default function AboutUsTemplate({ aboutUs, ...props }) {
   return (
@@ -12,7 +13,7 @@ export default function AboutUsTemplate({ aboutUs, ...props }) {
         <div className="hero-container">
           <h1 className="title container-module-medium typography-04">{ aboutUs.title }</h1>
         </div>
-        <div className="html-container" dangerouslySetInnerHTML={{ __html: aboutUs.content }} />
+        <FlexibleContent content={ aboutUs.flexible_content } />
         <NewsletterModule />
       </AboutUsTemplateStyle>
     </Layout>

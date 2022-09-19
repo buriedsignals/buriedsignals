@@ -40,6 +40,11 @@ export const HeaderDesktopStyle = styled.header`
                 transition: all 0.25s ease-out;
               }
             }
+            &.is-active {
+              p {
+                color: var(--color-green);
+              }
+            }
           }
         }
       }

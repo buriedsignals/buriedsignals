@@ -45,13 +45,13 @@ export default function Edit({ user, ...props }) {
                     <div className="icon-container">
                       <TwitterIcon size="small" />
                     </div>
-                    <input className="typography-01" type="text" defaultValue={ user.socials.twitter } />
+                    <input className="typography-01" type="text" defaultValue={ user.twitter_account } />
                   </div>
                   <div className="input-container">
                     <div className="icon-container">
                       <MailIcon size="small" />
                     </div>
-                    <input className="typography-01" type="email" defaultValue={ user.socials.mail } />
+                    <input className="typography-01" type="email" defaultValue={ user.mail } />
                   </div>
                 </div>
                 <div className="group-container">

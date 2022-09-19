@@ -1,5 +1,5 @@
-// Librairies
-import { getPage } from "@/librairies/ghost-api"
+// Middlewares
+import { getPageNotice } from '@/middlewares/librairies/pages/notice';
 // Templates
 import NoticeTemplate from "@/components/templates/Legal"
 
@@ -10,7 +10,7 @@ export default function Notice({ notice, ...props }) {
 }
 
 export async function getStaticProps(context) {
-  const notice = await getPage("notice")
+  const notice = await getPageNotice()
   if (!notice) {
     return {
       notFound: true,

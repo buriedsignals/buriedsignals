@@ -274,6 +274,27 @@ button, a {
   padding-top: 60px;
 }
 
+.html-container iframe {
+  display: block;
+  /* .container-module-medium */
+  width: 100%;
+  max-width: 858px;
+  margin: 0 auto;
+  /* ----------------------- */
+  height: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 40px;
+}
+@media screen and (max-width: 858px) {
+  .html-container iframe {
+    max-width: 100%;
+  }
+}
+.html-container figure:not(:first-child) iframe {
+  padding-top: 60px;
+}
+
 /* Typography */
 
 .typography-01 {

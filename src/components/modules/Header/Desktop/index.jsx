@@ -2,19 +2,22 @@
 import { HeaderDesktopStyle } from "./index.style"
 // Next
 import Link from "next/link"
+import { useRouter } from "next/router"
 // Hooks
 import useStore from "@/hooks/useStore"
 // Modules
 import DropdownModule from "@/components/modals/Dropdown"
 // Links
 import PrimaryLink from "@/components/links/Primary"
-import ProfileLink from "@/components/links/Profile"
+// import ProfileLink from "@/components/links/Profile"
 // Icons
 import LogoIcon from "@/components/icons/Logo"
 
 export default function HeaderDesktop() {
+  // Router
+  const router = useRouter()
   // Hooks
-  const [connected] = useStore((state) => [state.connected])
+  const [user] = useStore((state) => [state.user])
   return (
     <HeaderDesktopStyle>
       <div className="header-desktop-container">
@@ -27,21 +30,21 @@ export default function HeaderDesktop() {
           <ul className="pages">
             <li className="page">
               <Link href="/">
-                <a>
+                <a className={ router.pathname == "/" ? "is-active" : "" }>
                   <p className="typography-01">Visuals</p>
                 </a>
               </Link>
             </li>
             <li className="page">
               <Link href="/insights">
-                <a>
+                <a className={ router.pathname == "/insights" ? "is-active" : "" }>
                   <p className="typography-01">Insights</p>
                 </a>
               </Link>
             </li>
             <li className="page">
               <Link href="/resources">
-                <a>
+                <a className={ router.pathname == "/resources" ? "is-active" : "" }>
                   <p className="typography-01">Resources</p>
                 </a>
               </Link>
@@ -49,20 +52,21 @@ export default function HeaderDesktop() {
             <li className="page">
               <DropdownModule 
                 buttonName="About"
+                isActive={ router.pathname.includes("/about") ? "is-active" : "" }
                 listActions={ (() => {
                   return [
                     (() => <Link href="/about/about-us">
-                      <a>
+                      <a className={ router.pathname == "/about/about-us" ? "is-active" : "" }>
                         <p className="typography-01">About us</p>
                       </a>
                     </Link>)(),
                     (() => <Link href="/about/studio">
-                      <a>
+                      <a className={ router.pathname == "/about/studio" ? "is-active" : "" }>
                         <p className="typography-01">Studio</p>
                       </a>
                     </Link>)(),
                     (() => <Link href="/about/jury">
-                      <a>
+                      <a className={ router.pathname == "/about/jury" ? "is-active" : "" }>
                         <p className="typography-01">Jury</p>
                       </a>
                     </Link>)(),
@@ -79,10 +83,10 @@ export default function HeaderDesktop() {
                 <p className="typography-01">Submit</p>
               </a>
             </li>
-            { connected ?
+            { user.connected ?
                 <li className="action">
                   {/* <ProfileLink imgURL="/images/img-profil.jpg" /> */}
-                  <Link href="/profile">
+                  <Link href={ `/profiles/${ user.connected ? user.slug : 'signin' }` }>
                     <a>
                       <p className="typography-01">Profile</p>
                     </a>
@@ -91,14 +95,14 @@ export default function HeaderDesktop() {
               :
               <>
                 <li className="action">
-                  <Link href="/profile/signin">
+                  <Link href="/profiles/signin">
                     <a>
                       <p className="typography-01">Sign In</p>
                     </a>
                   </Link>
                 </li>
                 <li className="action">
-                  <PrimaryLink href="/profile/signup">
+                  <PrimaryLink href="/profiles/signup">
                     <p className="typography-03">Sign Up</p>
                   </PrimaryLink>
                 </li>

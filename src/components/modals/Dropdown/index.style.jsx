@@ -18,6 +18,11 @@ export const DropdownStyle = styled.div`
         transition: all 0.05s ease-in-out;
       }
     }
+    &.is-active {
+      p {
+        color: var(--color-green);
+      }
+    }
   }
   .panel {
     position: absolute;

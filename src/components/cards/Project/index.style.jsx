@@ -9,7 +9,7 @@ export const ProjectStyle = styled.a`
     width: 343px;
   }
   .project-container {
-    height: 601px;
+    height: 559px;
     .visual-container, .content-container {
       width: 100%;
       height: auto;
@@ -20,22 +20,6 @@ export const ProjectStyle = styled.a`
       height: 296px;
       ${down('md')} {
         height: 200px;
-      }
-      .awards {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%;
-        height: 40px;
-        background-color: var(--color-green);
-        transform: translate3d(-33.75%,95%,0) rotate3d(0,0,1,-45deg);
-        z-index: 1;
-        p {
-          position: absolute;
-          top: 50%; left: 50%;
-          color: var(--color-black02);
-          text-transform: uppercase;
-          transform: translate3D(-50%, -50%, 0);
-        }
       }
       img {
         position: absolute;
@@ -84,13 +68,6 @@ export const ProjectStyle = styled.a`
         }
         .description {
           color: var(--color-grey03);
-        }
-      }
-      .actions-container {
-        button {
-          &:not(:last-child) {
-            margin-right: 7.5px;
-          }
         }
       }
     }

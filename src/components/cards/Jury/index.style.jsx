@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { down } from "styled-breakpoints";
 
 export const JuryStyle = styled.div`
   display: block;
@@ -17,7 +16,6 @@ export const JuryStyle = styled.div`
       position: relative;
       width: 260px;
       height: 260px;
-      background: red;
       border-radius: 100%;
       img {
         position: absolute;

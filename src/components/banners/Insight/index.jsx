@@ -14,7 +14,7 @@ export default function Insight({ post, ...props }) {
         </div>
         <div className="content-container">
           <div className="extras-container">
-            <p className="author typography-03">{ post.author }</p>
+            <p className="author typography-03">{ post.source.author }</p>
             <div className="categories-container">
               { post.categories.map((category, index) => {
                 return <p key={ `category-${index}` } className="category typography-03">{ category }</p>
@@ -26,7 +26,7 @@ export default function Insight({ post, ...props }) {
             <p className="description typography-07">{ limitSizeText(post.description, 67) }</p>
           </div>
           <div className="actions-container">
-            <BookmarkButton />
+            <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } />
           </div>
         </div>
       </div>

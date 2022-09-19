@@ -22,7 +22,7 @@ export default function Spotlight({ post, ...props }) {
           </div>
           <div className="content-container">
             <div className="extras-container">
-              <p className="author typography-03">{ post.author }</p>
+              <p className="author typography-03">{ post.source.author }</p>
               <div className="categories-container">
                 { post.categories.map((category, index) => {
                   return <p key={ `category-${index}` } className="category typography-03">{ category }</p>
@@ -34,8 +34,8 @@ export default function Spotlight({ post, ...props }) {
               <p className="description typography-07">{ limitSizeText(post.description, 78) }</p>
             </div>
             <div className="actions-container">
-              <LikeButton likes={ post.likes } />
-              <BookmarkButton />
+              <LikeButton likes={ post.likes } liked={ post.liked } postId={ post.id } />
+              <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } />
               <CommentButton comments={ post.comments } />
             </div>
           </div>

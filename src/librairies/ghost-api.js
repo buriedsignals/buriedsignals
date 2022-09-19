@@ -1,4 +1,7 @@
 import GhostContentAPI from "@tryghost/content-api";
+import { getLikesForOnePost, getLikedByUserForOnePost, getBookmarkedByUserForOnePost } from '@/librairies/prisma-api';
+
+const userId = "1"
 
 const api = new GhostContentAPI({
   url: 'https://buried-signals.ghost.io',
@@ -6,15 +9,596 @@ const api = new GhostContentAPI({
   version: "v5.0"
 });
 
+export async function getMember(slug) {
+  const member = {
+    name: "Tom Vaillant",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur augue ipsum, pulvinar in maximus ac.",
+    image: {
+      url: "/images/img-profil.jpg",
+      alt: "Profil image"
+    },
+    socials: {
+      twitter: "@tomvllnt",
+      mail: "tom@buriedsignals.com"
+    },
+    bookmarks: {
+      spotlights: [
+        {
+          slug: "toto",
+          author: "The new york times",
+          categories: ["3D", "Dataviz", "Geomapping"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is making her Olympic debut after the. Uncover the truth about the legal fishing industry. A challenging year. Her versatility...",
+          image: {
+            url: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "week",
+          likes: 0,
+          comments: 10,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "titi",
+          author: "The new york times",
+          categories: ["3D", "Dataviz"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry. A challenging year. Her versatility",
+          image: {
+            url: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
+            alt: "Default image"
+          },
+          awards: null,
+          likes: 10100,
+          comments: 0,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Sunisa Lee - The Gymnast",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        },
+        {
+          slug: "tata",
+          author: "The new york times",
+          categories: ["3D"],
+          title: "Fin",
+          description: "Lee, 18, is makingtry",
+          image: {
+            url: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          awards: "honors",
+          likes: 152,
+          comments: 30,
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          submited_by: {
+            name: "Amelia Wattenberger",
+            image: {
+              url: "/images/img-profil.jpg",
+              alt: "Profil image"
+            }
+          }
+        }
+      ],
+      insights: [
+        {
+          slug: "toto",
+          author: "Matt Conlen",
+          categories: ["Research"],
+          title: "Can You Recall What Brings You Joy?",
+          description: "The first time I ate at a restaurant after COVID hit was in September 2020. That seems wild from this late pandemic vantage point ",
+          image: {
+            url: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          published_at: "2022-08-24T09:54:04.908Z"
+        },
+        {
+          slug: "titi",
+          author: "Matt Conlen",
+          categories: ["Interviews"],
+          title: "Can You Recall What Brings You Joy? Can You Recall What Brings You Joy?",
+          description: "The first time I ate at a restaurant after COVID hit was in September 2020. That seems wild from this late pandemic vantage point ",
+          image: {
+            url: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          published_at: "2022-08-24T09:54:04.908Z"
+        },
+        {
+          slug: "titi",
+          author: "Matt Conlen",
+          categories: ["Interviews"],
+          title: "Can You Recall What Brings You Joy? Can You Recall What Brings You Joy?",
+          description: "The first time I ate at a restaurant after COVID hit was in September 2020. That seems wild from this late pandemic vantage point ",
+          image: {
+            url: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+            alt: "Default image"
+          },
+          source: {
+            title: "articleurl.com",
+            url: "https://www.google.fr"
+          },
+          published_at: "2022-08-24T09:54:04.908Z"
+        },
+      ]
+    }
+  }
+  return member
+}
+
 export async function getMembers() {
-  const members = await api.members
-    .browse({
-      limit: "all"
-    })
-    .catch(err => {
-      console.error(err);
-    });
-  return { members: members }
+  const members = [
+    { slug: "remy-dumas" },
+    { slug: "tom-vaillant" },
+  ]
+  return members
+}
+
+export async function postMemberSignup(email) {
+  const result = await api.members.add({
+    email: email,
+  }, {
+    send_email: true,
+    email_type: 'signup',
+  })
+  return result
+}
+
+export async function postMemberNewsletter() {
+  const result = await api.members.add({}, {
+    send_email: false,
+    email_type: 'subscribe',
+  })
+  return result
 }
 
 export async function getPage(slug) {
@@ -46,7 +630,7 @@ export async function getPost(type, slug) {
     .catch(err => {
       console.error(err);
     });
-  return parsePost(post, tag)
+  return await parsePost(post, tag)
 }
 
 export async function getPosts(type) {
@@ -74,7 +658,8 @@ export async function getPosts(type) {
     .catch(err => {
       console.error(err);
     });
-  return parsePosts(posts, tag)
+
+  return await parsePosts(posts, tag)
 }
 
 const parsePage = (page) => {
@@ -90,7 +675,7 @@ const parsePage = (page) => {
   }
 }
 
-const parsePost = (post, tag) => {
+const parsePost = async (post, tag) => {
   const getCategoriesFromPost = (postTags) => {
     const postCategoriesParsed = postTags.filter(postTag => postTag.name.includes(`#${ tag.charAt(0).toUpperCase() + tag.slice(1) }`)).map(postTag => {
       const category = postTag.name.replace(`#${ tag.charAt(0).toUpperCase() + tag.slice(1) }`, '')
@@ -106,6 +691,7 @@ const parsePost = (post, tag) => {
     return postAwardsParsed.length != 0 ? postAwardsParsed : null
   }
   return {
+    id: post.id,
     slug: post.slug,
     author: "", // ???
     categories: getCategoriesFromPost(post.tags),
@@ -117,8 +703,10 @@ const parsePost = (post, tag) => {
     },
     content: post.html,
     awards: getAwardsFromPost(post.tags),
-    likes: 0, // By local BDD
-    comments: 0, // By local BDD
+    likes: await getLikesForOnePost(post.id),
+    liked: await getLikedByUserForOnePost(userId, post.id), 
+    bookmarked: await getBookmarkedByUserForOnePost(userId, post.id), 
+    comments: 0, // By plugin Ghost
     source: {
       title: "", // ???
       url: "" // ???
@@ -134,7 +722,7 @@ const parsePost = (post, tag) => {
   }
 }
 
-const parsePosts = (posts, tag) => {
+const parsePosts = async (posts, tag) => {
   const postsParsed = []
   const categories = []
   const awards = []
@@ -158,8 +746,10 @@ const parsePosts = (posts, tag) => {
     })
     return postAwardsParsed.length != 0 ? postAwardsParsed : null
   }
-  posts.forEach(post => {
+  for (let i = 0; i < posts.length; i++) {
+    const post = posts[i];
     postsParsed.push({
+      id: post.id,
       slug: post.slug,
       author: "", // ???
       categories: getCategoriesFromPosts(post.tags, categories),
@@ -170,8 +760,10 @@ const parsePosts = (posts, tag) => {
         alt: post.feature_image_alt
       },
       awards: getAwardsFromPosts(post.tags, awards),
-      likes: 0, // By local BDD
-      comments: 0, // By local BDD
+      likes: await getLikesForOnePost(post.id),
+      liked: await getLikedByUserForOnePost(userId, post.id), 
+      bookmarked: await getBookmarkedByUserForOnePost(userId, post.id), 
+      comments: 0, // By plugin Ghost
       source: {
         title: "", // ???
         url: "" // ???
@@ -185,7 +777,7 @@ const parsePosts = (posts, tag) => {
       },
       published_at: post.published_at
     })
-  });
+  }
   return {
     posts: postsParsed,
     categories: categories.length !== 0 ? categories : null,

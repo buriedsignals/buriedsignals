@@ -31,6 +31,11 @@ export const HeaderMobileStyle = styled.header`
                 transition: all 0.25s ease-out;
               }
             }
+            &.is-active {
+              p {
+                color: var(--color-green);
+              }
+            }
           }
           button {
             display: flex;
@@ -68,6 +73,11 @@ export const HeaderMobileStyle = styled.header`
               p {
                 color: var(--color-green);
                 transition: all 0.25s ease-out;
+              }
+            }
+            &.is-active {
+              p {
+                color: var(--color-green);
               }
             }
           }
@@ -110,6 +120,11 @@ export const HeaderMobileStyle = styled.header`
                 transition: all 0.25s ease-out;
               }
             }
+            &.is-active {
+              p {
+                color: var(--color-green);
+              }
+            }
           }
           .links {
             .link {
@@ -124,6 +139,11 @@ export const HeaderMobileStyle = styled.header`
                   p {
                     color: var(--color-green);
                     transition: all 0.25s ease-out;
+                  }
+                }
+                &.is-active {
+                  p {
+                    color: var(--color-green);
                   }
                 }
               }
