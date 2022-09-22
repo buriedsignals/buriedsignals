@@ -26,7 +26,6 @@ export async function getPostSpotlight(slug) {
   return post
 }
 
-// QUERY SPOTLIGHTS DE LA SEMAINE
 export async function getPostsSpotlightsWeek() {
   const date = new Date()
   const week_end = date.toISOString()
@@ -41,15 +40,14 @@ export async function getPostsSpotlightsWeek() {
   return parsePostsSpotlights(posts)
 }
 
-// QUERY SPOTLIGHTS DU MOIS
 export async function getPostsSpotlightsMonth() {
   const date = new Date()
   const month_end = date.toISOString()
-  const month_start = new Date(date.setDate(date.getDate() - 7)).toISOString()
+  const month_start = new Date(date.setDate(date.getDate() - 31)).toISOString()
   const apolloClient = getApolloClient()
   const response = await apolloClient.query({
     query: QUERY_POSTS_SPOTLIGHTS_MONTH,
-    variables: { week_start, week_end }
+    variables: { month_start, month_end }
   })
   if (!response) return null
   let posts = response.data.spotlightsPosts.data

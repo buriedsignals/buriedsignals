@@ -1,7 +1,7 @@
 // Middlewares
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
 import { QUERY_PAGE_STUDIO } from "@/middlewares/datas/pages/studio"
-import { parsePageContent } from '../utils'
+import { parsePageFlexible } from '../utils'
 
 export async function getPageStudio() {
   const apolloClient = getApolloClient()
@@ -9,6 +9,6 @@ export async function getPageStudio() {
     query: QUERY_PAGE_STUDIO,
   })
   if (!response) return null
-  let page = response.data.entry
-  return parsePageContent(page)
+  let page = response.data.pages.data[0].attributes
+  return parsePageFlexible(page)
 }

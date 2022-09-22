@@ -100,7 +100,7 @@ export const FlexibleContentStyle = styled.div`
       max-width: 100%;
     }
   }
-  figure:not(:first-child) img {
+  img:not(:first-child) {
     padding-top: 60px;
   }
   iframe {
@@ -110,7 +110,7 @@ export const FlexibleContentStyle = styled.div`
     max-width: 858px;
     margin: 0 auto;
     /* ----------------------- */
-    height: auto;
+    height: 563px;
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 40px;
@@ -118,9 +118,15 @@ export const FlexibleContentStyle = styled.div`
   @media screen and (max-width: 858px) {
     iframe {
       max-width: 100%;
+      height: 66vw;
     }
   }
-  figure:not(:first-child) iframe {
+  @media screen and (max-width: 558px) {
+    iframe {
+      height: 79vw;
+    }
+  }
+  iframe:not(:first-child) {
     padding-top: 60px;
   }
 `

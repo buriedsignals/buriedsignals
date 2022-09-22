@@ -2,6 +2,8 @@
 import { getUsersMembers, getUserMember } from '@/middlewares/librairies/users/member';
 // Templates
 import ProfileTemplate from "@/components/templates/Profiles/Profile"
+import useArray from '@/hooks/useArray';
+import { useEffect } from 'react';
 
 export default function Profile({ member }) {
   return (

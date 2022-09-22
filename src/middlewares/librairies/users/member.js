@@ -1,6 +1,6 @@
 // Middlewares
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
-import { QUERY_USERS_MEMBERS, QUERY_USER_MEMBER, UPDATE_USER_MEMBER_LIKED_SPOTLIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_SPOTLIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_INSIGHTS } from "@/middlewares/datas/users/members"
+import { QUERY_USERS_MEMBERS, QUERY_USER_MEMBER, UPDATE_USER_MEMBER_LIKED_SPOTLIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_SPOTLIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_INSIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_RESOURCES } from "@/middlewares/datas/users/members"
 import { parseUsersMembers, parseUserMember } from '../utils'
 
 export async function getUsersMembers() {
@@ -53,6 +53,17 @@ export async function updateUserMemberBookmarkedInsights(memberId, postIds) {
   const response = await apolloClient.mutate({
     errorPolicy: 'all',
     mutation: UPDATE_USER_MEMBER_BOOKMARKED_INSIGHTS,
+    variables: { memberId, postIds }
+  })
+  if (!response) return null
+  return response
+}
+
+export async function updateUserMemberBookmarkedResources(memberId, postIds) {
+  const apolloClient = getApolloClient()
+  const response = await apolloClient.mutate({
+    errorPolicy: 'all',
+    mutation: UPDATE_USER_MEMBER_BOOKMARKED_RESOURCES,
     variables: { memberId, postIds }
   })
   if (!response) return null

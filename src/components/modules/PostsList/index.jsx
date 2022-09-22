@@ -1,7 +1,7 @@
 // Styles
 import { PostsListStyle } from "./index.style"
 // React
-import { useState } from "react"
+import { useEffect, useState } from "react"
 // Hooks
 import useArray from "@/hooks/useArray"
 // Modules
@@ -23,7 +23,7 @@ export default function PostsList({ type, posts, categories, awards = [], max = 
   // Handlers
   const onClickButtonMorePosts = () => {
     setPage(page + 1)
-  }
+  }  
   return (
     <PostsListStyle { ...props } >
       { categories && <PostsFilterModule posts={ posts } categories={ categories } awards={ type == 'spotlight' ? awards.length !== 0 ? awards : false : false }  multiple={ type == 'spotlight' ? true : false } setPage={ setPage } /> }

@@ -3,25 +3,30 @@ import { gql } from '@apollo/client'
 
 export const QUERY_POSTS_PROJECTS = gql`
   query QueryPostsProjects {
-    entries(collection: "projects") {
+    projectsPosts {
       data {
-        ... on Entry_Projects_Project {
-          id
-          categories {
-            title
-          }
-          description
-          image {
-            ... on Asset_Assets {
-              alt
-              permalink
+        id
+        attributes {
+          Title
+          Slug
+          Image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
             }
           }
-          slug
-          source_author
-          source_title
-          source_url
-          title
+          Description
+          Source_author
+          Source_link
+          Categories {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
         }
       }
     }

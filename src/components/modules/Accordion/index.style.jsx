@@ -18,6 +18,9 @@ export const AccordionStyle = styled.div`
         transition: all 0.25s ease-in;
         &:not(:first-child) {
           margin-left: 50px;
+          ${down('md')} {
+            margin-left: 30px;
+          }
         }
         &.is-active {
           color: var(--color-white);

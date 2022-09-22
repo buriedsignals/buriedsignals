@@ -51,12 +51,12 @@ export default function Edit({ user, ...props }) {
                     <div className="icon-container">
                       <MailIcon size="small" />
                     </div>
-                    <input className="typography-01" type="email" defaultValue={ user.mail } />
+                    <input className="typography-01" type="email" defaultValue={ user.email } />
                   </div>
                 </div>
                 <div className="group-container">
                   <label className="typography-01" htmlFor="description">Description</label>
-                  <textarea className="typography-01" name="description" id="description" cols="30" rows="7"></textarea>
+                  <textarea className="typography-01" name="description" id="description" cols="30" rows="7" defaultValue={ user.description }></textarea>
                 </div>
                 <div className="buttons-container">
                   <PrimaryButton onClickButton={ onClickButtonSubmit }>

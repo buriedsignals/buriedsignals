@@ -122,6 +122,33 @@ export const QUERY_USER_MEMBER = gql`
               }
             }
           }
+          Bookmarked_resources {
+            data {
+              id
+              attributes {
+                Title
+                Slug
+                Image {
+                  data {
+                    attributes {
+                      alternativeText
+                      url
+                    }
+                  }
+                }
+                Description
+                Source_title
+                Source_link
+                Categories {
+                  data {
+                    attributes {
+                      Title
+                    }
+                  }
+                }
+              }
+            }
+          }
           Liked_spotlights {
             data {
               id
@@ -233,6 +260,16 @@ export const UPDATE_USER_MEMBER_BOOKMARKED_SPOTLIGHTS = gql`
 export const UPDATE_USER_MEMBER_BOOKMARKED_INSIGHTS = gql`
   mutation UpdateUserMemberBookmarkedInsights($memberId: ID!, $postIds: [Id]) {
     updateUsersPermissionsUser(id: $memberId, data: { Bookmarked_insights: $postIds }) {
+      data {
+        id
+      }
+    }
+  }
+`
+
+export const UPDATE_USER_MEMBER_BOOKMARKED_RESOURCES = gql`
+  mutation UpdateUserMemberBookmarkedResources($memberId: ID!, $postIds: [Id]) {
+    updateUsersPermissionsUser(id: $memberId, data: { Bookmarked_resources: $postIds }) {
       data {
         id
       }

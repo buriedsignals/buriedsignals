@@ -4,6 +4,7 @@ import { StudioTemplateStyle } from "./index.style"
 import Layout from "@/components/layouts"
 // Module
 import PostsListModule from "@/components/modules/PostsList"
+import FlexibleContentModule from "@/components/modules/FlexibleContent"
 // Links
 import ThirstyLink from "@/components/links/Thirsty"
 
@@ -17,7 +18,7 @@ export default function StudioTemplate({ studio, projects, ...props }) {
         <div className="projects-container">
           <PostsListModule type="project" posts={ projects.posts } max={ 6 } />
         </div>
-        <div className="html-container" dangerouslySetInnerHTML={{ __html: studio.content }} />
+        <FlexibleContentModule content={ studio.flexible_content } />
         <div className="contact-container">
           <ThirstyLink href="">Contact us</ThirstyLink>
         </div>

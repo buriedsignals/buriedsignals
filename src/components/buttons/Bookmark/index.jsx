@@ -12,7 +12,6 @@ import BookmarkIcon from "@/components/icons/Bookmark"
 export default function Bookmark({ bookmarked = false, postId, type, ...props }) {  
   // Hooks
   const [user] = useStore((state) => [state.user])
-  console.log(postId)
   // States
   const [alertSignin, setAlertSignin] = useState(!user.connected)
   const [isBookmarked, setIsBookmarked] = useState(user.bookmarked[type].some(post => post.id === postId))

@@ -6,8 +6,6 @@ export const PostsListStyle = styled.div`
     padding-top: 60px;
     padding-bottom: 60px;
     &.type-spotlight {
-      padding-left: 16px;
-      padding-right: 16px;
       ${down('md')} {
         display: flex;
         flex-wrap: wrap;

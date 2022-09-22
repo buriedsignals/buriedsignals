@@ -2,7 +2,6 @@
 import { useState } from "react"
 
 export default function useArray(defaultValue) { 
-
   // States
   const [array, setArray] = useState(defaultValue)         
   // Actions

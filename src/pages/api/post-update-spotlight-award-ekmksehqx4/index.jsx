@@ -1,7 +1,16 @@
 import { updatePostSpotlightAwards } from "@/middlewares/librairies/posts/spotlights";
 
 export default async function handle(req, res) {
-  const { postId, awardId } = req.body
+  const { postId, awardTitle } = req.body
+  let awardId = null
+  switch (awardTitle) {
+    case "Week":
+      awardId = 1
+      break
+    case "Month":
+      awardId = 2
+      break
+  }
   const result = await updatePostSpotlightAwards(postId, awardId)
   res.json(result)
 }

@@ -69,7 +69,7 @@ export function parsePostInsight(data) {
   return {
     bookmarked: USER.bookmarked.insights ? USER.bookmarked.insights.filter(insight => insight.slug === data.Slug).length > 0 : false, // Get by user
     categories: data.Categories ? data.Categories.data.map(category => category.attributes.Title) : null,
-    content: getDynamicContent(data.Dynamic_content),
+    flexible_content: getDynamicContent(data.Dynamic_content),
     description: data.Description,
     image: getImage(data.Image),
     published_at: data.updatedAt,
@@ -110,28 +110,24 @@ export function parsePostResource(data) {
 
 export function parsePostsProjects(datas) {
   const posts = datas.map(data => {
-    return parsePostProject(data)
-  });
-  return { 
+    return { id: data.id, ...parsePostProject(data.attributes) }
+  })
+  return {
     posts: posts
   }
 }
 
 export function parsePostProject(data) {
   return {    
-    categories: data.categories ? data.categories.map(category => category.title) : null,
-    description: data.description,
-    image: {
-      alt: data.image ? data.image.alt : null,
-      url: data.image ? data.image.permalink : null
-    },
-    slug: data.slug,
+    categories: data.Categories ? data.Categories.data.map(category => category.attributes.Title) : null,
+    description: data.Description,
+    image: getImage(data.Image),
+    slug: data.Slug,
     source: {
-      author: data.source_author,
-      title: data.source_title,
-      url: data.source_url
+      author: data.Source_author,
+      url: data.Source_link
     },
-    title: data.title
+    title: data.Title
   }
 }
 
@@ -176,6 +172,9 @@ export function parseUserMember(data) {
       }) : null,
       insights: data.Bookmarked_insights ? data.Bookmarked_insights.data.map(insight => {
         return { id: insight.id, ...parsePostInsight(insight.attributes) }
+      }) : null,
+      resources: data.Bookmarked_resources ? data.Bookmarked_resources.data.map(resource => {
+        return { id: resource.id, ...parsePostResource(resource.attributes) }
       }) : null,
     },
     liked: {

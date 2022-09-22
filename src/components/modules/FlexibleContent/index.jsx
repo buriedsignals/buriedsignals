@@ -7,14 +7,14 @@ export default function FlexibleContent({ content, ...props }) {
   return (
     <FlexibleContentStyle { ...props }>
       {
-        content.map(item => {
+        content && content.map((item, index) => {
           switch (item.type) {
             case "Body":
-              return <ReactMarkdown source={ item.markdown } escapeHtml={ true } />
+              return <ReactMarkdown key={ index } children={ item.markdown } />
             case "Illustration":
-              return <img src={ item.image.url } alt={ item.image.alt } />
+              return <img key={ index } src={ item.image.url } alt={ item.image.alt } />
             case "EmbedVideo":
-              return <iframe src={ item.link } />
+              return <iframe key={ index } src={ item.link } />
           }
         })
       }

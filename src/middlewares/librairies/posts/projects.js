@@ -9,6 +9,6 @@ export async function getPostsProjects() {
     query: QUERY_POSTS_PROJECTS,
   })
   if (!response) return null
-  let posts = response.data.entries.data
+  let posts = response.data.projectsPosts.data
   return parsePostsProjects(posts)
 }

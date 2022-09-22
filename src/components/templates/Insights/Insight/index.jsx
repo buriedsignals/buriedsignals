@@ -3,7 +3,10 @@ import { InsightTemplateStyle } from "./index.style"
 // Layouts
 import Layout from "@/components/layouts"
 // Modules
+import FlexibleContentModule from "@/components/modules/FlexibleContent"
+// Banners
 import InsightBanner from "@/components/banners/Insight"
+// Links
 import SecondaryLink from "@/components/links/Secondary"
 
 const post = {
@@ -36,7 +39,7 @@ export default function InsightTemplate({ insight, ...props }) {
         <div className="container-module-large banner-container">
           <InsightBanner post={ insight } />
         </div>
-        <div className="html-container" dangerouslySetInnerHTML={{ __html: insight.content }} />
+        <FlexibleContentModule content={ insight.flexible_content } />
         <div className="container-module-small back-container">
           <SecondaryLink href="/insights" intern={ true }>
               <p className="typography-03">Back to list</p>

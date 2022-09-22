@@ -1,17 +1,24 @@
 // Styles
 import { AccordionStyle } from "./index.style"
 // React
-import { useState } from "react"
+import { useEffect, useState } from "react"
 // Modules
 import PostsListModule from "@/components/modules/PostsList"
 
 export default function Accordion({ panels, ...props }) {
   // States
   const [panelSelected, setPanelSelected] = useState(Object.keys(panels)[0])
+  const [showPanel, setShowPanel] = useState(true)
   // Handlers
   const onClickButton = (panel) => {
     setPanelSelected(panel)
+    setShowPanel(false)
   }
+  useEffect(() => {
+    console.log(panelSelected)
+    console.log(panels[panelSelected])
+    setShowPanel(true)
+  }, [panelSelected])
   return (
     <AccordionStyle { ...props }>
       <div className="accordion-container">
@@ -23,7 +30,7 @@ export default function Accordion({ panels, ...props }) {
           )) }
         </div>
         <div className="panel-container">
-          <PostsListModule type={ panelSelected.slice(0, -1) } posts={ panels[panelSelected] } />
+          { showPanel && <PostsListModule type={ panelSelected.slice(0, -1) } posts={ panels[panelSelected] } /> }
         </div>
       </div>
     </AccordionStyle>
