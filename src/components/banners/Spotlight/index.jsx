@@ -31,8 +31,8 @@ export default function Spotlight({ post, ...props }) {
             <p className="description typography-07">{ limitSizeText(post.description, 78) }</p>
           </div>
           <div className="actions-container">
-            <LikeButton likes={ post.likes } liked={ post.liked } postId={ post.id } />
-            <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id }  />
+            <LikeButton likes={ post.likes } liked={ post.liked } postId={ post.id } type="spotlights" />
+            <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="spotlights"  />
             <CommentButton comments={ post.comments } />
           </div>
         </div>

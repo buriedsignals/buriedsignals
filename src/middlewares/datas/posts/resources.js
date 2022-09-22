@@ -3,25 +3,29 @@ import { gql } from '@apollo/client'
 
 export const QUERY_POSTS_RESOURCES = gql`
   query QueryPostsResources {
-    entries(collection: "resources") {
+    resourcesPosts {
       data {
-        ... on Entry_Resources_Resource {
-          id
-          categories {
-            title
-          }
-          description
-          image {
-            ... on Asset_Assets {
-              alt
-              permalink
+        attributes {
+          Title
+          Slug
+          Image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
             }
           }
-          slug
-          source_author
-          source_title
-          source_url
-          title
+          Description
+          Source_title
+          Source_link
+          Categories {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
         }
       }
     }

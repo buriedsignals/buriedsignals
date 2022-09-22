@@ -1,6 +1,6 @@
 // Middlewares
-import { getPageSpotlights } from '@/middlewares-statamic/librairies/pages/spotlights';
-import { getPostsSpotlights } from '@/middlewares-statamic/librairies/posts/spotlights';
+import { getPageSpotlights } from '@/middlewares/librairies/pages/spotlights';
+import { getPostsSpotlights } from '@/middlewares/librairies/posts/spotlights';
 // Templates
 import SpotlightsTemplate from "@/components/templates/Spotlights"
 

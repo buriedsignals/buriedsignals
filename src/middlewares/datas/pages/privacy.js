@@ -3,10 +3,30 @@ import { gql } from '@apollo/client'
 
 export const QUERY_PAGE_PRIVACY = gql`
   query QueryPagePrivacy {
-    entry(collection: "pages", slug: "privacy") {
-      ... on Entry_Pages_PagesContent {
-        title
-        content
+    pages(filters: { Slug: { eq: "privacy" } }) {
+      data {
+        attributes {
+          Title
+          Slug
+          Dynamic_content {
+            ... on ComponentBodyBody {
+              Content
+            }
+            ... on ComponentEmbedVideoEmbedVideo {
+              Link
+            }
+            ... on ComponentIllustrationIllustration {
+              Image {
+                data {
+                  attributes {
+                    url
+                    alternativeText
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -6,6 +6,7 @@ import { copyClipboard } from "@/scripts/utils"
 import Layout from "@/components/layouts"
 // Modules
 import SpotlightBanner from "@/components/banners/Spotlight"
+import CommentsModule from "@/components/modules/Comments"
 // Buttons
 import SecondaryButton from "@/components/buttons/Secondary"
 // Links
@@ -79,6 +80,7 @@ export default function SpotlightTemplate({ spotlight, ...props }) {
             <img src={ spotlight.submited_by.image.url } alt={ spotlight.submited_by.image.alt } />
           </div>
         </div>
+        <CommentsModule />
       </SpotlightTemplateStyle>
     </Layout>
   )

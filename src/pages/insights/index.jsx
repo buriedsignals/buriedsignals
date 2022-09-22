@@ -5,10 +5,8 @@ import { getPostsInsights } from '@/middlewares/librairies/posts/insights';
 import InsightsTemplate from "@/components/templates/Insights"
 
 export default function Insights({ insights, ...props }) {
-  console.log(insights)
   return (
-    // <InsightsTemplate insights={ insights } />
-    <></>
+    <InsightsTemplate insights={ insights } />
   )
 }
 

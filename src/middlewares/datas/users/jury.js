@@ -3,21 +3,20 @@ import { gql } from '@apollo/client'
 
 export const QUERY_USERS_JURY = gql`
   query QueryUsersJury {
-    users {
+    juries {
       data {
-        avatar {
-          ... on Asset_Assets {
-            alt
-            permalink
+        attributes {
+          Name
+          Description
+          Image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
+            }
           }
         }
-        description
-        email
-        name
-        group {
-          title
-        }
-        twitter_account
       }
     }
   }

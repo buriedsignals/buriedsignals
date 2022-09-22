@@ -3,10 +3,30 @@ import { gql } from '@apollo/client'
 
 export const QUERY_PAGE_NOTICE = gql`
   query QueryPageNotice {
-    entry(collection: "pages", slug: "notice") {
-      ... on Entry_Pages_PagesContent {
-        title
-        content
+    pages(filters: { Slug: { eq: "notice" } }) {
+      data {
+        attributes {
+          Title
+          Slug
+          Dynamic_content {
+            ... on ComponentBodyBody {
+              Content
+            }
+            ... on ComponentEmbedVideoEmbedVideo {
+              Link
+            }
+            ... on ComponentIllustrationIllustration {
+              Image {
+                data {
+                  attributes {
+                    url
+                    alternativeText
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

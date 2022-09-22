@@ -11,8 +11,8 @@ export default function Jury({ jury, ...props }) {
 }
 
 export async function getStaticProps(context) {
-  const page = await getPageJury()
   const jury = await getUsersJury()
+  const page = await getPageJury()
   if (!page || !jury) {
     return {
       notFound: true,

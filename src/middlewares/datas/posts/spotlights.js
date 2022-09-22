@@ -3,36 +3,53 @@ import { gql } from '@apollo/client'
 
 export const QUERY_POSTS_SPOTLIGHTS = gql`
   query QueryPostsSpotlights {
-    entries(collection: "spotlights") {
+    spotlightsPosts {
       data {
-        ... on Entry_Spotlights_Spotlight {
-          id
-          categories {
-            title
-          }
-          awards {
-            title
-          }
-          description
-          image {
-            ... on Asset_Assets {
-              alt
-              permalink
+        id
+        attributes {
+          Title
+          Slug
+          Image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
             }
           }
-          likes
-          slug
-          source_author
-          source_title
-          source_url
-          submited_by {
-            avatar {
-              permalink
+          Description
+          Source_author
+          Source_link
+          Categories {
+            data {
+              attributes {
+                Title
+              }
             }
-            name
-            id
           }
-          title
+          Award {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
+          Likes
+          Submited_by {
+            data {
+              attributes {
+                Name
+                Image {
+                  data {
+                    attributes {
+                      alternativeText
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -41,144 +58,195 @@ export const QUERY_POSTS_SPOTLIGHTS = gql`
 
 export const QUERY_POST_SPOTLIGHT = gql`
   query QueryPostSpotlight($slug: String) {
-    entry(collection: "spotlights", slug: $slug) {
-      ... on Entry_Spotlights_Spotlight {
+    spotlightsPosts(filters: { Slug: { eq: $slug } }) {
+      data {
         id
-        categories {
-          title
-        }
-        awards {
-          title
-        }
-        description
-        image {
-          ... on Asset_Assets {
-            alt
-            permalink
+        attributes {
+          Title
+          Slug
+          Image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
+            }
+          }
+          Description
+          Source_author
+          Source_link
+          Categories {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
+          Award {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
+          Likes
+          Submited_by {
+            data {
+              attributes {
+                Name
+                Image {
+                  data {
+                    attributes {
+                      alternativeText
+                      url
+                    }
+                  }
+                }
+              }
+            }
           }
         }
-        likes
-        slug
-        source_author
-        source_title
-        source_url
-        submited_by {
-          avatar {
-            permalink
+      }
+    }
+  }
+`
+
+export const QUERY_POSTS_SPOTLIGHTS_WEEK = gql`
+  query QueryPostsSpotlights($week_start: String, $week_end: String) {
+    spotlightsPosts(filters: { and: [ { publishedAt: { gte: $week_start } }, { publishedAt: { lte: $week_end } }] }) {
+      data {
+        id
+        attributes {
+          Title
+          Slug
+          Image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
+            }
           }
-          name
-          id
+          Description
+          Source_author
+          Source_link
+          Categories {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
+          Award {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
+          Likes
+          Submited_by {
+            data {
+              attributes {
+                Name
+                Image {
+                  data {
+                    attributes {
+                      alternativeText
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
-        title
+      }
+    }
+  }
+`
+
+export const QUERY_POSTS_SPOTLIGHTS_MONTH = gql`
+  query QueryPostsSpotlights($month_start: String, $month_end: String) {
+    spotlightsPosts(filters: { and: [ { publishedAt: { gte: $month_start } }, { publishedAt: { lte: $month_end } }] }) {
+      data {
+        id
+        attributes {
+          Title
+          Slug
+          Image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
+            }
+          }
+          Description
+          Source_author
+          Source_link
+          Categories {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
+          Award {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
+          Likes
+          Submited_by {
+            data {
+              attributes {
+                Name
+                Image {
+                  data {
+                    attributes {
+                      alternativeText
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
 `
 
 export const CREATE_POST_SPOTLIGHT = gql`
-  mutation CreatePostSpotlight($slug: String, $data: Object) {
-    entry(collection: "spotlights", slug: $slug, data: $data) {
-      ... on Entry_Spotlights_Spotlight {
+  mutation CreatePostSpotlight($data: SpotlightsPostInput!) {
+    createSpotlightsPost(data: $data) {
+      data {
         id
-        categories {
-          title
-        }
-        awards {
-          title
-        }
-        description
-        image {
-          ... on Asset_Assets {
-            alt
-            permalink
-          }
-        }
-        likes
-        slug
-        source_author
-        source_title
-        source_url
-        submited_by {
-          avatar {
-            permalink
-          }
-          name
-          id
-        }
-        title
       }
     }
   }
 `
 
 export const UPDATE_POST_SPOTLIGHT_LIKES = gql`
-mutation {
-  updatePage(id: 1, data: { spotlights_categories: ["3"] } ) {
-    data {
-      attributes {
-        Title
-        Slug
-        spotlights_categories {
-          data {
-            id
-            attributes {
-              Title
-            }
-          }
-        }
-        Dynamic_content {
-          ... on ComponentBodyBody {
-            Content
-          }
-          ... on ComponentIllustrationIllustration {
-            Image {
-              data {
-                attributes {
-                  url
-                  alternativeText
-                }
-              }
-            }
-          }
-        }
+  mutation MutationPostSpotlightLikes($id: ID!, $likes: Int) {
+    updateSpotlightsPost(id: $id, data: { Likes: $likes }) {
+      data {
+        id
       }
     }
   }
-}
 `
 
 export const UPDATE_POST_SPOTLIGHT_AWARDS = gql`
-mutation {
-  updatePage(id: 1, data: { spotlights_categories: ["2"] } ) {
-    data {
-      attributes {
-        Title
-        Slug
-        spotlights_categories {
-          data {
-            id
-            attributes {
-              Title
-            }
-          }
-        }
-        Dynamic_content {
-          ... on ComponentBodyBody {
-            Content
-          }
-          ... on ComponentIllustrationIllustration {
-            Image {
-              data {
-                attributes {
-                  url
-                  alternativeText
-                }
-              }
-            }
-          }
-        }
+  mutation MutationPostSpotlightAwards($id: ID!, $awardId: Id) {
+    updateSpotlightsPost(id: $id, data: { Award: $awardId }) {
+      data {
+        id
       }
     }
   }
-}
 `

@@ -1,15 +1,17 @@
-import { STRAPI_ENDPOINT } from "./apollo-client";
+import axios from "axios";
+import FormData from "form-data";
+import { USER, STRAPI_ENDPOINT } from "./apollo-client";
 
 export function parsePageSimple(datas) {
-  const page = {
+  return {
     title: datas.Title,
     slug: datas.Slug,
-    decription: datas.Description
+    description: datas.Description
   }
 }
 
 export function parsePageFlexible(datas) {
-  const page = {
+  return {
     title: datas.Title,
     slug: datas.Slug,
     flexible_content: getDynamicContent(datas.Dynamic_content)
@@ -18,11 +20,11 @@ export function parsePageFlexible(datas) {
 
 export function parsePostsSpotlights(datas) {
   const posts = datas.map(data => {
-    return parsePostSpotlight(data)
+    return { id: data.id, ...parsePostSpotlight(data.attributes) }
   });
-  const categories = getTaxonomiesPosts(datas, "categories")
-  const awards = getTaxonomiesPosts(datas, "awards")
-  return { 
+  const categories = getTaxonomiesPosts(datas, "Categories")
+  const awards = getTaxonomiesPosts(datas, "Award")
+  return {
     posts: posts,
     categories: categories,
     awards: awards
@@ -31,49 +33,41 @@ export function parsePostsSpotlights(datas) {
 
 export function parsePostSpotlight(data) {
   return {
-    awards: data.awards ? data.awards.title : null,
-    bookmarked: false, // Get by user
-    categories: data.categories ? data.categories.map(category => category.title) : null,
+    awards: data.Award.data ? data.Award.data.attributes.Title : null,
+    bookmarked: USER.bookmarked.spotlights ? USER.bookmarked.spotlights.filter(spotlight => spotlight.slug === data.Slug).length > 0 : false, // Get by user
+    categories: data.Categories ? data.Categories.data.map(category => category.attributes.Title) : null,
     comments: 0, // ???
-    description: data.description,
-    image: {
-      alt: data.image ? data.image.alt : null,
-      url: data.image ? data.image.permalink : null
-    },
-    likes: data.likes,
-    liked: false, // Get by user
-    slug: data.slug,
+    description: data.Description,
+    image: getImage(data.Image),
+    likes: data.Likes,
+    liked: USER.liked.spotlights ? USER.liked.spotlights.filter(spotlight => spotlight === data.Slug).length > 0 : false, // Get by user
+    slug: data.Slug,
     source: {
-      author: data.source_author,
-      title: data.source_title,
-      url: data.source_url
+      author: data.Source_author,
+      url: data.Source_link
     },
     submited_by: {
-      id: data.submited_by ? data.submited_by.id : null,
-      image: {
-        alt: `Profil image of ${ data.submited_by ? data.submited_by.name : "the auhtor of this post" }`,
-        url: data.submited_by ? data.submited_by.avatar ? data.submited_by.avatar.permalink : null : null
-      },
-      name: data.submited_by ? data.submited_by.name : null
+      image: getImage(data.Submited_by.data.attributes.Image),
+      name: data.Submited_by ? data.Submited_by.data.attributes.Name : null
     },
-    title: data.title
+    title: data.Title
   }
 }
 
 export function parsePostsInsights(datas) {
   const posts = datas.map(data => {
-    return parsePostInsight(data.attributes)
+    return { id: data.id, ...parsePostInsight(data.attributes) }
   });
-  // const categories = getTaxonomiesPosts(datas, "categories")
+  const categories = getTaxonomiesPosts(datas, "Categories")
   return { 
     posts: posts,
-    categories: {}
+    categories: categories
   }
 }
 
 export function parsePostInsight(data) {
   return {
-    bookmarked: false, // Get by user
+    bookmarked: USER.bookmarked.insights ? USER.bookmarked.insights.filter(insight => insight.slug === data.Slug).length > 0 : false, // Get by user
     categories: data.Categories ? data.Categories.data.map(category => category.attributes.Title) : null,
     content: getDynamicContent(data.Dynamic_content),
     description: data.Description,
@@ -91,9 +85,9 @@ export function parsePostInsight(data) {
 
 export function parsePostsResources(datas) {
   const posts = datas.map(data => {
-    return parsePostResource(data)
+    return parsePostResource(data.attributes)
   });
-  const categories = getTaxonomiesPosts(datas, "categories")
+  const categories = getTaxonomiesPosts(datas, "Categories")
   return { 
     posts: posts,
     categories: categories
@@ -102,19 +96,15 @@ export function parsePostsResources(datas) {
 
 export function parsePostResource(data) {
   return {
-    categories: data.categories ? data.categories.map(category => category.title) : null,
-    description: data.description,
-    image: {
-      alt: data.image ? data.image.alt : null,
-      url: data.image ? data.image.permalink : null
-    },
-    slug: data.slug,
+    categories: data.Categories ? data.Categories.data.map(category => category.attributes.Title) : null,
+    description: data.Description,
+    image: getImage(data.Image),
+    slug: data.Slug,
     source: {
-      author: data.source_author,
-      title: data.source_title,
-      url: data.source_url
+      title: data.Source_title,
+      url: data.Source_link
     },
-    title: data.title
+    title: data.Title
   }
 }
 
@@ -146,8 +136,8 @@ export function parsePostProject(data) {
 }
 
 export function parseUsersJury(datas) {
-  const users = datas.filter(data => data.group[0].title === "Jury").map(data => {
-    return parseUserJury(data)
+  const users = datas.map(data => {
+    return parseUserJury(data.attributes)
   });
   return { 
     users: users
@@ -156,24 +146,16 @@ export function parseUsersJury(datas) {
 
 export function parseUserJury(data) {
   return {    
-    description: data.description,
-    email: data.email,
-    image: {
-      alt: data.avatar ? data.avatar.alt : null,
-      url: data.avatar ? data.avatar.permalink : null
-    },
-    name: data.name,
-    slug: transformToSlug(data.name),
-    twitter_account: data.twitter_account
+    description: data.Description,
+    image: getImage(data.Image),
+    name: data.Name,
   }
 }
 
 export function parseUsersMembers(datas) {
-  const users = datas.filter(data => data.group[0].title === "Members").map(data => {
+  const users = datas.map(data => {
     return {
-      id: data.id,
-      name: data.name,
-      slug: transformToSlug(data.name),
+      slug: data.attributes.Slug,
     }
   });
   return { 
@@ -183,31 +165,42 @@ export function parseUsersMembers(datas) {
 
 export function parseUserMember(data) {
   return {   
-    slug: transformToSlug(data.name),
-    name: data.name,
-    twitter_account: data.twitter_account,
+    slug: data.Slug,
+    name: data.username,
+    twitter_account: data.Twitter_account,
     email: data.email,
-    description: data.description,
+    description: data.Description,
     bookmarked: {
-      spotlights: data.bookmarked_spotlights.map(bookmarked_spotlight => {
-        return parsePostSpotlight(bookmarked_spotlight)
-      }),
-      insights: data.bookmarked_insights.map(bookmarked_insight => {
-        return parsePostInsight(bookmarked_insight)
-      })
+      spotlights: data.Bookmarked_spotlights ? data.Bookmarked_spotlights.data.map(spotlight => {
+        return { id: spotlight.id, ...parsePostSpotlight(spotlight.attributes) }
+      }) : null,
+      insights: data.Bookmarked_insights ? data.Bookmarked_insights.data.map(insight => {
+        return { id: insight.id, ...parsePostInsight(insight.attributes) }
+      }) : null,
+    },
+    liked: {
+      spotlights: data.Liked_spotlights ? data.Liked_spotlights.data.map(spotlights => spotlights.id) : null,
     }
   }
 }
+
+export async function createImage(image, title) {
+  const responseImage = await axios.get(image, { responseType: "arraybuffer" })
+  const form = new FormData()
+  form.append("files", responseImage.data, `post-${ transformToSlug(title) }.jpg`)
+  const responseUpload = await axios.post(`${STRAPI_ENDPOINT}/api/upload`, form)
+  return responseUpload.data[0].id
+} 
 
 // ---
 
 function getTaxonomiesPosts(datas, type) {
   let taxonomies = [].concat(...datas.map(data => {
-    if (data[type]) {
-      if (Array.isArray(data[type])) {
-        return data[type].map(category => category.title)
+    if (data.attributes[type]) {
+      if (Array.isArray(data.attributes[type].data)) {    
+        return data.attributes[type].data.map(type => type.attributes.Title)
       } else {
-        return data[type].title
+        return data.attributes[type].data ? data.attributes[type].data.attributes.Title : null
       }
     } else {
       return null

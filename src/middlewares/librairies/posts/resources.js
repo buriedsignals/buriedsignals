@@ -9,6 +9,6 @@ export async function getPostsResources() {
     query: QUERY_POSTS_RESOURCES,
   })
   if (!response) return null
-  let posts = response.data.entries.data
+  let posts = response.data.resourcesPosts.data
   return parsePostsResources(posts)
 }

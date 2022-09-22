@@ -9,6 +9,6 @@ export async function getPageJury() {
     query: QUERY_PAGE_JURY,
   })
   if (!response) return null
-  let page = response.data.entry
+  let page = response.data.pages.data[0].attributes
   return parsePageSimple(page)
 }

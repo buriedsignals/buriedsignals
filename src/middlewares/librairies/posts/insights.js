@@ -21,7 +21,9 @@ export async function getPostInsight(slug) {
   })
   if (!response) return null
   let post = response.data.insightsPosts.data[0].attributes
-  return parsePostInsight(post)
+  post = parsePostInsight(post)
+  post.id = response.data.insightsPosts.data[0].id
+  return post
 }
 
 export async function createPostInsight(slug, data) {

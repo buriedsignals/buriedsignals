@@ -5,6 +5,7 @@ export const QUERY_POSTS_INSIGHTS = gql`
   query QueryPostsInsights {
     insightsPosts {
       data {
+        id
         attributes {
           Title
           Slug
@@ -56,6 +57,7 @@ export const QUERY_POST_INSIGHT = gql`
   query QueryPostInsight($slug: String) {
     insightsPosts(filters: { Slug: { eq: $slug } }) {
       data {
+        id
         attributes {
           Title
           Slug

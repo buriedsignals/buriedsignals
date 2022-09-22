@@ -4,7 +4,6 @@ import { getPageAboutUs } from '@/middlewares/librairies/pages/about-us';
 import AboutUsTemplate from "@/components/templates/About/AboutUs"
 
 export default function AboutUs({ aboutUs, ...props }) {
-  console.log(aboutUs)
   return (
     <AboutUsTemplate aboutUs={ aboutUs } />
   )
