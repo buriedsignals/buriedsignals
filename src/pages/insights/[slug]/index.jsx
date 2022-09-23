@@ -1,7 +1,7 @@
 // Middlewares
 import { getPostsInsights, getPostInsight } from '@/middlewares/librairies/posts/insights';
 // Templates
-import InsightTemplate from "@/components/templates/insights/Insight"
+import InsightTemplate from '@/components/templates/Insights/Insight';
 
 export default function Insight({ insight, ...props }) {
   return (
