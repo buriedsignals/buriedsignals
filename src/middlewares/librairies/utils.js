@@ -216,7 +216,7 @@ function transformToSlug(text) {
 function getImage(image) {
   return {
     alt: image ? image.data.attributes.alternativeText : null,
-    url: image ? `${STRAPI_ENDPOINT}${image.data.attributes.url}` : null
+    url: image ? image.data.attributes.url : null
   }
 }
 

@@ -73,11 +73,11 @@ export default function SigninTemplate({ ...props }) {
         <div className="container-module-extra-small signin-container">
           <h1 className="title typography-04">Sign in</h1>
           <div className="form-container">
-            <a href="" className="connect-twitter">
+            {/* <a href="" className="connect-twitter">
               <TwitterIcon />
               <p className="typography-17">Sign in with Twitter</p>
             </a>
-            <p className="label typography-01">Sign in with e-mail</p>
+            <p className="label typography-01">Sign in with e-mail</p> */}
             <div className="form" ref={ formRef }>
               <div className="inputs-container">
                 <input className="typography-01 input-email" type="email" placeholder="Your E-mail" />

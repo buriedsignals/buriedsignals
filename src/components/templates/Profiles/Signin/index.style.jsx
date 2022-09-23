@@ -5,7 +5,7 @@ export const SigninTemplateStyle = styled.main`
   .signin-container {
     padding: 117.5px 16px;
     .title {
-      margin-bottom: 80px;
+      margin-bottom: 60px;
       text-align: center;
     }
     .form-container {
