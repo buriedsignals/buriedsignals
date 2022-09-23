@@ -52,6 +52,28 @@ export const SignupTemplateStyle = styled.main`
               margin-top: 15px;
             }
           }
+          textarea {
+            width: 100%;
+            padding: 17.5px 25px;
+            background-color: var(--color-black03);
+            border: 1.25px solid var(--color-grey01);
+            border-radius: 5px;
+            color: var(--color-white);
+            text-align: center;
+            outline: none;
+            resize : none;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            &::-webkit-scrollbar {
+              display: none;
+            }
+            &:not(:first-child) {
+              margin-top: 15px;
+            }
+          }
+          .input-error {
+            border: 1.25px solid red;
+          }
         }
         button {
           min-width: 140px;

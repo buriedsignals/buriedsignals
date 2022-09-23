@@ -1,21 +1,26 @@
 // Styles
 import { LikeStyle } from "./index.style"
+// Scripts
+import { getUserCookies } from "@/scripts/utils"
 // React
-import { useState } from "react"
-// Hooks
-import useStore from "@/hooks/useStore"
+import { useEffect, useState } from "react"
+// Nodes
+import { setCookie } from "cookies-next"
 // Banners
 import SigninBanner from "@/components/banners/Signin"
 // Icons
 import LikeIcon from "@/components/icons/Like"
 
 export default function Like({ likes, liked = false, postId, type = null, ...props }) {
-  // Hooks
-  const [user] = useStore((state) => [state.user])
+  // Cookies
+  const user = getUserCookies()
   // States
-  const [alertSignin, setAlertSignin] = useState(!user.connected)
-  const [isLiked, setIsLiked] = useState(user.liked.spotlights.includes(postId))
+  const [alertSignin, setAlertSignin] = useState(false)
+  const [isLiked, setIsLiked] = useState(false)
   const [stateLikes, setStateLikes] = useState(parseInt(likes))
+  useEffect(() => {
+    setIsLiked(user.liked.spotlights.includes(postId))
+  }, [])
   // Handlers
   const onClickButton = async (e) => {
     e.preventDefault()
@@ -23,7 +28,7 @@ export default function Like({ likes, liked = false, postId, type = null, ...pro
       try {
         let likedSpotlights = null
         if (type != null) {
-          likedSpotlights = user.liked.spotlights
+          likedSpotlights = user.liked?.spotlights
           if (likedSpotlights.includes(postId)) {
             likedSpotlights.splice(likedSpotlights.indexOf(postId), 1)
           } else {
@@ -39,7 +44,8 @@ export default function Like({ likes, liked = false, postId, type = null, ...pro
         setStateLikes(isLiked ? stateLikes - 1 : stateLikes + 1)
         setIsLiked(!isLiked)
         if (type) {
-          useStore.setState({ liked: { spotlights: likedSpotlights } })
+          user.liked.spotlights = likedSpotlights
+          setCookie("liked", user.liked)
         }
       } catch (error) {
         console.error(error);

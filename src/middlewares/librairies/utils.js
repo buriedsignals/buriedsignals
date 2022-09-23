@@ -85,7 +85,7 @@ export function parsePostInsight(data) {
 
 export function parsePostsResources(datas) {
   const posts = datas.map(data => {
-    return parsePostResource(data.attributes)
+    return { id: data.id, ...parsePostResource(data.attributes) }
   });
   const categories = getTaxonomiesPosts(datas, "Categories")
   return { 

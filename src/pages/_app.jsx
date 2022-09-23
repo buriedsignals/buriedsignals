@@ -7,6 +7,7 @@ import Head from 'next/head'
 // Nodes
 import { ThemeProvider } from "styled-components"
 import { createTheme } from "styled-breakpoints"
+import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 // Hooks
 import useStore from '@/hooks/useStore'
 

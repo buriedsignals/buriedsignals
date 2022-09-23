@@ -5,6 +5,7 @@ export const QUERY_POSTS_RESOURCES = gql`
   query QueryPostsResources {
     resourcesPosts {
       data {
+        id
         attributes {
           Title
           Slug

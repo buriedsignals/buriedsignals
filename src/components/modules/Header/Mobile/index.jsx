@@ -1,10 +1,13 @@
 // Styles
 import { HeaderMobileStyle } from "./index.style"
+// Scripts
+import { getUserCookies } from "@/scripts/utils"
+// React
+import { useEffect, useState } from "react"
 // Next
 import Link from "next/link"
 import { useRouter } from "next/router"
 // Hooks
-import useStore from "@/hooks/useStore"
 import useToggle from "@/hooks/useToggle"
 // Links
 // import ProfileLink from "@/components/links/Profile"
@@ -17,8 +20,12 @@ import ArrowIcon from "@/components/icons/Arrow"
 export default function HeaderMobile() {
   // Router
   const router = useRouter()
+  // Cookies
+  const [user, setUser] = useState({ connected: false, slug: '' })
+  useEffect(() => {
+    setUser(getUserCookies())
+  }, [])
   // Hooks
-  const [user] = useStore((state) => [state.user])
   const [modalMenu, setModalMenu] = useToggle(false) 
   const [modalDropdown, setModalDropdown] = useToggle(false) 
   return (

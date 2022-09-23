@@ -15,8 +15,6 @@ export default function Accordion({ panels, ...props }) {
     setShowPanel(false)
   }
   useEffect(() => {
-    console.log(panelSelected)
-    console.log(panels[panelSelected])
     setShowPanel(true)
   }, [panelSelected])
   return (

@@ -1,40 +1,15 @@
 import { down } from "styled-breakpoints";
 import styled from "styled-components";
 
-export const EditStyle = styled.div`
-  position: relative;
+export const ErrorStyle = styled.div`
+  position: fixed;
   z-index: 2;
-  .modal {
-    position: relative;
-    display: flex;
-    align-items: center;
-    svg {
-      margin-right: 7.5px;
-      transition: all 0.05s ease-in-out;
-    }
-    &.is-open {
-      svg {
-        transform: rotate3D(0, 0, 1, -180deg);
-        transition: all 0.05s ease-in-out;
-      }
-    }
-  }
-  .panel-back {
-    position: fixed;
-    top: 71px; left: 0;
-    display: block;
-    width: 100vw;
-    height: calc(100vh - 71px);
-    background: var(--color-black01);
-    opacity: 0.5;
-    z-index: -1;
-  }
-  .panel-edit {
+  .panel-error {
     position: fixed;
     top: 50%; left: 50%;
     width: 100%;
     max-width: 860px;
-    background: var(--color-black01);
+    background: var(--color-black02);
     border-radius: 4px;
     transform: translate3D(-50%, -50%, 0);
     overflow-y: scroll;
@@ -50,7 +25,7 @@ export const EditStyle = styled.div`
       border-radius: 0;
       transform: inherit;
     }
-    .panel-edit-container {
+    .panel-error-container {
       position: sticky;
       max-width: 470px;
       margin: 0 auto;
@@ -59,6 +34,10 @@ export const EditStyle = styled.div`
         padding: 25px;
       }
       h3 {
+        margin-bottom: 27.5px;
+        text-align: center;
+      }
+      .description {
         margin-bottom: 37.5px;
         text-align: center;
       }
@@ -72,9 +51,6 @@ export const EditStyle = styled.div`
           border-radius: 5px;
           &:not(:first-child) {
             margin-top: 20px;
-          }
-          &.input-error {
-            border: 1.25px solid red;
           }
           .icon-container {
             display: inline-block;

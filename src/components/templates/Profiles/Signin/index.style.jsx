@@ -52,6 +52,9 @@ export const SigninTemplateStyle = styled.main`
               margin-top: 15px;
             }
           }
+          .input-error {
+            border: 1.25px solid red;
+          }
         }
         button {
           min-width: 140px;

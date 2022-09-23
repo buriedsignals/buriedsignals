@@ -1,10 +1,10 @@
 // Styles
 import { HeaderDesktopStyle } from "./index.style"
+// Scripts
+import { getUserCookies } from "@/scripts/utils"
 // Next
 import Link from "next/link"
 import { useRouter } from "next/router"
-// Hooks
-import useStore from "@/hooks/useStore"
 // Modules
 import DropdownModule from "@/components/modals/Dropdown"
 // Links
@@ -12,12 +12,16 @@ import PrimaryLink from "@/components/links/Primary"
 // import ProfileLink from "@/components/links/Profile"
 // Icons
 import LogoIcon from "@/components/icons/Logo"
+import { useEffect, useState } from "react"
 
 export default function HeaderDesktop() {
   // Router
   const router = useRouter()
-  // Hooks
-  const [user] = useStore((state) => [state.user])
+  // Cookies
+  const [user, setUser] = useState({ connected: false, slug: '' })
+  useEffect(() => {
+    setUser(getUserCookies())
+  }, [])
   return (
     <HeaderDesktopStyle>
       <div className="header-desktop-container">

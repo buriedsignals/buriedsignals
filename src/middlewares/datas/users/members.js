@@ -160,79 +160,315 @@ export const QUERY_USER_MEMBER = gql`
   }
 `
 
-// A faire login
 export const CREATE_USER_MEMBER = gql`
-  mutation CreateUserMember($data: Object) {
-    user(data: $data) {
-      name
-      twitter_account
-      email
-      group {
-        title
-      }
-      description
-      bookmarked_spotlights {
-        ... on Entry_Spotlights_Spotlight {
-          id
-          categories {
-            title
-          }
-          awards {
-            title
-          }
-          description
-          image {
-            ... on Asset_Assets {
-              alt
-              permalink
+  mutation CreateUserMember($datas: UsersPermissionsUserInput!) {
+    createUsersPermissionsUser(data: $datas) {
+      data {
+        id
+        attributes {
+          username
+          Slug
+          Twitter_account
+          email
+          Description
+            Bookmarked_spotlights {
+              data {
+                id
+                attributes {
+                  Title
+                  Slug
+                  Image {
+                    data {
+                      attributes {
+                        alternativeText
+                        url
+                      }
+                    }
+                  }
+                  Description
+                  Source_author
+                  Source_link
+                  Categories {
+                    data {
+                      attributes {
+                        Title
+                      }
+                    }
+                  }
+                  Award {
+                    data {
+                      attributes {
+                        Title
+                      }
+                    }
+                  }
+                  Likes
+                  Submited_by {
+                    data {
+                      attributes {
+                        Name
+                        Image {
+                          data {
+                            attributes {
+                              alternativeText
+                              url
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
-          }
-          likes
-          slug
-          source_author
-          source_title
-          source_url
-          submited_by {
-            avatar {
-              permalink
+            Bookmarked_insights {
+              data {
+                id
+                attributes {
+                  Title
+                  Slug
+                  Image {
+                    data {
+                      attributes {
+                        alternativeText
+                        url
+                      }
+                    }
+                  }
+                  Description
+                  Source_author
+                  Source_title
+                  Source_link
+                  Categories {
+                    data {
+                      attributes {
+                        Title
+                      }
+                    }
+                  }
+                  updatedAt
+                  Dynamic_content {
+                    ... on ComponentBodyBody {
+                      Content
+                    }
+                    ... on ComponentIllustrationIllustration {
+                      Image {
+                        data {
+                          attributes {
+                            url
+                            alternativeText
+                          }
+                        }
+                      }
+                    }
+                    ... on ComponentEmbedVideoEmbedVideo {
+                      Link
+                    }
+                  }
+                }
+              }
             }
-            name
-            id
-          }
-          title
-        }
-      }
-      bookmarked_insights {
-        ... on Entry_Insights_Insight {
-          id
-          categories {
-            title
-          }
-          content
-          date
-          description
-          image {
-            ... on Asset_Assets {
-              alt
-              permalink
+            Bookmarked_resources {
+              data {
+                id
+                attributes {
+                  Title
+                  Slug
+                  Image {
+                    data {
+                      attributes {
+                        alternativeText
+                        url
+                      }
+                    }
+                  }
+                  Description
+                  Source_title
+                  Source_link
+                  Categories {
+                    data {
+                      attributes {
+                        Title
+                      }
+                    }
+                  }
+                }
+              }
             }
-          }
-          slug
-          source_author
-          source_title
-          source_url
-          title
+            Liked_spotlights {
+              data {
+                id
+              }
+            }
         }
       }
     }
   }
 `
 
-// A faire edit
+export const REGISTER_USER_MEMBER = gql`
+  mutation RegisterUserMember($datas: UsersPermissionsRegisterInput!) {
+    register(input: $datas) {
+      user {
+        id
+      }
+    }
+  }
+`
+
+export const LOGIN_USER_MEMBER = gql`
+  mutation LoginUserMember($datas: UsersPermissionsLoginInput!) {
+    login(input: $datas) {
+      jwt
+      user {
+        username
+      }
+    }
+  }
+`
+
 export const UPDATE_USER_MEMBER = gql`
-  mutation UpdateUserMemberLiked($id: String, $liked: Boolean) {
-    user(id: $id, data: { liked: $liked }) {
-      liked
+  mutation UpdateUserMember($id: ID!, $datas: UsersPermissionsUserInput!) {
+    updateUsersPermissionsUser(id: $id, data: $datas) {
+      data {
+        id
+        attributes {
+          username
+          Slug
+          Twitter_account
+          email
+          Description
+            Bookmarked_spotlights {
+              data {
+                id
+                attributes {
+                  Title
+                  Slug
+                  Image {
+                    data {
+                      attributes {
+                        alternativeText
+                        url
+                      }
+                    }
+                  }
+                  Description
+                  Source_author
+                  Source_link
+                  Categories {
+                    data {
+                      attributes {
+                        Title
+                      }
+                    }
+                  }
+                  Award {
+                    data {
+                      attributes {
+                        Title
+                      }
+                    }
+                  }
+                  Likes
+                  Submited_by {
+                    data {
+                      attributes {
+                        Name
+                        Image {
+                          data {
+                            attributes {
+                              alternativeText
+                              url
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            Bookmarked_insights {
+              data {
+                id
+                attributes {
+                  Title
+                  Slug
+                  Image {
+                    data {
+                      attributes {
+                        alternativeText
+                        url
+                      }
+                    }
+                  }
+                  Description
+                  Source_author
+                  Source_title
+                  Source_link
+                  Categories {
+                    data {
+                      attributes {
+                        Title
+                      }
+                    }
+                  }
+                  updatedAt
+                  Dynamic_content {
+                    ... on ComponentBodyBody {
+                      Content
+                    }
+                    ... on ComponentIllustrationIllustration {
+                      Image {
+                        data {
+                          attributes {
+                            url
+                            alternativeText
+                          }
+                        }
+                      }
+                    }
+                    ... on ComponentEmbedVideoEmbedVideo {
+                      Link
+                    }
+                  }
+                }
+              }
+            }
+            Bookmarked_resources {
+              data {
+                id
+                attributes {
+                  Title
+                  Slug
+                  Image {
+                    data {
+                      attributes {
+                        alternativeText
+                        url
+                      }
+                    }
+                  }
+                  Description
+                  Source_title
+                  Source_link
+                  Categories {
+                    data {
+                      attributes {
+                        Title
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            Liked_spotlights {
+              data {
+                id
+              }
+            }
+        }
+      }
     }
   }
 `

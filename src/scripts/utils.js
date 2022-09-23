@@ -1,3 +1,5 @@
+import { deleteCookie, getCookie, setCookie } from "cookies-next";
+
 // Limit size text
 export function limitSizeText(text = "", length = 0) {
   if (!text) return ""
@@ -31,4 +33,39 @@ export function getTimeSince(date) {
 // Copy on clipboard
 export function copyClipboard() {
   alert("Copy")
+}
+// Tranform to slug
+export function transformToSlug(text) {
+  return text.toString() .normalize( 'NFD' ).replace( /[\u0300-\u036f]/g, '' ).toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-')
+}
+// Login cookies user
+export function loginUserCookies(datas) {
+  setCookie("connected", true)
+  setCookie("bookmarked", datas.bookmarked),
+  setCookie("description", datas.description),
+  setCookie("email", datas.email),
+  setCookie("id", datas.id),
+  setCookie("jwt", datas.jwt),
+  setCookie("liked", datas.liked),
+  setCookie("name", datas.name),
+  setCookie("slug", datas.slug),
+  setCookie("twitter_account", datas.twitter_account)
+}
+// Get cookies user
+export function getUserCookies() {
+  return {
+    connected: getCookie("connected"),
+    bookmarked: getCookie("bookmarked") ? JSON.parse(getCookie("bookmarked")) : { spotlights: [], insights: [], resources: [] },
+    description: getCookie("description"),
+    email: getCookie("email"),
+    id: getCookie("id"),
+    liked: getCookie("liked") ? JSON.parse(getCookie("liked")) : { spotlights: [] },
+    name: getCookie("name"),
+    slug: getCookie("slug"),
+    twitter_account: getCookie("twitter_account")
+  }
+}
+// Logout cookies user
+export function logoutUserCookies() {
+  setCookie("connected", false)
 }

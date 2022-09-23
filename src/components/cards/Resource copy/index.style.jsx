@@ -1,15 +1,11 @@
 import styled from "styled-components";
-import { down } from "styled-breakpoints";
 
 export const ResourceStyle = styled.a`
   display: block;
   background-color: var(--color-black03);
-  width: 529px;
-  ${down('md')} {
-    width: 343px;
-  }
+  width: 308px;
   .resource-container {
-    height: 584px;
+    height: 444px;
     .visual-container, .content-container {
       width: 100%;
       height: auto;
@@ -17,10 +13,7 @@ export const ResourceStyle = styled.a`
     }
     .visual-container {
       position: relative;
-      height: 296px;
-      ${down('md')} {
-        height: 200px;
-      }
+      height: 172px;
       img {
         position: absolute;
         top: 50%; left: 50%;
@@ -30,43 +23,10 @@ export const ResourceStyle = styled.a`
       }
     }
     .content-container {
-      padding: 32px 40px;
-      ${down('md')} {
-        padding: 24px 40px;
-      }
-      .extras-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 32.5px;
-        color: var(--color-grey01);
-        text-transform: uppercase;
-        .text-container {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          .categories-container {
-            order: 1;
-            display: flex;
-            .category {
-              &:not(:last-child) {
-                margin-right: 15px;
-              }
-            }
-          }
-          .author {
-            order: 2;
-            margin-right: 22.5px;
-            color: var(--color-grey03);
-          }
-        }
-      }
+      padding: 32px;
       .informations-container {
-        height: 120px;
+        height: 166px;
         margin-bottom: 25px;
-        ${down('md')} {
-          height: 220px;
-        }
         .title {
           margin-bottom: 18px;
           color: var(--color-white);
@@ -77,7 +37,7 @@ export const ResourceStyle = styled.a`
       }
       .more-container {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
         color: var(--color-grey01);
         text-transform: uppercase;

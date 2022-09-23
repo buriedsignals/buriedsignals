@@ -1,20 +1,25 @@
 // Styles
 import { BookmarkStyle } from "./index.style"
+// Scripts
+import { getUserCookies } from "@/scripts/utils"
 // React
-import { useState } from "react"
-// Hooks
-import useStore from "@/hooks/useStore"
+import { useEffect, useState } from "react"
+// Nodes
+import { setCookie } from "cookies-next"
 // Banners
 import SigninBanner from "@/components/banners/Signin"
 // Icons
 import BookmarkIcon from "@/components/icons/Bookmark"
 
-export default function Bookmark({ bookmarked = false, postId, type, ...props }) {  
-  // Hooks
-  const [user] = useStore((state) => [state.user])
+export default function Bookmark({ bookmarked = false, postId, type, ...props }) {
+  // Cookies
+  const user = getUserCookies()
   // States
-  const [alertSignin, setAlertSignin] = useState(!user.connected)
-  const [isBookmarked, setIsBookmarked] = useState(user.bookmarked[type].some(post => post.id === postId))
+  const [alertSignin, setAlertSignin] = useState(false)
+  const [isBookmarked, setIsBookmarked] = useState(false)
+  useEffect(() => {
+    setIsBookmarked(user.bookmarked[type].some(post => post.id === postId))
+  }, [])
   // Handlers
   const onClickButton = async (e) => {
     e.preventDefault()
@@ -33,9 +38,8 @@ export default function Bookmark({ bookmarked = false, postId, type, ...props })
           body: JSON.stringify(body),
         });
         setIsBookmarked(!isBookmarked)
-        const bookmarkedStore = user.bookmarked
-        bookmarkedStore[type] = bookmarkedPost
-        useStore.setState({ bookmarked: bookmarkedStore })
+        user.bookmarked[type] = bookmarkedPost
+        setCookie("bookmarked", user.bookmarked)
       } catch (error) {
         console.error(error);
       }
