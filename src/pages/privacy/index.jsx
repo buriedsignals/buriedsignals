@@ -17,6 +17,7 @@ export async function getStaticProps(context) {
     }
   }
   return {
-    props: { privacy }
+    props: { privacy },
+    revalidate: 30
   }
 }

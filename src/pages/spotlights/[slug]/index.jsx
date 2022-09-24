@@ -25,6 +25,7 @@ export async function getStaticProps({params, ...context}) {
     }
   }
   return {
-    props: { spotlight }
+    props: { spotlight },
+    revalidate: 30
   }
 }

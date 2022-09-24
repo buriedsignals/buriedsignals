@@ -17,6 +17,7 @@ export async function getStaticProps(context) {
     }
   }
   return {
-    props: { aboutUs }
+    props: { aboutUs },
+    revalidate: 30
   }
 }

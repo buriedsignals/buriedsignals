@@ -20,6 +20,7 @@ export async function getStaticProps(context) {
   }
   resources.page = page
   return {
-    props: { resources }
+    props: { resources },
+    revalidate: 30
   }
 }
