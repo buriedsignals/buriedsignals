@@ -112,7 +112,7 @@ export const QUERY_POST_SPOTLIGHT = gql`
 `
 
 export const QUERY_POSTS_SPOTLIGHTS_WEEK = gql`
-  query QueryPostsSpotlights($week_start: String, $week_end: String) {
+  query QueryPostsSpotlights($week_start: DateTime, $week_end: DateTime) {
     spotlightsPosts(filters: { and: [ { publishedAt: { gte: $week_start } }, { publishedAt: { lte: $week_end } }] }) {
       data {
         id
@@ -167,7 +167,7 @@ export const QUERY_POSTS_SPOTLIGHTS_WEEK = gql`
 `
 
 export const QUERY_POSTS_SPOTLIGHTS_MONTH = gql`
-  query QueryPostsSpotlights($month_start: String, $month_end: String) {
+  query QueryPostsSpotlights($month_start: DateTime, $month_end: DateTime) {
     spotlightsPosts(filters: { and: [ { publishedAt: { gte: $month_start } }, { publishedAt: { lte: $month_end } }] }) {
       data {
         id
