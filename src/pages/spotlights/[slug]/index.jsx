@@ -1,3 +1,5 @@
+// Next
+import Head from 'next/head'
 // Middlewares
 import { getPostsSpotlights, getPostSpotlight } from '@/middlewares/librairies/posts/spotlights';
 // Templates
@@ -5,7 +7,18 @@ import SpotlightTemplate from "@/components/templates/Spotlights/Spotlight"
 
 export default function Spotlight({ spotlight, ...props }) {
   return (
-    <SpotlightTemplate spotlight={ spotlight } />
+    <>
+      <Head>
+        <meta key='description' name='description' content={ spotlight.description } />
+        <meta key='og-title' property='og:title' content={ spotlight.title } />
+        <meta key='og-description' property='og:description' content={ spotlight.description } />
+        <meta key='og-image' property='og:image' content={ spotlight.image.url } />
+        <meta key='tw-title' name='twitter:title' content={ spotlight.title } />
+        <meta key='tw-description' name='twitter:description' content={ spotlight.description } />
+        <meta key='tw-image' name='twitter:image:src' content={ spotlight.image.url } />
+      </Head>
+      <SpotlightTemplate spotlight={ spotlight } />
+    </>
   )
 }
 

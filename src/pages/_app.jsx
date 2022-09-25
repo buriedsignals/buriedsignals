@@ -42,25 +42,25 @@ function App({ Component, pageProps }) {
         <meta name='author' content={ author } />
         <meta name='designer' content={ author } />
         <meta name='publisher' content={ author } />
-        <title>{ title }</title>
-        <meta name='description' content={ description } />
+        <title key='title'>{ title }</title>
+        <meta key='description' name='description' content={ description } />
         <meta name='keywords' content={ keywords } />
         <meta name='robots' content='index,follow' />
         <meta name='distribution' content='web' />
-        <meta property='og:title' content={ title } />
+        <meta key='og-title' property='og:title' content={ title } />
         <meta property='og:type' content='site' />
         <meta property='og:url' content={ url } />
-        <meta property='og:image' content={ url + 'images/img-meta.png' } />
+        <meta key='og-image' property='og:image' content={ url + 'images/img-meta.png' } />
         <meta property='og:site_name' content={ title } />
-        <meta property='og:description' content={ description } />
+        <meta key='og-description' property='og:description' content={ description } />
         <meta name='viewport' content='width=device-width, minimum-scale=1, initial-scale=1.0, user-scalable=no' />
         <link rel='shortcut icon' href='/icons/favicon.ico' />
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:site' content='@buriedsignals' />
-        <meta name='twitter:title' content={ title } />
-        <meta name='twitter:description' content={ description } />
+        <meta key='tw-title' name='twitter:title' content={ title } />
+        <meta key='tw-description' name='twitter:description' content={ description } />
         <meta name='twitter:creator' content='@buriedsignals' />
-        <meta name='twitter:image:src' content={ url +'images/img-meta.png' } />
+        <meta key='tw-image' name='twitter:image:src' content={ url +'images/img-meta.png' } />
       </Head>
       <ThemeProvider theme={ breakpoints }>
         <Layout>
