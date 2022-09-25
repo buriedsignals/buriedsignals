@@ -128,7 +128,9 @@ export default function SignupTemplate({ ...props }) {
           </div>
         </div>
         { internalError && <ErrorBanner onClickButtonClose={ setInternalError } /> }
-        { registered && <ValidateEmailBanner onClickButtonClose={ () => router.push('/') } /> }
+        { !registered && <ValidateEmailBanner onClickButtonClose={ () => {
+          document.location.href = window.location.protocol + "//" + window.location.host
+        } } /> }
       </SignupTemplateStyle>
     </Layout>
   )

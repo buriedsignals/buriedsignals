@@ -53,7 +53,7 @@ function App({ Component, pageProps }) {
         <meta property='og:image' content={ url + 'images/img-meta.png' } />
         <meta property='og:site_name' content={ title } />
         <meta property='og:description' content={ description } />
-        <meta name='viewport' content='width=device-width, minimum-scale=1, initial-scale=1.0' />
+        <meta name='viewport' content='width=device-width, minimum-scale=1, initial-scale=1.0, user-scalable=no' />
         <link rel='shortcut icon' href='/icons/favicon.ico' />
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:site' content='@buriedsignals' />

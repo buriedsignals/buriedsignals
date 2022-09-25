@@ -19,11 +19,12 @@ export const ErrorStyle = styled.div`
       display: none;
     }
     ${down('md')} {
-      top: 66px; left: 0;
+      top: 50vh; left: 0;
       max-width: inherit;
-      height: calc(100vh - 66px);
-      border-radius: 0;
-      transform: inherit;
+      width: calc(100% - 32px);
+      // height: calc(100vh - 66px);
+      margin: 0 16px;
+      transform: translate3D(0, -50%, 0);
     }
     .panel-error-container {
       position: sticky;

@@ -51,7 +51,7 @@ export default function SigninTemplate({ ...props }) {
           setInternalError(true)
         } else {
           loginUserCookies(result)
-          router.push("/")
+          document.location.href = window.location.protocol + "//" + window.location.host
         }
       } catch (error) {
         console.error(error);
