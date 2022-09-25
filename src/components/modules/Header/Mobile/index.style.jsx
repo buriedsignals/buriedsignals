@@ -20,6 +20,9 @@ export const HeaderMobileStyle = styled.header`
           &:not(:last-child) {
             margin-right: 40px;
           }
+          &:first-child {
+            margin-right: 20px;
+          }
           a {
             p {
               color: var(--color-white);

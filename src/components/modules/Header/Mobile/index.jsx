@@ -43,6 +43,11 @@ export default function HeaderMobile() {
             </a>
           </Link>
           <ul className="actions">
+            <li className="action">
+              <a href="https://google.fr">
+                <p className="typography-01">Submit</p>
+              </a>
+            </li>
             {  user.connected ?
                 <li className="action">
                   {/* <ProfileLink imgURL="/images/img-profil.jpg" /> */}
