@@ -49,7 +49,7 @@ export const PostsListStyle = styled.div`
       }
       .item-container {
         &:not(:last-child) {
-          margin-bottom: 20px;
+          margin-bottom: 77px;
         }
       }
     }
