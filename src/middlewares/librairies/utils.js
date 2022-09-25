@@ -36,7 +36,6 @@ export function parsePostSpotlight(data) {
     awards: data.Award.data ? data.Award.data.attributes.Title : null,
     bookmarked: USER.bookmarked.spotlights ? USER.bookmarked.spotlights.filter(spotlight => spotlight.slug === data.Slug).length > 0 : false, // Get by user
     categories: data.Categories ? data.Categories.data.map(category => category.attributes.Title) : null,
-    comments: 0, // ???
     description: data.Description,
     image: getImage(data.Image),
     likes: data.Likes,
@@ -51,6 +50,39 @@ export function parsePostSpotlight(data) {
       name: data.Submited_by ? data.Submited_by.data.attributes.Name : null
     },
     title: data.Title
+  }
+}
+
+export function parseComments(datas) {
+  let comments = datas.filter(data => !data.blocked ).map(data => {
+    return parseComment(data)
+  });
+  const comments_length = comments.length
+  let commentsThread = comments.filter(comment => comment.threadOf)
+  comments = comments.filter(comment => !comment.threadOf)
+  comments.forEach(comment => {
+    commentsThread.map(commentThread => {
+      if (comment.id == commentThread.threadOf) {
+        if (!comment.comments) {
+          comment.comments = []
+        }
+        comment.comments.push(commentThread)
+      }
+    })
+  });
+  return { comments, comments_length }
+}
+
+export function parseComment(data) {
+  return {
+    id: data.id,
+    content: data.content,
+    published_at: data.updatedAt,
+    threadOf: data.threadOf ? data.threadOf.id : null,
+    author: {
+      id: data.author.id,
+      name: data.author.name
+    }
   }
 }
 

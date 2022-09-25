@@ -46,7 +46,7 @@ export default function SigninTemplate({ ...props }) {
           body: JSON.stringify(body),
         });
         const result = await reponse.json()
-        if (result.error) {
+        if (result.errors) {
           logoutUserCookies()
           setInternalError(true)
         } else {

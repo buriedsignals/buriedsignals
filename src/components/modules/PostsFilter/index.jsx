@@ -62,8 +62,22 @@ export default function PostsFilter({ posts, categories, awards = false, multipl
   return (
     <PostsFilterStyle ref={ filterRef } className="container-module-large" { ...props } >
       <ul className="filters-container">
-        { awards && 
+        <div className="categories-container">
           <li className="filter-container">
+            <button className="filter-button is-active" onClick={ onClickButton } data-filter={ "All" }>
+              <p className="typography-05">All</p>
+            </button>
+          </li>
+          { categories.map((category, index) => {
+            return <li key={ `category-${ index }` } className="filter-container">
+              <button className="filter-button" onClick={ onClickButton } data-filter={ category }>
+                <p className="typography-05">{ category }</p>
+              </button>
+            </li>
+          }) }
+        </div>
+        { awards && 
+          <li className="filter-container filter-awards">
             <AwardsModal 
                 buttonName={ awardName }
                 listActions={ (() => {
@@ -80,20 +94,6 @@ export default function PostsFilter({ posts, categories, awards = false, multipl
               />
           </li>
         }
-        <div className="categories-container">
-          <li className="filter-container">
-            <button className="filter-button is-active" onClick={ onClickButton } data-filter={ "All" }>
-              <p className="typography-05">All</p>
-            </button>
-          </li>
-          { categories.map((category, index) => {
-            return <li key={ `category-${ index }` } className="filter-container">
-              <button className="filter-button" onClick={ onClickButton } data-filter={ category }>
-                <p className="typography-05">{ category }</p>
-              </button>
-            </li>
-          }) }
-        </div>
       </ul>
     </PostsFilterStyle>
   )

@@ -72,7 +72,7 @@ export const SignupTemplateStyle = styled.main`
             }
           }
           .input-error {
-            border: 1.25px solid red;
+            border: 1.25px solid var(--color-orange);
           }
         }
         button {

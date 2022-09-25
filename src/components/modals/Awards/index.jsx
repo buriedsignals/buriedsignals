@@ -11,8 +11,8 @@ export default function Awards({ buttonName = "", listActions = [], ...props }) 
   return (
     <AwardsStyle { ...props } onMouseEnter={ () => setModal(true) } onMouseLeave={ () => setModal(false) }>
       <button className={ `modal${ modal ? ' is-open' : '' }` }>
-        <ArrowIcon />
         <p className="typography-03">{ buttonName }</p>
+        <ArrowIcon />
       </button>
       { modal && 
         <div className="panel">

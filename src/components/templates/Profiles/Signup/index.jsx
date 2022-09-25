@@ -29,7 +29,7 @@ export default function SignupTemplate({ ...props }) {
   const onClickButtonSignup = async () => {
     const usernameInput = formRef.current.querySelector('.input-username')
     const username = usernameInput.value
-    const usernameError = /^[a-zA-Z\-]+$/.test(username)
+    const usernameError = /(^[A-Za-zÀ-ÿ]{3,16})?([ ]{0,1})([A-Za-zÀ-ÿ]{3,16})?([ ]{0,1})?([A-Za-zÀ-ÿ]{3,16})?([ ]{0,1})?([A-Za-zÀ-ÿ]{3,16})/.test(username)
     const emailInput = formRef.current.querySelector('.input-email')
     const email = emailInput.value.toLowerCase()
     const emailError = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
@@ -62,11 +62,11 @@ export default function SignupTemplate({ ...props }) {
           body: JSON.stringify(body),
         });
         const result = await reponse.json()
-        if (result.error) {
+        console.log(result)
+        if (result.errors) {
           logoutUserCookies()
           setInternalError(true)
         } else {
-          loginUserCookies(result)
           setRegistered(true)
         }
       } catch (error) {
@@ -92,6 +92,10 @@ export default function SignupTemplate({ ...props }) {
       }
     }
   }
+  const onChangeTwitterAccount = (e) => {
+    const account = e.target.value
+    e.target.value = account == "" ? "" : account.startsWith("@") ? account : `@${account}`
+  }
   return (
     <Layout>
       <SignupTemplateStyle { ...props }>
@@ -108,7 +112,7 @@ export default function SignupTemplate({ ...props }) {
                 <input className="typography-01 input-username" type="text" placeholder="Your Name" />
                 <input className="typography-01 input-email" type="email" placeholder="Your E-mail" />
                 <input className="typography-01 input-password" type="password" placeholder="Your Password" />
-                <input className="typography-01 input-twitter" type="text" placeholder="Your Twitter Account" />
+                <input className="typography-01 input-twitter" type="text" placeholder="Your Twitter Account" onChange={ onChangeTwitterAccount } />
                 <textarea className="typography-01 input-description" name="description" cols="30" rows="7" placeholder="Your Description"></textarea>
               </div>
               <PrimaryButton onClickButton={ onClickButtonSignup }>

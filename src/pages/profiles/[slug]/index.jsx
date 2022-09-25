@@ -13,7 +13,7 @@ export default function Profile({ member }) {
 
 export async function getStaticPaths() {
   const members = await getUsersMembers()
-  const paths = members.users.map((member) => ({
+  const paths = members.users.filter((member) => member.slug !== null).map((member) => ({
     params: { slug: member.slug },
   }))
   return { paths, fallback: false }

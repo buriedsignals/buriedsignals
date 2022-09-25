@@ -93,8 +93,8 @@ export default function HeaderMobile() {
               </li>
               <li className="page">
                 <button className={ `modal${ modalDropdown ? ' is-open' : '' } ${ router.pathname.includes("/about") ? "is-active" : "" }` } onClick={ setModalDropdown }>
+                  <p className="typography-01">About</p>                  
                   <ArrowIcon />
-                  <p className="typography-01">About</p>
                 </button>
                 { modalDropdown && 
                   <ul className="links">

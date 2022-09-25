@@ -9,7 +9,7 @@ export const DropdownStyle = styled.div`
     align-items: center;
     z-index: 2;
     svg {
-      margin-right: 7.5px;
+      margin-left: 7.5px;
       transition: all 0.05s ease-in-out;
     }
     &.is-open {
@@ -27,7 +27,7 @@ export const DropdownStyle = styled.div`
   .panel {
     position: absolute;
     top: -12.5px; left: -12.5px;
-    padding: 43px 26px 12.5px 28px;
+    padding: 47.5px 60px 20px 27.5px;
     background: var(--color-black01);
     border: 1px solid var(--color-grey01);
     border-radius: 4px;

@@ -17,32 +17,55 @@ import TwitterIcon from "@/components/icons/Twitter"
 import LinkIcon from "@/components/icons/Link"
 import ExternalLinkIcon from "@/components/icons/ExternalLink"
 
-const post = {
-  slug: "toto",
-  url: "http://www.google.fr",
-  author: "The new york times",
-  categories: ["3D", "Dataviz", "Geomapping"],
-  title: "Sunisa Lee - The Gymnast",
-  description: "Lee, 18, is making her Olympic debut after the. Uncover the truth about the legal fishing industry. A challenging year. Her versatility...",
-  image: {
-    url: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
-    alt: "Default image"
+const comments = [
+  {
+    "id": 1,
+    "content": "Hello",
+    "updatedAt": "2022-09-24T11:21:20.136Z",
+    "author": {
+      "id": "45",
+      "name": "Toto"
+    },
+    comments: [
+      {
+        "id": 1,
+        "content": "Hello",
+        "updatedAt": "2022-09-24T11:21:20.136Z",
+        "author": {
+          "id": "45",
+          "name": "Toto"
+        }
+      },
+      {
+        "id": 1,
+        "content": "Hello",
+        "updatedAt": "2022-09-24T11:21:20.136Z",
+        "author": {
+          "id": "45",
+          "name": "Toto"
+        }
+      }
+    ]
   },
-  awards: "week",
-  likes: 0,
-  comments: 10,
-  source: {
-    title: "articleurl.com",
-    url: "https://www.google.fr"
+  {
+    "id": 1,
+    "content": "Hello",
+    "updatedAt": "2022-09-24T11:21:20.136Z",
+    "author": {
+      "id": "45",
+      "name": "Toto"
+    }
   },
-  submited_by: {
-    name: "Amelia Wattenberger",
-    image: {
-      url: "/images/img-profil.jpg",
-      alt: "Profil image"
+  {
+    "id": 1,
+    "content": "Hello",
+    "updatedAt": "2022-09-24T11:21:20.136Z",
+    "author": {
+      "id": "45",
+      "name": "Toto"
     }
   }
-}
+]
 
 export default function SpotlightTemplate({ spotlight, ...props }) {
   return (
@@ -80,7 +103,7 @@ export default function SpotlightTemplate({ spotlight, ...props }) {
             <img src={ spotlight.submited_by.image.url } alt={ spotlight.submited_by.image.alt } />
           </div>
         </div>
-        <CommentsModule />
+        <CommentsModule comments={ spotlight.comments } comments_length={ spotlight.comments_length } postId={ spotlight.id } />
       </SpotlightTemplateStyle>
     </Layout>
   )

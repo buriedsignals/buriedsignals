@@ -74,7 +74,7 @@ export const EditStyle = styled.div`
             margin-top: 20px;
           }
           &.input-error {
-            border: 1.25px solid red;
+            border: 1.25px solid var(--color-orange);
           }
           .icon-container {
             display: inline-block;

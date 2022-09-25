@@ -59,6 +59,7 @@ export function getUserCookies() {
     description: getCookie("description"),
     email: getCookie("email"),
     id: getCookie("id"),
+    jwt: getCookie("jwt"),
     liked: getCookie("liked") ? JSON.parse(getCookie("liked")) : { spotlights: [] },
     name: getCookie("name"),
     slug: getCookie("slug"),
@@ -68,4 +69,13 @@ export function getUserCookies() {
 // Logout cookies user
 export function logoutUserCookies() {
   setCookie("connected", false)
+  setCookie("bookmarked", { spotlights: [], insights: [], resources: [] }),
+  setCookie("description", null),
+  setCookie("email", null),
+  setCookie("id", null),
+  setCookie("jwt", null),
+  setCookie("liked", { spotlights: [] }),
+  setCookie("name", null),
+  setCookie("slug", null),
+  setCookie("twitter_account", null)
 }

@@ -250,3 +250,48 @@ export const UPDATE_POST_SPOTLIGHT_AWARDS = gql`
     }
   }
 `
+
+export const CREATE_SPOTLIGHT_COMMENT = gql`
+  mutation CreateCommentSpotlight($datas: CreateComment!) {
+    createComment(input: $datas) {
+      id
+    }
+  }
+`
+
+export const QUERY_SPOTLIGHT_COMMENTS = gql`
+  query QuerySpotlightsComments($relation: String!) {
+    findAllFlat(relation: $relation, sort: "updatedAt:asc") {
+      data {
+        id
+        content
+        updatedAt
+        blocked
+        threadOf {
+          id
+        }
+        author {
+          id
+          name
+        }
+      }
+    }
+  }
+`
+
+export const UPDATE_SPOTLIGHT_COMMENT = gql`
+mutation UpdateSpotlightComment($datas: UpdateComment!) {
+  updateComment(input: $datas) {
+    id
+  }
+}
+`
+
+export const DELETE_SPOTLIGHT_COMMENT = gql`
+mutation DeleteSpotlightComment($datas: RemoveComment!) {
+  removeComment(input: $datas) {
+    id
+    removed
+  }
+}
+`

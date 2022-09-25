@@ -7,15 +7,17 @@ export const AwardsStyle = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    padding: 9px 12.5px;
+    padding: 10px 12px;
     border: 1px solid var(--color-grey01);
     border-radius: 4px;
     z-index: 2;
     svg {
-      margin-right: 7.5px;
+      margin-left: 7.5px;
       transition: all 0.05s ease-in-out;
     }
     p {
+      width: 51px;
+      text-align: left;
       text-transform: uppercase;
       pointer-events: none;
     }
@@ -29,8 +31,8 @@ export const AwardsStyle = styled.div`
   }
   .panel {
     position: absolute;
-    top: 0; left: 0;
-    padding: 40px 26px 12.5px 28px;
+    top: 0; right: 0;
+    padding: 45px 35px 15px 12.5px;
     background: var(--color-black01);
     border: 1px solid var(--color-grey01);
     border-radius: 4px;

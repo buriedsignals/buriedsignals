@@ -11,7 +11,7 @@ export default function Spotlight({ spotlight, ...props }) {
 
 export async function getStaticPaths() {
   const spotlights = await getPostsSpotlights()
-  const paths = spotlights.posts.map((post) => ({
+  const paths = spotlights.posts.filter((post) => post.slug !== null).map((post) => ({
     params: { slug: post.slug },
   }))
   return { paths, fallback: false }
@@ -26,6 +26,6 @@ export async function getStaticProps({params, ...context}) {
   }
   return {
     props: { spotlight },
-    revalidate: 30
+    revalidate: 1
   }
 }

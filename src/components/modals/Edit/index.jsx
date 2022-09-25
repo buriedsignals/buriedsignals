@@ -58,7 +58,7 @@ export default function Edit({ user, setUser, ...props }) {
           body: JSON.stringify(body),
         });
         const result = await reponse.json()
-        if (result.error) {
+        if (result.errors) {
           setInternalError(true)
         } else {
           setModal(!modal)

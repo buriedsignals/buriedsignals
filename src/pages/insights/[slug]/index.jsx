@@ -11,7 +11,7 @@ export default function Insight({ insight, ...props }) {
 
 export async function getStaticPaths() {
   const insights = await getPostsInsights()
-  const paths = insights.posts.map((post) => ({
+  const paths = insights.posts.filter((post) => post.slug !== null).map((post) => ({
     params: { slug: post.slug },
   }))
   return { paths, fallback: false }

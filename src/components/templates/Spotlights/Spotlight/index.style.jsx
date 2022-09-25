@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
 export const SpotlightTemplateStyle = styled.main`
-  padding: 47.5px 0;
+  padding-top: 47.5px;
   .links-container {
     display: flex;
     justify-content: space-between;
@@ -20,6 +20,8 @@ export const SpotlightTemplateStyle = styled.main`
     }
   }
   .banner-container {
+    display: flex;
+    justify-content: center;
     a {
       ${down('md')} {
         width: 100%;
@@ -31,6 +33,7 @@ export const SpotlightTemplateStyle = styled.main`
     justify-content: flex-end;
     align-items: center;
     margin-top: 30px;
+    margin-bottom: 30px;
     ${down('md')} {
       padding: 0 40px;
     }

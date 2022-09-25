@@ -3,6 +3,7 @@ import { down } from "styled-breakpoints";
 
 export const SpotlightStyle = styled.div`
   display: block;
+  width: 100%;
   background-color: var(--color-black03);
   ${down('md')} {
     width: 343px;

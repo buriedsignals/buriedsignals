@@ -87,7 +87,7 @@ export const HeaderMobileStyle = styled.header`
             align-items: center;
             z-index: 2;
             svg {
-              margin-right: 7.5px;
+              margin-left: 7.5px;
               transition: all 0.05s ease-in-out;
             }
             p {
@@ -127,9 +127,12 @@ export const HeaderMobileStyle = styled.header`
             }
           }
           .links {
+            margin-top: 25px;
             .link {
-              margin-top: 50px;
-              margin-left: 56px;
+              margin-left: 35px;
+              &:not(:last-child) {
+                margin-bottom: 25px;
+              }
               a {
                 p {
                   color: var(--color-white);
