@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const LegalTemplateStyle = styled.main`
+export const LegalTemplateStyle = styled.div`
   padding: 80px 0; 
   & > .title {
     width: auto;

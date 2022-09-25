@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const InsightTemplateStyle = styled.main`
+export const InsightTemplateStyle = styled.div`
   padding: 47.5px 0;
   .banner-container {
     a {

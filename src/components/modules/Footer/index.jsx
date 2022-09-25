@@ -1,5 +1,7 @@
 // Styles
 import { FooterStyle } from "./index.style"
+// React
+import { useEffect, useState } from "react"
 // Next
 import Link from "next/link"
 // Icons
@@ -10,8 +12,16 @@ import MailIcon from "@/components/icons/Mail"
 import Logo from "@/components/icons/Logo"
 
 export default function Footer() {
+  // States
+  const [show, setShow] = useState(false)
+  // Effects
+  useEffect(() => {
+    setTimeout(() => {
+      setShow(true)
+    }, 500);
+  }, [])
   return (
-    <FooterStyle>
+    <FooterStyle className={ `footer ${ show ? "is-show" : "" }` }>
       <div className="footer-container">
         {/* <ul className="socials">
           <li className="social">

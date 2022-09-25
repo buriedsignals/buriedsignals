@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const InsightsTemplateStyle = styled.main`
+export const InsightsTemplateStyle = styled.div`
   padding: 115px 0;
   & > .title {
     width: auto;

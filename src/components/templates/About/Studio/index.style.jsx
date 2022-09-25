@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const StudioTemplateStyle = styled.main`
+export const StudioTemplateStyle = styled.div`
   padding-bottom: 115px;
   .hero-container {
     padding: 175px 0 225px;

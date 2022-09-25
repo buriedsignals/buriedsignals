@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const SigninTemplateStyle = styled.main`
+export const SigninTemplateStyle = styled.div`
   .signin-container {
     padding: 117.5px 16px;
     .title {

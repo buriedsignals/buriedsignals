@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const SignupTemplateStyle = styled.main`
+export const SignupTemplateStyle = styled.div`
   .signup-container {
     padding: 117.5px 16px;
     .title {

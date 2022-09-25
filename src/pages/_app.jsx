@@ -10,6 +10,7 @@ import { createTheme } from "styled-breakpoints"
 import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 // Hooks
 import useStore from '@/hooks/useStore'
+import Layout from '@/components/layouts';
 
 // Metas
 const title = 'Buried Signals'
@@ -62,7 +63,9 @@ function App({ Component, pageProps }) {
         <meta name='twitter:image:src' content={ url +'images/img-meta.png' } />
       </Head>
       <ThemeProvider theme={ breakpoints }>
-        <Component { ...pageProps } />
+        <Layout>
+          <Component { ...pageProps } />
+        </Layout>
       </ThemeProvider>
     </>
   )

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const SpotlightTemplateStyle = styled.main`
+export const SpotlightTemplateStyle = styled.div`
   padding-top: 47.5px;
   .links-container {
     display: flex;

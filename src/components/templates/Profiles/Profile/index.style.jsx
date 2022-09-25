@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const ProfileTemplateStyle = styled.main`
+export const ProfileTemplateStyle = styled.div`
   .profile-container {
     display: flex;
     flex-direction: column;
@@ -77,6 +77,24 @@ export const ProfileTemplateStyle = styled.main`
             margin-left: 50px;
             ${down('md')} {
               margin-left: 0;
+            }
+          }
+          .icon-container {
+            position: relative;
+            display: inline-block;
+            background-color: inherit;
+            border: 1px solid var(--color-grey01);
+            border-radius: 5px;
+            transition: all 0.25s ease-in;
+            .icon {
+              display: flex;
+              align-items: center;
+              padding: 12px;
+              svg {
+                path {
+                  transition: all 0.25s ease-in;
+                }
+              }
             }
           }
           p {

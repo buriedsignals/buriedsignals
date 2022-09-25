@@ -7,7 +7,7 @@ import FooterModule from "@/components/modules/Footer"
 
 export default function Layout({ children, ...props }) {
   return (
-    <LayoutStyle { ...props }>
+    <LayoutStyle className="layout" { ...props }>
       <HeaderModule />
       { children }
       <FooterModule />

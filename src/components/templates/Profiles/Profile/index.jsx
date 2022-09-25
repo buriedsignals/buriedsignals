@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 // Next
 import { useRouter } from "next/router"
 // Layouts
-import Layout from "@/components/layouts"
+import Layout from "@/components/layouts/main"
 // Modules
 import AccordionModule from "@/components/modules/Accordion"
 // Modals
@@ -54,15 +54,25 @@ export default function ProfileTemplate({ member, ...props }) {
           <div className="container-module-large extras-container">
             <ul className="social-container">
               <li>
-                <SecondaryButton onClickButton={ () => copyClipboard(user.twitter_account) } >
+                {/* <SecondaryButton onClickButton={ () => copyClipboard(user.twitter_account) } >
                   <TwitterIcon size="small" />
-                </SecondaryButton>
+                </SecondaryButton> */}
+                <div className="icon-container">
+                  <div className="icon">
+                    <TwitterIcon size="small" />
+                  </div>
+                </div>
                 <p className="typography-05">{ user.twitter_account }</p>
               </li>
               <li>
-                <SecondaryButton onClickButton={ () => copyClipboard(user.email) } >
+                {/* <SecondaryButton onClickButton={ () => copyClipboard(user.email) } >
                   <MailIcon size="small" />
-                </SecondaryButton>
+                </SecondaryButton> */}
+                <div className="icon-container">
+                  <div className="icon">
+                    <MailIcon size="small" />
+                  </div>
+                </div>
                 <p className="typography-05">{ user.email }</p>
               </li>
             </ul>

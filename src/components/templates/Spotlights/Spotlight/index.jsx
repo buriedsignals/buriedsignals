@@ -3,7 +3,7 @@ import { SpotlightTemplateStyle } from "./index.style"
 // Scripts
 import { copyClipboard } from "@/scripts/utils"
 // Layouts
-import Layout from "@/components/layouts"
+import Layout from "@/components/layouts/main"
 // Modules
 import SpotlightBanner from "@/components/banners/Spotlight"
 import CommentsModule from "@/components/modules/Comments"

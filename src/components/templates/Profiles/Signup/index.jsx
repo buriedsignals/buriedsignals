@@ -8,7 +8,7 @@ import { useRef, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
 // Layouts
-import Layout from "@/components/layouts"
+import Layout from "@/components/layouts/main"
 // Banners
 import ErrorBanner from "@/components/banners/Error"
 import ValidateEmailBanner from "@/components/banners/ValidateEmail"
@@ -52,6 +52,7 @@ export default function SignupTemplate({ ...props }) {
             "password": password
           },
           datasUpdateUser: {
+            "Slug": transformToSlug(username),
             "Twitter_account": twitter,
             "Description": description
           }

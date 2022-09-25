@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const ResourcesTemplateStyle = styled.main`
+export const ResourcesTemplateStyle = styled.div`
   padding: 115px 0;
   & > .title {
     width: auto;

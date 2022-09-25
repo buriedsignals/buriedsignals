@@ -1,7 +1,7 @@
 // Styles
 import { LegalTemplateStyle } from "./index.style"
 // Layouts
-import Layout from "@/components/layouts"
+import Layout from "@/components/layouts/main"
 // Modules
 import FlexibleContentModule from "@/components/modules/FlexibleContent"
 

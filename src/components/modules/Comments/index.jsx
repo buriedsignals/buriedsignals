@@ -18,6 +18,7 @@ import ThirstyButton from "@/components/buttons/Thirsty"
 export default function Comments({ comments, comments_length, postId, max = 5, ...props }) {
   // Cookies
   const user = getUserCookies()
+  console.log(user)
   // States
   const [page, setPage] = useState(1)
   // Handlers

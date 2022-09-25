@@ -1,7 +1,7 @@
 // Styles
 import { StudioTemplateStyle } from "./index.style"
 // Layouts
-import Layout from "@/components/layouts"
+import Layout from "@/components/layouts/main"
 // Module
 import PostsListModule from "@/components/modules/PostsList"
 import FlexibleContentModule from "@/components/modules/FlexibleContent"

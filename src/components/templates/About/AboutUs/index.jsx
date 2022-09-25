@@ -1,7 +1,7 @@
 // Styles
 import { AboutUsTemplateStyle } from "./index.style"
 // Layouts
-import Layout from "@/components/layouts"
+import Layout from "@/components/layouts/main"
 // Modules
 import NewsletterModule from "@/components/modules/Newsletter"
 import FlexibleContentModule from "@/components/modules/FlexibleContent"

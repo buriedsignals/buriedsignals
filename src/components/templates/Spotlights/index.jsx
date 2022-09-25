@@ -1,7 +1,7 @@
 // Styles
 import { SpotlightsTemplateStyle } from "./index.style"
 // Layouts
-import Layout from "@/components/layouts"
+import Layout from "@/components/layouts/main"
 // Modules
 import PostsListModule from "@/components/modules/PostsList"
 import NewsletterModule from "@/components/modules/Newsletter"

@@ -42,7 +42,7 @@ export default function HeaderMobile() {
                 <li className="action">
                   {/* <ProfileLink imgURL="/images/img-profil.jpg" /> */}
                   <Link href={ `/profiles/${ user.slug }` }>
-                    <a className={ router.asPath == `/profiles/${ user.slug }` ? "is-active" : "" }>
+                    <a className={ router.asPath == `/profiles/${ user.slug }` ? "is-active" : "" } onClick={ () => setModalMenu(false) }>
                       <p className="typography-01">Profile</p>
                     </a>
                   </Link>
@@ -50,7 +50,7 @@ export default function HeaderMobile() {
               :
                 <li className="action">
                   <Link href="/profiles/signin">
-                    <a className={ router.pathname == "/profiles/signin" ? "is-active" : "" } onClick={ setModalMenu }>
+                    <a className={ router.pathname == "/profiles/signin" ? "is-active" : "" } onClick={ () => setModalMenu(false) }>
                       <p className="typography-01">Sign In</p>
                     </a>
                   </Link>

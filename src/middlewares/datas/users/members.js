@@ -311,6 +311,7 @@ export const REGISTER_USER_MEMBER = gql`
     register(input: $datas) {
       user {
         id
+        username
       }
     }
   }

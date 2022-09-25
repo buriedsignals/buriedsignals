@@ -152,6 +152,15 @@ body {
   overflow-x: hidden;
 }
 
+.layout .header, .layout .main, .layout .footer {
+  opacity: 0;
+  transition: all 0.15s ease-out;
+}
+.layout .header.is-show, .layout .main.is-show, .layout .footer.is-show {
+    opacity: 1;
+    transition: all 0.5s ease-in;
+}
+
 button, a {
   cursor: pointer;
 }
