@@ -7,6 +7,8 @@ import { useRef, useState } from "react"
 // Next
 import Link from "next/link"
 import { useRouter } from "next/router"
+// Layouts
+import Layout from "@/components/layouts/main"
 // Banners
 import ErrorBanner from "@/components/banners/Error"
 // Buttons
@@ -66,32 +68,34 @@ export default function SigninTemplate({ ...props }) {
     }
   }
   return (
-    <SigninTemplateStyle { ...props }>
-      <div className="container-module-extra-small signin-container">
-        <h1 className="title typography-04">Sign in</h1>
-        <div className="form-container">
-          {/* <a href="" className="connect-twitter">
-            <TwitterIcon />
-            <p className="typography-17">Sign in with Twitter</p>
-          </a>
-          <p className="label typography-01">Sign in with e-mail</p> */}
-          <div className="form" ref={ formRef }>
-            <div className="inputs-container">
-              <input className="typography-01 input-email" type="email" placeholder="Your E-mail" />
-              <input className="typography-01 input-password" type="password" placeholder="Password" />
+    <Layout>
+      <SigninTemplateStyle { ...props }>
+        <div className="container-module-extra-small signin-container">
+          <h1 className="title typography-04">Sign in</h1>
+          <div className="form-container">
+            {/* <a href="" className="connect-twitter">
+              <TwitterIcon />
+              <p className="typography-17">Sign in with Twitter</p>
+            </a>
+            <p className="label typography-01">Sign in with e-mail</p> */}
+            <div className="form" ref={ formRef }>
+              <div className="inputs-container">
+                <input className="typography-01 input-email" type="email" placeholder="Your E-mail" />
+                <input className="typography-01 input-password" type="password" placeholder="Password" />
+              </div>
+              <PrimaryButton onClickButton={ onClickButtonSignin }>
+                <p className="typography-03">Sign in</p>
+              </PrimaryButton>
+              <Link href="/profiles/signup">
+                <a>
+                  <p  className="typography-01">Sign up now</p>
+                </a>
+              </Link>
             </div>
-            <PrimaryButton onClickButton={ onClickButtonSignin }>
-              <p className="typography-03">Sign in</p>
-            </PrimaryButton>
-            <Link href="/profiles/signup">
-              <a>
-                <p  className="typography-01">Sign up now</p>
-              </a>
-            </Link>
           </div>
         </div>
-      </div>
-      { internalError && <ErrorBanner onClickButtonClose={ setInternalError } /> }
-    </SigninTemplateStyle>
+        { internalError && <ErrorBanner onClickButtonClose={ setInternalError } /> }
+      </SigninTemplateStyle>
+    </Layout>
   )
 }
