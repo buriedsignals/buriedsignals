@@ -9,6 +9,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 // Hooks
 import useToggle from "@/hooks/useToggle"
+import useStore from "@/hooks/useStore"
 // Links
 // import ProfileLink from "@/components/links/Profile"
 // Icons
@@ -28,6 +29,10 @@ export default function HeaderMobile() {
   // Hooks
   const [modalMenu, setModalMenu] = useToggle(false) 
   const [modalDropdown, setModalDropdown] = useToggle(false) 
+  // Effects
+  useEffect(() => {
+    useStore.setState({ scroll: !modalMenu })
+  }, [modalMenu])
   return (
     <HeaderMobileStyle>
       <div className="header-mobile-container">
