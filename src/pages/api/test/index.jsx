@@ -33,11 +33,7 @@ export default async function handle(req, res) {
     access_token_secret: "BJGkYob8gDiu_6x45GW5SJ1aaqrHUO-qaUmFG-IdtFZIIPEd3m"
   });
   function gotData(err, data) {
-    var tweets = data.statuses;
-    for (var i = 0; i < tweets.length; i++) {
-      console.log(tweets[i].text);
-    }
-    res.json(data)
+    res.json({ err, data })
   }
   T.get('search/tweets', { q: 'JavaScript', count: 10 }, gotData);
 }
