@@ -27,10 +27,10 @@ export default async function handle(req, res) {
   //   body: JSON.stringify(datas),
   // });
   var T = new Twit({
-    consumer_key: "MAmF4GwxtnB8CJGu3GaYOSw9p",
-    consumer_secret: "nz4YayEkFmEaEXbmZ19L7kdodOl3DVNlbHdO4KNNQuFTdEw7m1",
-    access_token: "dDRyWXJ2VUZIeVFWVVU1aWdnVUU6MTpjaQ",
-    access_token_secret: "BJGkYob8gDiu_6x45GW5SJ1aaqrHUO-qaUmFG-IdtFZIIPEd3m"
+    consumer_key: "dDRyWXJ2VUZIeVFWVVU1aWdnVUU6MTpjaQ",
+    consumer_secret: "BJGkYob8gDiu_6x45GW5SJ1aaqrHUO-qaUmFG-IdtFZIIPEd3m",
+    access_token: "785932989918130177-wz757mSRsjm1UnHHFXBGzog3LSNVLTl",
+    access_token_secret: "CH65P4terjQSzaSEWVJM7yyTcRZjMNlmjvipk1qs5wfG3"
   });
   function gotData(err, data) {
     res.json({ err, data })
