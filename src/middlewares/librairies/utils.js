@@ -215,10 +215,11 @@ export function parseUserMember(data) {
   }
 }
 
-export async function createImage(image, title) {
-  const responseImage = await axios.get(image, { responseType: "arraybuffer" })
+export async function createImage(url, title) {
+  const responseImage = await axios.get(url, { responseType: "arraybuffer" })
+  const extension = url.split(/[#?]/)[0].split('.').pop().trim()
   const form = new FormData()
-  form.append("files", responseImage.data, `post-${ transformToSlug(title) }.jpg`)
+  form.append("files", responseImage.data, `post-${ transformToSlug(title) }.${ extension }`)
   const responseUpload = await axios.post(`${STRAPI_ENDPOINT}/api/upload`, form)
   return responseUpload.data[0].id
 } 

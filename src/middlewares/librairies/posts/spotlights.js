@@ -2,6 +2,7 @@
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
 import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_WEEK, QUERY_POSTS_SPOTLIGHTS_MONTH, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_SPOTLIGHT_COMMENT } from "@/middlewares/datas/posts/spotlights"
 import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments } from '../utils'
+import { transformToSlug } from '@/scripts/utils'
 
 export let authorId = null
 
@@ -82,6 +83,7 @@ export async function getPostsSpotlightsMonth() {
 export async function createPostSpotlight(data) {
   data.Image = await createImage(data.Image, data.Title)
   data.publishedAt = null
+  data.Slug = transformToSlug(data.Slug)
   const apolloClient = getApolloClient()
   const response = await apolloClient.mutate({
     errorPolicy: 'all',

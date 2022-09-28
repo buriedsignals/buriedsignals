@@ -14,6 +14,7 @@
     "@prisma/client": "4.3.1",
     "@tryghost/content-api": "^1.11.1",
     "axios": "^0.27.2",
+    "body-parser": "^1.20.0",
     "cookies-next": "^2.1.1",
     "filereader": "^0.10.3",
     "form-data": "^4.0.0",
@@ -40,6 +41,7 @@
     "twit": "^2.2.11",
     "twitter": "^1.7.1",
     "url": "^0.11.0",
+    "xmlhttprequest": "^1.8.0",
     "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {

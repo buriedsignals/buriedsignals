@@ -61,6 +61,11 @@ export const HeaderDesktopStyle = styled.header`
             }
           }
           a, button {
+            svg {
+              path {
+                transition: fill 0.25s ease-in;
+              }
+            }
             p {
               color: var(--color-white);
               white-space: nowrap;
@@ -70,6 +75,12 @@ export const HeaderDesktopStyle = styled.header`
               p {
                 color: var(--color-green);
                 transition: all 0.25s ease-out;
+              }
+              svg {
+                path {
+                  fill: var(--color-green);
+                  transition: all 0.25s ease-out;
+                }
               }
             }
           }

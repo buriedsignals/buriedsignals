@@ -1,16 +1,15 @@
 import { createPostSpotlight } from "@/middlewares/librairies/posts/spotlights";
 
 export default async function handle(req, res) {
-  // const { datas } = req.body
   const datas = {
-    Title: "Wet",
-    Description: "Jop",
-    Slug: "wet",
-    Source_author: "Reop",
-    Source_link: "www.google.fr",
-    Categories: [2],
-    Submited_by: 1,
-    Image: "https://lesjoiesducode.fr/content/043/perpetual-view-generation.webp"
+    Title: req.body.Title,
+    Description: req.body.Description,
+    Slug: req.body.Slug,
+    Source_author: req.body.Source_author,
+    Source_link: req.body.Source_link,
+    Categories: (req.body.Categories == "" || req.body.Categories == null) ? [] : req.body.Categories,
+    Submited_by: (req.body.Submited_by == "" || req.body.Submited_by == null) ? null : req.body.Submited_by,
+    Image: req.body.Image
   }
   const resultPost = await createPostSpotlight(datas)
   res.json(resultPost)

@@ -17,6 +17,7 @@ import LogoIcon from "@/components/icons/Logo"
 import BurgerIcon from "@/components/icons/Burger"
 import CrossIcon from "@/components/icons/Cross"
 import ArrowIcon from "@/components/icons/Arrow"
+import TwitterIcon from "@/components/icons/Twitter"
 
 export default function HeaderMobile() {
   // Router
@@ -131,6 +132,11 @@ export default function HeaderMobile() {
                     </li>
                   </ul>
                 }
+              </li>
+              <li className="page">
+                <a href="https://twitter.com/buriedsignals" target="_blank" rel="noreferrer">
+                  <TwitterIcon size="small" />
+                </a>
               </li>
             </ul>
           </div>

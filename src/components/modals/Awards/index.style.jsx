@@ -32,12 +32,15 @@ export const AwardsStyle = styled.div`
   .panel {
     position: absolute;
     top: 0; right: 0;
-    padding: 45px 35px 15px 12.5px;
+    padding: 45px 18px 15px 21.5px;
     background: var(--color-black01);
     border: 1px solid var(--color-grey01);
     border-radius: 4px;
     .awards {
       .award {
+        &:first-child button {
+          margin-bottom: 0 !important;
+        }
         &:not(:last-child) button {
           margin-bottom: 20px;
         }
@@ -49,8 +52,10 @@ export const AwardsStyle = styled.div`
             }
           }
           p {
+            width: 51px;
             color: var(--color-grey01);
             text-transform: uppercase;
+            text-align: left;
             white-space: nowrap;
             pointer-events: none;
             transition: all 0.25s ease-in;

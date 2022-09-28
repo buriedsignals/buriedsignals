@@ -10,15 +10,15 @@ export default function Awards({ buttonName = "", listActions = [], ...props }) 
   const [modal, setModal] = useToggle(false) 
   return (
     <AwardsStyle { ...props } onMouseEnter={ () => setModal(true) } onMouseLeave={ () => setModal(false) }>
-      <button className={ `modal${ modal ? ' is-open' : '' }` }>
+      <button className={ `modal${ modal ? ' is-open' : '' }` } onClick={ () => setModal(false) }>
         <p className="typography-03">{ buttonName }</p>
         <ArrowIcon />
       </button>
       { modal && 
         <div className="panel">
-          <ul className="awards" onClick={ setModal }>
+          <ul className="awards">
             { listActions.map((itemAction, index) => {
-                return <li key={ `item-${index}` } className="award">
+                return <li key={ `item-${index}` } className="award" onClick={ () => setModal(false) }>
                   { itemAction }
                 </li>
             }) }

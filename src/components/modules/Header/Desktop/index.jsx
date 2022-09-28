@@ -2,6 +2,8 @@
 import { HeaderDesktopStyle } from "./index.style"
 // Scripts
 import { getUserCookies } from "@/scripts/utils"
+// React
+import { useEffect, useState } from "react"
 // Next
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -12,7 +14,7 @@ import PrimaryLink from "@/components/links/Primary"
 // import ProfileLink from "@/components/links/Profile"
 // Icons
 import LogoIcon from "@/components/icons/Logo"
-import { useEffect, useState } from "react"
+import TwitterIcon from "@/components/icons/Twitter"
 
 export default function HeaderDesktop() {
   // Router
@@ -82,6 +84,11 @@ export default function HeaderDesktop() {
         </div>
         <div className="right-container">
           <ul className="actions">
+            <li className="action">
+              <a href="https://twitter.com/buriedsignals" target="_blank" rel="noreferrer">
+                <TwitterIcon size="small" />
+              </a>
+            </li>
             <li className="action">
               <a href="https://google.fr">
                 <p className="typography-01">Submit</p>

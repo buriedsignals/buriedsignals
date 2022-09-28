@@ -68,6 +68,11 @@ export const HeaderMobileStyle = styled.header`
             margin-bottom: 50px;
           }
           a {
+            svg {
+              path {
+                transition: fill 0.25s ease-in;
+              }
+            }
             p {
               color: var(--color-white);
               transition: all 0.25s ease-in;
@@ -76,6 +81,12 @@ export const HeaderMobileStyle = styled.header`
               p {
                 color: var(--color-green);
                 transition: all 0.25s ease-out;
+              }
+              svg {
+                path {
+                  fill: var(--color-green);
+                  transition: all 0.25s ease-out;
+                }
               }
             }
             &.is-active {
