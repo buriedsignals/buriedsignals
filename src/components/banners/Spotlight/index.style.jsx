@@ -50,8 +50,8 @@ export const SpotlightStyle = styled.div`
       img {
         position: absolute;
         top: 50%; left: 50%;
-        width: 100%;
-        height: auto;
+        width: auto;
+        height: 100%;
         transform: translate3D(-50%, -50%, 0);
       }
     }
