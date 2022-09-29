@@ -29,7 +29,6 @@ export default async function handle(req, res) {
     }
     const params = { status: template }
     T.post('statuses/update', params, function (err, data, response) {
-      console.log(data)
       res.json(data)
     })
   }

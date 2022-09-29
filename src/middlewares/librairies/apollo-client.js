@@ -6,14 +6,14 @@ export let USER = {
   id: null,
   slug: null,
   bookmarked: {
-    insights: null,
-    spotlights: null,
-    resources: null
+    insights: [],
+    spotlights: [],
+    resources: []
   },
   description: null,
   email: null,
   liked: {
-    spotlights: null
+    spotlights: []
   },
   name: null,
   slug: null,

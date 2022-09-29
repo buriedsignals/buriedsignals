@@ -63,7 +63,6 @@ export default function SignupTemplate({ ...props }) {
           body: JSON.stringify(body),
         });
         const result = await reponse.json()
-        console.log(result)
         if (result.errors) {
           logoutUserCookies()
           setInternalError(true)

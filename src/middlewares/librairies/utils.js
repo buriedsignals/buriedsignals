@@ -1,3 +1,4 @@
+import { getUserCookies } from "@/scripts/utils";
 import axios from "axios";
 import FormData from "form-data";
 import { USER, STRAPI_ENDPOINT } from "./apollo-client";
