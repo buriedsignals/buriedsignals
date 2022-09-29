@@ -20,6 +20,6 @@ export async function getStaticProps(context) {
   }
   return {
     props: { studio: studio, projects: projects },
-    revalidate: 30
+    revalidate: 1
   }
 }

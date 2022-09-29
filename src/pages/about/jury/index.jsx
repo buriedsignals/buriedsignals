@@ -21,6 +21,6 @@ export async function getStaticProps(context) {
   jury.page = page
   return {
     props: { jury },
-    revalidate: 30
+    revalidate: 1
   }
 }

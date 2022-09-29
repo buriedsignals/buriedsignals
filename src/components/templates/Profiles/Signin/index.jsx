@@ -51,7 +51,7 @@ export default function SigninTemplate({ ...props }) {
           setInternalError(true)
         } else {
           loginUserCookies(result)
-          document.location.href = window.location.protocol + "//" + window.location.host
+          document.location.href = window.location.protocol + "//" + window.location.host + "/profiles/" + result.slug
         }
       } catch (error) {
         console.error(error);

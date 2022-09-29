@@ -21,6 +21,6 @@ export async function getStaticProps(context) {
   resources.page = page
   return {
     props: { resources },
-    revalidate: 30
+    revalidate: 1
   }
 }

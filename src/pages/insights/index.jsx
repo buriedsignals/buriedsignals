@@ -21,6 +21,6 @@ export async function getStaticProps(context) {
   insights.page = page
   return {
     props: { insights },
-    revalidate: 30
+    revalidate: 1
   }
 }

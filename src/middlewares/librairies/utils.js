@@ -248,8 +248,8 @@ function transformToSlug(text) {
 
 function getImage(image) {
   return {
-    alt: image ? image.data.attributes.alternativeText : null,
-    url: image ? image.data.attributes.url : null
+    alt: image ? image.data ? image.data.attributes.alternativeText : null : null,
+    url: image ? image.data ? image.data.attributes.url : null : null
   }
 }
 

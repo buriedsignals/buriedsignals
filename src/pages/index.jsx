@@ -21,6 +21,6 @@ export async function getStaticProps(context) {
   spotlights.page = page
   return {
     props: { spotlights },
-    revalidate: 30
+    revalidate: 1
   }
 }

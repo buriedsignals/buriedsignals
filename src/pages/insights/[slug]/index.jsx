@@ -39,6 +39,6 @@ export async function getStaticProps({params, ...context}) {
   }
   return {
     props: { insight },
-    revalidate: 30
+    revalidate: 1
   }
 }
