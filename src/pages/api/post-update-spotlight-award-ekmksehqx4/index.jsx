@@ -5,10 +5,10 @@ export default async function handle(req, res) {
   let awardId = null
   switch (awardTitle) {
     case "Week":
-      awardId = 1
+      awardId = 2
       break
     case "Month":
-      awardId = 2
+      awardId = 1
       break
   }
   const result = await updatePostSpotlightAwards(postId, awardId)
