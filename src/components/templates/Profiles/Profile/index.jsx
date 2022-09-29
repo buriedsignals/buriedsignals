@@ -30,7 +30,7 @@ export default function ProfileTemplate({ member, ...props }) {
   // Handlers
   const onClickButtonSignout = () => {
     logoutUserCookies()
-    router.push("/profiles/signin")
+    document.location.href = window.location.protocol + "//" + window.location.host + "/profiles/signin"
   }
   return (
     <Layout>

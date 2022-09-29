@@ -1,7 +1,7 @@
 // Styles
 import { BookmarkStyle } from "./index.style"
 // Scripts
-import { getUserCookies } from "@/scripts/utils"
+import { getUserCookies, setCookieObject } from "@/scripts/utils"
 // React
 import { useEffect, useState } from "react"
 // Nodes
@@ -18,7 +18,7 @@ export default function Bookmark({ bookmarked = false, postId, type, ...props })
   const [alertSignin, setAlertSignin] = useState(false)
   const [isBookmarked, setIsBookmarked] = useState(false)
   useEffect(() => {
-    setIsBookmarked(user.bookmarked[type].some(post => post.id === postId))
+    setIsBookmarked(user.bookmarked[type].some(post => post.id == postId))
   }, [])
   // Handlers
   const onClickButton = async (e) => {
@@ -39,7 +39,7 @@ export default function Bookmark({ bookmarked = false, postId, type, ...props })
         });
         setIsBookmarked(!isBookmarked)
         user.bookmarked[type] = bookmarkedPost
-        setCookie("bookmarked", user.bookmarked)
+        setCookieObject("bookmarked", user.bookmarked)
       } catch (error) {
         console.error(error);
       }

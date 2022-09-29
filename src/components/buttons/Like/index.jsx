@@ -1,7 +1,7 @@
 // Styles
 import { LikeStyle } from "./index.style"
 // Scripts
-import { getUserCookies } from "@/scripts/utils"
+import { getUserCookies, setCookieObject } from "@/scripts/utils"
 // React
 import { useEffect, useState } from "react"
 // Nodes
@@ -45,7 +45,7 @@ export default function Like({ likes, liked = false, postId, type = null, ...pro
         setIsLiked(!isLiked)
         if (type) {
           user.liked.spotlights = likedSpotlights
-          setCookie("liked", user.liked)
+          setCookieObject("liked", user.liked)
         }
       } catch (error) {
         console.error(error);

@@ -32,35 +32,35 @@ export function getTimeSince(date) {
 }
 // Copy on clipboard
 export function copyClipboard() {
-  alert("Copy")
+  // alert("Copy")
 }
 // Tranform to slug
 export function transformToSlug(text) {
-  return text.toString() .normalize( 'NFD' ).replace( /[\u0300-\u036f]/g, '' ).toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-')
+  return text.toString().normalize( 'NFD' ).replace( /[\u0300-\u036f]/g, '' ).toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-')
 }
 // Login cookies user
 export function loginUserCookies(datas) {
   setCookie("connected", true)
-  setCookie("bookmarked", datas.bookmarked),
-  setCookie("description", datas.description),
-  setCookie("email", datas.email),
-  setCookie("id", datas.id),
-  setCookie("jwt", datas.jwt),
-  setCookie("liked", datas.liked),
-  setCookie("name", datas.name),
-  setCookie("slug", datas.slug),
+  setCookieObject("bookmarked", datas.bookmarked)
+  setCookie("description", datas.description)
+  setCookie("email", datas.email)
+  setCookie("id", datas.id)
+  setCookie("jwt", datas.jwt)
+  setCookieObject("liked", datas.liked)
+  setCookie("name", datas.name)
+  setCookie("slug", datas.slug)
   setCookie("twitter_account", datas.twitter_account)
 }
 // Get cookies user
 export function getUserCookies() {
   return {
     connected: getCookie("connected"),
-    bookmarked: getCookie("bookmarked") ? JSON.parse(getCookie("bookmarked")) : { spotlights: [], insights: [], resources: [] },
+    bookmarked: getCookieObject("bookmarked"),
     description: getCookie("description"),
     email: getCookie("email"),
     id: getCookie("id"),
     jwt: getCookie("jwt"),
-    liked: getCookie("liked") ? JSON.parse(getCookie("liked")) : { spotlights: [] },
+    liked: getCookieObject("liked"),
     name: getCookie("name"),
     slug: getCookie("slug"),
     twitter_account: getCookie("twitter_account")
@@ -69,13 +69,52 @@ export function getUserCookies() {
 // Logout cookies user
 export function logoutUserCookies() {
   setCookie("connected", false)
-  setCookie("bookmarked", { spotlights: [], insights: [], resources: [] }),
-  setCookie("description", null),
-  setCookie("email", null),
-  setCookie("id", null),
-  setCookie("jwt", null),
-  setCookie("liked", { spotlights: [] }),
-  setCookie("name", null),
-  setCookie("slug", null),
+  setCookieObject("bookmarked", { spotlights: [], insights: [], resources: [] })
+  setCookie("description", null)
+  setCookie("email", null)
+  setCookie("id", null)
+  setCookie("jwt", null)
+  setCookieObject("liked", { spotlights: [] })
+  setCookie("name", null)
+  setCookie("slug", null)
   setCookie("twitter_account", null)
+}
+
+export function setCookieObject(dataName, object) {
+  let types = ""
+  Object.entries(object).forEach(([key, value], index) => {
+    setCookie(`${ dataName }-${ key }`, getIdsFromArrayOfObject(value))
+    types += key
+    if (index !== Object.keys(object).length - 1) {
+      types += ","
+    }
+  });
+  setCookie(`${ dataName }-types`, types)
+}
+
+export function getCookieObject(dataName) {
+  const object = {}
+  if(getCookie(`${ dataName }-types`)) {
+    getCookie(`${ dataName }-types`).split(',').forEach(type => {
+      object[type] = getIdsFromString(getCookie(`${ dataName }-${ type }`))
+    });
+  }
+  return object
+}
+
+function getIdsFromArrayOfObject(array) {
+  let listIds = ""
+  array.forEach((element, index) => {
+    listIds += element.id
+    if (index !== array.length - 1) {
+      listIds += ","
+    }
+  });
+  return listIds
+}
+
+function getIdsFromString(string) {
+  return string.split(',').map(element => {
+    return { id: parseInt(element) }
+  });
 }

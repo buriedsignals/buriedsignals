@@ -3,8 +3,10 @@ import { getPageSpotlights } from '@/middlewares/librairies/pages/spotlights';
 import { getPostsSpotlights } from '@/middlewares/librairies/posts/spotlights';
 // Templates
 import SpotlightsTemplate from "@/components/templates/Spotlights"
+import { getUserCookies } from '@/scripts/utils';
 
 export default function Spotlights({ spotlights, ...props }) {
+  console.log(getUserCookies())
   return (
     <SpotlightsTemplate spotlights={ spotlights } />
   )

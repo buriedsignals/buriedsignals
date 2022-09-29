@@ -1,7 +1,7 @@
 // Styles
 import { SigninTemplateStyle } from "./index.style"
 // Scripts
-import { loginUserCookies, logoutUserCookies } from "@/scripts/utils"
+import { getUserCookies, loginUserCookies, logoutUserCookies } from "@/scripts/utils"
 // React
 import { useRef, useState } from "react"
 // Next
