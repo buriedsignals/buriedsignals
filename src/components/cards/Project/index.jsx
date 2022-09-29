@@ -5,7 +5,7 @@ import { limitSizeText } from "@/scripts/utils"
 
 export default function Project({ post, ...props }) {
   return (
-    <ProjectStyle href="https://www.google.com/" target="_blank" rel="noopener noreferrer" { ...props }>
+    <ProjectStyle href={ post.source.url } target="_blank" rel="noopener noreferrer" { ...props }>
       <div className="project-container">
         <div className="visual-container">
           { post.awards && <div className="awards">
