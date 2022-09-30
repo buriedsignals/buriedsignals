@@ -76,7 +76,9 @@ export async function getPostsSpotlightsMonth() {
   })
   if (!response) return null
   let posts = response.data.spotlightsPosts.data
-  return parsePostsSpotlights(posts)
+  posts = parsePostsSpotlights(posts)
+  posts.posts = posts.posts.filter(post => post.awards == "Week")
+  return posts
 }
 
 // Récupérer les ID des catégories + l'ID de la personne qui à soumis le spotlight
