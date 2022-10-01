@@ -54,16 +54,16 @@ export function loginUserCookies(datas) {
 // Get cookies user
 export function getUserCookies() {
   return {
-    connected: getCookie("connected"),
-    bookmarked: getCookieObject("bookmarked"),
-    description: getCookie("description"),
-    email: getCookie("email"),
-    id: getCookie("id"),
-    jwt: getCookie("jwt"),
-    liked: getCookieObject("liked"),
-    name: getCookie("name"),
-    slug: getCookie("slug"),
-    twitter_account: getCookie("twitter_account")
+    connected: getCookie("connected") ? getCookie("connected") : false,
+    bookmarked: getCookie("bookmarked-types") ? getCookieObject("bookmarked") : { spotlights: [], insights: [], resources: [] },
+    description: getCookie("description") ? getCookie("description") : null,
+    email: getCookie("email") ? getCookie("email") : null,
+    id: getCookie("id") ? getCookie("id") : null,
+    jwt: getCookie("jwt") ? getCookie("jwt") : null,
+    liked: getCookie("liked-types") ? getCookieObject("liked") : { spotlights: [] },
+    name: getCookie("name") ? getCookie("name") : null,
+    slug: getCookie("slug") ? getCookie("slug") : null,
+    twitter_account: getCookie("twitter_account") ? getCookie("twitter_account") : null,
   }
 }
 // Logout cookies user
