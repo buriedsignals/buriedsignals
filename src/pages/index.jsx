@@ -11,7 +11,7 @@ export default function Spotlights({ spotlights, ...props }) {
   )
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const spotlights = await getPostsSpotlights()
   const page = await getPageSpotlights()
   if (!spotlights || !page) {
@@ -21,6 +21,7 @@ export async function getServerSideProps(context) {
   }
   spotlights.page = page
   return {
-    props: { spotlights }
+    props: { spotlights },
+    revalidate: 1
   }
 }

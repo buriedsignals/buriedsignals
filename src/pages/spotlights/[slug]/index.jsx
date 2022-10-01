@@ -31,7 +31,7 @@ export async function getStaticPaths() {
   return { paths, fallback: false }
 }
 
-export async function getServerSideProps({params, ...context}) {
+export async function getStaticProps({params, ...context}) {
   const spotlight = await getPostSpotlight(params.slug)
   // if (!spotlight) {
   //   return {
@@ -39,6 +39,7 @@ export async function getServerSideProps({params, ...context}) {
   //   }
   // }
   return {
-    props: { spotlight }
+    props: { spotlight },
+    revalidate: 1
   }
 }
