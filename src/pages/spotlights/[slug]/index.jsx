@@ -28,7 +28,8 @@ export async function getStaticPaths() {
   const paths = spotlights.posts.filter((post) => post.slug !== null).map((post) => ({
     params: { slug: post.slug },
   }))
-  return { paths, fallback: false }
+  console.log(paths)
+  return { paths, fallback: true }
 }
 
 export async function getStaticProps({params, ...context}) {
