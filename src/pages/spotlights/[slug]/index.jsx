@@ -9,7 +9,7 @@ export default function Spotlight({ spotlight, ...props }) {
   console.log(spotlight)
   return (
     <>
-      {/* <Head>
+      <Head>
         <meta key='description' name='description' content={ spotlight.description } />
         <meta key='og-title' property='og:title' content={ spotlight.title } />
         <meta key='og-description' property='og:description' content={ spotlight.description } />
@@ -18,7 +18,7 @@ export default function Spotlight({ spotlight, ...props }) {
         <meta key='tw-description' name='twitter:description' content={ spotlight.description } />
         <meta key='tw-image' name='twitter:image:src' content={ spotlight.image.url } />
       </Head>
-      <SpotlightTemplate spotlight={ spotlight } /> */}
+      <SpotlightTemplate spotlight={ spotlight } />
     </>
   )
 }
