@@ -7,7 +7,6 @@ import NewsletterModule from "@/components/modules/Newsletter"
 import FlexibleContentModule from "@/components/modules/FlexibleContent"
 
 export default function AboutUsTemplate({ aboutUs, ...props }) {
-  console.log(aboutUs)
   return (
     <Layout>
       <AboutUsTemplateStyle>

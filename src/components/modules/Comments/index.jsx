@@ -56,7 +56,6 @@ export default function Comments({ comments, comments_length, postId, max = 5, .
         setInternalError(true)
       }
     } else {
-      console.log(user)
       setAlertSignin(true)
     }
   }

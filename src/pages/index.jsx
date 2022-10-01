@@ -5,7 +5,6 @@ import { getPostsSpotlights } from '@/middlewares/librairies/posts/spotlights';
 import SpotlightsTemplate from "@/components/templates/Spotlights"
 
 export default function Spotlights({ spotlights, ...props }) {
-  console.log(spotlights)
   return (
     <SpotlightsTemplate spotlights={ spotlights } />
   )
