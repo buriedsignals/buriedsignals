@@ -5,12 +5,13 @@ import { getPostsSpotlights } from '@/middlewares/librairies/posts/spotlights';
 import SpotlightsTemplate from "@/components/templates/Spotlights"
 
 export default function Spotlights({ spotlights, ...props }) {
+  console.log(spotlights)
   return (
     <SpotlightsTemplate spotlights={ spotlights } />
   )
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const spotlights = await getPostsSpotlights()
   const page = await getPageSpotlights()
   if (!spotlights || !page) {
@@ -20,7 +21,6 @@ export async function getStaticProps(context) {
   }
   spotlights.page = page
   return {
-    props: { spotlights },
-    revalidate: 1
+    props: { spotlights }
   }
 }
