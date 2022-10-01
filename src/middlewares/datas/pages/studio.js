@@ -8,6 +8,7 @@ export const QUERY_PAGE_STUDIO = gql`
         attributes {
           Title
           Slug
+          Description
           Dynamic_content {
             ... on ComponentBodyBody {
               Content

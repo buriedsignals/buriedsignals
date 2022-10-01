@@ -27,7 +27,7 @@ export async function getStaticPaths() {
   const paths = insights.posts.filter((post) => post.slug !== null).map((post) => ({
     params: { slug: post.slug },
   }))
-  return { paths, fallback: false }
+  return { paths, fallback: true }
 }
 
 export async function getStaticProps({params, ...context}) {

@@ -13,7 +13,7 @@ export default function StudioTemplate({ studio, projects, ...props }) {
     <Layout>
       <StudioTemplateStyle>
         <div className="hero-container">
-          <h1 className="title container-module-medium typography-04">{ studio.title }</h1>
+          <h1 className="title container-module-medium typography-04">{ studio.description }</h1>
         </div>        
         <div className="projects-container">
           <PostsListModule type="project" posts={ projects.posts } max={ 6 } />

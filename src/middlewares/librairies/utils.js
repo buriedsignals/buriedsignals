@@ -5,16 +5,17 @@ import { USER, STRAPI_ENDPOINT } from "./apollo-client";
 
 export function parsePageSimple(datas) {
   return {
-    title: datas.Title,
-    slug: datas.Slug,
-    description: datas.Description
+    title: datas.Title ? datas.Title : "",
+    slug: datas.Slug ? datas.Slug : null,
+    description: datas.Description ? datas.Description : ""
   }
 }
 
 export function parsePageFlexible(datas) {
   return {
-    title: datas.Title,
-    slug: datas.Slug,
+    title: datas.Title ? datas.Title : "",
+    slug: datas.Slug ? datas.Slug : null,
+    description: datas.Description ? datas.Description : "",
     flexible_content: getDynamicContent(datas.Dynamic_content)
   }
 }
@@ -101,18 +102,18 @@ export function parsePostsInsights(datas) {
 export function parsePostInsight(data) {
   return {
     bookmarked: USER.bookmarked.insights ? USER.bookmarked.insights.filter(insight => insight.slug === data.Slug).length > 0 : false, // Get by user
-    categories: data.Categories ? data.Categories.data.map(category => category.attributes.Title) : null,
+    categories: data.Categories ? data.Categories.data.map(category => category.attributes.Title) : [],
     flexible_content: getDynamicContent(data.Dynamic_content),
-    description: data.Description,
+    description: data.Description ? data.Description : "",
     image: getImage(data.Image),
-    published_at: data.updatedAt,
-    slug: data.Slug,
+    published_at: data.updatedAt ? data.updatedAt : "",
+    slug: data.Slug ? data.Slug : null,
     source: {
-      author: data.Source_author,
-      title: data.Source_title,
-      url: data.Source_link
+      author: data.Source_author ? data.Source_author : "",
+      title: data.Source_title ? data.Source_title : "",
+      url: data.Source_link ? data.Source_link : ""
     },
-    title: data.Title
+    title: data.Title ? data.Title : ""
   }
 }
 
@@ -194,11 +195,11 @@ export function parseUsersMembers(datas) {
 
 export function parseUserMember(data) {
   return {   
-    slug: data.Slug,
-    name: data.username,
-    twitter_account: data.Twitter_account,
-    email: data.email,
-    description: data.Description,
+    slug: data.Slug ? data.Slug : null,
+    name: data.username ? data.username : "",
+    twitter_account: data.Twitter_account ? data.Twitter_account : "",
+    email: data.email ? data.email : "",
+    description: data.Description ? data.Description : "",
     bookmarked: {
       spotlights: data.Bookmarked_spotlights ? data.Bookmarked_spotlights.data.map(spotlight => {
         return { id: spotlight.id, ...parsePostSpotlight(spotlight.attributes) }

@@ -7,11 +7,12 @@ import NewsletterModule from "@/components/modules/Newsletter"
 import FlexibleContentModule from "@/components/modules/FlexibleContent"
 
 export default function AboutUsTemplate({ aboutUs, ...props }) {
+  console.log(aboutUs)
   return (
     <Layout>
       <AboutUsTemplateStyle>
         <div className="hero-container">
-          <h1 className="title container-module-medium typography-04">{ aboutUs.title }</h1>
+          <h1 className="title container-module-medium typography-04">{ aboutUs.description }</h1>
         </div>
         <FlexibleContentModule content={ aboutUs.flexible_content } />
         <NewsletterModule />

@@ -16,7 +16,7 @@ export async function getStaticPaths() {
   const paths = members.users.filter((member) => member.slug !== null).map((member) => ({
     params: { slug: member.slug },
   }))
-  return { paths, fallback: false }
+  return { paths, fallback: true }
 }
 
 export async function getStaticProps({params, ...context}) {
