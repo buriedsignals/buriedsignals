@@ -34,23 +34,23 @@ export function parsePostsSpotlights(datas) {
 
 export function parsePostSpotlight(data) {
   return {
-    awards: data.Award.data ? data.Award.data.attributes.Title : null,
+    awards: data.Award.data ? data.Award.data.attributes.Title : "",
     bookmarked: USER.bookmarked.spotlights ? USER.bookmarked.spotlights.filter(spotlight => spotlight.slug === data.Slug).length > 0 : false, // Get by user
-    categories: data.Categories ? data.Categories.data.map(category => category.attributes.Title) : null,
-    description: data.Description,
+    categories: data.Categories ? data.Categories.data.map(category => category.attributes.Title) : [],
+    description: data.Description ? data.Description : "",
     image: getImage(data.Image),
-    likes: data.Likes,
+    likes: data.Likes ? data.Likes : 0,
     liked: USER.liked.spotlights ? USER.liked.spotlights.filter(spotlight => spotlight === data.Slug).length > 0 : false, // Get by user
-    slug: data.Slug,
+    slug: data.Slug ? data.Slug : null,
     source: {
-      author: data.Source_author,
-      url: data.Source_link
+      author: data.Source_author ? data.Source_author : "",
+      url: data.Source_link ? data.Source_link : ""
     },
     submited_by: {
       image: data.Submited_by.data ? getImage(data.Submited_by.data.attributes.Image) : "",
       name: data.Submited_by.data ? data.Submited_by.data.attributes.Name : null
     },
-    title: data.Title
+    title: data.Title ? data.Title : ""
   }
 }
 
