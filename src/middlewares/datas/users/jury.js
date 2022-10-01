@@ -3,7 +3,7 @@ import { gql } from '@apollo/client'
 
 export const QUERY_USERS_JURY = gql`
   query QueryUsersJury {
-    juries {
+    juries(sort: "createdAt:asc") {
       data {
         attributes {
           Name

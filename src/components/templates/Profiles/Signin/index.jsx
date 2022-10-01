@@ -16,6 +16,9 @@ import PrimaryButton from "@/components/buttons/Primary"
 // Icons
 import TwitterIcon from "@/components/icons/Twitter"
 
+import { getCookies } from "cookies-next";
+
+
 export default function SigninTemplate({ ...props }) {
   // References
   const formRef = useRef()

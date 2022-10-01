@@ -212,7 +212,9 @@ export function parseUserMember(data) {
       }) : null,
     },
     liked: {
-      spotlights: data.Liked_spotlights ? data.Liked_spotlights.data.map(spotlights => spotlights.id) : null,
+      spotlights: data.Liked_spotlights ? data.Liked_spotlights.data.map(spotlights => {
+        return { id: spotlights.id }
+      }) : null,
     }
   }
 }

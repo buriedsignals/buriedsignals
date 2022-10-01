@@ -1,4 +1,4 @@
-import { deleteCookie, getCookie, setCookie } from "cookies-next";
+import { deleteCookie, getCookie, setCookie, getCookies } from "cookies-next";
 
 // Limit size text
 export function limitSizeText(text = "", length = 0) {
@@ -81,6 +81,7 @@ export function logoutUserCookies() {
 }
 
 export function setCookieObject(dataName, object) {
+
   let types = ""
   Object.entries(object).forEach(([key, value], index) => {
     setCookie(`${ dataName }-${ key }`, getIdsFromArrayOfObject(value))
