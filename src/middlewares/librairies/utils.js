@@ -47,7 +47,7 @@ export function parsePostSpotlight(data) {
       url: data.Source_link
     },
     submited_by: {
-      image: data.Submited_by.data ? getImage(data.Submited_by.data.attributes.Image) : null,
+      image: data.Submited_by.data ? getImage(data.Submited_by.data.attributes.Image) : "",
       name: data.Submited_by.data ? data.Submited_by.data.attributes.Name : null
     },
     title: data.Title
