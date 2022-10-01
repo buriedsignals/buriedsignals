@@ -3,7 +3,7 @@ import { gql } from '@apollo/client'
 
 export const QUERY_POSTS_RESOURCES = gql`
   query QueryPostsResources {
-    resourcesPosts {
+    resourcesPosts(sort: "updatedAt:desc", pagination: { limit: 99999999 }) {
       data {
         id
         attributes {

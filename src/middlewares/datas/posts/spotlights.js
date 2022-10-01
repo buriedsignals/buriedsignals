@@ -3,7 +3,7 @@ import { gql } from '@apollo/client'
 
 export const QUERY_POSTS_SPOTLIGHTS = gql`
   query QueryPostsSpotlights {
-    spotlightsPosts {
+    spotlightsPosts(sort: "updatedAt:desc", pagination: { limit: 99999999 }) {
       data {
         id
         attributes {
@@ -113,7 +113,7 @@ export const QUERY_POST_SPOTLIGHT = gql`
 
 export const QUERY_POSTS_SPOTLIGHTS_WEEK = gql`
   query QueryPostsSpotlights($week_start: DateTime, $week_end: DateTime) {
-    spotlightsPosts(filters: { and: [ { publishedAt: { gte: $week_start } }, { publishedAt: { lte: $week_end } }] }) {
+    spotlightsPosts(filters: { and: [ { publishedAt: { gte: $week_start } }, { publishedAt: { lte: $week_end } }] }, pagination: { limit: 99999999 }) {
       data {
         id
         attributes {
@@ -168,7 +168,7 @@ export const QUERY_POSTS_SPOTLIGHTS_WEEK = gql`
 
 export const QUERY_POSTS_SPOTLIGHTS_MONTH = gql`
   query QueryPostsSpotlights($month_start: DateTime, $month_end: DateTime) {
-    spotlightsPosts(filters: { and: [ { publishedAt: { gte: $month_start } }, { publishedAt: { lte: $month_end } }] }) {
+    spotlightsPosts(filters: { and: [ { publishedAt: { gte: $month_start } }, { publishedAt: { lte: $month_end } }] }, pagination: { limit: 99999999 }) {
       data {
         id
         attributes {

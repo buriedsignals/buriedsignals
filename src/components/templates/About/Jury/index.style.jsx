@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const JuryTemplateStyle = styled.main`
+export const JuryTemplateStyle = styled.div`
   padding: 115px 0;
   & > .title {
     width: auto;

@@ -12,7 +12,7 @@ export default function Dropdown({ buttonName = "", listActions = [], isActive =
   const [modal, setModal] = useToggle(false) 
   return (
     <DropdownStyle { ...props } onMouseEnter={ () => setModal(true) } onMouseLeave={ () => setModal(false) }>
-      <button className={ `modal${ modal ? ' is-open' : '' } ${ isActive ? "is-active" : "" }` } onClick={ () => setModal(false) }>
+      <button className={ `modal${ modal ? ' is-open' : '' } ${ isActive ? "is-active" : "" }` } onClick={ () => setModal(!modal) }>
         <p className="typography-01">{ buttonName }</p>
         <ArrowIcon />
       </button>

@@ -102,5 +102,6 @@ export const PostsListStyle = styled.div`
   }
   .more-posts {
     padding-bottom: 20px;
+    margin-bottom: 40px;
   }
 `

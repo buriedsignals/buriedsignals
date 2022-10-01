@@ -25,7 +25,7 @@ export default function Comments({ comments, comments_length, postId, max = 5, .
     setPage(page + 1)
   }  
   const onClickButtonAddComment = async (formRef, setAlertSignin, setInternalError) => {
-    if (!user.connected) {
+    if (user.connected) {
       const commentInput = formRef.current.querySelector('.input-comment')
       const comment = commentInput.value
       try {
@@ -56,6 +56,7 @@ export default function Comments({ comments, comments_length, postId, max = 5, .
         setInternalError(true)
       }
     } else {
+      console.log(user)
       setAlertSignin(true)
     }
   }
