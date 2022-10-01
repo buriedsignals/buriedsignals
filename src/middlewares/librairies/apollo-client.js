@@ -43,7 +43,7 @@ export function _createApolloClient() {
     link: new HttpLink({
       uri: `${STRAPI_ENDPOINT}${STRAPI_GRAPHQL_ENDPOINT}`,
     }),
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
     defaultOptions: {
       watchQuery: {
         fetchPolicy: 'no-cache'
