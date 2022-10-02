@@ -9,23 +9,45 @@ export const ThirstyStyle = styled.a`
   border-radius: 4px;
   text-transform: capitalize;
   white-space: nowrap;
-  transition: all 0.25s ease-in;
-  &::after {
-    content: '';
+  transition: all 0.25s linear;
+  &::before {
+    content: "";
     position: absolute;
-    bottom: -10px; left: 0;
-    display: block;
+    left: 0;
+    bottom: -7.5px;
     width: 100%;
-    height: 2px;
+    height: 2.5px;
     background-color: var(--color-${ (props) => props.color });
-    transition: all 0.25s ease-in;
+    transform-origin: 100% 50%;
+    transform: scaleX(1);
+    transition: all .25s linear .125s;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -7.5px;
+    width: 100%;
+    height: 2.5px;
+    background-color: var(--color-${ (props) => props.color });
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    transition: all .25s linear;
   }
   &:hover {
     color: var(--color-${ (props) => props.colorHover });
-    transition: all 0.25s ease-out;
+    transition: all 0.25s linear;
+    &::before {
+      background-color: var(--color-${ (props) => props.colorHover });
+      transform-origin: 100% 50%;
+      transform: scaleX(0);
+      transition: all .25s linear;
+    }
     &::after {
       background-color: var(--color-${ (props) => props.colorHover });
-      transition: all 0.25s ease-out;
+      transform-origin: 0 50%;
+      transform: scaleX(1);
+      transition: all .25s linear .125s;
     }
   }
 `

@@ -9,6 +9,9 @@ import FlexibleContentModule from "@/components/modules/FlexibleContent"
 import ThirstyLink from "@/components/links/Thirsty"
 
 export default function StudioTemplate({ studio, projects, ...props }) {
+  const firstsPosts = projects.posts.filter((post, index) => (index == 0 || index == 1))
+  const lastsPosts = projects.posts.filter((post, index) => (index != 0 && index != 1))
+  console.log(firstsPosts, lastsPosts)
   return (
     <Layout>
       <StudioTemplateStyle>
@@ -16,11 +19,16 @@ export default function StudioTemplate({ studio, projects, ...props }) {
           <h1 className="title container-module-medium typography-04">{ studio.description }</h1>
         </div>        
         <div className="projects-container">
-          <PostsListModule type="project" posts={ projects.posts } max={ 6 } />
+          <PostsListModule type="project" posts={ firstsPosts } max={ 6 } />
         </div>
-        <FlexibleContentModule content={ studio.flexible_content } />
+        <div className="flexible-container">
+          <FlexibleContentModule content={ studio.flexible_content } />
+        </div>
         <div className="contact-container">
           <ThirstyLink href="">Contact us</ThirstyLink>
+        </div>
+        <div className="projects-more-container">
+          <PostsListModule type="project" posts={ lastsPosts } max={ 6 } />
         </div>
       </StudioTemplateStyle>
     </Layout>

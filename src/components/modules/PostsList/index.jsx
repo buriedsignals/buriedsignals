@@ -27,7 +27,7 @@ export default function PostsList({ type, posts, categories, awards = [], max = 
   return (
     <PostsListStyle { ...props } >
       { categories && <PostsFilterModule posts={ posts } categories={ categories } awards={ type == 'spotlight' ? awards.length !== 0 ? awards : false : false }  multiple={ type == 'spotlight' ? true : false } setPage={ setPage } /> }
-      <ul className={ `${ type !== 'spotlight' ? 'container-module-large' : '' } list-container type-${ type }` }>
+      <ul className={ `${ type !== 'spotlight' ? 'container-module-large' : '' } list-container type-${ type } ${ posts.array.length == 0 ? 'no-result-container' : '' }` }>
         { posts.array.length != 0 ? posts.array.map((post, index) => {
             if (index < max * page) {
               return <li key={ `post-${ index }` } className={ `${ type == 'spotlight' ? 'container-module-large' : '' } item-container` }>

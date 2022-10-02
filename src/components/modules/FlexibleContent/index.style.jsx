@@ -16,7 +16,7 @@ export const FlexibleContentStyle = styled.div`
     color: var(--color-grey03);
   }
   h2:not(:first-child) {
-    padding-top: 40px;
+    padding-top: 41.5px;
   }
   h3:not(:first-child), p:not(:first-child), ul:not(:first-child), ol:not(:first-child) {
     padding-top: 20px;

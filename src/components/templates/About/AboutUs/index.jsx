@@ -13,7 +13,9 @@ export default function AboutUsTemplate({ aboutUs, ...props }) {
         <div className="hero-container">
           <h1 className="title container-module-medium typography-04">{ aboutUs.description }</h1>
         </div>
-        <FlexibleContentModule content={ aboutUs.flexible_content } />
+        <div className="flexible-container">
+          <FlexibleContentModule content={ aboutUs.flexible_content } />
+        </div>
         <NewsletterModule />
       </AboutUsTemplateStyle>
     </Layout>

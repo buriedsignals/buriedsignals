@@ -83,6 +83,9 @@ export const PostsListStyle = styled.div`
           margin-bottom: 20px;
         }
       }
+      &.no-result-container {
+        display: none;
+      }
     }
     .item-container {
       ${down('md')} {
