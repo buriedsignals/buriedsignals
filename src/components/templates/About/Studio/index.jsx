@@ -25,7 +25,7 @@ export default function StudioTemplate({ studio, projects, ...props }) {
           <FlexibleContentModule content={ studio.flexible_content } />
         </div>
         <div className="contact-container">
-          <ThirstyLink href="">Contact us</ThirstyLink>
+          <ThirstyLink href="https://t1ipnnn9dzv.typeform.com/to/vUqvFitw" target="_blank" rel="noreferrer">Contact us</ThirstyLink>
         </div>
         <div className="projects-more-container">
           <PostsListModule type="project" posts={ lastsPosts } max={ 6 } />
