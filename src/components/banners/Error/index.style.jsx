@@ -37,10 +37,12 @@ export const ErrorStyle = styled.div`
       h3 {
         margin-bottom: 27.5px;
         text-align: center;
+        text-transform: none;
       }
       .description {
         margin-bottom: 37.5px;
         text-align: center;
+        text-transform: none;
       }
       .inputs-container {
         margin-bottom: 32.5px;

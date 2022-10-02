@@ -3,7 +3,7 @@ import { gql } from '@apollo/client'
 
 export const QUERY_POSTS_SPOTLIGHTS = gql`
   query QueryPostsSpotlights {
-    spotlightsPosts(sort: "updatedAt:desc", pagination: { limit: 99999999 }) {
+    spotlightsPosts(sort: "createdAt:desc", pagination: { limit: 99999999 }) {
       data {
         id
         attributes {
@@ -261,11 +261,11 @@ export const CREATE_SPOTLIGHT_COMMENT = gql`
 
 export const QUERY_SPOTLIGHT_COMMENTS = gql`
   query QuerySpotlightsComments($relation: String!) {
-    findAllFlat(relation: $relation, sort: "updatedAt:asc") {
+    findAllFlat(relation: $relation, sort: "createdAt:asc") {
       data {
         id
         content
-        updatedAt
+        createdAt
         blocked
         threadOf {
           id

@@ -9,7 +9,10 @@ export const ProjectStyle = styled.a`
     width: 343px;
   }
   .project-container {
-    height: 559px;
+    height: 510px;
+    ${down('md')} {
+      height: 485px;
+    }
     .visual-container, .content-container {
       width: 100%;
       height: auto;
@@ -60,8 +63,10 @@ export const ProjectStyle = styled.a`
         }
       }
       .informations-container {
-        height: 121px;
-        margin-bottom: 20px;
+        height: 91px;
+        ${down('md')} {
+          height: 145px;
+        }
         .title {
           margin-bottom: 12.5px;
           color: var(--color-white);

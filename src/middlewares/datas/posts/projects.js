@@ -3,7 +3,7 @@ import { gql } from '@apollo/client'
 
 export const QUERY_POSTS_PROJECTS = gql`
   query QueryPostsProjects {
-    projectsPosts(sort: "updatedAt:desc", pagination: { limit: 99999999 }) {
+    projectsPosts(sort: "createdAt:desc", pagination: { limit: 99999999 }) {
       data {
         id
         attributes {

@@ -3,7 +3,7 @@ import { gql } from '@apollo/client'
 
 export const QUERY_POSTS_INSIGHTS = gql`
   query QueryPostsInsights {
-    insightsPosts(sort: "updatedAt:desc", pagination: { limit: 99999999 }) {
+    insightsPosts(sort: "createdAt:desc", pagination: { limit: 99999999 }) {
       data {
         id
         attributes {

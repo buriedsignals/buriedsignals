@@ -16,6 +16,10 @@ export default function AboutUsTemplate({ aboutUs, ...props }) {
         <div className="flexible-container">
           <FlexibleContentModule content={ aboutUs.flexible_content } />
         </div>
+        <div className="images-container container-module-medium">
+          <img src="/images/logo-02.gif" alt="Logo 02" />
+          <img src="/images/logo-01.png" alt="Logo 01" />
+        </div>
         <NewsletterModule />
       </AboutUsTemplateStyle>
     </Layout>
