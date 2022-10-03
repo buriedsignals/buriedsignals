@@ -22,8 +22,8 @@ export default async function handle(req, res) {
     })
     let link = await responseLink.json()
     link = link.link
-    let template = `Spotlight: ${ datas.Title } | ${ datas.Categories[0].Title }\n\n•\n\n${ link }\n\n#narrativevisualisation #informationdesign`
-    const templateExtra = `Spotlight: ${ datas.Title } | ${ datas.Categories[0].Title }\n\n•${ description }\n\n${ link }\n\n#narrativevisualisation #informationdesign`
+    let template = `Spotlight: ${ datas.Title } by ${ datas.Source_author } | ${ datas.Categories[0].Title }\n\n•\n\n${ link }\n\n#narrativevisualisation #informationdesign`
+    const templateExtra = `Spotlight: ${ datas.Title } by ${ datas.Source_author } | ${ datas.Categories[0].Title }\n\n•${ description }\n\n${ link }\n\n#narrativevisualisation #informationdesign`
     if (template.length + description.length <= 300) {
       template = templateExtra
     }
