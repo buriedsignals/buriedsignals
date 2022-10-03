@@ -55,7 +55,7 @@ export default function SigninTemplate({ ...props }) {
         } else {
           loginUserCookies(result)
           const storage = globalThis?.sessionStorage;
-          if (storage) {
+          if (storage && storage.getItem("prevPath")) {
             document.location.href = window.location.protocol + "//" + window.location.host + storage.getItem("prevPath")
           } else {
             document.location.href = window.location.protocol + "//" + window.location.host + "/profiles/" + result.slug
