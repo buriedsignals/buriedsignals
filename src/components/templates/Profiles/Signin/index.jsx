@@ -55,10 +55,10 @@ export default function SigninTemplate({ ...props }) {
         } else {
           loginUserCookies(result)
           const storage = globalThis?.sessionStorage;
-          if (storage.getItem("prevPath")) {
+          if (storage) {
             document.location.href = window.location.protocol + "//" + window.location.host + storage.getItem("prevPath")
           } else {
-            document.location.href = window.location.protocol + "//" + window.location.host
+            document.location.href = window.location.protocol + "//" + window.location.host + "/profiles/" + result.slug
           }
         }
       } catch (error) {
