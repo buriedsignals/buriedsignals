@@ -14,7 +14,7 @@ export default function CheckEmail({ onClickButtonClose, ...props }) {
       <div ref={ panelRef } className="panel-check-email">
         <div className="panel-check-email-container">
           <h3 className="typography-08">Please check your email</h3>
-          <p className="typography-07 description">We've sent you an email !</p>
+          <p className="typography-07 description">{ "We've sent you an email !" }</p>
           <div className="buttons-container">
             <PrimaryButton color="black02" onClickButton={ (e) => { 
               e.preventDefault()
