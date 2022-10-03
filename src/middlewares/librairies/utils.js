@@ -56,12 +56,11 @@ export function parsePostSpotlight(data) {
 }
 
 export function parseComments(datas) {
-  let comments = datas.filter(data => !data.blocked ).map(data => {
+  let comments = datas.map(data => {
     return parseComment(data)
   });
-  const comments_length = comments.length
-  let commentsThread = comments.filter(comment => comment.threadOf)
-  comments = comments.filter(comment => !comment.threadOf)
+  let commentsThread = comments.filter(comment => comment.threadOf && !comment.blocked)
+  comments = comments.filter(comment => !comment.threadOf && !comment.blocked)
   comments.forEach(comment => {
     commentsThread.map(commentThread => {
       if (comment.id == commentThread.threadOf) {
@@ -71,7 +70,11 @@ export function parseComments(datas) {
         comment.comments.push(commentThread)
       }
     })
-  });
+  })
+  let comments_length = 0
+  comments.forEach(comment => {
+    comments_length += 1 + comment.comments.length
+  })
   return { comments, comments_length }
 }
 
@@ -79,8 +82,9 @@ export function parseComment(data) {
   return {
     id: data.id,
     content: data.content,
-    published_at: data.updatedAt,
+    published_at: data.createdAt,
     threadOf: data.threadOf ? data.threadOf.id : null,
+    blocked: data.blocked,
     author: {
       id: data.author.id,
       name: data.author.name
