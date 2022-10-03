@@ -5,13 +5,13 @@ export default async function handle(req, res) {
   const model = req.body.model
   if (model == "spotlights-post") {
     const T = new Twit({
-      consumer_key: "ruZrpEYOmy2ydiTffTX9NOnS3",
-      consumer_secret: "BOFoclCIO5Qz8dW9DsfU6DrvVkdn0SnTS6kRHHSrOOQDs7i138",
-      access_token: "1273186472133263361-fq88txc3LTQe2XT2lfJP6egFq4Xrb9",
-      access_token_secret: "kVJGaUMr0mxo82raKDADAemxIxhKyY0vF1fGQWCiylUe5"
+      consumer_key: "fiC4fMv7gmg7gNJUrM7Cs8MfV",
+      consumer_secret: "b7FFGIwNTYNUwloO57qH7AauXB6oHdsleVuHqheCYjL5iV7JVo",
+      access_token: "1399628894295269376-BCm4IGRCa37jLbwGkrCzL2kUsew0hS",
+      access_token_secret: "NMhGeIb1kDkv6naeV6S9WrpUgz6njm0IXFPa4k85SuwoI"
     })
     const description = `\n\n${ datas.Description }\n\n•`
-    const url = "https://buriedsignalsv2.vercel.app/spotlights/"
+    const url = "https://www.buriedsignals.com/spotlights/"
     const responseLink = await fetch('https://api-ssl.bitly.com/v4/shorten', {
       method: 'POST',
       headers: {

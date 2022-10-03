@@ -61,19 +61,19 @@ export default function HeaderDesktop() {
                 isActive={ router.pathname.includes("/about") ? "is-active" : "" }
                 listActions={ (() => {
                   return [
-                    (() => <Link href="/about/about-us">
-                      <a className={ router.pathname == "/about/about-us" ? "is-active" : "" }>
-                        <p className="typography-01">About us</p>
-                      </a>
-                    </Link>)(),
-                    (() => <Link href="/about/studio">
-                      <a className={ router.pathname == "/about/studio" ? "is-active" : "" }>
-                        <p className="typography-01">Studio</p>
+                    (() => <Link href="/about/publication">
+                      <a className={ router.pathname == "/about/publication" ? "is-active" : "" }>
+                        <p className="typography-01">Publication</p>
                       </a>
                     </Link>)(),
                     (() => <Link href="/about/jury">
                       <a className={ router.pathname == "/about/jury" ? "is-active" : "" }>
                         <p className="typography-01">Jury</p>
+                      </a>
+                    </Link>)(),
+                    (() => <Link href="/about/studio">
+                      <a className={ router.pathname == "/about/studio" ? "is-active" : "" }>
+                        <p className="typography-01">Studio</p>
                       </a>
                     </Link>)(),
                   ]

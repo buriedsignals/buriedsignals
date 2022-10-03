@@ -110,16 +110,9 @@ export default function HeaderMobile() {
                 { modalDropdown && 
                   <ul className="links">
                     <li className="link">
-                      <Link href="/about/about-us">
-                        <a className={ router.pathname == "/about/about-u" ? "is-active" : "" } onClick={ () => { setModalDropdown(); setModalMenu(); } }>
-                          <p className="typography-01">About us</p>
-                        </a>
-                      </Link>
-                    </li>
-                    <li className="link">
-                      <Link href="/about/studio">
-                        <a className={ router.pathname == "/about/studio" ? "is-active" : "" } onClick={ () => { setModalDropdown(); setModalMenu(); } }>
-                          <p className="typography-01">Studio</p>
+                      <Link href="/about/publication">
+                        <a className={ router.pathname == "/about/publication" ? "is-active" : "" } onClick={ () => { setModalDropdown(); setModalMenu(); } }>
+                          <p className="typography-01">Publication</p>
                         </a>
                       </Link>
                     </li>
@@ -127,6 +120,13 @@ export default function HeaderMobile() {
                       <Link href="/about/jury">
                         <a className={ router.pathname == "/about/jury" ? "is-active" : "" } onClick={ () => { setModalDropdown(); setModalMenu(); } }>
                           <p className="typography-01">Jury</p>
+                        </a>
+                      </Link>
+                    </li>
+                    <li className="link">
+                      <Link href="/about/studio">
+                        <a className={ router.pathname == "/about/studio" ? "is-active" : "" } onClick={ () => { setModalDropdown(); setModalMenu(); } }>
+                          <p className="typography-01">Studio</p>
                         </a>
                       </Link>
                     </li>

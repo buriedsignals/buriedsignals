@@ -1,7 +1,7 @@
 // Nodes
 import { gql } from '@apollo/client'
 
-export const QUERY_PAGE_ABOUT_US = gql`
+export const QUERY_PAGE_PUBLICATION = gql`
   query QueryPageAboutUs {
     pages(filters: { Slug: { eq: "about-us" } }) {
       data {
