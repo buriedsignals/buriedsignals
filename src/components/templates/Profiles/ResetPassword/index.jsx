@@ -1,7 +1,7 @@
 // Styles
 import { ResetPasswordTemplateStyle } from "./index.style"
 // Scripts
-import { getUserCookies, loginUserCookies, logoutUserCookies } from "@/scripts/utils"
+import { logoutUserCookies } from "@/scripts/utils"
 // React
 import { useRef, useState } from "react"
 // Next
@@ -13,10 +13,6 @@ import Layout from "@/components/layouts/main"
 import ErrorBanner from "@/components/banners/Error"
 // Buttons
 import PrimaryButton from "@/components/buttons/Primary"
-// Icons
-import TwitterIcon from "@/components/icons/Twitter"
-
-import { getCookies } from "cookies-next";
 
 
 export default function ResetPasswordTemplate({ ...props }) {
@@ -40,7 +36,7 @@ export default function ResetPasswordTemplate({ ...props }) {
         const body = { 
           password: password,
           passwordConfirmation: passwordConfirmation,
-          code: code
+          code: router.query.code
         };
         const reponse = await fetch('/api/post-reset-password-user-2c2vzr2iu1/', {
           method: 'POST',
@@ -52,13 +48,7 @@ export default function ResetPasswordTemplate({ ...props }) {
           logoutUserCookies()
           setInternalError(true)
         } else {
-          loginUserCookies(result)
-          const storage = globalThis?.sessionStorage;
-          if (storage) {
-            document.location.href = window.location.protocol + "//" + window.location.host + storage.getItem("prevPath")
-          } else {
-            document.location.href = window.location.protocol + "//" + window.location.host
-          }
+          document.location.href = window.location.protocol + "//" + window.location.host + '/profiles/signin'
         }
       } catch (error) {
         console.error(error);

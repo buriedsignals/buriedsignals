@@ -83,7 +83,7 @@ export async function resetPasswordUserMember(password, passwordConfirmation, co
     variables: { password, passwordConfirmation, code }
   })
   if (!response) return null
-  return response
+  return response.data.forgotPassword
 }
 
 export async function updateUserMember(id, datas) {

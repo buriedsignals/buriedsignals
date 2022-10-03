@@ -1,7 +1,7 @@
 // Styles
 import { ForgotPasswordTemplateStyle } from "./index.style"
 // Scripts
-import { getUserCookies, loginUserCookies, logoutUserCookies } from "@/scripts/utils"
+import { logoutUserCookies } from "@/scripts/utils"
 // React
 import { useRef, useState } from "react"
 // Next
@@ -11,12 +11,9 @@ import { useRouter } from "next/router"
 import Layout from "@/components/layouts/main"
 // Banners
 import ErrorBanner from "@/components/banners/Error"
+import CheckEmailBanner from "@/components/banners/CheckEmail"
 // Buttons
 import PrimaryButton from "@/components/buttons/Primary"
-// Icons
-import TwitterIcon from "@/components/icons/Twitter"
-
-import { getCookies } from "cookies-next";
 
 
 export default function ForgotPasswordTemplate({ ...props }) {
@@ -24,6 +21,7 @@ export default function ForgotPasswordTemplate({ ...props }) {
   const formRef = useRef()
   // States
   const [internalError, setInternalError] = useState(false)
+  const [registered, setRegistered] = useState(false)
   // Router
   const router = useRouter()
   // Handlers
@@ -43,17 +41,12 @@ export default function ForgotPasswordTemplate({ ...props }) {
           body: JSON.stringify(body),
         });
         const result = await reponse.json()
-        if (result.errors) {
+        console.log(result)
+        if (result.errors || !result.ok) {
           logoutUserCookies()
           setInternalError(true)
         } else {
-          loginUserCookies(result)
-          const storage = globalThis?.sessionStorage;
-          if (storage) {
-            document.location.href = window.location.protocol + "//" + window.location.host + storage.getItem("prevPath")
-          } else {
-            document.location.href = window.location.protocol + "//" + window.location.host
-          }
+          setRegistered(true)
         }
       } catch (error) {
         console.error(error);
@@ -88,6 +81,7 @@ export default function ForgotPasswordTemplate({ ...props }) {
           </div>
         </div>
         { internalError && <ErrorBanner onClickButtonClose={ setInternalError } /> }
+        { registered && <CheckEmailBanner onClickButtonClose={ setRegistered } /> }
       </ForgotPasswordTemplateStyle>
     </Layout>
   )
