@@ -1,5 +1,5 @@
 // Styles
-import { SigninTemplateStyle } from "./index.style"
+import { ForgotPasswordTemplateStyle } from "./index.style"
 // Scripts
 import { getUserCookies, loginUserCookies, logoutUserCookies } from "@/scripts/utils"
 // React
@@ -19,7 +19,7 @@ import TwitterIcon from "@/components/icons/Twitter"
 import { getCookies } from "cookies-next";
 
 
-export default function SigninTemplate({ ...props }) {
+export default function ForgotPasswordTemplate({ ...props }) {
   // References
   const formRef = useRef()
   // States
@@ -27,23 +27,17 @@ export default function SigninTemplate({ ...props }) {
   // Router
   const router = useRouter()
   // Handlers
-  const onClickButtonSignin = async () => {
+  const onClickButtonForgotPassword = async () => {
     const emailInput = formRef.current.querySelector('.input-email')
     const email = emailInput.value.toLowerCase()
     const emailError = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
-    const passwordInput = formRef.current.querySelector('.input-password')
-    const password = passwordInput.value
-    const passwordError = /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/.test(password)
-    
-    if (emailError && passwordError) {
+
+    if (emailError) {
       try {
         const body = { 
-          datas: {
-            "identifier": email, 
-            "password": password,
-          }
+          email: email
         };
-        const reponse = await fetch('/api/post-login-user-6fh5q7mr50/', {
+        const reponse = await fetch('/api/post-forgot-password-user-odwqiqg3d9/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),
@@ -55,10 +49,10 @@ export default function SigninTemplate({ ...props }) {
         } else {
           loginUserCookies(result)
           const storage = globalThis?.sessionStorage;
-          if (storage && storage.getItem("prevPath")) {
+          if (storage) {
             document.location.href = window.location.protocol + "//" + window.location.host + storage.getItem("prevPath")
           } else {
-            document.location.href = window.location.protocol + "//" + window.location.host + "/profiles/" + result.slug
+            document.location.href = window.location.protocol + "//" + window.location.host
           }
         }
       } catch (error) {
@@ -70,47 +64,31 @@ export default function SigninTemplate({ ...props }) {
       if (!emailError) {
         emailInput.classList.add("input-error")
       }
-      if (!passwordError) {
-        passwordInput.classList.add("input-error")
-      }
     }
   }
   return (
     <Layout>
-      <SigninTemplateStyle { ...props }>
-        <div className="container-module-extra-small signin-container">
-          <h1 className="title typography-04">Sign in</h1>
+      <ForgotPasswordTemplateStyle { ...props }>
+        <div className="container-module-extra-small forgot-password-container">
+          <h1 className="title typography-04">Forgot password</h1>
           <div className="form-container">
-            {/* <a href="" className="connect-twitter">
-              <TwitterIcon />
-              <p className="typography-17">Sign in with Twitter</p>
-            </a>
-            <p className="label typography-01">Sign in with e-mail</p> */}
             <div className="form" ref={ formRef }>
               <div className="inputs-container">
                 <input className="typography-01 input-email" type="email" placeholder="Your E-mail" />
-                <input className="typography-01 input-password" type="password" placeholder="Password" />
               </div>
-              <PrimaryButton onClickButton={ onClickButtonSignin }>
-                <p className="typography-03">Sign in</p>
+              <PrimaryButton onClickButton={ onClickButtonForgotPassword }>
+                <p className="typography-03">Send</p>
               </PrimaryButton>
-              <div className="links">
-                <Link href="/profiles/signup">
-                  <a>
-                    <p  className="typography-01">Sign up now</p>
-                  </a>
-                </Link>
-                <Link href="/profiles/forgot-password">
-                  <a>
-                    <p  className="typography-01">Password reset</p>
-                  </a>
-                </Link>
-              </div>
+              <Link href="/profiles/signin">
+                <a>
+                  <p  className="typography-01">Sign in now</p>
+                </a>
+              </Link>
             </div>
           </div>
         </div>
         { internalError && <ErrorBanner onClickButtonClose={ setInternalError } /> }
-      </SigninTemplateStyle>
+      </ForgotPasswordTemplateStyle>
     </Layout>
   )
 }

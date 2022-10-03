@@ -328,6 +328,25 @@ export const LOGIN_USER_MEMBER = gql`
   }
 `
 
+export const FORGOT_PASSWORD_USER_MEMBER = gql`
+mutation ForgotPasswordUserMember($email: String!) {
+  forgotPassword(email: $email) {
+    ok
+  }
+}
+`
+
+export const RESET_PASSWORD_USER_MEMBER = gql`
+mutation ResetPasswordUserMember($password: String!, $passwordConfirmation: String!, $code: String!) {
+  resetPassword(password: $password, passwordConfirmation: $passwordConfirmation, code: $code) {
+    jwt
+    user {
+      username
+    }
+  }
+}
+`
+
 export const UPDATE_USER_MEMBER = gql`
   mutation UpdateUserMember($id: ID!, $datas: UsersPermissionsUserInput!) {
     updateUsersPermissionsUser(id: $id, data: $datas) {

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const SigninTemplateStyle = styled.div`
-  .signin-container {
-    padding: 117.5px 16px;
+export const ForgotPasswordTemplateStyle = styled.div`
+  .forgot-password-container {
+    padding: 115px 16px;
     .title {
       margin-bottom: 60px;
       text-align: center;
@@ -64,27 +64,15 @@ export const SigninTemplateStyle = styled.div`
             text-align: center;
           }
         }
-        .links {
-          display: flex;
-          justify-content: center;
-          column-gap: 10px;
-          a {
-            display: block;
-            width: 128px;
-            margin-top: 24px;
-            color: var(--color-grey02);
-            text-decoration: underline;
+        a {
+          display: block;
+          margin-top: 24px;
+          color: var(--color-grey02);
+          text-decoration: underline;
+          transition: all 0.25s ease-out;
+          &:hover {
+            color: var(--color-white);
             transition: all 0.25s ease-out;
-            &:hover {
-              color: var(--color-white);
-              transition: all 0.25s ease-out;
-            }
-            &:first-child p {
-              text-align: right;
-            }
-            &:last-child p {
-              text-align: left;
-            }
           }
         }
       }
