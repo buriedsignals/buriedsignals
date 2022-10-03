@@ -50,7 +50,7 @@ export default function Footer() {
             <Logo type="large" />
           </a>
         </Link>
-        <p className="copyright typography-10">© 2021 Buried Signals. See <Link href="/privacy"><a className="typography-03">Privacy Terms</a></Link> and <Link href="/notice"><a className="typography-03">Information Collection Notice</a></Link></p>
+        <p className="copyright typography-10">© 2021 Buried Signals. See <Link href="/privacy"><a className="typography-03">Privacy Terms</a></Link> and <Link href="/notice"><a className="typography-03">Legal Notice</a></Link></p>
       </div>
     </FooterStyle>
   )
