@@ -53,7 +53,8 @@ export const SpotlightTemplateStyle = styled.div`
       img {
         position: absolute;
         top: 50%; left: 50%;
-        width: 100%;
+        height: 100%;
+        width: auto;
         transform: translate3D(-50%, -50%, 0);
       }
     }

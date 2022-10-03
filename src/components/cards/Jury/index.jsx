@@ -7,18 +7,38 @@ import ExternalLinkIcon from "@/components/icons/ExternalLink"
 
 export default function Jury({ post, ...props }) {
   return (
-    <JuryStyle { ...props }>
-      <div className="jury-container">
-        <div className="visual-container">
-          <img src={ post.image.url } alt={ post.image.alt } />
-        </div>
-        <div className="content-container">
-          <div className="informations-container">
-            <h3 className="title typography-06">{ limitSizeText(post.name, 40) }</h3>
-            <p className="description typography-07">{ limitSizeText(post.description, 100) }</p>
+    <>
+      { (post.portfolio && post.portfolio.length != 0) ?
+        <a href={ post.portfolio } target="_blank" rel="noopener noreferrer">
+          <JuryStyle { ...props }>
+            <div className="jury-container">
+              <div className="visual-container">
+                <img src={ post.image.url } alt={ post.image.alt } />
+              </div>
+              <div className="content-container">
+                <div className="informations-container">
+                  <h3 className="title typography-06">{ limitSizeText(post.name, 40) }</h3>
+                  <p className="description typography-07">{ limitSizeText(post.description, 100) }</p>
+                </div>
+              </div>
+            </div>
+          </JuryStyle>
+        </a>
+        :
+        <JuryStyle { ...props }>
+          <div className="jury-container">
+            <div className="visual-container">
+              <img src={ post.image.url } alt={ post.image.alt } />
+            </div>
+            <div className="content-container">
+              <div className="informations-container">
+                <h3 className="title typography-06">{ limitSizeText(post.name, 40) }</h3>
+                <p className="description typography-07">{ limitSizeText(post.description, 100) }</p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </JuryStyle>
+        </JuryStyle>
+      }
+    </>
   )
 }

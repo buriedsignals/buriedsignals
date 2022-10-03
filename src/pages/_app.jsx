@@ -1,9 +1,10 @@
 // Styles
 import '@/styles/globals.css'
 // React
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 // Next
 import Head from 'next/head'
+import { useRouter } from "next/router"
 // Nodes
 import { ThemeProvider } from "styled-components"
 import { createTheme } from "styled-breakpoints"
@@ -15,9 +16,10 @@ import Layout from '@/components/layouts';
 // Metas
 const title = 'Buried Signals'
 const url = 'https://www.buriedsignals.com/'
-const description = 'A creative production studio crafting explorable essays, visual reports and immersive documentaries'
-const keywords = ''
+const description = "Discover the world's best visual narratives. Inspiration, insights and resources for interactive storytelling."
+const keywords = 'dataviz, information, design, visualisation, narrative, interactive, visual, journalism, awards, resources, insights, courses, community, data'
 const author = 'Buried Signals'
+const image = url + 'images/img-meta.png'
 
 function App({ Component, pageProps }) {
   // Nodes
@@ -33,6 +35,17 @@ function App({ Component, pageProps }) {
   useEffect(() => {
     document.body.className = !scroll ? 'no-scroll' : '';
   })
+  // ---
+  const router = useRouter();
+  useEffect(() => storePathValues, [router.asPath]);
+  function storePathValues() {
+    const storage = globalThis?.sessionStorage;
+    if (!storage) return;
+    const prevPath = storage.getItem("currentPath");
+    storage.setItem("prevPath", prevPath);
+    storage.setItem("currentPath", globalThis.location.pathname);
+  }
+  // ---
   return (
     <>      
       <Head>
@@ -50,7 +63,7 @@ function App({ Component, pageProps }) {
         <meta key='og-title' property='og:title' content={ title } />
         <meta property='og:type' content='site' />
         <meta property='og:url' content={ url } />
-        <meta key='og-image' property='og:image' content={ url + 'images/img-meta.png' } />
+        <meta key='og-image' property='og:image' content={ image } />
         <meta property='og:site_name' content={ title } />
         <meta key='og-description' property='og:description' content={ description } />
         <meta name='viewport' content='width=device-width, minimum-scale=1, initial-scale=1.0, user-scalable=no' />
@@ -60,7 +73,7 @@ function App({ Component, pageProps }) {
         <meta key='tw-title' name='twitter:title' content={ title } />
         <meta key='tw-description' name='twitter:description' content={ description } />
         <meta name='twitter:creator' content='@buriedsignals' />
-        <meta key='tw-image' name='twitter:image:src' content={ url +'images/img-meta.png' } />
+        <meta key='tw-image' name='twitter:image:src' content={ image } />
       </Head>
       <ThemeProvider theme={ breakpoints }>
         <Layout>

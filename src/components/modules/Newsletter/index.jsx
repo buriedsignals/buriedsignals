@@ -16,9 +16,9 @@ export default function Newsletter({ ...props }) {
             <LogoIcon />
           </a>
         </Link>
-        <p className="typography-09 details">Support groundbreaking journalism by signing up for our newsletter.</p>
+        <p className="typography-09 details">The montly newsletter for visual journalism resources, insights and inspiration.</p>
         {/* <input className="typography-03" type="email" name="email" placeholder="Your e-mail here" /> */}
-        <ThirstyLink color="black02" colorHover="white" href="https://buriedsignals.substack.com/" target="_blank" rel="noopener noreferrer">Join newsletter</ThirstyLink>
+        <ThirstyLink color="black02" colorHover="white" href="https://buriedsignals.substack.com/" target="_blank" rel="noopener noreferrer">I'm interested</ThirstyLink>
       </div>
     </NewsletterStyle>
   )

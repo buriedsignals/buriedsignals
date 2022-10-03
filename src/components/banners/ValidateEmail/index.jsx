@@ -16,7 +16,7 @@ export default function ValidateEmail({ onClickButtonClose, ...props }) {
           <h3 className="typography-08">Thank you for registering!</h3>
           <p className="typography-07 description">You have to confirm your email address.</p>
           <div className="buttons-container">
-            <PrimaryButton color="white" onClickButton={ (e) => { 
+            <PrimaryButton color="black02" onClickButton={ (e) => { 
               e.preventDefault()
               onClickButtonClose(false)
             } }>

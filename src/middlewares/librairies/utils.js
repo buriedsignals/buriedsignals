@@ -179,6 +179,7 @@ export function parseUserJury(data) {
     description: data.Description,
     image: getImage(data.Image),
     name: data.Name,
+    portfolio: data.Portfolio_link ? data.Portfolio_link : "",
   }
 }
 

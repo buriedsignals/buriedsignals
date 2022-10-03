@@ -11,7 +11,6 @@ import ThirstyLink from "@/components/links/Thirsty"
 export default function StudioTemplate({ studio, projects, ...props }) {
   const firstsPosts = projects.posts.filter((post, index) => (index == 0 || index == 1))
   const lastsPosts = projects.posts.filter((post, index) => (index != 0 && index != 1))
-  console.log(firstsPosts, lastsPosts)
   return (
     <Layout>
       <StudioTemplateStyle>

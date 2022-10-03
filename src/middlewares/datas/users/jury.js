@@ -3,7 +3,7 @@ import { gql } from '@apollo/client'
 
 export const QUERY_USERS_JURY = gql`
   query QueryUsersJury {
-    juries(sort: "createdAt:asc") {
+    juries(sort: "Ordering_date:desc") {
       data {
         attributes {
           Name
@@ -16,6 +16,7 @@ export const QUERY_USERS_JURY = gql`
               }
             }
           }
+          Portfolio_link
         }
       }
     }

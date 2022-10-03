@@ -31,7 +31,7 @@ export const AboutUsTemplateStyle = styled.div`
     gap: 50px;
     margin-bottom: 100px;
     img {
-      height: 300px;
+      height: 150px;
       ${down('md')} {
         height: 100px;
       }

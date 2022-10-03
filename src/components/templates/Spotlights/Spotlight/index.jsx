@@ -90,7 +90,7 @@ export default function SpotlightTemplate({ spotlight, ...props }) {
             </li>
           </ul> 
               <SecondaryLink href={ spotlight.source.url }>
-                <p className="typography-03">Visit article</p>
+                <p className="typography-03">Visit Spotlight</p>
                 <ExternalLinkIcon />
               </SecondaryLink>
         </div>
