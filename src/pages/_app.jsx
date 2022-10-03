@@ -28,6 +28,7 @@ function App({ Component, pageProps }) {
     md: "905px",
     lg: "1175px",
     xl: "1440px",
+    list: "1078px",
   });
   // Hooks
   const [scroll] = useStore((state) => [state.scroll])

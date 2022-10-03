@@ -27,10 +27,13 @@ export const PostsListStyle = styled.div`
       display: flex;
       flex-wrap: wrap;
       column-gap: 20px;
-      justify-content: center;
+      justify-content: flex-start;
       ${down('md')} {
         padding-left: 16px;
         padding-right: 16px;
+      }
+      ${down('list')} {
+        justify-content: center;
       }
       .item-container {
         &:not(:last-child) {
@@ -42,10 +45,13 @@ export const PostsListStyle = styled.div`
       display: flex;
       flex-wrap: wrap;
       column-gap: 77px;
-      justify-content: center;
+      justify-content: flex-start;
       ${down('md')} {
         padding-left: 16px;
         padding-right: 16px;
+      }
+      ${down('list')} {
+        justify-content: center;
       }
       .item-container {
         &:not(:last-child) {
@@ -57,10 +63,13 @@ export const PostsListStyle = styled.div`
       display: flex;
       flex-wrap: wrap;
       column-gap: 77px;
-      justify-content: center;
+      justify-content: flex-start;
       ${down('md')} {
         padding-left: 40px;
         padding-right: 40px;
+      }
+      ${down('list')} {
+        justify-content: center;
       }
       .item-container {
         &:not(:last-child) {
@@ -72,11 +81,14 @@ export const PostsListStyle = styled.div`
       display: flex;
       flex-wrap: wrap;
       column-gap: 20px;
-      justify-content: center;
+      justify-content: flex-start;
       padding-top: 0;
       ${down('md')} {
         padding-left: 16px;
         padding-right: 16px;
+      }
+      ${down('list')} {
+        justify-content: center;
       }
       .item-container {
         &:not(:last-child) {
