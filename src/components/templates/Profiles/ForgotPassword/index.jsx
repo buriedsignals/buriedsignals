@@ -81,7 +81,9 @@ export default function ForgotPasswordTemplate({ ...props }) {
           </div>
         </div>
         { internalError && <ErrorBanner onClickButtonClose={ setInternalError } /> }
-        { registered && <CheckEmailBanner onClickButtonClose={ setRegistered } /> }
+        { registered && <CheckEmailBanner onClickButtonClose={ () => {
+          document.location.href = window.location.protocol + "//" + window.location.host
+        } } /> }
       </ForgotPasswordTemplateStyle>
     </Layout>
   )
