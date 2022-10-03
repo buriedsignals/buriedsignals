@@ -72,7 +72,7 @@ export async function forgotPasswordUserMember(email) {
     variables: { email }
   })
   if (!response) return null
-  return response
+  return response.data.forgotPassword
 }
 
 export async function resetPasswordUserMember(password, passwordConfirmation, code) {
@@ -83,7 +83,7 @@ export async function resetPasswordUserMember(password, passwordConfirmation, co
     variables: { password, passwordConfirmation, code }
   })
   if (!response) return null
-  return response.data.forgotPassword
+  return response
 }
 
 export async function updateUserMember(id, datas) {
