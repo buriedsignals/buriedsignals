@@ -41,7 +41,6 @@ export default function ForgotPasswordTemplate({ ...props }) {
           body: JSON.stringify(body),
         });
         const result = await reponse.json()
-        console.log(result)
         if (result.errors || !result.ok) {
           logoutUserCookies()
           setInternalError(true)
