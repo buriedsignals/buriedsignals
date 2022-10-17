@@ -19,7 +19,7 @@ export default function Signin({ onClickButtonClose, ...props }) {
           <p className="typography-07 description">We need you to sign in for that.</p>
           <div className="buttons-container">
             <PrimaryLink href="/profiles/signin">
-              <p className="typography-03">Sing in</p>
+              <p className="typography-03">Sign In</p>
             </PrimaryLink>
             <PrimaryButton color="black03" onClickButton={ (e) => { 
               e.preventDefault()
