@@ -89,11 +89,6 @@ export default function HeaderDesktop() {
                 <TwitterIcon size="small" />
               </a>
             </li>
-            <li className="action">
-              <a href="https://t1ipnnn9dzv.typeform.com/to/YrFFaQjA" target="_blank" rel="noreferrer">
-                <p className="typography-01">Submit</p>
-              </a>
-            </li>
             { user.connected ?
                 <li className="action">
                   {/* <ProfileLink imgURL="/images/img-profil.jpg" /> */}
@@ -113,12 +108,19 @@ export default function HeaderDesktop() {
                   </Link>
                 </li>
                 <li className="action">
-                  <PrimaryLink href="/profiles/signup">
-                    <p className="typography-03">Sign Up</p>
-                  </PrimaryLink>
+                  <Link href="/profiles/signup">
+                    <a>
+                      <p className="typography-01">Sign Up</p>
+                    </a>
+                  </Link>
                 </li>
               </>
             }
+            <li className="action">
+              <PrimaryLink href="https://t1ipnnn9dzv.typeform.com/to/YrFFaQjA" intern={ false }>
+                <p className="typography-03">Submit</p>
+              </PrimaryLink>
+            </li>
           </ul>
         </div>
       </div>

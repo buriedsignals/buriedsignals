@@ -3,7 +3,7 @@ import { down } from "styled-breakpoints";
 
 export const ForgotPasswordTemplateStyle = styled.div`
   .forgot-password-container {
-    padding: 115px 16px;
+    padding: 117.5px 16px;
     .title {
       margin-bottom: 60px;
       text-align: center;
