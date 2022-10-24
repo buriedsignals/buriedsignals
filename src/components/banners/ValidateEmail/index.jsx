@@ -13,7 +13,7 @@ export default function ValidateEmail({ onClickButtonClose, ...props }) {
       <div ref={ panelRef } className="panel-validate-email">
         <div className="panel-validate-email-container">
           <h3 className="typography-08">Glad to have you with us!</h3>
-          <p className="typography-07 description">We've sent you an email, you'll need it to sign in!</p>
+          <p className="typography-07 description">{ "We've sent you an email, you'll need it to sign in!" }</p>
           <div className="buttons-container">
             <PrimaryButton color="black02" onClickButton={ (e) => { 
               e.preventDefault()
