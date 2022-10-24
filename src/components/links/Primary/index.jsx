@@ -4,7 +4,6 @@ import { PrimaryStyle } from "./index.style"
 import Link from "next/link"
 
 export default function Primary({ color = "green", href, children, intern = true, ...props }) {
-  console.log(href)
   return (
     <>
       { intern ?

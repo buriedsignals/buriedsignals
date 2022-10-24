@@ -5,7 +5,7 @@ export const FlexibleContentStyle = styled.div`
   hr {
     display: none;
   }
-  h1, h2, h3, p, ul, ol {
+  h1, h2, h3, h4, p, ul, ol {
     /* .container-module-small */
     width: 100%;
     max-width: 640px;
@@ -18,7 +18,7 @@ export const FlexibleContentStyle = styled.div`
   h2:not(:first-child) {
     padding-top: 41.5px;
   }
-  h3:not(:first-child), p:not(:first-child), ul:not(:first-child), ol:not(:first-child) {
+  h4:not(:first-child), h3:not(:first-child), p:not(:first-child), ul:not(:first-child), ol:not(:first-child) {
     padding-top: 20px;
   }
   ul {
@@ -49,7 +49,7 @@ export const FlexibleContentStyle = styled.div`
       line-height: 130%;
     }
   }
-  h3 {
+  h3, h4 {
     /* .typographie-14 */
     font-family: 'Space Grotesk';
     font-style: normal;
