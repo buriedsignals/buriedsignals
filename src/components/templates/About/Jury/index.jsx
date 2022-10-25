@@ -13,7 +13,7 @@ export default function JuryTemplate({ jury, ...props }) {
         <div className="container-module-large description-container">
           <p className="typography-07">{ jury.page.description }</p>
         </div>
-        <PostsListModule type="jury" posts={ jury.users } max={ 6 } />
+        <PostsListModule type="jury" posts={ jury.users } max={ 99999 } />
       </JuryTemplateStyle>
     </Layout>
   )

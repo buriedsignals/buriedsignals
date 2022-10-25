@@ -10,12 +10,15 @@ export const DropdownStyle = styled.div`
     z-index: 2;
     svg {
       margin-left: 7.5px;
-      transition: all 0.05s ease-in-out;
+      transform-origin: center;
+      transform: rotate3D(0, 0, 1, 0deg);
+      transition: all 0.2s linear;
     }
     &.is-open {
       svg {
+        transform-origin: center;
         transform: rotate3D(0, 0, 1, -180deg);
-        transition: all 0.05s ease-in-out;
+        transition: all 0.2s linear;
       }
     }
     &.is-active {
