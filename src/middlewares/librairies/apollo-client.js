@@ -19,7 +19,7 @@ export let USER = {
   slug: null,
   twitter_account: null
 }
-export const STRAPI_ENDPOINT = "https://buriedsignals-api.herokuapp.com"
+export const STRAPI_ENDPOINT = "http://localhost:3000"
 const STRAPI_GRAPHQL_ENDPOINT = "/graphql"
 let client = null
 
