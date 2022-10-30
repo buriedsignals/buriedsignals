@@ -1,6 +1,7 @@
 import Twit from "twit";
 
 export default async function handle(req, res) {
+  console.log("okokok")
   const datas = req.body.entry
   const model = req.body.model
   if (model == "spotlights-post") {
@@ -24,12 +25,14 @@ export default async function handle(req, res) {
     link = link.link
     let template = `Spotlight: ${ datas.Title } by ${ datas.Source_author } | ${ datas.Categories[0].Title }\n\n•\n\n${ link }\n\n#narrativevisualisation #informationdesign`
     const templateExtra = `Spotlight: ${ datas.Title } by ${ datas.Source_author } | ${ datas.Categories[0].Title }\n\n•${ description }\n\n${ link }\n\n#narrativevisualisation #informationdesign`
-    if (template.length + description.length <= 290) {
+    if (template.length + description.length <= 270) {
       template = templateExtra
     }
+    console.log(template.length)
     const params = { status: template }
     T.post('statuses/update', params, function (err, data, response) {
       res.json(data)
+      console.log(data)
     })
   }
 }
