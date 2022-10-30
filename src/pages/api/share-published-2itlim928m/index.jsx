@@ -24,8 +24,16 @@ export default async function handle(req, res) {
     link = link.link
     let template = `Spotlight: ${ datas.Title } by ${ datas.Source_author } | ${ datas.Categories[0].Title }\n\n•\n\n${ link }\n\n#narrativevisualisation #informationdesign`
     const templateExtra = `Spotlight: ${ datas.Title } by ${ datas.Source_author } | ${ datas.Categories[0].Title }\n\n•${ description }\n\n${ link }\n\n#narrativevisualisation #informationdesign`
-    if (templateExtra <= 270) {
+    const templateWithoutCategory = `Spotlight: ${ datas.Title } by ${ datas.Source_author }\n\n•\n\n${ link }\n\n#narrativevisualisation #informationdesign`
+    const templateWithoutCategoryAndAuthor = `Spotlight: ${ datas.Title }\n\n•\n\n${ link }\n\n#narrativevisualisation #informationdesign`
+    if (templateExtra.length <= 270) {
       template = templateExtra
+    } else if (template.length > 270) {
+      if (templateWithoutCategory.length <= 270) {
+        template = templateWithoutCategory
+      } else {
+        template = templateWithoutCategoryAndAuthor
+      }
     }
     const params = { status: template }
     T.post('statuses/update', params, function (err, data, response) {
