@@ -7,6 +7,8 @@ import { useRef, useState } from "react"
 // Next
 import Link from "next/link"
 import { useRouter } from "next/router"
+// Hooks
+import useStore from "@/hooks/useStore"
 // Layouts
 import Layout from "@/components/layouts/main"
 // Banners
@@ -26,6 +28,8 @@ export default function SigninTemplate({ ...props }) {
   const [internalError, setInternalError] = useState(false)
   // Router
   const router = useRouter()
+  // Hooks
+  const [previousPath] = useStore((state) => [state.previousPath])
   // Handlers
   const onClickButtonSignin = async () => {
     const emailInput = formRef.current.querySelector('.input-email')
@@ -53,10 +57,10 @@ export default function SigninTemplate({ ...props }) {
           logoutUserCookies()
           setInternalError(true)
         } else {
-          loginUserCookies(result)
+          // loginUserCookies(result)
           const storage = globalThis?.sessionStorage;
-          if (storage && storage.getItem("prevPath") !== null) {
-            document.location.href = window.location.protocol + "//" + window.location.host + storage.getItem("prevPath")
+          if (previousPath !== null && previousPath !== "/profiles/signin" && previousPath !== "/profiles/signup" && previousPath !== "/profiles/signout" && previousPath !== "/profiles/forgot-password" && previousPath !== "/profiles/reset-password") {
+            document.location.href = window.location.protocol + "//" + window.location.host + previousPath
           } else if (result.slug) {
             document.location.href = window.location.protocol + "//" + window.location.host + "/profiles/" + result.slug
           } else {

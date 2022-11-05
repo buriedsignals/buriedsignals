@@ -39,14 +39,11 @@ function App({ Component, pageProps }) {
   })
   // ---
   const router = useRouter();
-  useEffect(() => storePathValues, [router.asPath]);
-  function storePathValues() {
-    const storage = globalThis?.sessionStorage;
-    if (!storage) return;
-    const prevPath = storage.getItem("currentPath");
-    storage.setItem("prevPath", prevPath);
-    storage.setItem("currentPath", globalThis.location.pathname);
-  }
+  useEffect(() => {
+    return () => {
+      useStore.setState({ previousPath: router.asPath })
+    }
+  }, [router.asPath]);
   // ---
   return (
     <>      
