@@ -57,7 +57,7 @@ export default function SigninTemplate({ ...props }) {
           logoutUserCookies()
           setInternalError(true)
         } else {
-          // loginUserCookies(result)
+          loginUserCookies(result)
           const storage = globalThis?.sessionStorage;
           if (previousPath !== null && previousPath !== "/profiles/signin" && previousPath !== "/profiles/signup" && previousPath !== "/profiles/signout" && previousPath !== "/profiles/forgot-password" && previousPath !== "/profiles/reset-password") {
             document.location.href = window.location.protocol + "//" + window.location.host + previousPath
