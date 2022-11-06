@@ -73,7 +73,11 @@ export function parseComments(datas) {
   })
   let comments_length = 0
   comments.forEach(comment => {
-    comments_length += 1 + comment.comments.length
+    if (comment.comments) {
+      comments_length += 1 + comment.comments.length
+    } else {
+      comments_length += 1
+    }
   })
   return { comments, comments_length }
 }
