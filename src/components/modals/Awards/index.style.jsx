@@ -18,7 +18,7 @@ export const AwardsStyle = styled.div`
       transition: all 0.2s linear;
     }
     p {
-      width: 51px;
+      width: 120px;
       text-align: left;
       text-transform: uppercase;
       pointer-events: none;
@@ -50,7 +50,7 @@ export const AwardsStyle = styled.div`
             }
           }
           p {
-            width: 51px;
+            width: 120px;
             color: var(--color-grey01);
             text-transform: uppercase;
             text-align: left;

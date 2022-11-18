@@ -8,8 +8,13 @@ export const SpotlightTemplateStyle = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-bottom: 40px;
-    ${down('md')} {
+    ${down('lg')} {
       padding: 0 16px;
+    }
+    .secondary-container {
+      .arrow {
+        transform: rotate3D(0, 0, 1, 90deg);
+      }
     }
     .share-container {
       display: flex;

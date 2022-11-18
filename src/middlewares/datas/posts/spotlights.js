@@ -3,7 +3,7 @@ import { gql } from '@apollo/client'
 
 export const QUERY_POSTS_SPOTLIGHTS = gql`
   query QueryPostsSpotlights {
-    spotlightsPosts(sort: "createdAt:desc", pagination: { limit: 99999999 }) {
+    spotlightsPosts(sort: "publishedAt:desc", pagination: { limit: 99999999 }) {
       data {
         id
         attributes {
@@ -28,6 +28,13 @@ export const QUERY_POSTS_SPOTLIGHTS = gql`
             }
           }
           Award {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
+          Geography {
             data {
               attributes {
                 Title
@@ -89,6 +96,75 @@ export const QUERY_POST_SPOTLIGHT = gql`
               }
             }
           }
+          Geography {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
+          Likes
+          Submited_by {
+            data {
+              attributes {
+                Name
+                Image {
+                  data {
+                    attributes {
+                      alternativeText
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+export const QUERY_POSTS_SPOTLIGHTS_LATEST = gql`
+  query QueryPostsSpotlights($limit: Int) {
+    spotlightsPosts(sort: "publishedAt:desc", pagination: { limit: $limit }) {
+      data {
+        id
+        attributes {
+          Title
+          Slug
+          Image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
+            }
+          }
+          Description
+          Source_author
+          Source_link
+          Categories {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
+          Award {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
+          Geography {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
           Likes
           Submited_by {
             data {
@@ -144,6 +220,13 @@ export const QUERY_POSTS_SPOTLIGHTS_WEEK = gql`
               }
             }
           }
+          Geography {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
           Likes
           Submited_by {
             data {
@@ -193,6 +276,13 @@ export const QUERY_POSTS_SPOTLIGHTS_MONTH = gql`
             }
           }
           Award {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
+          Geography {
             data {
               attributes {
                 Title

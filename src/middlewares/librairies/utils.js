@@ -26,10 +26,12 @@ export function parsePostsSpotlights(datas) {
   });
   const categories = getTaxonomiesPosts(datas, "Categories")
   const awards = getTaxonomiesPosts(datas, "Award")
+  const geographies = getTaxonomiesPosts(datas, "Geography")
   return {
     posts: posts,
     categories: categories,
-    awards: awards
+    awards: awards,
+    geographies: geographies
   }
 }
 
@@ -40,6 +42,7 @@ export function parsePostSpotlight(data) {
     categories: data.Categories ? data.Categories.data.map(category => category.attributes.Title) : [],
     description: data.Description ? data.Description : "",
     image: getImage(data.Image),
+    geography: data.Geography.data ? data.Geography.data.attributes.Title : "",
     likes: data.Likes ? data.Likes : 0,
     liked: USER.liked.spotlights ? USER.liked.spotlights.filter(spotlight => spotlight === data.Slug).length > 0 : false, // Get by user
     slug: data.Slug ? data.Slug : null,

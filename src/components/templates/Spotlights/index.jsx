@@ -14,7 +14,7 @@ export default function SpotlightsTemplate({ spotlights }) {
         <div className="container-module-large description-container">
           <p className="typography-07">{ spotlights.page.description }</p>
         </div>
-        <PostsListModule type="spotlight" posts={ spotlights.posts } categories={ spotlights.categories } awards={ spotlights.awards } max={ 6 } />
+        <PostsListModule type="spotlight" posts={ spotlights.posts } categories={ spotlights.categories } awards={ spotlights.awards } geographies={ spotlights.geographies } max={ 6 } />
         <NewsletterModule />
       </SpotlightsTemplateStyle>
     </Layout>

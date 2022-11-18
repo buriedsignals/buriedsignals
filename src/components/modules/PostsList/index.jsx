@@ -15,7 +15,7 @@ import ProjectCard from "@/components/cards/Project"
 // Buttons
 import ThirstyButton from "@/components/buttons/Thirsty"
 
-export default function PostsList({ type, posts, categories, awards = [], max = 5, ...props }) {
+export default function PostsList({ type, posts, categories, awards = [], geographies = [], max = 5, ...props }) {
   // States
   const [page, setPage] = useState(1)
   // Hooks
@@ -26,7 +26,7 @@ export default function PostsList({ type, posts, categories, awards = [], max = 
   }  
   return (
     <PostsListStyle { ...props } >
-      { categories && <PostsFilterModule posts={ posts } categories={ categories } awards={ type == 'spotlight' ? awards.length !== 0 ? awards : false : false }  multiple={ type == 'spotlight' ? true : false } setPage={ setPage } /> }
+      { categories && <PostsFilterModule posts={ posts } categories={ categories } awards={ type == 'spotlight' ? awards.length !== 0 ? awards : false : false } geographies={ type == 'spotlight' ? geographies.length !== 0 ? geographies : false : false }  multiple={ type == 'spotlight' ? true : false } setPage={ setPage } /> }
       <ul className={ `${ type !== 'spotlight' ? 'container-module-large' : '' } list-container type-${ type } ${ posts.array.length == 0 ? 'no-result-container' : '' }` }>
         { posts.array.length != 0 ? posts.array.map((post, index) => {
             if (index < max * page) {

@@ -6,17 +6,21 @@ import { limitSizeText } from "@/scripts/utils"
 import LikeButton from "@/components/buttons/Like"
 import BookmarkButton from "@/components/buttons/Bookmark"
 import CommentButton from "@/components/buttons/Comment"
+// Links
+import SecondaryLink from "@/components/links/Secondary"
+// Icons
+import ExternalLinkIcon from "@/components/icons/ExternalLink"
 
 export default function Spotlight({ post, ...props }) {
   return (
     <SpotlightStyle { ...props }>
       <div className="spotlight-container">
-        <div className="visual-container">
+        <a className="visual-container" href={ post.source.url } target="_blank" rel="noopener noreferrer">
           { post.awards && <div className="awards">
             <p className="typography-13">{ `Spotlight of the ${ post.awards }` }</p>
           </div> }
           <img src={ post.image.url } alt={ post.image.alt } />
-        </div>
+        </a>
         <div className="content-container">
           <div className="extras-container">
             <p className="author typography-03">{ post.source.author }</p>
@@ -34,6 +38,10 @@ export default function Spotlight({ post, ...props }) {
             <LikeButton likes={ post.likes } liked={ post.liked } postId={ post.id } type="spotlights" />
             <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="spotlights"  />
             <CommentButton comments={ post.comments_length } />
+            <SecondaryLink href={ post.source.url }>
+              <p className="typography-03">Visit Spotlight</p>
+              <ExternalLinkIcon />
+            </SecondaryLink>
           </div>
         </div>
       </div>

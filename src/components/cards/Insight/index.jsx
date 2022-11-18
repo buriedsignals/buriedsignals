@@ -45,8 +45,8 @@ export default function Insight({ post, ...props }) {
           </div>
         </InsightStyle>
         :
-        <Link href={ `insights/${ post.slug }` }>
-          <InsightStyle { ...props }>
+        <Link href={ `insights/${ post.slug }` } passHref>
+          <InsightStyle { ...props } target="_blank" rel="noopener noreferrer">
             <div className="insight-container">
               <div className="visual-container">
                 <img src={ post.image.url } alt={ post.image.alt } />

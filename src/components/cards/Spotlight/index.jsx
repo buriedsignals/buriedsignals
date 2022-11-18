@@ -11,8 +11,8 @@ import CommentButton from "@/components/buttons/Comment"
 
 export default function Spotlight({ post, ...props }) {
   return (
-    <Link href={ `/spotlights/${ post.slug }` }>
-      <SpotlightStyle { ...props }>
+    <Link href={ `/spotlights/${ post.slug }` } passHref>
+      <SpotlightStyle { ...props } target="_blank" rel="noopener noreferrer">
         <div className="spotlight-container">
           <div className="visual-container">
             { post.awards && <div className="awards">

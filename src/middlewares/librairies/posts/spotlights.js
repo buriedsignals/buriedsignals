@@ -1,6 +1,6 @@
 // Middlewares
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
-import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_WEEK, QUERY_POSTS_SPOTLIGHTS_MONTH, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_SPOTLIGHT_COMMENT } from "@/middlewares/datas/posts/spotlights"
+import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_LATEST, QUERY_POSTS_SPOTLIGHTS_WEEK, QUERY_POSTS_SPOTLIGHTS_MONTH, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_SPOTLIGHT_COMMENT } from "@/middlewares/datas/posts/spotlights"
 import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments } from '../utils'
 import { transformToSlug } from '@/scripts/utils'
 
@@ -52,13 +52,22 @@ export async function getPostSpotlight(slug) {
 }
 
 export async function getPostsSpotlightsWeek() {
-  const date = new Date()
-  const week_end = date.toISOString()
-  const week_start = new Date(date.setDate(date.getDate() - 7)).toISOString()
+  // const date = new Date()
+  // const week_end = date.toISOString()
+  // const week_start = new Date(date.setDate(date.getDate() - 7)).toISOString()
+  // const apolloClient = getApolloClient()
+  // const response = await apolloClient.query({
+  //   query: QUERY_POSTS_SPOTLIGHTS_WEEK,
+  //   variables: { week_start, week_end }
+  // })
+  // if (!response) return null
+  // let posts = response.data.spotlightsPosts.data
+  // return parsePostsSpotlights(posts)
+  const limit = 7
   const apolloClient = getApolloClient()
   const response = await apolloClient.query({
-    query: QUERY_POSTS_SPOTLIGHTS_WEEK,
-    variables: { week_start, week_end }
+    query: QUERY_POSTS_SPOTLIGHTS_LATEST,
+    variables: { limit }
   })
   if (!response) return null
   let posts = response.data.spotlightsPosts.data
@@ -66,19 +75,29 @@ export async function getPostsSpotlightsWeek() {
 }
 
 export async function getPostsSpotlightsMonth() {
-  const date = new Date()
-  const month_end = date.toISOString()
-  const month_start = new Date(date.setDate(date.getDate() - 31)).toISOString()
+  // const date = new Date()
+  // const month_end = date.toISOString()
+  // const month_start = new Date(date.setDate(date.getDate() - 31)).toISOString()
+  // const apolloClient = getApolloClient()
+  // const response = await apolloClient.query({
+  //   query: QUERY_POSTS_SPOTLIGHTS_MONTH,
+  //   variables: { month_start, month_end }
+  // })
+  // if (!response) return null
+  // let posts = response.data.spotlightsPosts.data
+  // posts = parsePostsSpotlights(posts)
+  // posts.posts = posts.posts.filter(post => post.awards == "Week")
+  // return posts
+  const limit = 4
   const apolloClient = getApolloClient()
   const response = await apolloClient.query({
-    query: QUERY_POSTS_SPOTLIGHTS_MONTH,
-    variables: { month_start, month_end }
+    query: QUERY_POSTS_SPOTLIGHTS
   })
   if (!response) return null
   let posts = response.data.spotlightsPosts.data
   posts = parsePostsSpotlights(posts)
   posts.posts = posts.posts.filter(post => post.awards == "Week")
-  return posts
+  return posts.posts.slice(0, limit);
 }
 
 // Récupérer les ID des catégories + l'ID de la personne qui à soumis le spotlight

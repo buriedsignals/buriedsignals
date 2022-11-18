@@ -7,17 +7,20 @@ import useArray from "@/hooks/useArray"
 // Modals
 import AwardsModal from "@/components/modals/Awards"
 
-export default function PostsFilter({ posts, categories, awards = false, multiple = false, setPage, ...props }) {
+export default function PostsFilter({ posts, categories, awards = false, geographies = false, multiple = false, setPage, ...props }) {
   // Hooks
   const categoriesSelected = useArray([]);
   // State
   const [awardName, setAwardName] = useState('All')
+  // State
+  const [geographyName, setGeographyName] = useState('World')
   // Ref
   const filterRef = useRef()
   // Handlers
   const onClickButton = (e) => {
     const category = e.target.dataset.filter || false
     const award = e.target.dataset.award || awardName
+    const geography = e.target.dataset.geography || geographyName
     let newCategoriesSelected = [ ...categoriesSelected.array ]
     if (category) {
       if ((newCategoriesSelected.length == 1 && newCategoriesSelected.includes("All")) || category == "All") {
@@ -46,14 +49,18 @@ export default function PostsFilter({ posts, categories, awards = false, multipl
     if (award) {
       setAwardName(award)
     }
+    if (geography) {
+      setGeographyName(geography)
+    }
     posts.origin()
-    if (category != "All" || award != "All") {
+    if (category != "All" || award != "All" || award != "World") {
       posts.filter(n => {
         const filterCategory = (category == "All") || newCategoriesSelected.includes("All") ? true : newCategoriesSelected.every(categorySelected => {
           return  n.categories.includes(categorySelected)
         });
         const filterAward = (award == "All") ? true : n.awards == award;
-        return filterCategory && filterAward;
+        const filterGeography = (geography == "World") ? true : n.geography == geography;
+        return filterCategory && filterAward && filterGeography;
       })
     }
     categoriesSelected.set(newCategoriesSelected)
@@ -76,24 +83,44 @@ export default function PostsFilter({ posts, categories, awards = false, multipl
             </li>
           }) }
         </div>
-        { awards && 
-          <li className="filter-container filter-awards">
-            <AwardsModal 
-                buttonName={ awardName }
-                listActions={ (() => {
-                  const itemsAwards = awards.map(award => {
-                    return (() => <button className={ `awards-button ${ awardName == award ? "is-active" : "" }` } onClick={ onClickButton } data-award={ award }>
-                      <p className="typography-03">{ award }</p>
-                    </button>)()
-                  })
-                  itemsAwards.unshift((() => <button className={ `awards-button ${ awardName == "All" ? "is-active" : "" }` } onClick={ onClickButton } data-award={ "All" }>
-                    <p className="typography-03">All</p>
-                  </button>)())
-                  return itemsAwards
-                })() }
-              />
-          </li>
-        }
+        <div className="specific-container">
+          { geographies && 
+            <li className="filter-container filter-geographies">
+              <AwardsModal 
+                  buttonName={ geographyName }
+                  listActions={ (() => {
+                    const itemsGeographies = geographies.map(geography => {
+                      return (() => <button className={ `geographies-button ${ geographyName == geography ? "is-active" : "" }` } onClick={ onClickButton } data-geography={ geography }>
+                        <p className="typography-03">{ geography }</p>
+                      </button>)()
+                    })
+                    itemsGeographies.unshift((() => <button className={ `geographies-button ${ geographyName == "World" ? "is-active" : "" }` } onClick={ onClickButton } data-geography={ "World" }>
+                      <p className="typography-03">World</p>
+                    </button>)())
+                    return itemsGeographies
+                  })() }
+                />
+            </li>
+          }
+          { awards && 
+            <li className="filter-container filter-awards">
+              <AwardsModal 
+                  buttonName={ awardName }
+                  listActions={ (() => {
+                    const itemsAwards = awards.map(award => {
+                      return (() => <button className={ `awards-button ${ awardName == award ? "is-active" : "" }` } onClick={ onClickButton } data-award={ award }>
+                        <p className="typography-03">{ award }</p>
+                      </button>)()
+                    })
+                    itemsAwards.unshift((() => <button className={ `awards-button ${ awardName == "All" ? "is-active" : "" }` } onClick={ onClickButton } data-award={ "All" }>
+                      <p className="typography-03">All</p>
+                    </button>)())
+                    return itemsAwards
+                  })() }
+                />
+            </li>
+          }
+        </div>
       </ul>
     </PostsFilterStyle>
   )

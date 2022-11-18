@@ -34,6 +34,28 @@ export const PostsFilterStyle = styled.div`
         padding-left: 42.5px;
         padding-right: 32px;
       }
+      .filter-container:not(:first-child) {
+        padding-left: 47.5px;
+        ${down('md')} {
+          padding-left: 40px;
+        }
+      }
+    }
+    .specific-container {
+      display: flex;
+      column-gap: 30px;
+      padding-left: 47.5px;
+      ${down('md')} {
+        padding-left: 40px;
+      }
+    }
+    .filter-categories {
+      ${down('md')} {
+        order: 1; 
+        margin-bottom: 25px;
+        padding-left: 32px;
+        padding-right: 32px;
+      }
     }
     .filter-awards {
       ${down('md')} {
@@ -44,12 +66,6 @@ export const PostsFilterStyle = styled.div`
       }
     }
     .filter-container {
-      &:not(:first-child) {
-        padding-left: 47.5px;
-        ${down('md')} {
-          padding-left: 40px;
-        }
-      }
       & > button {
         color: var(--color-grey01);
         transition: all 0.25s ease-in;

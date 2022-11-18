@@ -15,7 +15,7 @@ import SecondaryLink from "@/components/links/Secondary"
 import FacebookIcon from "@/components/icons/Facebook"
 import TwitterIcon from "@/components/icons/Twitter"
 import LinkIcon from "@/components/icons/Link"
-import ExternalLinkIcon from "@/components/icons/ExternalLink"
+import ArrowIcon from "@/components/icons/Arrow"
 
 const comments = [
   {
@@ -72,6 +72,10 @@ export default function SpotlightTemplate({ spotlight, ...props }) {
     <Layout>
       <SpotlightTemplateStyle { ...props }>
         <div className="container-module-large links-container">
+          <SecondaryLink href="/" intern={ true }>
+            <ArrowIcon className="arrow" />
+            <p className="typography-03">Back to list</p>
+          </SecondaryLink>
           <ul className="share-container">
             <li>
               <SecondaryLink href={ `https://www.facebook.com/sharer/sharer.php?p[url]=${ spotlight.source.url }` }>
@@ -88,11 +92,7 @@ export default function SpotlightTemplate({ spotlight, ...props }) {
                 <LinkIcon />
               </SecondaryButton>
             </li>
-          </ul> 
-              <SecondaryLink href={ spotlight.source.url }>
-                <p className="typography-03">Visit Spotlight</p>
-                <ExternalLinkIcon />
-              </SecondaryLink>
+          </ul>
         </div>
         <div className="container-module-large banner-container">
           <SpotlightBanner post={ spotlight } />

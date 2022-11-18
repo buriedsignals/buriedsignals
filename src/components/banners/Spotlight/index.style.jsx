@@ -25,6 +25,7 @@ export const SpotlightStyle = styled.div`
     }
     .visual-container {
       position: relative;
+      display: block;
       ${down('md')} {
         height: 218px;
       }
@@ -100,6 +101,15 @@ export const SpotlightStyle = styled.div`
         button {
           &:not(:last-child) {
             margin-right: 7.5px;
+          }
+        }
+        a {
+          top: -4px;
+          width: inherit;
+          .secondary-container {
+            ${down('md')} {
+              padding: 12px 8px;
+            }
           }
         }
       }

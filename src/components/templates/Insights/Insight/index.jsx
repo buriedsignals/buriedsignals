@@ -1,13 +1,23 @@
 // Styles
 import { InsightTemplateStyle } from "./index.style"
+// React
+import { useEffect, useState } from "react"
 // Layouts
 import Layout from "@/components/layouts/main"
 // Modules
 import FlexibleContentModule from "@/components/modules/FlexibleContent"
 // Banners
 import InsightBanner from "@/components/banners/Insight"
+// Buttons
+import SecondaryButton from "@/components/buttons/Secondary"
+import BookmarkButton from "@/components/buttons/Bookmark"
 // Links
 import SecondaryLink from "@/components/links/Secondary"
+// Icons
+import FacebookIcon from "@/components/icons/Facebook"
+import TwitterIcon from "@/components/icons/Twitter"
+import LinkIcon from "@/components/icons/Link"
+import ArrowIcon from "@/components/icons/Arrow"
 
 const post = {
   slug: "toto",
@@ -33,17 +43,70 @@ const post = {
 }
 
 export default function InsightTemplate({ insight, ...props }) {
+  // State
+  const [url, setUrl] = useState('')
+  // Effects
+  useEffect(() => {
+    setUrl(window.location.protocol + "//" + window.location.host + window.location.pathname)
+  }, [])
   return (
     <Layout>
       <InsightTemplateStyle { ...props }>
+        <div className="container-module-large links-container">
+          <SecondaryLink href="/insights" intern={ true }>
+            <ArrowIcon className="arrow" />
+            <p className="typography-03">Back to list</p>
+          </SecondaryLink>
+          <ul className="share-container">
+            <li>
+              <SecondaryLink href={ `https://www.facebook.com/sharer/sharer.php?p[url]=${ url }` }>
+                <FacebookIcon />
+              </SecondaryLink>
+            </li>
+            <li>
+              <SecondaryLink href={ `https://twitter.com/intent/tweet?url=${ url }` }>
+                <TwitterIcon size="small" />
+              </SecondaryLink>
+            </li>
+            <li>
+              <SecondaryButton onClickButton={ () => copyClipboard(url) } >
+                <LinkIcon />
+              </SecondaryButton>
+            </li>
+          </ul>
+        </div>
         <div className="container-module-large banner-container">
           <InsightBanner post={ insight } />
         </div>
         <FlexibleContentModule content={ insight.flexible_content } />
-        <div className="container-module-small back-container">
-          <SecondaryLink href="/insights" intern={ true }>
-              <p className="typography-03">Back to list</p>
-          </SecondaryLink>
+        <div className="back-container">
+          <div className="container-module-medium">
+            <div className="interact-container">
+              <SecondaryLink href="/insights" intern={ true }>
+                <ArrowIcon className="arrow" />
+                <p className="typography-03">Back to list</p>
+              </SecondaryLink>
+              <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="insights"  />
+              <p className="typography-03">Like the insight? Bookmark it!</p>
+            </div>
+            <ul className="share-container">
+              <li>
+                <SecondaryLink href={ `https://www.facebook.com/sharer/sharer.php?p[url]=${ '' }` }>
+                  <FacebookIcon />
+                </SecondaryLink>
+              </li>
+              <li>
+                <SecondaryLink href={ `https://twitter.com/intent/tweet?url=${ '' }` }>
+                  <TwitterIcon size="small" />
+                </SecondaryLink>
+              </li>
+              <li>
+                <SecondaryButton onClickButton={ () => copyClipboard('') } >
+                  <LinkIcon />
+                </SecondaryButton>
+              </li>
+            </ul>
+          </div>
         </div>
       </InsightTemplateStyle>
     </Layout>

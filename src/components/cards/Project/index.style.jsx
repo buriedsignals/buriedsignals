@@ -41,7 +41,7 @@ export const ProjectStyle = styled.a`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 42.5px;
+        margin-bottom: 25px;
         color: var(--color-grey01);
         text-transform: uppercase;
         ${down('md')} {
