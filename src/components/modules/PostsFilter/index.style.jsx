@@ -44,7 +44,7 @@ export const PostsFilterStyle = styled.div`
     .specific-container {
       display: flex;
       column-gap: 30px;
-      padding-left: 47.5px;
+      padding-left: 30px;
       ${down('md')} {
         padding-left: 40px;
       }
