@@ -86,22 +86,22 @@ export default function InsightTemplate({ insight, ...props }) {
                 <ArrowIcon className="arrow" />
                 <p className="typography-03">Back to list</p>
               </SecondaryLink>
-              <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="insights"  />
+              <BookmarkButton bookmarked={ insight.bookmarked } postId={ insight.id } type="insights"  />
               <p className="typography-03">Like the insight? Bookmark it!</p>
             </div>
             <ul className="share-container">
               <li>
-                <SecondaryLink href={ `https://www.facebook.com/sharer/sharer.php?p[url]=${ '' }` }>
+                <SecondaryLink href={ `https://www.facebook.com/sharer/sharer.php?p[url]=${ url }` }>
                   <FacebookIcon />
                 </SecondaryLink>
               </li>
               <li>
-                <SecondaryLink href={ `https://twitter.com/intent/tweet?url=${ '' }` }>
+                <SecondaryLink href={ `https://twitter.com/intent/tweet?url=${ url }` }>
                   <TwitterIcon size="small" />
                 </SecondaryLink>
               </li>
               <li>
-                <SecondaryButton onClickButton={ () => copyClipboard('') } >
+                <SecondaryButton onClickButton={ () => copyClipboard(url) } >
                   <LinkIcon />
                 </SecondaryButton>
               </li>
