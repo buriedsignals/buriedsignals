@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 export const SigninStyle = styled.div`
   position: fixed;
-  z-index: 2;
+  z-index: 10;
+  cursor: default;
   .panel-signin {
     position: fixed;
     top: 50%; left: 50%;
@@ -38,11 +39,13 @@ export const SigninStyle = styled.div`
         margin-bottom: 27.5px;
         text-align: center;
         text-transform: none;
+        color: var(--color-white);
       }
       .description {
         margin-bottom: 37.5px;
         text-align: center;
         text-transform: none;
+        color: var(--color-white);
       }
       .inputs-container {
         margin-bottom: 32.5px;

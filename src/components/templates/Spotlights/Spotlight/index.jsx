@@ -99,9 +99,16 @@ export default function SpotlightTemplate({ spotlight, ...props }) {
         </div>
         <div className="container-module-large profil-container">
           <p className="typography-03 submitted">Submitted by<br/>{ spotlight.submited_by.name }</p>
-          <div className="photo-container">
-            <img src={ spotlight.submited_by.image.url } alt={ spotlight.submited_by.image.alt } />
-          </div>
+          {
+            spotlight.submited_by.link ? 
+              <a className="photo-container" href={ spotlight.submited_by.link } target="_blank" rel="noopener noreferrer">
+                <img src={ spotlight.submited_by.image.url } alt={ spotlight.submited_by.image.alt } />
+              </a>
+            :
+              <div className="photo-container">
+                <img src={ spotlight.submited_by.image.url } alt={ spotlight.submited_by.image.alt } />
+              </div>
+          }
         </div>
         <CommentsModule comments={ spotlight.comments } comments_length={ spotlight.comments_length } postId={ spotlight.id } />
       </SpotlightTemplateStyle>

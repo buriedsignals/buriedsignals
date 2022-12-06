@@ -8,7 +8,7 @@ export async function getPageInsights() {
   const response = await apolloClient.query({
     query: QUERY_PAGE_INSIGHTS,
   })
-  if (!response) return null
+  if (!response || response.data.pages.data.length == 0) return null
   let page = response.data.pages.data[0].attributes
   return parsePageSimple(page)
 }

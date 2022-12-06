@@ -12,6 +12,7 @@ export default async function handle(req, res) {
     })
     const author = datas.Source_author_twitter_account ? `@${ datas.Source_author_twitter_account }` : datas.Source_author
     const description = `\n\n${ datas.Description }\n\n•`
+    const categories = datas.Categories.length !== 0 ? ` | ${ datas.Categories[0].Title }` : ""
     const url = "https://www.buriedsignals.com/spotlights/"
     const responseLink = await fetch('https://api-ssl.bitly.com/v4/shorten', {
       method: 'POST',
@@ -23,8 +24,8 @@ export default async function handle(req, res) {
     })
     let link = await responseLink.json()
     link = link.link
-    let template = `Spotlight: ${ datas.Title } by ${ author } | ${ datas.Categories[0].Title }\n\n•\n\n${ link }\n\n#narrativevisualisation #informationdesign`
-    const templateExtra = `Spotlight: ${ datas.Title } by ${ author } | ${ datas.Categories[0].Title }\n\n•${ description }\n\n${ link }\n\n#narrativevisualisation #informationdesign`
+    let template = `Spotlight: ${ datas.Title } by ${ author }${ categories }\n\n•\n\n${ link }\n\n#narrativevisualisation #informationdesign`
+    const templateExtra = `Spotlight: ${ datas.Title } by ${ author }${ categories }\n\n•${ description }\n\n${ link }\n\n#narrativevisualisation #informationdesign`
     const templateWithoutCategory = `Spotlight: ${ datas.Title } by ${ author }\n\n•\n\n${ link }\n\n#narrativevisualisation #informationdesign`
     const templateWithoutCategoryAndAuthor = `Spotlight: ${ datas.Title }\n\n•\n\n${ link }\n\n#narrativevisualisation #informationdesign`
     if (templateExtra.length <= 270) {

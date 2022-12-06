@@ -11,8 +11,11 @@ import PrimaryLink from "@/components/links/Primary"
 export default function Signin({ onClickButtonClose, ...props }) {
   // Refernces 
   const panelRef = useRef()
+  const onClickTest = (e) => {
+    e.preventDefault();
+  }
   return (
-    <SigninStyle { ...props }>
+    <SigninStyle { ...props } onClick={ onClickTest }>
       <div ref={ panelRef } className="panel-signin">
         <div className="panel-signin-container">
           <h3 className="typography-08">Howdy!</h3>

@@ -51,8 +51,9 @@ export function parsePostSpotlight(data) {
       url: data.Source_link ? data.Source_link : ""
     },
     submited_by: {
-      image: data.Submited_by.data ? getImage(data.Submited_by.data.attributes.Image) : "",
-      name: data.Submited_by.data ? data.Submited_by.data.attributes.Name : null
+      image: data.Submited_by.data ? getImage(data.Submited_by.data.attributes.Image) : data.Submited_by_external ? { url:"/images/profile-default.jpg", alt: "Default profile picture" } : "",
+      name: data.Submited_by.data ? data.Submited_by.data.attributes.Name : data.Submited_by_external ? data.Submited_by_external : null,
+      link: data.Submited_by.data ? data.Submited_by.data.attributes.Portfolio_link : null,
     },
     title: data.Title ? data.Title : ""
   }
@@ -265,7 +266,7 @@ function transformToSlug(text) {
 function getImage(image) {
   return {
     alt: image ? image.data ? image.data.attributes.alternativeText : null : null,
-    url: image ? image.data ? image.data.attributes.url : null : null
+    url: image ? image.data ? STRAPI_ENDPOINT + image.data.attributes.url : null : null
   }
 }
 

@@ -42,6 +42,7 @@ export const QUERY_POSTS_SPOTLIGHTS = gql`
             }
           }
           Likes
+          Submited_by_external
           Submited_by {
             data {
               attributes {
@@ -54,6 +55,7 @@ export const QUERY_POSTS_SPOTLIGHTS = gql`
                     }
                   }
                 }
+                Portfolio_link
               }
             }
           }
@@ -104,6 +106,7 @@ export const QUERY_POST_SPOTLIGHT = gql`
             }
           }
           Likes
+          Submited_by_external
           Submited_by {
             data {
               attributes {
@@ -116,6 +119,7 @@ export const QUERY_POST_SPOTLIGHT = gql`
                     }
                   }
                 }
+                Portfolio_link
               }
             }
           }
@@ -166,6 +170,7 @@ export const QUERY_POSTS_SPOTLIGHTS_LATEST = gql`
             }
           }
           Likes
+          Submited_by_external
           Submited_by {
             data {
               attributes {
@@ -178,6 +183,7 @@ export const QUERY_POSTS_SPOTLIGHTS_LATEST = gql`
                     }
                   }
                 }
+                Portfolio_link
               }
             }
           }
@@ -228,6 +234,7 @@ export const QUERY_POSTS_SPOTLIGHTS_WEEK = gql`
             }
           }
           Likes
+          Submited_by_external
           Submited_by {
             data {
               attributes {
@@ -240,6 +247,7 @@ export const QUERY_POSTS_SPOTLIGHTS_WEEK = gql`
                     }
                   }
                 }
+                Portfolio_link
               }
             }
           }
@@ -290,6 +298,7 @@ export const QUERY_POSTS_SPOTLIGHTS_MONTH = gql`
             }
           }
           Likes
+          Submited_by_external
           Submited_by {
             data {
               attributes {
@@ -302,6 +311,7 @@ export const QUERY_POSTS_SPOTLIGHTS_MONTH = gql`
                     }
                   }
                 }
+                Portfolio_link
               }
             }
           }

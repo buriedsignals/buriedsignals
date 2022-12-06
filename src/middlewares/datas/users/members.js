@@ -57,6 +57,7 @@ export const QUERY_USER_MEMBER = gql`
                   }
                 }
                 Likes
+                Submited_by_external
                 Submited_by {
                   data {
                     attributes {
@@ -69,6 +70,7 @@ export const QUERY_USER_MEMBER = gql`
                           }
                         }
                       }
+                      Portfolio_link
                     }
                   }
                 }
@@ -203,6 +205,7 @@ export const CREATE_USER_MEMBER = gql`
                     }
                   }
                   Likes
+                  Submited_by_external
                   Submited_by {
                     data {
                       attributes {
@@ -215,6 +218,7 @@ export const CREATE_USER_MEMBER = gql`
                             }
                           }
                         }
+                        Portfolio_link
                       }
                     }
                   }
@@ -390,6 +394,7 @@ export const UPDATE_USER_MEMBER = gql`
                     }
                   }
                   Likes
+                  Submited_by_external
                   Submited_by {
                     data {
                       attributes {
@@ -402,6 +407,7 @@ export const UPDATE_USER_MEMBER = gql`
                             }
                           }
                         }
+                        Portfolio_link
                       }
                     }
                   }

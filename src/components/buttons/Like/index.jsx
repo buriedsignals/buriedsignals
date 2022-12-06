@@ -19,23 +19,20 @@ export default function Like({ likes, liked = false, postId, type = null, ...pro
   const [isLiked, setIsLiked] = useState(false)
   const [stateLikes, setStateLikes] = useState(parseInt(likes))
   useEffect(() => {
-    setIsLiked(user.liked.spotlights.includes(postId))
+    setIsLiked(user.liked[type].some(post => post.id == postId))
   }, [])
   // Handlers
   const onClickButton = async (e) => {
     e.preventDefault()
     if (user.connected) {
       try {
-        let likedSpotlights = null
-        if (type != null) {
-          likedSpotlights = user.liked?.spotlights
-          if (likedSpotlights.includes(postId)) {
-            likedSpotlights.splice(likedSpotlights.indexOf(postId), 1)
-          } else {
-            likedSpotlights.push(postId)
-          }
+        let likedSpotlights = user.liked[type]
+        if (likedSpotlights.some(post => post.id === postId)) {
+          likedSpotlights = likedSpotlights.filter(post => post.id !== postId)
+        } else {
+          likedSpotlights.push({ id: postId })
         }
-        const body = { userId: user.id, postId, likes: isLiked ? stateLikes - 1 : stateLikes + 1, userPostIdsLiked: likedSpotlights };
+        const body = { userId: user.id, postId, likes: isLiked ? stateLikes - 1 : stateLikes + 1, userPostIdsLiked: likedSpotlights.map(post => post.id) };
         await fetch('/api/post-update-spotlights-liked-mh2ea9e02i/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

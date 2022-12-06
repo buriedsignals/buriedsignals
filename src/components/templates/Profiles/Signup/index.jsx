@@ -70,7 +70,7 @@ export default function SignupTemplate({ ...props }) {
           setRegistered(true)
         }
       } catch (error) {
-        console.error(error);
+        console.error('catch', error);
         logoutUserCookies()
         setInternalError(true)
       }

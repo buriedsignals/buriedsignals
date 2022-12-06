@@ -103,7 +103,6 @@ export function logoutUserCookies() {
 }
 
 export function setCookieObject(dataName, object) {
-
   let types = ""
   Object.entries(object).forEach(([key, value], index) => {
     setCookie(`${ dataName }-${ key }`, getIdsFromArrayOfObject(value))
@@ -119,7 +118,11 @@ export function getCookieObject(dataName) {
   const object = {}
   if(getCookie(`${ dataName }-types`)) {
     getCookie(`${ dataName }-types`).split(',').forEach(type => {
-      object[type] = getIdsFromString(getCookie(`${ dataName }-${ type }`))
+      if (getCookie(`${ dataName }-${ type }`).length !== 0) {
+        object[type] = getIdsFromString(getCookie(`${ dataName }-${ type }`))
+      } else {
+        object[type] = []
+      }
     });
   }
   return object
