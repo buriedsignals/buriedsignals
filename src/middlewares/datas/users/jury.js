@@ -3,7 +3,7 @@ import { gql } from '@apollo/client'
 
 export const QUERY_USERS_JURY = gql`
   query QueryUsersJury {
-    juries(sort: "Ordering_date:desc") {
+    juries(sort: "Ordering_date:desc", pagination: { limit: 99999999 }) {
       data {
         attributes {
           Name

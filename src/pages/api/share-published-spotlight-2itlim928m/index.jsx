@@ -10,7 +10,7 @@ export default async function handle(req, res) {
       access_token: "1399628894295269376-BCm4IGRCa37jLbwGkrCzL2kUsew0hS",
       access_token_secret: "NMhGeIb1kDkv6naeV6S9WrpUgz6njm0IXFPa4k85SuwoI"
     })
-    const author = datas.Source_author_twitter_account ? `@${ datas.Source_author_twitter_account }` : datas.Source_author
+    const author = datas.Source_author_twitter_account ? datas.Source_author_twitter_account.startsWith('@') ? datas.Source_author_twitter_account : `@${ datas.Source_author_twitter_account }` : datas.Source_author
     const description = `\n\n${ datas.Description }\n\n•`
     const categories = datas.Categories.length !== 0 ? ` | ${ datas.Categories[0].Title }` : ""
     const url = "https://www.buriedsignals.com/spotlights/"
