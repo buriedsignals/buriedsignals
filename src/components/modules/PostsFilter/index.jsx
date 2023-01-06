@@ -14,11 +14,15 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
   const categoriesSelected = useArray([]);
   const categoriesWidth = useArray([]);
   // State
-  const [awardName, setAwardName] = useState('All')
+  const [awardName, setAwardName] = useState('Award')
   const [geographyName, setGeographyName] = useState('World')
   const [indexCategoriesSlider, setIndexCategoriesSlider] = useState(0)
   const [translateCategoriesSlider, setTranslateCategoriesSlider] = useState(0)
   const [hideButtonsSlider, setHideButtonsSlider] = useState(false)
+  const [hidePreviousButtonSlider, setHidePreviousButtonSlider] = useState(true)
+  const [hideNextButtonSlider, setHideNextButtonSlider] = useState(false)
+  const [maxWidthSlider, setMaxWidthSlider] = useState(0)
+
   // Ref
   const filterRef = useRef()
   const sliderRef = useRef()
@@ -27,8 +31,10 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
   useEffect(() => {
     getWidthsSlider()
     window.addEventListener('resize', onResizeWindow)
+    sliderContainerRef.current.addEventListener('scroll', onScrollSlider)
     return () => {
       window.removeEventListener('resize', onResizeWindow)
+      sliderContainerRef.current.addEventListener('scroll', onScrollSlider)
     }
   }, [])
   useEffect(() => {        
@@ -45,6 +51,7 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
         widthAllSlide += widthEl
         newCategoriesWidth.push(widthEl)
       })
+      setMaxWidthSlider(widthAllSlide - sliderContainerRef.current.getBoundingClientRect().width)
       categoriesWidth.set(newCategoriesWidth)
       setHideButtonsSlider(widthAllSlide > sliderContainerRef.current.getBoundingClientRect().width ? false : true)
     }, 0);
@@ -56,7 +63,7 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
     const geography = e.target.dataset.geography || geographyName
     let newCategoriesSelected = [ ...categoriesSelected.array ]
     if (category) {
-      if ((newCategoriesSelected.length == 1 && newCategoriesSelected.includes("All")) || category == "All") {
+      if ((newCategoriesSelected.length == 1 && newCategoriesSelected.includes("Award")) || category == "Award") {
         newCategoriesSelected = []
       }
       if (newCategoriesSelected.includes(category)) {
@@ -69,7 +76,7 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
         }
       }
       if (newCategoriesSelected.length == 0) {
-        newCategoriesSelected.push("All")
+        newCategoriesSelected.push("Award")
       }
       const filterButtons = filterRef.current.querySelectorAll(".filter-button")
       filterButtons.forEach(filterButton => {
@@ -86,12 +93,12 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
       setGeographyName(geography)
     }
     posts.origin()
-    if (category != "All" || award != "All" || award != "World") {
+    if (category != "Award" || award != "Award" || award != "World") {
       posts.filter(n => {
-        const filterCategory = (category == "All") || newCategoriesSelected.includes("All") ? true : newCategoriesSelected.every(categorySelected => {
+        const filterCategory = (category == "Award") || newCategoriesSelected.includes("Award") ? true : newCategoriesSelected.every(categorySelected => {
           return  n.categories.includes(categorySelected)
         });
-        const filterAward = (award == "All") ? true : n.awards == award;
+        const filterAward = (award == "Award") ? true : n.awards == award;
         const filterGeography = (geography == "World") ? true : n.geography == geography;
         return filterCategory && filterAward && filterGeography;
       })
@@ -102,18 +109,20 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
   const onClickButtonSlider = (e) => {
     const direction = e.target.dataset.direction
     if (direction === "Previous") {
-      if (indexCategoriesSlider === 0) {
-        // Hide previous
-      } else {
-        setTranslateCategoriesSlider(translateCategoriesSlider + categoriesWidth.array[indexCategoriesSlider - 1])
+      if (indexCategoriesSlider !== 0) {
+        const translateSlider = translateCategoriesSlider + categoriesWidth.array[indexCategoriesSlider - 1]
+        setTranslateCategoriesSlider(translateSlider)
         setIndexCategoriesSlider(indexCategoriesSlider - 1)
+        setHidePreviousButtonSlider((indexCategoriesSlider - 1) == 0)
+        setHideNextButtonSlider(translateSlider < -maxWidthSlider ? true : false)
       }
     } else if (direction === "Next") {
-      if (indexCategoriesSlider === categoriesWidth.array.length - 1) {
-        // Hide next
-      } else {
-        setTranslateCategoriesSlider(translateCategoriesSlider - categoriesWidth.array[indexCategoriesSlider])
+      if (indexCategoriesSlider !== categoriesWidth.array.length - 1) {
+        const translateSlider = translateCategoriesSlider - categoriesWidth.array[indexCategoriesSlider]
+        setTranslateCategoriesSlider(translateSlider)
         setIndexCategoriesSlider(indexCategoriesSlider + 1)
+        setHidePreviousButtonSlider(false)
+        setHideNextButtonSlider(translateSlider < -maxWidthSlider ? true : false)
       }
     }
   } 
@@ -121,37 +130,55 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
     getWidthsSlider()
     setTranslateCategoriesSlider(0)
     setIndexCategoriesSlider(0)
+    setHidePreviousButtonSlider(true)
+    setHideNextButtonSlider(false)
+  }
+  const onScrollSlider = (e) => {
+    if (e.target.scrollLeft == 0) {
+      setHidePreviousButtonSlider(true)
+    } else if (e.target.scrollLeft > 0) {
+      setHidePreviousButtonSlider(false)
+    }
+    const scrollMaxWidthSlider = maxWidthSlider - 1
+    console.log(e.target.scrollLeft, scrollMaxWidthSlider)
+    if (e.target.scrollLeft >= scrollMaxWidthSlider) {
+      setHideNextButtonSlider(true)
+    } else if (e.target.scrollLeft < scrollMaxWidthSlider) {
+      setHideNextButtonSlider(false)
+    }
   }
   return (
     <PostsFilterStyle ref={ filterRef } className="container-module-large" { ...props } >
       <ul className="filters-container">
-        <div ref={ sliderContainerRef }  className="categories-container">
-          <div ref={ sliderRef } className="slider-container">
-            <li className="filter-container">
-              <button className="filter-button is-active" onClick={ onClickButton } data-filter={ "All" }>
-                <p className="typography-05">All</p>
-              </button>
-            </li>
-            { categories.map((category, index) => {
-              return <li key={ `category-${ index }` } className="filter-container">
-                <button className="filter-button" onClick={ onClickButton } data-filter={ category }>
-                  <p className="typography-05">{ category }</p>
+        <div className="categories-slider-container">
+          <div ref={ sliderContainerRef } className="categories-container">
+            <div ref={ sliderRef } className="slider-container">
+              <li className="filter-container">
+                <button className="filter-button is-active" onClick={ onClickButton } data-filter={ "Award" }>
+                  <p className="typography-05">All</p>
                 </button>
               </li>
-            }) }
+              { categories.map((category, index) => {
+                return <li key={ `category-${ index }` } className="filter-container">
+                  <button className="filter-button" onClick={ onClickButton } data-filter={ category }>
+                    <p className="typography-05">{ category }</p>
+                  </button>
+                </li>
+              }) }
+            </div>
           </div>
           <div className="buttons-container">
             {
-              indexCategoriesSlider !== 0 && !hideButtonsSlider &&
+              !hideButtonsSlider && !hidePreviousButtonSlider &&
               <button className="button-slider button-slider-previous typography-05" onClick={ onClickButtonSlider } data-direction={ "Previous" }>
                 <ArrowIcon />
-                Previous
+                <span>Previous</span>
               </button>
             }
             {
-              indexCategoriesSlider !== categoriesWidth.array.length - 1 && !hideButtonsSlider &&
+              !hideButtonsSlider && !hideNextButtonSlider &&
               <button className="button-slider button-slider-next typography-05" onClick={ onClickButtonSlider } data-direction={ "Next" }>
-                Next
+                <span>Next</span>
                 <ArrowIcon />
               </button>
             }
@@ -186,7 +213,7 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
                         <p className="typography-03">{ award }</p>
                       </button>)()
                     })
-                    itemsAwards.unshift((() => <button className={ `awards-button ${ awardName == "All" ? "is-active" : "" }` } onClick={ onClickButton } data-award={ "All" }>
+                    itemsAwards.unshift((() => <button className={ `awards-button ${ awardName == "Award" ? "is-active" : "" }` } onClick={ onClickButton } data-award={ "Award" }>
                       <p className="typography-03">All</p>
                     </button>)())
                     return itemsAwards

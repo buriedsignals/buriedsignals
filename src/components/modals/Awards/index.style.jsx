@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const AwardsStyle = styled.div`
   position: relative;
-  z-index: 3;
+  z-index: 6;
   .modal {
     position: relative;
     display: flex;

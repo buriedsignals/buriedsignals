@@ -21,28 +21,43 @@ export const PostsFilterStyle = styled.div`
       justify-content: center;
       align-items: flex-start;
     }
-    .categories-container {
-      position: relative;
-      display: flex;
-      overflow: hidden;
-      ${down('md')} {
-        order: 2; 
-        width: calc(100% - 70px);
-        margin-left: 35px;
-        margin-right: 35px;
-      }
-      ${down('sm')} {
-        overflow-x: scroll;
-        overflow-y: hidden;
-        &::-webkit-scrollbar {
-          display: none;
-        }
-        -ms-overflow-style: none;
-      }
-      .slider-container {
+    .categories-slider-container {
+        position: relative;
         display: flex;
-        padding: 5px 0;
-        transition: transform 0.25s ease-in-out;
+        overflow: hidden;
+        ${down('md')} {
+          order: 2; 
+          width: calc(100% - 70px);
+          margin-left: 35px;
+          margin-right: 35px;
+        }
+      .categories-container {
+        position: relative;
+        display: flex;
+        overflow: hidden;
+        ${down('md')} {
+          order: 2; 
+          width: 100%;
+        }
+        ${down('sm')} {
+          overflow-x: scroll;
+          overflow-y: hidden;
+          &::-webkit-scrollbar {
+            display: none;
+          }
+          -ms-overflow-style: none;
+        }
+        .slider-container {
+          display: flex;
+          padding: 5px 0;
+          transition: transform 0.25s ease-in-out;
+        }
+        .filter-container:not(:last-child) {
+          padding-right: 47.5px;
+          ${down('md')} {
+            padding-right: 40px;
+          }
+        }
       }
       .button-slider {
         position: absolute;
@@ -50,8 +65,13 @@ export const PostsFilterStyle = styled.div`
         background: var(--color-black01);
         padding-left: 10px;
         padding-right: 10px;
+        span {
+          pointer-events: none;
+        }
         ${down('sm')} {
-          display: none;
+          span {
+            display: none;
+          }
         }
         &::before {
           content: "";
@@ -73,6 +93,9 @@ export const PostsFilterStyle = styled.div`
           svg {
             margin-right: 10px;
             transform: translate3D(0, -50%, 0) rotate3D(0, 0, 1, 90deg);
+            ${down('sm')} {
+              margin-right: 0;
+            }
           }
         }
         &-next {
@@ -87,13 +110,10 @@ export const PostsFilterStyle = styled.div`
           svg {
             margin-left: 10px;
             transform: translate3D(0, -50%, 0) rotate3D(0, 0, 1, -90deg);
+            ${down('sm')} {
+              margin-left: 0;
+            }
           }
-        }
-      }
-      .filter-container:not(:last-child) {
-        padding-right: 47.5px;
-        ${down('md')} {
-          padding-right: 40px;
         }
       }
     }
