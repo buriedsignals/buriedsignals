@@ -69,6 +69,7 @@ export const PostsFilterStyle = styled.div`
           pointer-events: none;
         }
         ${down('sm')} {
+          pointer-events: none;
           span {
             display: none;
           }
@@ -84,6 +85,9 @@ export const PostsFilterStyle = styled.div`
         &-previous {
           left: -1px;
           z-index: 5;
+          ${down('sm')} {
+            padding-left: 0;
+          }
           &::before {
             right: 0;
             border-left: 1px solid var(--color-white);
@@ -101,6 +105,9 @@ export const PostsFilterStyle = styled.div`
         &-next {
           right: -1px;
           z-index: 5;
+          ${down('sm')} {
+            padding-right: 0;
+          }
           &::before {
             left: 0;
             border-right: 1px solid var(--color-white);

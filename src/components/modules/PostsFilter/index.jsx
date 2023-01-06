@@ -30,11 +30,9 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
   // Effect
   useEffect(() => {
     getWidthsSlider()
-    window.addEventListener('resize', onResizeWindow)
-    sliderContainerRef.current.addEventListener('scroll', onScrollSlider)
+    window.addEventListener('resize', onResizeWindow) 
     return () => {
       window.removeEventListener('resize', onResizeWindow)
-      sliderContainerRef.current.addEventListener('scroll', onScrollSlider)
     }
   }, [])
   useEffect(() => {        
@@ -134,13 +132,13 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
     setHideNextButtonSlider(false)
   }
   const onScrollSlider = (e) => {
-    if (e.target.scrollLeft == 0) {
+    console.log('maxWidthSlider', maxWidthSlider)
+    if (e.target.scrollLeft <= 1) {
       setHidePreviousButtonSlider(true)
     } else if (e.target.scrollLeft > 0) {
       setHidePreviousButtonSlider(false)
     }
     const scrollMaxWidthSlider = maxWidthSlider - 1
-    console.log(e.target.scrollLeft, scrollMaxWidthSlider)
     if (e.target.scrollLeft >= scrollMaxWidthSlider) {
       setHideNextButtonSlider(true)
     } else if (e.target.scrollLeft < scrollMaxWidthSlider) {
@@ -151,7 +149,7 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
     <PostsFilterStyle ref={ filterRef } className="container-module-large" { ...props } >
       <ul className="filters-container">
         <div className="categories-slider-container">
-          <div ref={ sliderContainerRef } className="categories-container">
+          <div ref={ sliderContainerRef } className="categories-container"  onScroll={ onScrollSlider }>
             <div ref={ sliderRef } className="slider-container">
               <li className="filter-container">
                 <button className="filter-button is-active" onClick={ onClickButton } data-filter={ "Award" }>
