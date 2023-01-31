@@ -11,7 +11,7 @@ export const NewsletterStyle = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 60px;
+    padding: 60px 30px;
     background-color: var(--color-green);
     &::after {
       position: absolute;

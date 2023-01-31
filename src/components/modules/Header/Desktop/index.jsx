@@ -71,11 +71,9 @@ export default function HeaderDesktop() {
                         <p className="typography-01">Jury</p>
                       </a>
                     </Link>)(),
-                    (() => <Link href="/about/studio">
-                      <a className={ router.pathname == "/about/studio" ? "is-active" : "" }>
-                        <p className="typography-01">Studio</p>
-                      </a>
-                    </Link>)(),
+                    (() => <a className={ router.pathname == "/about/studio" ? "is-active" : "" } href="https://nuanced.studio" target="_blank" rel="noopener noreferrer">
+                      <p className="typography-01">Studio</p>
+                    </a>)(),
                   ]
                 })() }
               />

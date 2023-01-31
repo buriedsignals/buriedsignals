@@ -24,19 +24,6 @@ export const PublicationTemplateStyle = styled.div`
       }
     }
   }
-  .images-container {    
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 50px;
-    margin-bottom: 100px;
-    img {
-      height: 150px;
-      ${down('md')} {
-        height: 100px;
-      }
-    } 
-  }
   & > .flexible-container {
     h1, h2, h3, p, ul, ol, a, img, iframe {
       max-width: 848px;

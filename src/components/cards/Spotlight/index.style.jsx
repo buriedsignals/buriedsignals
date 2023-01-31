@@ -90,9 +90,17 @@ export const SpotlightStyle = styled.a`
         .title {
           margin-bottom: 12.5px;
           color: var(--color-white);
+          // ${down('md')} {
+            font-size: 18px;
+            line-height: 24px;
+          // }
         }
         .description {
           color: var(--color-grey03);
+          // ${down('md')} {    
+            font-size: 14px;
+            line-height: 18px;
+          // }
         }
       }
       .actions-container {

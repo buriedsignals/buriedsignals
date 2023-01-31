@@ -8,6 +8,9 @@ import Link from "next/link"
 import LikeButton from "@/components/buttons/Like"
 import BookmarkButton from "@/components/buttons/Bookmark"
 import CommentButton from "@/components/buttons/Comment"
+// Nodes
+import { down } from "styled-breakpoints"
+import { useBreakpoint } from 'styled-breakpoints/react-styled';
 
 export default function Spotlight({ post, ...props }) {
   return (
@@ -30,8 +33,8 @@ export default function Spotlight({ post, ...props }) {
               </div>
             </div>
             <div className="informations-container">
-              <h3 className="title typography-06">{ limitSizeText(post.title, 40) }</h3>
-              <p className="description typography-07">{ limitSizeText(post.description, 78) }</p>
+              <h3 className="title typography-06">{ limitSizeText(post.title, useBreakpoint(down('md')) ? 55 : 100) }</h3>
+              <p className="description typography-07">{ limitSizeText(post.description, useBreakpoint(down('md')) ? 110 : 180) }</p>
             </div>
             <div className="actions-container">
               <LikeButton likes={ post.likes } liked={ post.liked } postId={ post.id } type="spotlights" />
