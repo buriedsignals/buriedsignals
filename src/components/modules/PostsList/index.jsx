@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react"
 import useArray from "@/hooks/useArray"
 // Modules
 import PostsFilterModule from "../PostsFilter"
+import NewsletterModule from "../Newsletter"
 // Cards
 import SpotlightCard from "@/components/cards/Spotlight"
 import InsightCard from "@/components/cards/Insight"
@@ -54,7 +55,7 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
       <ul  ref={ listRef } className={ `${ type !== 'spotlight' ? 'container-module-large' : '' } list-container type-${ type } ${ posts.array.length == 0 ? 'no-result-container' : '' }` }>
         { posts.array.length != 0 ? posts.array.map((post, index) => {
             if (index < max * page) {
-              return <li key={ `post-${ index }` } className={ `${ type == 'spotlight' ? 'container-module-large' : '' } item-container` }>
+              return <><li key={ `post-${ index }` } className={ `${ type == 'spotlight' ? 'container-module-large' : '' } item-container` }>
                 {(() => {
                   switch (type) {
                     case 'spotlight':
@@ -70,6 +71,9 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
                   }
                 })()}
               </li>
+              { index % max == 5 && <NewsletterModule /> }
+              </>
+
             }
           }) : <li className="container-module-large item-container">
             <p className="no-result typography-06">No results...</p>

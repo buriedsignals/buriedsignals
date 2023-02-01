@@ -14,7 +14,7 @@ export const PostsListStyle = styled.div`
         padding-top: 48px;
         padding-bottom: 48px;
       }
-      .item-container {
+      & > * {
         &:not(:last-child) {
           margin-bottom: 80px;
           ${down('md')} {
