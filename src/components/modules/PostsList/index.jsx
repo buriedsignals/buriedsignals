@@ -17,6 +17,8 @@ import ProjectCard from "@/components/cards/Project"
 import ThirstyButton from "@/components/buttons/Thirsty"
 
 export default function PostsList({ type, posts, categories, awards = [], geographies = [], max = 5, ...props }) {
+  // Datas
+  const maxNewsletter = 5
   // References
   const listRef = useRef()
   // States
@@ -71,7 +73,7 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
                   }
                 })()}
               </li>
-              { index % max == 5 && <NewsletterModule /> }
+              { index % max == maxNewsletter && type !== 'jury' && <NewsletterModule key={ `post-${ page }-${ index }` }  /> }
               </>
 
             }

@@ -35,7 +35,7 @@ export const PostsListStyle = styled.div`
       ${down('list')} {
         justify-content: center;
       }
-      .item-container {
+      & > * {
         &:not(:last-child) {
           margin-bottom: 20px;
         }
@@ -53,7 +53,7 @@ export const PostsListStyle = styled.div`
       ${down('list')} {
         justify-content: center;
       }
-      .item-container {
+      & > * {
         &:not(:last-child) {
           margin-bottom: 77px;
         }
@@ -104,12 +104,12 @@ export const PostsListStyle = styled.div`
         width: auto;
         margin: 0;
       }
-      &:not(:last-child) {
-        margin-bottom: 80px;
-        ${down('md')} {
-          margin-bottom: 40px;
-        }
-      }
+      // &:not(:last-child) {
+      //   margin-bottom: 80px;
+      //   ${down('md')} {
+      //     margin-bottom: 40px;
+      //   }
+      // }
       .no-result {
         color: var(--color-grey01);
       }

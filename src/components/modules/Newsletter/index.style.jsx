@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
 export const NewsletterStyle = styled.div`
+  width: 100%;
   ${down('md')} {
     padding: 0 16px;
   }
