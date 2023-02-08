@@ -33,7 +33,7 @@ export default function Spotlight({ post, ...props }) {
               </div>
             </div>
             <div className="informations-container">
-              <h3 className="title typography-06">{ limitSizeText(post.title, useBreakpoint(down('md')) ? 55 : 100) }</h3>
+              <h3 className="title typography-06">{ limitSizeText(post.title, useBreakpoint(down('md')) ? 50 : 100) }</h3>
               <p className="description typography-07">{ limitSizeText(post.description, useBreakpoint(down('md')) ? 110 : 180) }</p>
             </div>
             <div className="actions-container">

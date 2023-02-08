@@ -15,8 +15,8 @@ export default function Error({ onClickButtonClose, ...props }) {
     <ErrorStyle { ...props }>
       <div ref={ panelRef } className="panel-error">
         <div className="panel-error-container">
-          <h3 className="typography-08">Sorry we have some troubles ...</h3>
-          <p className="typography-07 description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3 className="typography-08">Oh it seems we’re out of reception for some reason.</h3>
+          <p className="typography-07 description">We’ll fix this, quickly!</p>
           <div className="buttons-container">
             <PrimaryButton color="black03" onClickButton={ (e) => { 
               e.preventDefault()
