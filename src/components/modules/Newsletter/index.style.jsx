@@ -39,6 +39,10 @@ export const NewsletterStyle = styled.div`
       margin-bottom: 37.5px;
       color: var(--color-black02);
       text-align: center;
+      ${down('md')} {
+        font-size: 24px;
+        line-height: 36px;
+      }
     }
     input {
       width: 327px;

@@ -23,8 +23,18 @@ export default function Footer() {
   return (
     <FooterStyle className={ `footer ${ show ? "is-show" : "" }` }>
       <div className="footer-container">
-        {/* <ul className="socials">
+        <ul className="socials">
           <li className="social">
+            <a href="https://medium.com" target="_blank" rel="noreferrer">
+              <InstagramIcon />
+            </a>
+          </li>
+          <li className="social">
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer">
+              <TwitterIcon />
+            </a>
+          </li>
+          {/* <li className="social">
             <a href="https://instagram.com" target="_blank" rel="noreferrer">
               <InstagramIcon />
             </a>
@@ -43,8 +53,8 @@ export default function Footer() {
             <a href="mailto:contact@buriedsignals.com" target="_blank" rel="noreferrer">
               <MailIcon />
             </a>
-          </li>
-        </ul> */}
+          </li> */}
+        </ul>
         <Link href="/">
           <a className="logo">
             <Logo type="large" />

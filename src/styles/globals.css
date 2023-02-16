@@ -177,6 +177,18 @@ button, a {
   display: none;
 }
 
+.html-container strong {
+  font-weight: 700;
+}
+
+.html-container u {
+  text-decoration: underline;
+}
+
+.html-container em {
+  font-style: italic;
+}
+
 .html-container h1, .html-container h2, .html-container h3, .html-container p, .html-container ul, .html-container ol {
   /* .container-module-small */
   width: 100%;

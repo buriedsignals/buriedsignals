@@ -5,6 +5,17 @@ export const FlexibleContentStyle = styled.div`
   hr {
     display: none;
   }
+  strong {
+    font-weight: 700;
+  }
+
+  u {
+    text-decoration: underline;
+  }
+
+  em {
+    font-style: italic;
+  }
   h1, h2, h3, h4, p, ul, ol {
     /* .container-module-small */
     width: 100%;
@@ -32,7 +43,7 @@ export const FlexibleContentStyle = styled.div`
     padding-left: 15px;
     padding-bottom: 10px;
   }
-  h2 {
+  h1, h2 {
     padding-bottom: 20px;
     /* .typographie-04 */
     font-family: 'Space Grotesk';
