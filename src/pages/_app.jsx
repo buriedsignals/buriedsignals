@@ -30,6 +30,7 @@ function App({ Component, pageProps }) {
     lg: "1175px",
     xl: "1440px",
     list: "1078px",
+    headerSponsor: "1090px"
   });
   // Hooks
   const [scroll] = useStore((state) => [state.scroll])
