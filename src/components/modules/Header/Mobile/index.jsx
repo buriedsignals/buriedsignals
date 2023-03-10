@@ -48,7 +48,7 @@ export default function HeaderMobile() {
           <ul className="actions">
             <li className="action">
               <a href="https://t1ipnnn9dzv.typeform.com/to/YrFFaQjA" target="_blank" rel="noreferrer">
-                <p className="typography-01">Submit a project</p>
+                <p className="typography-01">Submit</p>
               </a>
             </li>
             {  user.connected ?
