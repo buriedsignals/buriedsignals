@@ -132,6 +132,7 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
     setHideNextButtonSlider(false)
   }
   const onScrollSlider = (e) => {
+    console.log('maxWidthSlider', maxWidthSlider)
     if (e.target.scrollLeft <= 1) {
       setHidePreviousButtonSlider(true)
     } else if (e.target.scrollLeft > 0) {
@@ -187,8 +188,8 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
               <AwardsModal 
                   buttonName={ geographyName }
                   listActions={ (() => {
-                    const itemsGeographies = geographies.map((geography, index) => {
-                      return (() => <button key={ `geography-${ index }` } className={ `geographies-button ${ geographyName == geography ? "is-active" : "" }` } onClick={ onClickButton } data-geography={ geography }>
+                    const itemsGeographies = geographies.map(geography => {
+                      return (() => <button className={ `geographies-button ${ geographyName == geography ? "is-active" : "" }` } onClick={ onClickButton } data-geography={ geography }>
                         <p className="typography-03">{ geography }</p>
                       </button>)()
                     })
@@ -205,8 +206,8 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
               <AwardsModal 
                   buttonName={ awardName }
                   listActions={ (() => {
-                    const itemsAwards = awards.map((award, index) => {
-                      return (() => <button key={ `award-${ index }` } className={ `awards-button ${ awardName == award ? "is-active" : "" }` } onClick={ onClickButton } data-award={ award }>
+                    const itemsAwards = awards.map(award => {
+                      return (() => <button className={ `awards-button ${ awardName == award ? "is-active" : "" }` } onClick={ onClickButton } data-award={ award }>
                         <p className="typography-03">{ award }</p>
                       </button>)()
                     })

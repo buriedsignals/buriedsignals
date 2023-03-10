@@ -2,12 +2,8 @@ import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
 export const HeaderDesktopStyle = styled.header`
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
   padding: 18px 36px;
   background-color: var(--color-black02);
-  z-index: 10;
   .header-desktop-container {
     display: flex;
     justify-content: space-between;
@@ -18,8 +14,8 @@ export const HeaderDesktopStyle = styled.header`
       .pages {
         position: relative;
         display: flex;
-        margin-left: 32.5px;
-        padding-left: 32.5px;
+        margin-left: 47.5px;
+        padding-left: 47.5px;
         &::before {
           content: '';
           position: absolute;
@@ -58,16 +54,11 @@ export const HeaderDesktopStyle = styled.header`
         display: flex;
         align-items: center;
         .action {
-          &:first-child {
-            ${down('headerSponsor')} {
+          &:not(:last-child) {
+            margin-right: 40px;
+            ${down('lg')} {
               display: none;
             }
-          }
-          &:not(:last-child) {
-            margin-right: 32px;
-            // ${down('lg')} {
-            //   display: none;
-            // }
           }
           a, button {
             svg {

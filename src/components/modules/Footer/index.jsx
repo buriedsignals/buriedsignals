@@ -24,6 +24,16 @@ export default function Footer() {
     <FooterStyle className={ `footer ${ show ? "is-show" : "" }` }>
       <div className="footer-container">
         <ul className="socials">
+          <li className="social">
+            <a href="https://medium.com" target="_blank" rel="noreferrer">
+              <InstagramIcon />
+            </a>
+          </li>
+          <li className="social">
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer">
+              <TwitterIcon />
+            </a>
+          </li>
           {/* <li className="social">
             <a href="https://instagram.com" target="_blank" rel="noreferrer">
               <InstagramIcon />

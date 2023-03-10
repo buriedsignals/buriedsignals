@@ -6,7 +6,7 @@ import Layout from "@/components/layouts/main"
 import PostsListModule from "@/components/modules/PostsList"
 import NewsletterModule from "@/components/modules/Newsletter"
 
-export default function SpotlightsTemplate({ spotlights }) {  
+export default function SpotlightsTemplate({ spotlights }) {
   return (
     <Layout>
       <SpotlightsTemplateStyle>

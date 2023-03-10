@@ -54,7 +54,7 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
   return (
     <PostsListStyle { ...props } >
       { categories && <PostsFilterModule posts={ posts } categories={ categories } awards={ type == 'spotlight' ? awards.length !== 0 ? awards : false : false } geographies={ type == 'spotlight' ? geographies.length !== 0 ? geographies : false : false }  multiple={ type == 'spotlight' ? true : false } setPage={ setPage } /> }
-      <ul ref={ listRef } className={ `${ type !== 'spotlight' ? 'container-module-large' : '' } list-container type-${ type } ${ posts.array.length == 0 ? 'no-result-container' : '' }` }>
+      <ul  ref={ listRef } className={ `${ type !== 'spotlight' ? 'container-module-large' : '' } list-container type-${ type } ${ posts.array.length == 0 ? 'no-result-container' : '' }` }>
         { posts.array.length != 0 ? posts.array.map((post, index) => {
             if (index < max * page) {
               return <><li key={ `post-${ index }` } className={ `${ type == 'spotlight' ? 'container-module-large' : '' } item-container` }>
@@ -77,7 +77,7 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
               </>
 
             }
-          }) : <li key="post-0" className="container-module-large item-container">
+          }) : <li className="container-module-large item-container">
             <p className="no-result typography-06">No results...</p>
           </li> }
       </ul>
