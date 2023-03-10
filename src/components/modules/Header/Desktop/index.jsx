@@ -7,6 +7,9 @@ import { useEffect, useState } from "react"
 // Next
 import Link from "next/link"
 import { useRouter } from "next/router"
+// Nodes
+import { down } from "styled-breakpoints"
+import { useBreakpoint } from 'styled-breakpoints/react-styled';
 // Modules
 import DropdownModule from "@/components/modals/Dropdown"
 // Links
@@ -15,6 +18,8 @@ import PrimaryLink from "@/components/links/Primary"
 // Icons
 import LogoIcon from "@/components/icons/Logo"
 import TwitterIcon from "@/components/icons/Twitter"
+import SlackIcon from "@/components/icons/Slack"
+import SponsorButton from "@/components/links/Sponsor"
 
 export default function HeaderDesktop() {
   // Router
@@ -30,7 +35,7 @@ export default function HeaderDesktop() {
         <div className="left-container">
           <Link href="/">
             <a className="logo">
-              <LogoIcon type="long" />
+              <LogoIcon type="small" />
             </a>
           </Link>
           <ul className="pages">
@@ -83,6 +88,14 @@ export default function HeaderDesktop() {
         <div className="right-container">
           <ul className="actions">
             <li className="action">
+              {/* <SponsorButton href="https://www.google.fr" text="WebRecorder" icon={ () => <SlackIcon /> } /> */}
+            </li>
+            <li className="action">
+              <a href="https://t1ipnnn9dzv.typeform.com/to/khhK4BJ2" target="_blank" rel="noreferrer">
+                <SlackIcon />
+              </a>
+            </li>
+            <li className="action">
               <a href="https://twitter.com/buriedsignals" target="_blank" rel="noreferrer">
                 <TwitterIcon size="small" />
               </a>
@@ -105,18 +118,18 @@ export default function HeaderDesktop() {
                     </a>
                   </Link>
                 </li>
-                <li className="action">
+                {/* <li className="action">
                   <Link href="/profiles/signup">
                     <a>
                       <p className="typography-01">Sign Up</p>
                     </a>
                   </Link>
-                </li>
+                </li> */}
               </>
             }
             <li className="action">
               <PrimaryLink href="https://t1ipnnn9dzv.typeform.com/to/YrFFaQjA" intern={ false }>
-                <p className="typography-03">Submit</p>
+                <p className="typography-03">{ useBreakpoint(down('xl')) ? "Submit" : "Submit a project" }</p>
               </PrimaryLink>
             </li>
           </ul>
