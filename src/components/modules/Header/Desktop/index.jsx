@@ -14,12 +14,13 @@ import { useBreakpoint } from 'styled-breakpoints/react-styled';
 import DropdownModule from "@/components/modals/Dropdown"
 // Links
 import PrimaryLink from "@/components/links/Primary"
+import SponsorButton from "@/components/links/Sponsor"
 // import ProfileLink from "@/components/links/Profile"
 // Icons
 import LogoIcon from "@/components/icons/Logo"
 import TwitterIcon from "@/components/icons/Twitter"
 import SlackIcon from "@/components/icons/Slack"
-import SponsorButton from "@/components/links/Sponsor"
+import WebrecorderIcon from "@/components/icons/Webrecorder"
 
 export default function HeaderDesktop() {
   // Router
@@ -88,7 +89,7 @@ export default function HeaderDesktop() {
         <div className="right-container">
           <ul className="actions">
             <li className="action">
-              {/* <SponsorButton href="https://www.google.fr" text="WebRecorder" icon={ () => <SlackIcon /> } /> */}
+              <SponsorButton href="https://www.webrecorder.net" text="WebRecorder" icon={ () => <WebrecorderIcon /> } />
             </li>
             <li className="action">
               <a href="https://t1ipnnn9dzv.typeform.com/to/khhK4BJ2" target="_blank" rel="noreferrer">

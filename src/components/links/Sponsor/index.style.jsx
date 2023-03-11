@@ -15,6 +15,7 @@ export const SponsorStyle = styled.a`
   & > .text {
     display: flex;
     flex-direction: column;
+    min-width: 140px;
     color: var(--color-green) !important;
     transition: all 0.25s linear;
     span {

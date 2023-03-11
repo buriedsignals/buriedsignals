@@ -1,11 +1,13 @@
 // Next
 import Head from 'next/head'
+import Script from "next/script"
 // Templates
 import ArchiveTemplate from '@/components/templates/Archives/Archive';
 
 export default function Archive({ archive, ...props }) {
   return (
     <>
+      <Script src="https://cdn.jsdelivr.net/npm/replaywebpage@1.7.13/ui.js" strategy="beforeInteractive" />
       <ArchiveTemplate archive={ archive } />
     </>
   )

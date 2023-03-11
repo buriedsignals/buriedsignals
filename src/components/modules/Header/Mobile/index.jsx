@@ -11,6 +11,7 @@ import { useRouter } from "next/router"
 import useToggle from "@/hooks/useToggle"
 import useStore from "@/hooks/useStore"
 // Links
+import SponsorButton from "@/components/links/Sponsor"
 // import ProfileLink from "@/components/links/Profile"
 // Icons
 import LogoIcon from "@/components/icons/Logo"
@@ -19,7 +20,7 @@ import CrossIcon from "@/components/icons/Cross"
 import ArrowIcon from "@/components/icons/Arrow"
 import TwitterIcon from "@/components/icons/Twitter"
 import SlackIcon from "@/components/icons/Slack"
-import SponsorButton from "@/components/links/Sponsor"
+import WebrecorderIcon from "@/components/icons/Webrecorder"
 
 export default function HeaderMobile() {
   // Router
@@ -143,8 +144,7 @@ export default function HeaderMobile() {
                   </a>
                 </li>
               </ul>
-              {/* <SponsorButton href="https://www.google.fr" text="WebRecorder" icon={ () => <SlackIcon /> } /> */}
-            </div>
+              <SponsorButton href="https://www.webrecorder.net" text="WebRecorder" icon={ () => <WebrecorderIcon /> } />            </div>
           </div>
       }
       </div>
