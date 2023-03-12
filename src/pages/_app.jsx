@@ -36,7 +36,10 @@ function App({ Component, pageProps }) {
   const [scroll] = useStore((state) => [state.scroll])
   // Effects
   useEffect(() => {
-    document.body.className = !scroll ? 'no-scroll' : '';
+    const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)
+    const isChrome = /Google Inc/.test(navigator.vendor) || navigator.userAgent.match('CriOS')
+    const className = `${ !scroll ? 'no-scroll' : '' } ${ isSafari ? 'is-safari' : '' } ${ isChrome ? 'is-chrome' : '' }`
+    document.body.className = className
   })
   // ---
   const router = useRouter();

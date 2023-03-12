@@ -8,16 +8,16 @@ export const HeaderStyle = styled.div`
     top: -86px;
     transition: top 0.25s ease;
   }
-  &.is-stick {
-    header {
-      top: 0;
-      transition: top 0.25s ease;
-    }
-  }
   ${down('md')} {
     padding-bottom: 66px;
     header {
       top: -66px;
+      transition: top 0.25s ease;
+    }
+  }
+  &.is-stick {
+    header {
+      top: 0;
       transition: top 0.25s ease;
     }
   }

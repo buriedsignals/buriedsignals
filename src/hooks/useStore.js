@@ -41,7 +41,7 @@ const useStore = create((set) => {
     //   twitter_account: "@rcdpnt"
     // },
     scroll: true,
-    previousPath: null
+    previousPath: null,
   }
 })
 

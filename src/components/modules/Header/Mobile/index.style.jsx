@@ -64,8 +64,15 @@ export const HeaderMobileStyle = styled.header`
       }
     }
     .header-panel {
+      .is-safari & {
+        padding: 87.5px 64px 164px;
+      }
+      .is-chrome & {
+        padding: 87.5px 64px 184px;
+      }
       position: relative;
-      height: calc(100vh - 66px);
+      height: 100vh;
+      min-height: 100%;
       padding: 87.5px 64px 64px;
       background-color: var(--color-black01);
       z-index: 2;

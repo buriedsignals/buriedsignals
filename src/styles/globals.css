@@ -166,7 +166,8 @@ button, a {
 }
 
 .no-scroll {
-  overflow-y: hidden;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .html-container {
