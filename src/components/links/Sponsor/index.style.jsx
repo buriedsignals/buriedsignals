@@ -16,17 +16,17 @@ export const SponsorStyle = styled.a`
     display: flex;
     flex-direction: column;
     min-width: 140px;
-    color: var(--color-green) !important;
+    color: var(--color-white) !important;
     transition: all 0.25s linear;
     span {
-      &:last-child {
-        text-transform: uppercase;
+      &:last-child {    
+        line-height: 14px;
       }
     }
   }
   &:hover {
     & > .text {
-      color: var(--color-white) !important;
+      color: var(--color-green) !important;
       transition: all 0.25s linear;
     }
   }
