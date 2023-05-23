@@ -1,15 +1,15 @@
-import Twit from "twit";
+import { TwitterApi } from 'twitter-api-v2';
 
 export default async function handle(req, res) {
   const datas = req.body.entry
   const model = req.body.model
   if (model == "spotlights-post") {
-    const T = new Twit({
-      consumer_key: "fiC4fMv7gmg7gNJUrM7Cs8MfV",
-      consumer_secret: "b7FFGIwNTYNUwloO57qH7AauXB6oHdsleVuHqheCYjL5iV7JVo",
-      access_token: "1399628894295269376-BCm4IGRCa37jLbwGkrCzL2kUsew0hS",
-      access_token_secret: "NMhGeIb1kDkv6naeV6S9WrpUgz6njm0IXFPa4k85SuwoI"
-    })
+    const twitterClient = new TwitterApi({
+      appKey: 'ZsaE2Ble7fulgBxgzvqyhH42D',
+      appSecret: 'rLLvLye2Lo03tD1koaklWu4Q0gl2Vih2zXuDDuJNYEGPdHZNgs',
+      accessToken: '1399628894295269376-P6Y9G3kmRVFaK9nWzuKN89JnB6lcHm',
+      accessSecret: 'yorQCPngtT66lx9Ouew4PfHVeOSDnJXu4BtKHZeKtSeKu',
+    });    
     const author = datas.Source_author_twitter_account ? datas.Source_author_twitter_account.startsWith('@') ? datas.Source_author_twitter_account : `@${ datas.Source_author_twitter_account }` : datas.Source_author
     const description = `\n\n${ datas.Description }\n\n•`
     const categories = datas.Categories.length !== 0 ? ` | ${ datas.Categories[0].Title }` : ""
@@ -37,9 +37,7 @@ export default async function handle(req, res) {
         template = templateWithoutCategoryAndAuthor
       }
     }
-    const params = { status: template }
-    T.post('statuses/update', params, function (err, data, response) {
-      res.json(data)
-    })
+    const data = await twitterClient.v2.tweet(template, {});
+    res.json(data)
   }
 }
