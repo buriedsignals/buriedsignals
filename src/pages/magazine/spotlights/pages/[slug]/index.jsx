@@ -10,11 +10,20 @@ export default function Spotlights({ spotlights, ...props }) {
   )
 }
 
-export async function getStaticProps({ params, ...context}) {
-  console.log(params)
+export async function getStaticPaths() {
+  const pageSize = 42
+  const spotlights = await getPostsSpotlights()
+  const paths = spotlights.posts.filter((post) => post.slug !== null).filter((post, index) => index % pageSize == 0).map((post, index) => ({
+    params: { slug: (index + 1).toString(), pageSize: pageSize },
+  }))
+  return { paths, fallback: "blocking" }
+}
+
+export async function getStaticProps({params, ...context}) {
+  console.log(context)
   const spotlights = await getPostsSpotlights({ page: {
-    index: 1,
-    pageSize: 42
+    index: params.slug,
+    pageSize: params.pageSize || 2
   } })
   const page = await getPageSpotlights()
   if (!spotlights || !page) {

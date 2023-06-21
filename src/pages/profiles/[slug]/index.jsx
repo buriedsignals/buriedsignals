@@ -1,5 +1,7 @@
 // Middlewares
 import { getUsersMembers, getUserMember } from '@/middlewares/librairies/users/member';
+// Next
+import Head from 'next/head'
 // Templates
 import ProfileTemplate from "@/components/templates/Profiles/Profile"
 import useArray from '@/hooks/useArray';
@@ -7,7 +9,12 @@ import { useEffect } from 'react';
 
 export default function Profile({ member }) {
   return (
-    <ProfileTemplate member={ member } />
+    <>
+      <Head>
+        <title key='title'>{ `Buried Signals | ${ member.name }` }</title>
+      </Head>
+      <ProfileTemplate member={ member } />
+    </>
   )
 }
 

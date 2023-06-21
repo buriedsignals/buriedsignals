@@ -11,6 +11,7 @@ export const HeaderMobileStyle = styled.header`
       display: flex;
       justify-content: space-between;
       align-items: center;
+      height: 86px;
       padding: 18px 36px;
       background-color: var(--color-black02);
       .logo {
@@ -75,13 +76,17 @@ export const HeaderMobileStyle = styled.header`
       min-height: 100%;
       padding: 87.5px 64px 64px;
       background-color: var(--color-black01);
+      overflow: scroll;
       z-index: 2;
       .header-panel-container {
         position: relative;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 100%;
+        min-height: 100%;
+        & > *:not(:last-child) {
+          margin-bottom: 50px;
+        }
         .pages {
           .page {
             :not(:last-child) {

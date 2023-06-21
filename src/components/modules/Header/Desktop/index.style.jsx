@@ -58,16 +58,17 @@ export const HeaderDesktopStyle = styled.header`
         display: flex;
         align-items: center;
         .action {
-          &:first-child {
-            ${down('headerSponsor')} {
-              display: none;
-            }
-          }
           &:not(:last-child) {
             margin-right: 32px;
             // ${down('lg')} {
             //   display: none;
             // }
+          }
+          &:first-child {
+            margin-right: 96px;
+            ${down('xl')} {
+              margin-right: 32px;
+            }
           }
           a, button {
             svg {

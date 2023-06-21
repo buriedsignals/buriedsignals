@@ -7,8 +7,7 @@ import Link from "next/link"
 // Icons
 import InstagramIcon from "@/components/icons/Instagram"
 import TwitterIcon from "@/components/icons/Twitter"
-import DiscordIcon from "@/components/icons/Discord"
-import MailIcon from "@/components/icons/Mail"
+import LinkedinIcon from "@/components/icons/Linkedin"
 import Logo from "@/components/icons/Logo"
 
 export default function Footer() {
@@ -23,34 +22,28 @@ export default function Footer() {
   return (
     <FooterStyle className={ `footer ${ show ? "is-show" : "" }` }>
       <div className="footer-container">
-        <ul className="socials">
-          {/* <li className="social">
-            <a href="https://instagram.com" target="_blank" rel="noreferrer">
-              <InstagramIcon />
-            </a>
-          </li>
-          <li className="social">
-            <a href="https://twitter.com" target="_blank" rel="noreferrer">
-              <TwitterIcon />
-            </a>
-          </li>
-          <li className="social">
-            <a href="https://discord.com" target="_blank" rel="noreferrer">
-              <DiscordIcon />
-            </a>
-          </li>
-          <li className="social">
-            <a href="mailto:contact@buriedsignals.com" target="_blank" rel="noreferrer">
-              <MailIcon />
-            </a>
-          </li> */}
-        </ul>
-        <Link href="/">
-          <a className="logo">
-            <Logo type="large" />
-          </a>
-        </Link>
-        <p className="copyright typography-10">© 2021 Buried Signals. See <Link href="/privacy"><a className="typography-03">Privacy Terms</a></Link> and <Link href="/notice"><a className="typography-03">Legal Notice</a></Link></p>
+        <div className="links">
+          <div className="socials">
+            <a href="https://www.instagram.com/buriedsignals" className="network" target="_blank" rel="noopener noreferrer"><InstagramIcon /></a>
+            <a href="https://twitter.com/buriedsignals" className="network" target="_blank" rel="noopener noreferrer"><TwitterIcon /></a>
+            <a href="https://www.linkedin.com/company/buried-signals" className="network" target="_blank" rel="noopener noreferrer"><LinkedinIcon /></a>
+          </div>
+          <div className="buried">
+            <Link href="/"><a className="typography-01">Magazine</a></Link>
+            <a href="https://www.studio.buriedsignals.com" className="typography-01" target="_blank" rel="noopener noreferrer">Studio</a>
+            <Link href="/membership"><a className="typography-01">Membership</a></Link>
+            <a href="https://buriedsignals.substack.com" className="typography-01" target="_blank" rel="noopener noreferrer">Subscribe</a>
+            <Link href="/about"><a className="typography-01">About</a></Link>
+          </div>
+        </div>
+        <div className="infos">
+          <div className="legal">
+            <p className="typography-10">Zurich, Switzerland</p>
+            <a href="mailto:tom@buriedsignals.com" className="typography-10" target="_blank" rel="noopener noreferrer">tom@buriedsignals.com</a>
+            <p className="copyright typography-10">© 2023 Buried Signals. See <Link href="/privacy"><a className="typography-03">Privacy</a></Link>, <Link href="/terms"><a href="https://buriedsignals.com/terms" className="typography-03">Terms</a></Link> and <Link href="/notice"><a className="typography-03">Information Collection Notice</a></Link></p>
+          </div>
+          <Link href="/"><a className="logo" target="_blank" rel="noopener noreferrer"><Logo type="large" /></a></Link>
+        </div>
       </div>
     </FooterStyle>
   )

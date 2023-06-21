@@ -41,48 +41,58 @@ export default function HeaderDesktop() {
           </Link>
           <ul className="pages">
             <li className="page">
-              <Link href="/">
-                <a className={ router.pathname == "/" ? "is-active" : "" }>
-                  <p className="typography-01">Visuals</p>
-                </a>
-              </Link>
-            </li>
-            <li className="page">
-              <Link href="/insights">
-                <a className={ router.pathname == "/insights" ? "is-active" : "" }>
-                  <p className="typography-01">Insights</p>
-                </a>
-              </Link>
-            </li>
-            <li className="page">
-              <Link href="/resources">
-                <a className={ router.pathname == "/resources" ? "is-active" : "" }>
-                  <p className="typography-01">Resources</p>
-                </a>
-              </Link>
-            </li>
-            <li className="page">
               <DropdownModule 
-                buttonName="About"
-                isActive={ router.pathname.includes("/about") ? "is-active" : "" }
+                buttonName="Magazine"
+                isActive={ router.pathname == "/" || router.pathname.includes("/magazine") ? "is-active" : "" }
                 listActions={ (() => {
                   return [
-                    (() => <Link href="/about/publication">
-                      <a className={ router.pathname == "/about/publication" ? "is-active" : "" }>
-                        <p className="typography-01">Publication</p>
+                    (() => <Link href="/">
+                      <a className={ router.pathname == "/" ? "is-active" : "" }>
+                        <p className="typography-01">Inspiration</p>
                       </a>
                     </Link>)(),
-                    (() => <Link href="/about/jury">
-                      <a className={ router.pathname == "/about/jury" ? "is-active" : "" }>
-                        <p className="typography-01">Jury</p>
+                    (() => <Link href="/magazine/insights">
+                      <a className={ router.pathname == "/magazine/insights" ? "is-active" : "" }>
+                        <p className="typography-01">Insights</p>
                       </a>
                     </Link>)(),
-                    (() => <a className={ router.pathname == "/about/studio" ? "is-active" : "" } href="https://nuanced.studio" target="_blank" rel="noopener noreferrer">
-                      <p className="typography-01">Studio</p>
-                    </a>)(),
+                    (() => <Link href="/magazine/resources">
+                      <a className={ router.pathname == "/magazine/resources" ? "is-active" : "" }>
+                        <p className="typography-01">Resources</p>
+                      </a>
+                    </Link>)(),
+                    // (() => <Link href="/magazine/directory">
+                    //   <a className={ router.pathname == "/magazine/directory" ? "is-active" : "" }>
+                    //     <p className="typography-01">Directory</p>
+                    //   </a>
+                    // </Link>)(),
                   ]
                 })() }
               />
+            </li>
+            <li className="page">
+              <a href="https://www.studio.buriedsignals.com" target="_blank" rel="noopener noreferrer">
+                <p className="typography-01">Studio</p>
+              </a>
+            </li>
+            <li className="page">
+              <Link href="/membership">
+                <a className={ router.pathname == "/membership" ? "is-active" : "" }>
+                  <p className="typography-01">Membership</p>
+                </a>
+              </Link>
+            </li>
+            <li className="page">
+              <a href="https://buriedsignals.substack.com" target="_blank" rel="noopener noreferrer">
+                <p className="typography-01">Newsletter</p>
+              </a>
+            </li>
+            <li className="page">
+              <Link href="/about">
+                <a className={ router.pathname == "/about" ? "is-active" : "" }>
+                  <p className="typography-01">About</p>
+                </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -91,19 +101,8 @@ export default function HeaderDesktop() {
             <li className="action">
               <SponsorButton href="https://www.webrecorder.net" text="WebRecorder" icon={ () => <WebrecorderIcon /> } />
             </li>
-            <li className="action">
-              <a href="https://t1ipnnn9dzv.typeform.com/to/khhK4BJ2" target="_blank" rel="noreferrer">
-                <SlackIcon />
-              </a>
-            </li>
-            <li className="action">
-              <a href="https://twitter.com/buriedsignals" target="_blank" rel="noreferrer">
-                <TwitterIcon size="small" />
-              </a>
-            </li>
             { user.connected ?
                 <li className="action">
-                  {/* <ProfileLink imgURL="/images/img-profil.jpg" /> */}
                   <Link href={ `/profiles/${ user.connected ? user.slug : 'signin' }` }>
                     <a>
                       <p className="typography-01">Profile</p>
@@ -119,13 +118,6 @@ export default function HeaderDesktop() {
                     </a>
                   </Link>
                 </li>
-                {/* <li className="action">
-                  <Link href="/profiles/signup">
-                    <a>
-                      <p className="typography-01">Sign Up</p>
-                    </a>
-                  </Link>
-                </li> */}
               </>
             }
             <li className="action">

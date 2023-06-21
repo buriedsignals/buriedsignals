@@ -1,12 +1,19 @@
 // Middlewares
 // import { getPageArchives } from '@/middlewares/librairies/pages/archives';
 // import { getPostsArchives } from '@/middlewares/librairies/posts/archives';
+// Next
+import Head from 'next/head'
 // Templates
 import ArchivesTemplate from "@/components/templates/Archives"
 
 export default function Archives({ archives, ...props }) {
   return (
-    <ArchivesTemplate archives={ archives } />
+    <>
+      <Head>
+        <title key='title'>Buried Signals | Archives</title>
+      </Head>
+      <ArchivesTemplate archives={ archives } />
+    </>
   )
 }
 

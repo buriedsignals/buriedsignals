@@ -1,11 +1,18 @@
 // Middlewares
 import { getPageNotice } from '@/middlewares/librairies/pages/notice';
+// Next
+import Head from 'next/head'
 // Templates
 import NoticeTemplate from "@/components/templates/Legal"
 
 export default function Notice({ notice, ...props }) {
   return (
-    <NoticeTemplate legal={ notice } />
+    <>
+      <Head>
+        <title key='title'>Buried Signals | Notice</title>
+      </Head>
+      <NoticeTemplate legal={ notice } />
+    </>
   )
 }
 

@@ -1,11 +1,18 @@
 // Middlewares
 import { getPagePrivacy } from '@/middlewares/librairies/pages/privacy';
+// Next
+import Head from 'next/head'
 // Templates
 import PrivacyTemplate from "@/components/templates/Legal"
 
 export default function Privacy({ privacy, ...props }) {
   return (
-    <PrivacyTemplate legal={ privacy } />
+    <>
+      <Head>
+        <title key='title'>Buried Signals | Privacy</title>
+      </Head>
+      <PrivacyTemplate legal={ privacy } />
+    </>
   )
 }
 

@@ -86,65 +86,72 @@ export default function HeaderMobile() {
             <div className="header-panel-container">
               <ul className="pages">
                 <li className="page">
-                  <Link href="/">
-                    <a className={ router.pathname == "/" ? "is-active" : "" } onClick={ setModalMenu }>
-                      <p className="typography-01">Visuals</p>
-                    </a>
-                  </Link>
-                </li>
-                <li className="page">
-                  <Link href="/insights">
-                    <a className={ router.pathname == "/insights" ? "is-active" : "" } onClick={ setModalMenu }>
-                      <p className="typography-01">Insights</p>
-                    </a>
-                  </Link>
-                </li>
-                <li className="page">
-                  <Link href="/resources">
-                    <a className={ router.pathname == "/resources" ? "is-active" : "" } onClick={ setModalMenu }>
-                      <p className="typography-01">Resources</p>
-                    </a>
-                  </Link>
-                </li>
-                <li className="page">
-                  <button className={ `modal${ modalDropdown ? ' is-open' : '' } ${ router.pathname.includes("/about") ? "is-active" : "" }` } onClick={ setModalDropdown }>
-                    <p className="typography-01">About</p>                  
+                  <button className={ `modal${ modalDropdown ? ' is-open' : '' } ${ router.pathname == "/" || router.pathname.includes("/magazine") ? "is-active" : "" }` } onClick={ setModalDropdown }>
+                    <p className="typography-01">Magazine</p>                  
                     <ArrowIcon />
                   </button>
                   { modalDropdown && 
                     <ul className="links">
                       <li className="link">
-                        <Link href="/about/publication">
-                          <a className={ router.pathname == "/about/publication" ? "is-active" : "" } onClick={ () => { setModalDropdown(); setModalMenu(); } }>
-                            <p className="typography-01">Publication</p>
+                        <Link href="/">
+                          <a className={ router.pathname == "/" ? "is-active" : "" }>
+                            <p className="typography-01">Inspiration</p>
                           </a>
                         </Link>
                       </li>
                       <li className="link">
-                        <Link href="/about/jury">
-                          <a className={ router.pathname == "/about/jury" ? "is-active" : "" } onClick={ () => { setModalDropdown(); setModalMenu(); } }>
-                            <p className="typography-01">Jury</p>
+                        <Link href="/magazine/insights">
+                          <a className={ router.pathname == "/magazine/insights" ? "is-active" : "" }>
+                            <p className="typography-01">Insights</p>
                           </a>
                         </Link>
                       </li>
                       <li className="link">
-                        <a href="https://nuanced.studio" target="_blank" rel="noopener noreferrer">
-                          <p className="typography-01">Studio</p>
-                        </a>
+                        <Link href="/magazine/resources">
+                          <a className={ router.pathname == "/magazine/resources" ? "is-active" : "" }>
+                            <p className="typography-01">Resources</p>
+                          </a>
+                        </Link>
                       </li>
+                      {/* <li className="link">
+                        <Link href="/magazine/directory">
+                          <a className={ router.pathname == "/magazine/directory" ? "is-active" : "" }>
+                            <p className="typography-01">Directory</p>
+                          </a>
+                        </Link>
+                      </li> */}
                     </ul>
                   }
                 </li>
-                <li className="page socials-container">
-                  <a href="https://t1ipnnn9dzv.typeform.com/to/khhK4BJ2" target="_blank" rel="noreferrer">
-                    <SlackIcon />
-                  </a>
-                  <a href="https://twitter.com/buriedsignals" target="_blank" rel="noreferrer">
-                    <TwitterIcon size="small" />
+                <li className="page">
+                  <a href="https://www.studio.buriedsignals.com">
+                    <p className="typography-01">Studio</p>
                   </a>
                 </li>
+                <li className="page">
+                  <Link href="/membership">
+                    <a className={ router.pathname == "/membership" ? "is-active" : "" }>
+                      <p className="typography-01">Membership</p>
+                    </a>
+                  </Link>
+                </li>
+                <li className="page">
+                  <Link href="/newsletter">
+                    <a className={ router.pathname == "/newsletter" ? "is-active" : "" }>
+                      <p className="typography-01">Newsletter</p>
+                    </a>
+                  </Link>
+                </li>
+                <li className="page">
+                  <Link href="/about">
+                    <a className={ router.pathname == "/about" ? "is-active" : "" }>
+                      <p className="typography-01">About</p>
+                    </a>
+                  </Link>
+                </li>
               </ul>
-              <SponsorButton href="https://www.webrecorder.net" text="WebRecorder" icon={ () => <WebrecorderIcon /> } />            </div>
+              <SponsorButton href="https://www.webrecorder.net" text="WebRecorder" icon={ () => <WebrecorderIcon /> } />
+            </div>
           </div>
       }
       </div>

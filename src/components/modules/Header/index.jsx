@@ -43,7 +43,7 @@ export default function Header() {
   }
   return (
     <HeaderStyle className={ `header ${ show ? "is-show" : "" } ${ stick ? "is-stick" : "" }` }>
-      { useBreakpoint(down('md')) ?
+      { useBreakpoint(down('lg')) ?
           <HeaderMobile />
         : 
           <HeaderDesktop />

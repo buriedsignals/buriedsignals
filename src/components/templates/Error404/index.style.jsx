@@ -5,7 +5,7 @@ export const Error404TemplateStyle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 89px - 264.5px);
+  min-height: calc(100vh - 89px - 316px);
   padding: 115px 0;
   ${down('md')} {
     flex-direction: column;

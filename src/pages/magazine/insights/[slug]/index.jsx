@@ -8,7 +8,8 @@ import InsightTemplate from '@/components/templates/Insights/Insight';
 export default function Insight({ insight, ...props }) {
   return (
     <>
-      <Head>
+      <Head>        
+        <title key='title'>{ `Buried Signals | Insight : ${ insight.title }` }</title>
         <meta key='description' name='description' content={ insight.description } />
         <meta key='og-title' property='og:title' content={ insight.title } />
         <meta key='og-description' property='og:description' content={ insight.description } />

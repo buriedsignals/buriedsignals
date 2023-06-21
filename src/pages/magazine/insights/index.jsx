@@ -1,12 +1,19 @@
 // Middlewares
 import { getPageInsights } from '@/middlewares/librairies/pages/insights';
 import { getPostsInsights } from '@/middlewares/librairies/posts/insights';
+// Next
+import Head from 'next/head'
 // Templates
 import InsightsTemplate from "@/components/templates/Insights"
 
 export default function Insights({ insights, ...props }) {
   return (
-    <InsightsTemplate insights={ insights } />
+    <>
+      <Head>
+        <title key='title'>Buried Signals | Insights</title>
+      </Head>
+      <InsightsTemplate insights={ insights } />
+    </>
   )
 }
 

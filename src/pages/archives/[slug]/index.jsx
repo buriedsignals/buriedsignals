@@ -7,6 +7,9 @@ import ArchiveTemplate from '@/components/templates/Archives/Archive';
 export default function Archive({ archive, ...props }) {
   return (
     <>
+      <Head>
+        <title key='title'>{ `Buried Signals | ${ archive.title }` }</title>
+      </Head>
       <Script src="https://cdn.jsdelivr.net/npm/replaywebpage@1.7.13/ui.js" strategy="beforeInteractive" />
       <ArchiveTemplate archive={ archive } />
     </>

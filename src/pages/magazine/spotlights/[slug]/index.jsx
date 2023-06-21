@@ -9,6 +9,7 @@ export default function Spotlight({ spotlight, ...props }) {
   return (
     <>
       <Head>
+        <title key='title'>{ `Buried Signals | Spotlight : ${ spotlight.title }` }</title>
         <meta key='description' name='description' content={ spotlight.description } />
         <meta key='og-title' property='og:title' content={ spotlight.title } />
         <meta key='og-description' property='og:description' content={ spotlight.description } />
