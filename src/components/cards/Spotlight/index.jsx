@@ -14,7 +14,7 @@ import { useBreakpoint } from 'styled-breakpoints/react-styled';
 
 export default function Spotlight({ post, ...props }) {
   return (
-    <Link href={ `/magazine/spotlights/${ post.slug }` } passHref>
+    <Link href={ `/spotlights/${ post.slug }` } passHref>
       <SpotlightStyle { ...props } target="_blank" rel="noopener noreferrer">
         <div className="spotlight-container">
           <div className="visual-container">
