@@ -86,7 +86,7 @@ export default function HeaderMobile() {
             <div className="header-panel-container">
               <ul className="pages">
                 <li className="page">
-                  <button className={ `modal${ modalDropdown ? ' is-open' : '' } ${ router.pathname == "/" || router.pathname.includes("/magazine") ? "is-active" : "" }` } onClick={ setModalDropdown }>
+                  <button className={ `modal${ modalDropdown ? ' is-open' : '' } ${ router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ? "is-active" : "" }` } onClick={ setModalDropdown }>
                     <p className="typography-01">Magazine</p>                  
                     <ArrowIcon />
                   </button>
@@ -100,22 +100,22 @@ export default function HeaderMobile() {
                         </Link>
                       </li>
                       <li className="link">
-                        <Link href="/magazine/insights">
-                          <a className={ router.pathname == "/magazine/insights" ? "is-active" : "" }>
+                        <Link href="/insights">
+                          <a className={ router.pathname == "/insights" ? "is-active" : "" }>
                             <p className="typography-01">Insights</p>
                           </a>
                         </Link>
                       </li>
                       <li className="link">
-                        <Link href="/magazine/resources">
-                          <a className={ router.pathname == "/magazine/resources" ? "is-active" : "" }>
+                        <Link href="/resources">
+                          <a className={ router.pathname == "/resources" ? "is-active" : "" }>
                             <p className="typography-01">Resources</p>
                           </a>
                         </Link>
                       </li>
                       {/* <li className="link">
-                        <Link href="/magazine/directory">
-                          <a className={ router.pathname == "/magazine/directory" ? "is-active" : "" }>
+                        <Link href="/directory">
+                          <a className={ router.pathname == "/directory" ? "is-active" : "" }>
                             <p className="typography-01">Directory</p>
                           </a>
                         </Link>

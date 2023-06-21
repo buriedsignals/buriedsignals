@@ -43,7 +43,7 @@ export default function HeaderDesktop() {
             <li className="page">
               <DropdownModule 
                 buttonName="Magazine"
-                isActive={ router.pathname == "/" || router.pathname.includes("/magazine") ? "is-active" : "" }
+                isActive={ router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ? "is-active" : "" }
                 listActions={ (() => {
                   return [
                     (() => <Link href="/">
@@ -51,18 +51,18 @@ export default function HeaderDesktop() {
                         <p className="typography-01">Inspiration</p>
                       </a>
                     </Link>)(),
-                    (() => <Link href="/magazine/insights">
-                      <a className={ router.pathname == "/magazine/insights" ? "is-active" : "" }>
+                    (() => <Link href="/insights">
+                      <a className={ router.pathname == "/insights" ? "is-active" : "" }>
                         <p className="typography-01">Insights</p>
                       </a>
                     </Link>)(),
-                    (() => <Link href="/magazine/resources">
-                      <a className={ router.pathname == "/magazine/resources" ? "is-active" : "" }>
+                    (() => <Link href="/resources">
+                      <a className={ router.pathname == "/resources" ? "is-active" : "" }>
                         <p className="typography-01">Resources</p>
                       </a>
                     </Link>)(),
-                    // (() => <Link href="/magazine/directory">
-                    //   <a className={ router.pathname == "/magazine/directory" ? "is-active" : "" }>
+                    // (() => <Link href="/directory">
+                    //   <a className={ router.pathname == "/directory" ? "is-active" : "" }>
                     //     <p className="typography-01">Directory</p>
                     //   </a>
                     // </Link>)(),
