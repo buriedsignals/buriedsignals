@@ -3,7 +3,7 @@ import { gql } from '@apollo/client'
 
 export const QUERY_PAGE_PUBLICATION = gql`
   query QueryPageAboutUs {
-    pages(filters: { Slug: { eq: "about-us" } }) {
+    pages(filters: { Slug: { eq: "about" } }) {
       data {
         attributes {
           Title
