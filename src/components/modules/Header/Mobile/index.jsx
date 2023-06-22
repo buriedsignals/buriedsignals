@@ -37,6 +37,10 @@ export default function HeaderMobile() {
   useEffect(() => {
     useStore.setState({ scroll: !modalMenu })
   }, [modalMenu])
+  useEffect(() => {
+    setModalDropdown(false)
+    setModalMenu(false)
+  }, [router.asPath])
   return (
     <HeaderMobileStyle>
       <div className="header-mobile-container">

@@ -29,5 +29,24 @@ export const SpotlightsTemplateStyle = styled.div`
       max-width: 640px;
       color: var(--color-grey03);
     }
+    .socials {
+      display: flex;
+      gap: 16px;
+      padding-top: 40px;
+      svg {
+        width: 18px;
+        height: 18px;
+        path {
+          fill: var(--color-white);
+          transition: fill 0.25s ease-in;
+        }
+        &:hover {
+          path {
+            fill: var(--color-green);
+            transition: fill 0.25s ease-out;
+          }
+        }
+      }
+    }
   }
 `

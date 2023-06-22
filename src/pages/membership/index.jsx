@@ -4,7 +4,7 @@ import { getUsersJury } from '@/middlewares/librairies/users/jury';
 // Next
 import Head from 'next/head'
 // Templates
-import MembershipTemplate from "@/components/templates/About/Jury"
+import MembershipTemplate from "@/components/templates/Membership"
 
 export default function Membership({ membership, ...props }) {
   return (
