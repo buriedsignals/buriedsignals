@@ -40,7 +40,7 @@ export default function Footer() {
           <div className="legal">
             <p className="typography-10">Zurich, Switzerland</p>
             <a href="mailto:tom@buriedsignals.com" className="typography-10" target="_blank" rel="noopener noreferrer">tom@buriedsignals.com</a>
-            <p className="copyright typography-10">© 2023 Buried Signals. See <Link href="/privacy"><a className="typography-03">Privacy</a></Link>, <Link href="/terms"><a href="https://buriedsignals.com/terms" className="typography-03">Terms</a></Link> and <Link href="/notice"><a className="typography-03">Information Collection Notice</a></Link></p>
+            <p className="copyright typography-10">© 2023 Buried Signals. See <Link href="/privacy"><a className="typography-03">Privacy</a></Link>, <Link href="/terms"><a className="typography-03">Terms</a></Link> and <Link href="/notice"><a className="typography-03">Information Collection Notice</a></Link></p>
           </div>
           <Link href="/"><a className="logo" target="_blank" rel="noopener noreferrer"><Logo type="large" /></a></Link>
         </div>

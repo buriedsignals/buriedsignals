@@ -16,8 +16,8 @@ export default function Dropdown({ buttonName = "", listActions = [], isActive =
         <p className="typography-01">{ buttonName }</p>
         <ArrowIcon />
       </button>
-      { modal && 
-        <div className="panel">
+      {/* { modal &&  */}
+        <div className={ `panel ${ modal ? 'is-show' : '' }` }>
           <ul className="links">
             { listActions.map((itemAction, index) => {
                 return <li key={ `item-${index}` } className="link" onClick={ () => setModal(false) }>
@@ -26,7 +26,7 @@ export default function Dropdown({ buttonName = "", listActions = [], isActive =
             }) }
           </ul>
         </div>
-     }
+     {/* } */}
     </DropdownStyle>
   )
 }

@@ -4,13 +4,13 @@ import { getPageNotice } from '@/middlewares/librairies/pages/notice';
 import Head from 'next/head'
 // Templates
 import NoticeTemplate from "@/components/templates/Legal"
+// Modules
+import HeadSEOModule from '@/components/modules/HeadSEO';
 
 export default function Notice({ notice, ...props }) {
   return (
     <>
-      <Head>
-        <title key='title'>Buried Signals | Notice</title>
-      </Head>
+      <HeadSEOModule meta={ notice.page.meta } />
       <NoticeTemplate legal={ notice } />
     </>
   )

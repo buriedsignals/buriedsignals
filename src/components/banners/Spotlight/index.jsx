@@ -8,6 +8,7 @@ import BookmarkButton from "@/components/buttons/Bookmark"
 import CommentButton from "@/components/buttons/Comment"
 // Links
 import SecondaryLink from "@/components/links/Secondary"
+import ThirstyLink from "@/components/links/Thirsty"
 // Icons
 import ExternalLinkIcon from "@/components/icons/ExternalLink"
 
@@ -31,17 +32,27 @@ export default function Spotlight({ post, ...props }) {
             </div>
           </div>
           <div className="informations-container">
-            <h3 className="title typography-06">{ limitSizeText(post.title, 40) }</h3>
+            <h1 className="title typography-06">{ limitSizeText(post.title, 40) }</h1>
             <p className="description typography-07">{ limitSizeText(post.description, 78) }</p>
           </div>
-          <div className="actions-container">
-            <LikeButton likes={ post.likes } liked={ post.liked } postId={ post.id } type="spotlights" />
-            <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="spotlights"  />
-            <CommentButton comments={ post.comments_length } />
-            <SecondaryLink href={ post.source.url }>
-              <p className="typography-03">Visit Spotlight</p>
-              <ExternalLinkIcon />
-            </SecondaryLink>
+          <div className="actions">
+            <div className="actions-container">
+              <LikeButton likes={ post.likes } liked={ post.liked } postId={ post.id } type="spotlights" />
+              <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="spotlights"  />
+              <CommentButton comments={ post.comments_length } />
+              <SecondaryLink href={ post.source.url }>
+                <p className="typography-03">Visit Spotlight</p>
+                <ExternalLinkIcon />
+              </SecondaryLink>
+            </div>
+            { post.archive.slug && 
+              // <a href={ `/archives/${ post.archive.slug }` }>
+              //   <p className="typography-10">Archive</p>
+              // </a> 
+              <ThirstyLink href={ `/archives/${ post.archive.slug }` } size="small">
+                Archive
+              </ThirstyLink> 
+            }
           </div>
         </div>
       </div>

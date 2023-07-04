@@ -1,23 +1,23 @@
 // Middlewares
-import { getPagePublication } from '@/middlewares/librairies/pages/publication';
+import { getPageAbout } from '@/middlewares/librairies/pages/about';
 // Next
 import Head from 'next/head'
 // Templates
-import AboutTemplate from "@/components/templates/About/Publication"
+import AboutTemplate from "@/components/templates/About"
+// Modules
+import HeadSEOModule from '@/components/modules/HeadSEO';
 
 export default function About({ about, ...props }) {
   return (
     <>
-      <Head>
-        <title key='title'>Buried Signals | About</title>
-      </Head>
+      <HeadSEOModule meta={ about.meta } />
       <AboutTemplate publication={ about } />
     </>
   )
 }
 
 export async function getStaticProps(context) {
-  const about = await getPagePublication()
+  const about = await getPageAbout()
   if (!about) {
     return {
       notFound: true,

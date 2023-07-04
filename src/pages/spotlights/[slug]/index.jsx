@@ -4,34 +4,40 @@ import Head from 'next/head'
 import { getPostsSpotlights, getPostSpotlight } from '@/middlewares/librairies/posts/spotlights';
 // Templates
 import SpotlightTemplate from "@/components/templates/Spotlights/Spotlight"
+// Modules
+import HeadSEOModule from '@/components/modules/HeadSEO';
 
 export default function Spotlight({ spotlight, ...props }) {
   return (
     <>
-      <Head>
-        <title key='title'>{ `Buried Signals | Spotlight : ${ spotlight.title }` }</title>
-        <meta key='description' name='description' content={ spotlight.description } />
-        <meta key='og-title' property='og:title' content={ spotlight.title } />
-        <meta key='og-description' property='og:description' content={ spotlight.description } />
-        <meta key='og-image' property='og:image' content={ spotlight.image.url } />
-        <meta key='tw-title' name='twitter:title' content={ spotlight.title } />
-        <meta key='tw-description' name='twitter:description' content={ spotlight.description } />
-        <meta key='tw-image' name='twitter:image:src' content={ spotlight.image.url } />
-      </Head>
+      <HeadSEOModule meta={ spotlight.meta } />
       <SpotlightTemplate spotlight={ spotlight } />
     </>
   )
 }
 
-export async function getStaticPaths() {
-  const spotlights = await getPostsSpotlights()
-  const paths = spotlights.posts.filter((post) => post.slug !== null).map((post) => ({
-    params: { slug: post.slug },
-  }))
-  return { paths, fallback: "blocking" }
-}
+// export async function getStaticPaths() {
+//   const spotlights = await getPostsSpotlights()
+//   const paths = spotlights.posts.filter((post) => post.slug !== null).map((post) => ({
+//     params: { slug: post.slug },
+//   }))
+//   return { paths, fallback: "blocking" }
+// }
 
-export async function getStaticProps({params, ...context}) {
+// export async function getStaticProps({params, ...context}) {
+//   const spotlight = await getPostSpotlight(params.slug)
+//   if (!spotlight) {
+//     return {
+//       notFound: true,
+//     }
+//   }
+//   return {
+//     props: { spotlight },
+//     revalidate: 1
+//   }
+// }
+
+export async function getServerSideProps({params, ...context}) {
   const spotlight = await getPostSpotlight(params.slug)
   if (!spotlight) {
     return {
@@ -39,7 +45,6 @@ export async function getStaticProps({params, ...context}) {
     }
   }
   return {
-    props: { spotlight },
-    revalidate: 1
+    props: { spotlight }
   }
 }

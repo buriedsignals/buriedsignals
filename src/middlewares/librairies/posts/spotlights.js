@@ -1,19 +1,35 @@
 // Middlewares
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
-import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_LATEST, QUERY_POSTS_SPOTLIGHTS_WEEK, QUERY_POSTS_SPOTLIGHTS_MONTH, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_SPOTLIGHT_COMMENT } from "@/middlewares/datas/posts/spotlights"
-import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments } from '../utils'
-import { transformToSlug } from '@/scripts/utils'
+import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_LATEST, QUERY_POSTS_SPOTLIGHTS_WEEK, QUERY_POSTS_SPOTLIGHTS_MONTH, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_SPOTLIGHT_COMMENT, UPDATE_POST_SPOTLIGHT_METRICS_VIRALITY_VALUE, QUERY_POST_SPOTLIGHT_ARCHIVE, QUERY_POSTS_SPOTLIGHTS_ARCHIVES } from "@/middlewares/datas/posts/spotlights"
+// Scripts
+import { getDecile, transformToSlug, parsePostsSpotlights, parsePostSpotlight, createImage, parseComments, parseArchivesSpotlights, parseArchiveSpotlight } from '../utils'
 
 export let authorId = null
 
-export async function getPostsSpotlights() {
+export async function getPostsSpotlights(query) {
   const apolloClient = getApolloClient()
+  const variables = {}
+  if (query.category) {
+    variables.categories = [].concat(query.category)
+  }
+  if (query.award) {
+    variables.award = query.award
+  }
+  if (query.geography) {
+    variables.geography = query.geography
+  }
   const responseSpotlights = await apolloClient.query({
-    query: QUERY_POSTS_SPOTLIGHTS,
+    query: QUERY_POSTS_SPOTLIGHTS({
+      categories: query.category || null,
+      award: query.award || null,
+      geography: query.geography || null
+    }),
+    variables: variables
   })
   if (!responseSpotlights) return null
   let posts = responseSpotlights.data.spotlightsPosts.data
-  posts = parsePostsSpotlights(posts)
+  posts = parsePostsSpotlights(posts, query)
+
   for (let i = 0; i < posts.posts.length; i++) {
     const post = posts.posts[i]
     const responseComments = await apolloClient.query({
@@ -175,4 +191,66 @@ export async function deleteSpotlightComment(datas) {
   })
   if (!response) return null
   return response
+}
+
+export async function updateViralityMetricsSpotlights() {
+  /* 
+    - Get all spotlights (id, metrics_virality_backlinks) 
+    - Create array of all metrics_virality_backlinks
+    - Create decentile function
+    - For each spotlights
+      - Get notation of the current metrics_virality_backlinks
+      - Update the metrics_virality_value 
+  */  
+  const apolloClient = getApolloClient()
+  const responseSpotlights = await apolloClient.query({
+    query: QUERY_POSTS_SPOTLIGHTS,
+  })
+  if (!responseSpotlights) return null
+  let posts = responseSpotlights.data.spotlightsPosts.data
+  posts = parsePostsSpotlights(posts)
+  const backlinks = []
+  posts.posts.forEach(post => {
+    if (post.virality_backlinks) {
+      backlinks.push(post.virality_backlinks)
+    }
+  })
+  const responses = []
+  posts.posts.forEach(async post => {
+    if (post.virality_backlinks) {
+      const metrics_virality_value = getDecile(post.virality_backlinks, backlinks)
+      const response = await apolloClient.mutate({
+        errorPolicy: 'all',
+        mutation: UPDATE_POST_SPOTLIGHT_METRICS_VIRALITY_VALUE,
+        variables: { id: post.id, metricsViralityValue: metrics_virality_value }
+      })
+      responses.push(response)
+      if (!response) return null
+    }
+  })
+  return responses
+}
+
+
+export async function getPostsSpotlightsArchives(query) {
+  const apolloClient = getApolloClient()
+  const responseSpotlightsArchives = await apolloClient.query({
+    query: QUERY_POSTS_SPOTLIGHTS_ARCHIVES
+  })
+  if (!responseSpotlightsArchives) return null
+  let posts = responseSpotlightsArchives.data.spotlightsArchives.data
+  posts = parseArchivesSpotlights(posts, query)
+  return posts
+}
+
+
+export async function getPostSpotlightArchive(slug) {
+  const apolloClient = getApolloClient()
+  const responseSpotlightArchive = await apolloClient.query({
+    query: QUERY_POST_SPOTLIGHT_ARCHIVE,
+    variables: { slug }
+  })
+  if (!responseSpotlightArchive) return null
+  const post = responseSpotlightArchive.data.spotlightsArchives.data[0].attributes
+  return parseArchiveSpotlight(post)
 }

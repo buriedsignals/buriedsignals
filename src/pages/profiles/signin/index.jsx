@@ -2,13 +2,15 @@
 import Head from 'next/head'
 // Templates
 import SigninTemplate from "@/components/templates/Profiles/Signin"
+// Modules
+import HeadSEOModule from '@/components/modules/HeadSEO'
 
 export default function Signin() {
   return (
     <>
-      <Head>
-        <title key='title'>Buried Signals | Sign in</title>
-      </Head>
+      <HeadSEOModule meta={ {
+        title: "Buried Signals - Sign in"
+      } } />
       <SigninTemplate />
     </>
   )

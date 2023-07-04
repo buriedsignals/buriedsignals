@@ -15,7 +15,7 @@ export default function ResourcesTemplate({ resources, ...props }) {
         <div className="container-module-large description-container">
           <p className="typography-07">{resources.page.description}</p>
         </div>
-        <PostsListModule type="resource" posts={resources.posts} categories={resources.categories} max={6} />
+        <PostsListModule type="resource" posts={resources.posts} categories={resources.categories} meta={resources.meta} />
       </ResourcesTemplateStyle>
     </Layout>
   )

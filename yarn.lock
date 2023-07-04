@@ -2750,6 +2750,11 @@ pbf@^3.2.1:
     ieee754 "^1.1.12"
     resolve-protobuf-schema "^2.1.0"
 
+percentile@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/percentile/-/percentile-1.6.0.tgz#c847b35a4d0a4e52235e16742aa3f317ce957293"
+  integrity sha512-8vSyjdzwxGDHHwH+cSGch3A9Uj2On3UpgOWxWXMKwUvoAbnujx6DaqmV1duWXNiH/oEWpyVd6nSQccix6DM3Ng==
+
 performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"

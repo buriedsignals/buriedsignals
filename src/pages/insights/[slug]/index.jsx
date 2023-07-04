@@ -4,20 +4,13 @@ import Head from 'next/head'
 import { getPostsInsights, getPostInsight } from '@/middlewares/librairies/posts/insights';
 // Templates
 import InsightTemplate from '@/components/templates/Insights/Insight';
+// Modules
+import HeadSEOModule from '@/components/modules/HeadSEO';
 
 export default function Insight({ insight, ...props }) {
   return (
     <>
-      <Head>        
-        <title key='title'>{ `Buried Signals | Insight : ${ insight.title }` }</title>
-        <meta key='description' name='description' content={ insight.description } />
-        <meta key='og-title' property='og:title' content={ insight.title } />
-        <meta key='og-description' property='og:description' content={ insight.description } />
-        <meta key='og-image' property='og:image' content={ insight.image.url } />
-        <meta key='tw-title' name='twitter:title' content={ insight.title } />
-        <meta key='tw-description' name='twitter:description' content={ insight.description } />
-        <meta key='tw-image' name='twitter:image:src' content={ insight.image.url } />
-      </Head>
+      <HeadSEOModule meta={ insight.meta } />
       <InsightTemplate insight={ insight } />
     </>
   )

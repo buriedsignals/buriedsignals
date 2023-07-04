@@ -26,6 +26,17 @@ export const QUERY_PAGE_PRIVACY = gql`
               }
             }
           }
+          Meta_title
+          Meta_description
+          Meta_keywords
+          Meta_image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
+            }
+          }
         }
       }
     }

@@ -5,20 +5,35 @@ import { getPostsInsights } from '@/middlewares/librairies/posts/insights';
 import Head from 'next/head'
 // Templates
 import InsightsTemplate from "@/components/templates/Insights"
+// Modules
+import HeadSEOModule from '@/components/modules/HeadSEO';
 
 export default function Insights({ insights, ...props }) {
   return (
     <>
-      <Head>
-        <title key='title'>Buried Signals | Insights</title>
-      </Head>
+      <HeadSEOModule meta={ insights.page.meta } />
       <InsightsTemplate insights={ insights } />
     </>
   )
 }
 
-export async function getStaticProps(context) {
-  const insights = await getPostsInsights()
+// export async function getStaticProps(context) {
+//   const insights = await getPostsInsights()
+//   const page = await getPageInsights()
+//   if (!insights || !page) {
+//     return {
+//       notFound: true,
+//     }
+//   }
+//   insights.page = page
+//   return {
+//     props: { insights },
+//     revalidate: 1
+//   }
+// }
+
+export async function getServerSideProps({ query }) {
+  const insights = await getPostsInsights(query)
   const page = await getPageInsights()
   if (!insights || !page) {
     return {
@@ -27,7 +42,6 @@ export async function getStaticProps(context) {
   }
   insights.page = page
   return {
-    props: { insights },
-    revalidate: 1
+    props: { insights }
   }
 }

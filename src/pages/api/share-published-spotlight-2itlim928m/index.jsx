@@ -24,10 +24,10 @@ export default async function handle(req, res) {
     })
     let link = await responseLink.json()
     link = link.link
-    let template = `Spotlight: ${ datas.Title } by ${ author }${ categories }\n\n•\n\n${ link }\n\n#narrativevisualisation #informationdesign`
-    const templateExtra = `Spotlight: ${ datas.Title } by ${ author }${ categories }\n\n•${ description }\n\n${ link }\n\n#narrativevisualisation #informationdesign`
-    const templateWithoutCategory = `Spotlight: ${ datas.Title } by ${ author }\n\n•\n\n${ link }\n\n#narrativevisualisation #informationdesign`
-    const templateWithoutCategoryAndAuthor = `Spotlight: ${ datas.Title }\n\n•\n\n${ link }\n\n#narrativevisualisation #informationdesign`
+    let template = `Inspiration: ${ datas.Title } by ${ author }${ categories }\n\n•\n\n${ link }\n\n#narrativevisualisation #datastorytelling`
+    const templateExtra = `Inspiration: ${ datas.Title } by ${ author }${ categories }\n\n•${ description }\n\n${ link }\n\n#narrativevisualisation #datastorytelling`
+    const templateWithoutCategory = `Inspiration: ${ datas.Title } by ${ author }\n\n•\n\n${ link }\n\n#narrativevisualisation #datastorytelling`
+    const templateWithoutCategoryAndAuthor = `Inspiration: ${ datas.Title }\n\n•\n\n${ link }\n\n#narrativevisualisation #datastorytelling`
     if (templateExtra.length <= 270) {
       template = templateExtra
     } else if (template.length > 270) {

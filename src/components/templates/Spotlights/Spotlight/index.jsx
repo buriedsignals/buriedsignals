@@ -7,6 +7,8 @@ import Layout from "@/components/layouts/main"
 // Modules
 import SpotlightBanner from "@/components/banners/Spotlight"
 import CommentsModule from "@/components/modules/Comments"
+// Banners
+import MetricBanner from "@/components/banners/Metric"
 // Buttons
 import SecondaryButton from "@/components/buttons/Secondary"
 // Links
@@ -93,6 +95,11 @@ export default function SpotlightTemplate({ spotlight, ...props }) {
               </SecondaryButton>
             </li>
           </ul>
+        </div>
+        <div className="container-module-large metrics-container">
+          { spotlight.metrics.map((metric, index) => {
+            return <MetricBanner key={ `metric-${ index }` } metric={ metric } />
+          }) }
         </div>
         <div className="container-module-large banner-container">
           <SpotlightBanner post={ spotlight } />

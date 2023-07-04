@@ -13,7 +13,7 @@ export default function InsightsTemplate({ insights, ...props }) {
         <div className="container-module-large description-container">
           <p className="typography-07">{ insights.page.description }</p>
         </div>
-        <PostsListModule type="insight" posts={ insights.posts } categories={ insights.categories } max={ 6 } />
+        <PostsListModule type="insight" posts={ insights.posts } categories={ insights.categories } meta={ insights.meta } />
       </InsightsTemplateStyle>
     </Layout>
   )

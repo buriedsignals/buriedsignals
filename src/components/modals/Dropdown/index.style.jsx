@@ -25,15 +25,24 @@ export const DropdownStyle = styled.div`
       p {
         color: var(--color-green);
       }
+      svg {
+        path {
+          fill: var(--color-green);
+        }
+      }
     }
   }
   .panel {
     position: absolute;
     top: -12.5px; left: -12.5px;
+    display: none;
     padding: calc(30px + 17.5px) 30px 17.5px;
     background: var(--color-black01);
     border: 1px solid var(--color-grey01);
     border-radius: 4px;
+    &.is-show {
+      display: block;
+    }
     .links {
       .link {
         &:not(:last-child) {

@@ -1,17 +1,15 @@
 // Middlewares
 // import { getPageDirectory } from '@/middlewares/librairies/pages/directories';
 // import { getPostsDirectories } from '@/middlewares/librairies/posts/directories';
-// Next
-import Head from 'next/head'
 // Templates
 // import DirectoryTemplate from "@/components/templates/Directory"
+// Modules
+import HeadSEOModule from '@/components/modules/HeadSEO'
 
 export default function Directory({ directory, ...props }) {
   return (
     <>
-      <Head>
-        <title key='title'>Buried Signals | Directory</title>
-      </Head>
+      <HeadSEOModule meta={ directory.page.meta } />
       {/* <DirectoryTemplate Directory={ directory } /> */}
     </>
   )

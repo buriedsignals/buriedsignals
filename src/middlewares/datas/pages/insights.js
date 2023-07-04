@@ -9,6 +9,17 @@ export const QUERY_PAGE_INSIGHTS = gql`
           Title
           Slug
           Description
+          Meta_title
+          Meta_description
+          Meta_keywords
+          Meta_image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
+            }
+          }
         }
       }
     }

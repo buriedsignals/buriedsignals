@@ -4,13 +4,13 @@ import { getPagePrivacy } from '@/middlewares/librairies/pages/privacy';
 import Head from 'next/head'
 // Templates
 import PrivacyTemplate from "@/components/templates/Legal"
+// Modules
+import HeadSEOModule from '@/components/modules/HeadSEO';
 
 export default function Privacy({ privacy, ...props }) {
   return (
     <>
-      <Head>
-        <title key='title'>Buried Signals | Privacy</title>
-      </Head>
+      <HeadSEOModule meta={ privacy.page.meta } />
       <PrivacyTemplate legal={ privacy } />
     </>
   )

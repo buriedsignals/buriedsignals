@@ -1,5 +1,17 @@
 import { deleteCookie, getCookie, setCookie, getCookies } from "cookies-next";
+import percentile from "percentile";
 
+// Get decentile
+export function getDecile(currrentValue, allValues) {
+  const deciles = percentile([10, 20, 30, 40, 50, 60, 70, 80, 90, 100], allValues)
+  let currentDecile = 0
+  deciles.forEach((decile, index) => {
+    if (decile <= currrentValue) {
+      currentDecile = index + 1
+    }
+  })
+  return currentDecile
+}
 // Limit size text
 export function limitSizeText(text = "", length = 0) {
   if (!text) return ""

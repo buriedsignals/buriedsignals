@@ -1,7 +1,82 @@
 // Nodes
 import { gql } from '@apollo/client'
 
-export const QUERY_POSTS_SPOTLIGHTS = gql`
+export const QUERY_POSTS_SPOTLIGHTS = ({ categories, award, geography }) => gql`
+  query QueryPostsSpotlights${ categories || award || geography ? `(${ categories ? "$categories: [String]" : "" }${ award ? `${ categories ? ", " : "" }$award: String` : "" }${ geography ? `${ categories || award ? ", " : "" }$geography: String` : "" })` : "" } {
+    spotlightsPosts(${ categories || award || geography ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" }${ award ? `${ categories ? "," : "" } Award: { Slug: { eq: $award } }` : "" }${ geography ? `${ categories || award ? "," : "" } Geography: { Slug: { eq: $geography } }` : "" }}, ` : "" }sort: "publishedAt:desc", pagination: { limit: 99999999 }) {
+      data {
+        id
+        attributes {
+          Title
+          Slug
+          Image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
+            }
+          }
+          Description
+          Source_author
+          Source_link
+          Categories {
+            data {
+              attributes {
+                Title
+                Slug
+              }
+            }
+          }
+          Award {
+            data {
+              attributes {
+                Title
+                Slug
+              }
+            }
+          }
+          Geography {
+            data {
+              attributes {
+                Title
+                Slug
+              }
+            }
+          }
+          Likes
+          Submited_by_external
+          Submited_by {
+            data {
+              attributes {
+                Name
+                Image {
+                  data {
+                    attributes {
+                      alternativeText
+                      url
+                    }
+                  }
+                }
+                Portfolio_link
+              }
+            }
+          }
+          Metrics_virality_backlinks
+          Archive {
+            data {
+              attributes {
+                Slug
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+export const QUERY_POSTS_SPOTLIGHTS_OLD = gql`
   query QueryPostsSpotlights {
     spotlightsPosts(sort: "publishedAt:desc", pagination: { limit: 99999999 }) {
       data {
@@ -59,6 +134,7 @@ export const QUERY_POSTS_SPOTLIGHTS = gql`
               }
             }
           }
+          Metrics_virality_backlinks
         }
       }
     }
@@ -120,6 +196,29 @@ export const QUERY_POST_SPOTLIGHT = gql`
                   }
                 }
                 Portfolio_link
+              }
+            }
+          }
+          Meta_title
+          Meta_description
+          Meta_keywords
+          Meta_image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
+            }
+          }
+          Metrics_effectiveness_value
+          Metrics_effectiveness_information
+          Metrics_virality_value
+          Metrics_virality_information
+          Metrics_virality_backlinks
+          Archive {
+            data {
+              attributes {
+                Slug
               }
             }
           }
@@ -351,6 +450,16 @@ export const UPDATE_POST_SPOTLIGHT_AWARDS = gql`
   }
 `
 
+export const UPDATE_POST_SPOTLIGHT_METRICS_VIRALITY_VALUE = gql`
+mutation MutationPostSpotlightMetricsViralityValue($id: ID!, $metricsViralityValue: Float) {
+  updateSpotlightsPost(id: $id, data: { Metrics_virality_value: $metricsViralityValue }) {
+    data {
+      id
+    }
+  }
+}
+`
+
 export const CREATE_SPOTLIGHT_COMMENT = gql`
   mutation CreateCommentSpotlight($datas: CreateComment!) {
     createComment(input: $datas) {
@@ -394,4 +503,81 @@ mutation DeleteSpotlightComment($datas: RemoveComment!) {
     removed
   }
 }
+`
+
+export const QUERY_POSTS_SPOTLIGHTS_ARCHIVES = gql`
+  query QueryPostsSpotlightsArchives {
+    spotlightsArchives(sort: "publishedAt:desc", pagination: { limit: 99999999 }) {
+      data {
+        id
+        attributes {
+          Title
+          Slug
+          File_wacz {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          Spotlight {
+            data {
+              attributes {
+                Title
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+
+export const QUERY_POST_SPOTLIGHT_ARCHIVE = gql`
+  query QueryPostSpotlightArchive($slug: String) {
+    spotlightsArchives(filters: { Slug: { eq: $slug } }) {
+      data {
+        id
+        attributes {
+          Title
+          Slug
+          File_wacz {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          Spotlight {
+            data {
+              attributes {
+                Image {
+                  data {
+                    attributes {
+                      alternativeText
+                      url
+                    }
+                  }
+                }
+                Description
+                Source_link
+                Meta_title
+                Meta_description
+                Meta_keywords
+                Meta_image {
+                  data {
+                    attributes {
+                      alternativeText
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 `
