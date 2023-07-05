@@ -101,7 +101,7 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
                   }
                 })()}
               </li>
-              { index % max == maxPostsBeforeNewsletter && type === 'spotlight' && <li key={ `newsletter-${ section }` } className={ `${ (index < max * section) ? 'is-show' : 'is-hide' } newsletter-container` }><NewsletterModule /></li> }
+              { index % max == maxPostsBeforeNewsletter - 1 && type === 'spotlight' && <li key={ `newsletter-${ section }` } className={ `${ (index < max * section) ? 'is-show' : 'is-hide' } newsletter-container` }><NewsletterModule /></li> }
               </>
           }) : <li key="post-0" className="container-module-large item-container">
             <p className="no-result typography-06">No results...</p>
@@ -114,7 +114,13 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
       }
       { meta && posts.length <= max * section && maxPages > 1 &&
         <div className="container-module-large more-pages">
-          { currentPage !== 1 && <p className="typography-01 arrow-left">{ "<" }</p> }
+          { currentPage !== 1 && 
+            <button onClick={ () => {
+              router.push({ pathname: router.pathname, query: { ...router.query, page: currentPage - 1 } }, undefined, { shallow: true }).then(() => router.reload())
+            } } className="page typography-01" >
+              <p className="typography-01 arrow-left">{ "<" }</p> 
+            </button>
+          }
           { Array.from({ length: maxPagesShow }).map((el, index) => {
             let page = currentPage
             let offset = maxPagesShow % 2 ? Math.floor(maxPagesShow / 2) : Math.floor(maxPagesShow / 2) - 1
@@ -125,14 +131,20 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
             }
             page = page + index - offset
             return (
-                <button onClick={ () => {
+                <button key={ `page-${ index }` } onClick={ () => {
                   router.push({ pathname: router.pathname, query: { ...router.query, page: page } }, undefined, { shallow: true }).then(() => router.reload())
                 } } className={ `${ (page == currentPage) ? 'is-active' : '' } page typography-01` }>
-                  <p key={ `page-${ index }` } className="typography-01">{ page }</p> 
+                  <p className="typography-01">{ page }</p> 
                 </button>
             )
           }) }
-          { currentPage !== maxPages && <p className="typography-01 arrow-right">{ ">" }</p> }
+          { currentPage !== maxPages && 
+            <button onClick={ () => {
+              router.push({ pathname: router.pathname, query: { ...router.query, page: currentPage + 1 } }, undefined, { shallow: true }).then(() => router.reload())
+            } } className="page typography-01">
+              <p className="typography-01 arrow-right">{ ">" }</p> 
+            </button>
+          }
         </div>
       }
     </PostsListStyle>

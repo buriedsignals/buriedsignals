@@ -1,6 +1,6 @@
 // Middlewares
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
-import { QUERY_USERS_MEMBERS, QUERY_USER_MEMBER, REGISTER_USER_MEMBER, UPDATE_USER_MEMBER, UPDATE_USER_MEMBER_LIKED_SPOTLIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_SPOTLIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_INSIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_RESOURCES, LOGIN_USER_MEMBER, FORGOT_PASSWORD_USER_MEMBER, RESET_PASSWORD_USER_MEMBER } from "@/middlewares/datas/users/members"
+import { QUERY_USERS_MEMBERS, QUERY_USER_MEMBER, REGISTER_USER_MEMBER, UPDATE_USER_MEMBER, UPDATE_USER_MEMBER_LIKED_SPOTLIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_SPOTLIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_INSIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_RESOURCES, LOGIN_USER_MEMBER, FORGOT_PASSWORD_USER_MEMBER, RESET_PASSWORD_USER_MEMBER, UPDATE_USER_MEMBER_VOTED_SPOTLIGHTS } from "@/middlewares/datas/users/members"
 import { parseUsersMembers, parseUserMember } from '../utils'
 import { transformToSlug } from '@/scripts/utils'
 
@@ -105,6 +105,17 @@ export async function updateUserMemberLikedSpotlights(memberId, postIds) {
   const response = await apolloClient.mutate({
     errorPolicy: 'all',
     mutation: UPDATE_USER_MEMBER_LIKED_SPOTLIGHTS,
+    variables: { memberId, postIds }
+  })
+  if (!response) return null
+  return response
+}
+
+export async function updateUserMemberVotedSpotlights(memberId, postIds) {
+  const apolloClient = getApolloClient()
+  const response = await apolloClient.mutate({
+    errorPolicy: 'all',
+    mutation: UPDATE_USER_MEMBER_VOTED_SPOTLIGHTS,
     variables: { memberId, postIds }
   })
   if (!response) return null

@@ -10,7 +10,7 @@ export const SecondaryStyle = styled.a`
   .secondary-container {
     display: flex;
     align-items: center;
-    padding: 12px;
+    padding: 9px 12px;
     svg {
       path {
         transition: all 0.25s ease-in;

@@ -17,7 +17,7 @@ import InformationIcon from "@/components/icons/Information"
 
 
 
-export default function Information({ information, ...props }) {
+export default function Information({ description, ...props }) {
   // Refernces 
   const panelRef = useRef()
   // Hooks
@@ -58,7 +58,7 @@ export default function Information({ information, ...props }) {
         <InformationIcon />
       </button>
       { modal && 
-        <InformationBanner information={ information } onClickButtonClose={ onClickButtonClose } />
+        <InformationBanner description={ description } onClickButtonClose={ onClickButtonClose } />
       }
     </InformationStyle>
   )

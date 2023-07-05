@@ -9,7 +9,7 @@ import { useBreakpoint } from 'styled-breakpoints/react-styled';
 import PrimaryButton from "@/components/buttons/Primary"
 
 
-export default function Information({ information, onClickButtonClose, ...props }) {
+export default function Information({ description, onClickButtonClose, ...props }) {
   // Refernces 
   const panelRef = useRef()
   //
@@ -18,7 +18,7 @@ export default function Information({ information, onClickButtonClose, ...props 
       <div ref={ panelRef } className="panel-information">
         <div className="panel-information-container">
           <h3 className={ `typography-${ useBreakpoint(down('sm')) ? "06" : "03" }` }>Details</h3>
-          <p className={ `typography-${ useBreakpoint(down('sm')) ? "07" : "21" } description` }>{ information }</p>
+          <p className={ `typography-${ useBreakpoint(down('sm')) ? "07" : "21" } description` }>{ description }</p>
           { useBreakpoint(down('sm')) && <>
             <div className="buttons-container">
               <PrimaryButton color="black03" onClickButton={ (e) => { 

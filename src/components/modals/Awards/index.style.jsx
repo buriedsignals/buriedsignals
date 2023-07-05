@@ -7,7 +7,7 @@ export const AwardsStyle = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    padding: 10px 12px;
+    padding: 9px 12px;
     border: 1px solid var(--color-grey01);
     border-radius: 4px;
     z-index: 2;

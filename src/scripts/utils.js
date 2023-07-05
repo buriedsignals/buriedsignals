@@ -81,6 +81,7 @@ export function loginUserCookies(datas) {
   setCookie("id", datas.id)
   setCookie("jwt", datas.jwt)
   setCookieObject("liked", datas.liked)
+  setCookieObject("voted", datas.voted)
   setCookie("name", datas.name)
   setCookie("slug", datas.slug)
   setCookie("twitter_account", datas.twitter_account)
@@ -95,6 +96,7 @@ export function getUserCookies() {
     id: getCookie("id") ? getCookie("id") : null,
     jwt: getCookie("jwt") ? getCookie("jwt") : null,
     liked: getCookie("liked-types") ? getCookieObject("liked") : { spotlights: [] },
+    voted: getCookie("voted-types") ? getCookieObject("voted") : { spotlights: [] },
     name: getCookie("name") ? getCookie("name") : null,
     slug: getCookie("slug") ? getCookie("slug") : null,
     twitter_account: getCookie("twitter_account") ? getCookie("twitter_account") : null,
@@ -109,6 +111,7 @@ export function logoutUserCookies() {
   setCookie("id", null)
   setCookie("jwt", null)
   setCookieObject("liked", { spotlights: [] })
+  setCookieObject("voted", { spotlights: [] })
   setCookie("name", null)
   setCookie("slug", null)
   setCookie("twitter_account", null)

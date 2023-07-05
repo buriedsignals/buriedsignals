@@ -62,6 +62,7 @@ export const QUERY_POSTS_SPOTLIGHTS = ({ categories, award, geography }) => gql`
               }
             }
           }
+          Metrics_effectiveness_votes
           Metrics_virality_backlinks
           Archive {
             data {
@@ -210,11 +211,6 @@ export const QUERY_POST_SPOTLIGHT = gql`
               }
             }
           }
-          Metrics_effectiveness_value
-          Metrics_effectiveness_information
-          Metrics_virality_value
-          Metrics_virality_information
-          Metrics_virality_backlinks
           Archive {
             data {
               attributes {
@@ -222,6 +218,13 @@ export const QUERY_POST_SPOTLIGHT = gql`
               }
             }
           }
+          Metrics_effectiveness_votes
+          Metrics_effectiveness_value
+          Metrics_effectiveness_description_information
+          Metrics_effectiveness_description_vote
+          Metrics_virality_backlinks
+          Metrics_virality_value
+          Metrics_virality_description_information
         }
       }
     }
@@ -440,6 +443,16 @@ export const UPDATE_POST_SPOTLIGHT_LIKES = gql`
   }
 `
 
+export const UPDATE_POST_SPOTLIGHT_VOTES = gql`
+  mutation MutationPostSpotlightVotes($id: ID!, $votes: String) {
+    updateSpotlightsPost(id: $id, data: { Metrics_effectiveness_votes: $votes }) {
+      data {
+        id
+      }
+    }
+  }
+`
+
 export const UPDATE_POST_SPOTLIGHT_AWARDS = gql`
   mutation MutationPostSpotlightAwards($id: ID!, $awardId: Id) {
     updateSpotlightsPost(id: $id, data: { Award: $awardId }) {
@@ -450,9 +463,9 @@ export const UPDATE_POST_SPOTLIGHT_AWARDS = gql`
   }
 `
 
-export const UPDATE_POST_SPOTLIGHT_METRICS_VIRALITY_VALUE = gql`
-mutation MutationPostSpotlightMetricsViralityValue($id: ID!, $metricsViralityValue: Float) {
-  updateSpotlightsPost(id: $id, data: { Metrics_virality_value: $metricsViralityValue }) {
+export const UPDATE_POST_SPOTLIGHT_METRICS_VALUE = gql`
+mutation MutationPostSpotlightMetricsValue($id: ID!, $metricsEffectivenessValue: Float, $metricsViralityValue: Float) {
+  updateSpotlightsPost(id: $id, data: { Metrics_effectiveness_value: $metricsEffectivenessValue, Metrics_virality_value: $metricsViralityValue }) {
     data {
       id
     }

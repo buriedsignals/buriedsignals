@@ -82,13 +82,22 @@ export function parsePostSpotlight(data) {
     metrics: [
       {
         title: "Effectiveness",
+        slug: "effectiveness",
         value: data.Metrics_effectiveness_value ? data.Metrics_effectiveness_value : "--",
-        information: data.Metrics_effectiveness_information ? data.Metrics_effectiveness_information : ""
+        votes: data.Metrics_effectiveness_votes ? data.Metrics_effectiveness_votes.split(',') : [],
+        description: {
+          information: data.Metrics_effectiveness_description_information ? data.Metrics_effectiveness_description_information : "",
+          vote: data.Metrics_effectiveness_description_vote ? data.Metrics_effectiveness_description_vote : ""
+        }
       },
       {
         title: "Virality",
+        slug: "virality",
         value: data.Metrics_virality_value ? data.Metrics_virality_value : "--",
-        information: data.Metrics_virality_information ? data.Metrics_virality_information : "",
+        backlinks: data.Metrics_virality_backlinks ? data.Metrics_virality_backlinks : null,
+        description: {
+          information: data.Metrics_virality_description_information ? data.Metrics_virality_description_information : "",
+        }
       }
     ],
     virality_backlinks: data.Metrics_virality_backlinks ? data.Metrics_virality_backlinks : null,
@@ -283,6 +292,11 @@ export function parseUserMember(data) {
         return { id: spotlights.id }
       }) : null,
     },
+    voted: {
+      spotlights: data.Voted_effectiveness_spotlights ? data.Voted_effectiveness_spotlights.data.map(spotlights => {
+        return { id: spotlights.id }
+      }) : null,
+    },
     meta: {
       title: `Buried Signals - ${ data.username ? data.username : "Profile" }`
     }
@@ -378,7 +392,7 @@ const pagination = (page, sectionSize, posts) => {
   let pageSize = Math.floor(50 / sectionSize) * sectionSize
   pageSize = totalPosts < pageSize ? totalPosts : pageSize
   const totalPages = Math.ceil(totalPosts / pageSize)
-  const paginatedPosts = posts.slice((page - 1) * pageSize, ((page - 1) * pageSize) + pageSize)
+  const paginatedPosts = page == -1 ? posts : posts.slice((page - 1) * pageSize, ((page - 1) * pageSize) + pageSize)
   return {
     posts: paginatedPosts,
     meta: {

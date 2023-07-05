@@ -33,6 +33,9 @@ export const SpotlightTemplateStyle = styled.div`
     ${down('lg')} {
       padding: 0 16px;
     }
+    ${down('md')} {
+      flex-wrap: wrap;
+    }
   }
   .banner-container {
     display: flex;

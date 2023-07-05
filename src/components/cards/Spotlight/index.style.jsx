@@ -85,7 +85,7 @@ export const SpotlightStyle = styled.a`
         }
       }
       .informations-container {
-        height: 121px;
+        height: 124px;
         margin-bottom: 20px;
         .title {
           margin-bottom: 12.5px;

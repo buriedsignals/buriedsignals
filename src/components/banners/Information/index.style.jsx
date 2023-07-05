@@ -4,21 +4,21 @@ import styled from "styled-components";
 export const InformationStyle = styled.div`
   // position: fixed;
   position: absolute;
-  top: calc(50% - 6px); left: calc(50% + 62.5px);
+  top: calc(50% - 6px); right: calc(-50% + 62.5px);
   width: 100%;
   height: 100%;
   transform: translate3D(-50%, -50%, 0);
   z-index: 2;
   ${down('sm')} {
     position: fixed;
-    top: inherit; left: inherit;
+    top: inherit; right: inherit;
     width: inherit;
     height: inherit;
     transform: inherit;
   }
   .panel-information {
     position: absolute;
-    bottom: 100%; right: 0;
+    bottom: 100%; left: 0;
     width: 250px;
     background: var(--color-black02);
     border-radius: 4px;

@@ -20,7 +20,7 @@ export const FormStyle = styled.div`
       input {
         display: block;
         width: 100%;
-        padding: 12.5px 25px;
+        padding: 9px 25px;
         background-color: var(--color-black03) !important;
         border: 1.25px solid var(--color-grey01);
         border-radius: 4px;

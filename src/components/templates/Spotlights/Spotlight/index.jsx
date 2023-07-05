@@ -98,7 +98,7 @@ export default function SpotlightTemplate({ spotlight, ...props }) {
         </div>
         <div className="container-module-large metrics-container">
           { spotlight.metrics.map((metric, index) => {
-            return <MetricBanner key={ `metric-${ index }` } metric={ metric } />
+            return <MetricBanner key={ `metric-${ index }` } metric={ metric } postId={ spotlight.id } />
           }) }
         </div>
         <div className="container-module-large banner-container">
