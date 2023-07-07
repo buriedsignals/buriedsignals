@@ -1,14 +1,13 @@
 // Nodes
 import { gql } from '@apollo/client'
 
-export const QUERY_PAGE_PUBLICATION = gql`
-  query QueryPageAboutUs {
-    pages(filters: { Slug: { eq: "about" } }) {
+export const QUERY_PAGE_TERMS = gql`
+  query QueryPageTerms {
+    pages(filters: { Slug: { eq: "terms" } }) {
       data {
         attributes {
           Title
           Slug
-          Description
           Dynamic_content {
             ... on ComponentBodyBody {
               Content
@@ -24,6 +23,17 @@ export const QUERY_PAGE_PUBLICATION = gql`
                     alternativeText
                   }
                 }
+              }
+            }
+          }
+          Meta_title
+          Meta_description
+          Meta_keywords
+          Meta_image {
+            data {
+              attributes {
+                alternativeText
+                url
               }
             }
           }

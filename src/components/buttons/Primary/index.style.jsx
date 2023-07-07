@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const PrimaryStyle = styled.button`
   display: flex;
   align-items: center;
-  padding: 18px 36px;
+  padding: 13px 36px;
   background-color: var(--color-${ (props) => props.color });
   border: 1px solid var(--color-${ (props) => props.color });
   border-radius: 4px;

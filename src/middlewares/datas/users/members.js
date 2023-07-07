@@ -156,6 +156,11 @@ export const QUERY_USER_MEMBER = gql`
               id
             }
           }
+          Voted_effectiveness_spotlights {
+            data {
+              id
+            }
+          }
         }
       }
     }
@@ -300,6 +305,11 @@ export const CREATE_USER_MEMBER = gql`
               }
             }
             Liked_spotlights {
+              data {
+                id
+              }
+            }
+            Voted_effectiveness_spotlights {
               data {
                 id
               }
@@ -493,6 +503,11 @@ export const UPDATE_USER_MEMBER = gql`
                 id
               }
             }
+            Voted_effectiveness_spotlights {
+              data {
+                id
+              }
+            }
         }
       }
     }
@@ -502,6 +517,16 @@ export const UPDATE_USER_MEMBER = gql`
 export const UPDATE_USER_MEMBER_LIKED_SPOTLIGHTS = gql`
   mutation UpdateUserMemberLikedSpotlights($memberId: ID!, $postIds: [Id]) {
     updateUsersPermissionsUser(id: $memberId, data: { Liked_spotlights: $postIds }) {
+      data {
+        id
+      }
+    }
+  }
+`
+
+export const UPDATE_USER_MEMBER_VOTED_SPOTLIGHTS = gql`
+  mutation UpdateUserMemberVotedSpotlights($memberId: ID!, $postIds: [Id]) {
+    updateUsersPermissionsUser(id: $memberId, data: { Voted_effectiveness_spotlights: $postIds }) {
       data {
         id
       }

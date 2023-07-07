@@ -2,6 +2,8 @@
 import { PostsFilterStyle } from "./index.style"
 // React
 import { useEffect, useRef, useState } from "react"
+// Next
+import { useRouter } from "next/router"
 // Hooks
 import useArray from "@/hooks/useArray"
 // Modals
@@ -10,19 +12,20 @@ import AwardsModal from "@/components/modals/Awards"
 import ArrowIcon from "@/components/icons/Arrow"
 
 export default function PostsFilter({ posts, categories, awards = false, geographies = false, multiple = false, setPage, ...props }) {
+  // Router
+  const router = useRouter()
   // Hooks
   const categoriesSelected = useArray([]);
   const categoriesWidth = useArray([]);
   // State
-  const [awardName, setAwardName] = useState('Award')
-  const [geographyName, setGeographyName] = useState('World')
+  const [awardName, setAwardName] = useState(router.query.award ? awards.find(a => a.slug === router.query.award) : { title: "Award", slug: "award" })
+  const [geographyName, setGeographyName] = useState(router.query.geography ? geographies.find(g => g.slug === router.query.geography) : { title: "World", slug: "world" })
   const [indexCategoriesSlider, setIndexCategoriesSlider] = useState(0)
   const [translateCategoriesSlider, setTranslateCategoriesSlider] = useState(0)
   const [hideButtonsSlider, setHideButtonsSlider] = useState(false)
   const [hidePreviousButtonSlider, setHidePreviousButtonSlider] = useState(true)
   const [hideNextButtonSlider, setHideNextButtonSlider] = useState(false)
   const [maxWidthSlider, setMaxWidthSlider] = useState(0)
-
   // Ref
   const filterRef = useRef()
   const sliderRef = useRef()
@@ -56,53 +59,50 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
   }
   // Handlers
   const onClickButton = (e) => {
-    const category = e.target.dataset.filter || false
-    const award = e.target.dataset.award || awardName
-    const geography = e.target.dataset.geography || geographyName
-    let newCategoriesSelected = [ ...categoriesSelected.array ]
-    if (category) {
-      if ((newCategoriesSelected.length == 1 && newCategoriesSelected.includes("Award")) || category == "Award") {
-        newCategoriesSelected = []
-      }
-      if (newCategoriesSelected.includes(category)) {
-        newCategoriesSelected.splice(newCategoriesSelected.indexOf(category), 1)
+    let category
+    if (e.target.dataset.filter) {
+      if (e.target.dataset.filter == "all") {
+        category = null
       } else {
-        if (multiple) {
-          newCategoriesSelected.push(category)
+        if (router.query.category) {
+          if (Array.isArray(router.query.category)) {
+            if (router.query.category.includes(e.target.dataset.filter)) {
+              router.query.category.splice(router.query.category.indexOf(e.target.dataset.filter), 1)
+              category = [...router.query.category]
+            } else {
+              category = [...router.query.category, e.target.dataset.filter]
+            }
+          } else {
+            if (router.query.category !== e.target.dataset.filter) {
+              category = [router.query.category, e.target.dataset.filter]
+            }
+          }
         } else {
-          newCategoriesSelected = [category]
+          category = e.target.dataset.filter
         }
       }
-      if (newCategoriesSelected.length == 0) {
-        newCategoriesSelected.push("Award")
+    } else {
+      if (router.query.category) {
+        category = router.query.category
+      } else {
+        category = null
       }
-      const filterButtons = filterRef.current.querySelectorAll(".filter-button")
-      filterButtons.forEach(filterButton => {
-        filterButton.classList.remove("is-active")
-        if (newCategoriesSelected.includes(filterButton.dataset.filter)) {
-          filterButton.classList.add("is-active")
-        }
-      });
     }
-    if (award) {
-      setAwardName(award)
+    const award = e.target.dataset.award || router.query.award || null
+    const geography = e.target.dataset.geography || router.query.geography || null
+    const query = { ...router.query, category, award, geography, page: 1 }
+    for (let key in query) {
+      if (query[key] === null || query[key] === "award" || query[key] === "world") {
+        delete query[key];
+      }
     }
-    if (geography) {
-      setGeographyName(geography)
+    router.push({ pathname: router.pathname, query }, undefined, { shallow: true }).then(() => router.reload())
+    if (query.award) {
+      setAwardName(query.award ? awards.find(a => a.slug === query.award) : { title: "Award", slug: "award" })
     }
-    posts.origin()
-    if (category != "Award" || award != "Award" || award != "World") {
-      posts.filter(n => {
-        const filterCategory = (category == "Award") || newCategoriesSelected.includes("Award") ? true : newCategoriesSelected.every(categorySelected => {
-          return  n.categories.includes(categorySelected)
-        });
-        const filterAward = (award == "Award") ? true : n.awards == award;
-        const filterGeography = (geography == "World") ? true : n.geography == geography;
-        return filterCategory && filterAward && filterGeography;
-      })
+    if (query.geography) {
+      setGeographyName(query.geography ? geographies.find(a => a.slug === query.geography) : { title: "World", slug: "world" })
     }
-    categoriesSelected.set(newCategoriesSelected)
-    setPage(1)
   }
   const onClickButtonSlider = (e) => {
     const direction = e.target.dataset.direction
@@ -148,17 +148,17 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
     <PostsFilterStyle ref={ filterRef } className="container-module-large" { ...props } >
       <ul className="filters-container">
         <div className="categories-slider-container">
-          <div ref={ sliderContainerRef } className="categories-container"  onScroll={ onScrollSlider }>
+          <div ref={ sliderContainerRef } className="categories-container" onScroll={ onScrollSlider }>
             <div ref={ sliderRef } className="slider-container">
               <li className="filter-container">
-                <button className="filter-button is-active" onClick={ onClickButton } data-filter={ "Award" }>
+                <button className={ `filter-button ${ !router.query.category ? "is-active" : "" }` } onClick={ onClickButton } data-filter={ "all" }>
                   <p className="typography-05">All</p>
                 </button>
               </li>
-              { categories.map((category, index) => {
+              { categories.map((category, index) => {  
                 return <li key={ `category-${ index }` } className="filter-container">
-                  <button className="filter-button" onClick={ onClickButton } data-filter={ category }>
-                    <p className="typography-05">{ category }</p>
+                  <button className={ `filter-button ${ router.query.category == category.slug ||( router.query.category && router.query.category.includes(category.slug)) ? "is-active" : "" }` } onClick={ onClickButton } data-filter={ category.slug }>
+                    <p className="typography-05">{ category.title }</p>
                   </button>
                 </li>
               }) }
@@ -185,14 +185,14 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
           { geographies && 
             <li className="filter-container filter-geographies">
               <AwardsModal 
-                  buttonName={ geographyName }
+                  buttonName={ geographyName.title }
                   listActions={ (() => {
                     const itemsGeographies = geographies.map((geography, index) => {
-                      return (() => <button key={ `geography-${ index }` } className={ `geographies-button ${ geographyName == geography ? "is-active" : "" }` } onClick={ onClickButton } data-geography={ geography }>
-                        <p className="typography-03">{ geography }</p>
+                      return (() => <button key={ `geography-${ index }` } className={ `geographies-button ${ geographyName.slug == geography.slug ? "is-active" : "" }` } onClick={ onClickButton } data-geography={ geography.slug }>
+                        <p className="typography-03">{ geography.title }</p>
                       </button>)()
                     })
-                    itemsGeographies.unshift((() => <button className={ `geographies-button ${ geographyName == "World" ? "is-active" : "" }` } onClick={ onClickButton } data-geography={ "World" }>
+                    itemsGeographies.unshift((() => <button className={ `geographies-button ${ geographyName.slug == "world" ? "is-active" : "" }` } onClick={ onClickButton } data-geography={ "world" }>
                       <p className="typography-03">World</p>
                     </button>)())
                     return itemsGeographies
@@ -203,14 +203,14 @@ export default function PostsFilter({ posts, categories, awards = false, geograp
           { awards && 
             <li className="filter-container filter-awards">
               <AwardsModal 
-                  buttonName={ awardName }
+                  buttonName={ awardName.title }
                   listActions={ (() => {
                     const itemsAwards = awards.map((award, index) => {
-                      return (() => <button key={ `award-${ index }` } className={ `awards-button ${ awardName == award ? "is-active" : "" }` } onClick={ onClickButton } data-award={ award }>
-                        <p className="typography-03">{ award }</p>
+                      return (() => <button key={ `award-${ index }` } className={ `awards-button ${ awardName.slug == award.slug ? "is-active" : "" }` } onClick={ onClickButton } data-award={ award.slug }>
+                        <p className="typography-03">{ award.title }</p>
                       </button>)()
                     })
-                    itemsAwards.unshift((() => <button className={ `awards-button ${ awardName == "Award" ? "is-active" : "" }` } onClick={ onClickButton } data-award={ "Award" }>
+                    itemsAwards.unshift((() => <button className={ `awards-button ${ awardName.slug == "award" ? "is-active" : "" }` } onClick={ onClickButton } data-award={ "award" }>
                       <p className="typography-03">All</p>
                     </button>)())
                     return itemsAwards

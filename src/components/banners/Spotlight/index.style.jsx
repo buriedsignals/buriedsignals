@@ -87,7 +87,7 @@ export const SpotlightStyle = styled.div`
         }
       }
       .informations-container {
-        height: 121px;
+        height: 124px;
         margin-bottom: 20px;
         .title {
           margin-bottom: 12.5px;
@@ -105,20 +105,28 @@ export const SpotlightStyle = styled.div`
           // }
         }
       }
-      .actions-container {
-        button {
-          &:not(:last-child) {
-            margin-right: 7.5px;
-          }
-        }
-        a {
-          top: -4px;
-          width: inherit;
-          .secondary-container {
-            ${down('md')} {
-              padding: 12px 8px;
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        .actions-container {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 7.5px;
+          a {
+            width: inherit;
+            .secondary-container {
+              ${down('md')} {
+                padding: 12px 8px;
+              }
             }
           }
+        }
+        & > a {
+          width: inherit;
+          margin: 0;
         }
       }
     }

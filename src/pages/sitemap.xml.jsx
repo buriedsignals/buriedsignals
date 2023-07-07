@@ -1,5 +1,5 @@
 // Middlewares
-import { getPostsSpotlights } from '@/middlewares/librairies/posts/spotlights';
+import { getPostsSpotlights, getPostsSpotlightsArchives } from '@/middlewares/librairies/posts/spotlights';
 import { getPostsInsights } from '@/middlewares/librairies/posts/insights';
 import { getUsersMembers } from '@/middlewares/librairies/users/member';
 
@@ -13,6 +13,8 @@ export async function getServerSideProps({ res }) {
   const slugsInsights = insights.posts.filter((post) => post.slug !== null).map((post) => (post.slug))
   const members = await getUsersMembers()
   const slugsMembers = members.users.filter((member) => member.slug !== null).map((member) => (member.slug))
+  const archives = await getPostsSpotlightsArchives()
+  const slugsArchives = archives.posts.filter((post) => post.slug !== null).map((post) => (post.slug))
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -26,10 +28,10 @@ export async function getServerSideProps({ res }) {
         <loc>https://buriedsignals.com/resources</loc>
       </url>
       <url>
-        <loc>https://buriedsignals.com/about/publication</loc>
+        <loc>https://buriedsignals.com/membership</loc>
       </url>
       <url>
-        <loc>https://buriedsignals.com/about/jury</loc>
+        <loc>https://buriedsignals.com/about</loc>
       </url>
       <url>
         <loc>https://buriedsignals.com/profiles/signin</loc>
@@ -44,7 +46,7 @@ export async function getServerSideProps({ res }) {
         <loc>https://buriedsignals.com/notice</loc>
       </url>
       <url>
-        <loc>https://buriedsignals.com/archives</loc>
+        <loc>https://buriedsignals.com/terms</loc>
       </url>
       <url>
         <loc>https://buriedsignals.com/404</loc>
@@ -72,6 +74,15 @@ export async function getServerSideProps({ res }) {
           return `
               <url>
                  <loc>https://buriedsignals.com/profiles/${slug}</loc>
+              </url>
+            `
+        }).join('')
+      }
+      ${slugsArchives.map(
+        (slug) => {
+          return `
+              <url>
+                 <loc>https://buriedsignals.com/archives/${slug}</loc>
               </url>
             `
         }).join('')

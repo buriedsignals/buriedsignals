@@ -32,7 +32,12 @@ export default function Like({ likes, liked = false, postId, type = null, ...pro
         } else {
           likedSpotlights.push({ id: postId })
         }
-        const body = { userId: user.id, postId, likes: isLiked ? stateLikes - 1 : stateLikes + 1, userPostIdsLiked: likedSpotlights.map(post => post.id) };
+        const body = { 
+          userId: user.id, 
+          postId, 
+          likes: isLiked ? stateLikes - 1 : stateLikes + 1, 
+          userPostIdsLiked: likedSpotlights.map(post => post.id) 
+        };
         await fetch('/api/post-update-spotlights-liked-mh2ea9e02i/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

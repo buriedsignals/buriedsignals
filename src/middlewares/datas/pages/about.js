@@ -1,9 +1,9 @@
 // Nodes
 import { gql } from '@apollo/client'
 
-export const QUERY_PAGE_STUDIO = gql`
-  query QueryPageStudio {
-    pages(filters: { Slug: { eq: "studio" } }) {
+export const QUERY_PAGE_ABOUT = gql`
+  query QueryPageAbout {
+    pages(filters: { Slug: { eq: "about" } }) {
       data {
         attributes {
           Title
@@ -24,6 +24,17 @@ export const QUERY_PAGE_STUDIO = gql`
                     alternativeText
                   }
                 }
+              }
+            }
+          }
+          Meta_title
+          Meta_description
+          Meta_keywords
+          Meta_image {
+            data {
+              attributes {
+                alternativeText
+                url
               }
             }
           }

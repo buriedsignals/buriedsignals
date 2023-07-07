@@ -66,7 +66,7 @@ export const InsightStyle = styled.div`
         }
       }
       .informations-container {
-        height: 121px;
+        height: 124px;
         margin-bottom: 20px;
         .title {
           margin-bottom: 12.5px;

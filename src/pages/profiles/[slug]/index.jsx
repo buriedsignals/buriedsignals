@@ -1,18 +1,18 @@
 // Middlewares
 import { getUsersMembers, getUserMember } from '@/middlewares/librairies/users/member';
-// Next
-import Head from 'next/head'
+// React
+import { useEffect } from 'react';
+// Hooks
+import useArray from '@/hooks/useArray';
 // Templates
 import ProfileTemplate from "@/components/templates/Profiles/Profile"
-import useArray from '@/hooks/useArray';
-import { useEffect } from 'react';
+// Modules
+import HeadSEOModule from '@/components/modules/HeadSEO';
 
 export default function Profile({ member }) {
   return (
     <>
-      <Head>
-        <title key='title'>{ `Buried Signals | ${ member.name }` }</title>
-      </Head>
+      <HeadSEOModule meta={ member.meta } />
       <ProfileTemplate member={ member } />
     </>
   )

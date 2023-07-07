@@ -4,6 +4,7 @@ export const ThirstyStyle = styled.a`
   position: relative;
   display: flex;
   align-items: center;
+  height: fit-content;
   margin: 0 auto;
   color: var(--color-${ (props) => props.color });
   border-radius: 4px;
@@ -14,9 +15,9 @@ export const ThirstyStyle = styled.a`
     content: "";
     position: absolute;
     left: 0;
-    bottom: -7.5px;
+    bottom: ${ (props) => props.size == "small" ? "-5" : "-7.5" }px;
     width: 100%;
-    height: 2.5px;
+    height: ${ (props) => props.size == "small" ? "1.5" : "2.5" }px;
     background-color: var(--color-${ (props) => props.color });
     transform-origin: 100% 50%;
     transform: scaleX(1);
@@ -26,9 +27,9 @@ export const ThirstyStyle = styled.a`
     content: "";
     position: absolute;
     left: 0;
-    bottom: -7.5px;
+    bottom: ${ (props) => props.size == "small" ? "-5" : "-7.5" }px;
     width: 100%;
-    height: 2.5px;
+    height: ${ (props) => props.size == "small" ? "1.5" : "2.5" }px;
     background-color: var(--color-${ (props) => props.color });
     transform-origin: 0 50%;
     transform: scaleX(0);

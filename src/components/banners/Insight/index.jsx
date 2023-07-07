@@ -22,7 +22,7 @@ export default function Insight({ post, ...props }) {
             </div>
           </div>
           <div className="informations-container">
-            <h3 className="title typography-06">{ limitSizeText(post.title, 40) }</h3>
+            <h1 className="title typography-06">{ limitSizeText(post.title, 40) }</h1>
             <p className="description typography-07">{ limitSizeText(post.description, 67) }</p>
           </div>
           <div className="actions-container">

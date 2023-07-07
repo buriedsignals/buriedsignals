@@ -22,7 +22,7 @@ export default function SpotlightsTemplate({ spotlights }) {
               <a href="https://www.linkedin.com/company/buried-signals" className="network" target="_blank" rel="noopener noreferrer"><LinkedinIcon /></a>
             </div>
         </div>
-        <PostsListModule type="spotlight" posts={ spotlights.posts } categories={ spotlights.categories } awards={ spotlights.awards } geographies={ spotlights.geographies } max={ 6 } />
+        <PostsListModule type="spotlight" posts={ spotlights.posts } categories={ spotlights.categories } awards={ spotlights.awards } geographies={ spotlights.geographies } meta={ spotlights.meta } />
       </SpotlightsTemplateStyle>
     </Layout>
   )

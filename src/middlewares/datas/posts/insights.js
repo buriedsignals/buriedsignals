@@ -1,9 +1,9 @@
 // Nodes
 import { gql } from '@apollo/client'
 
-export const QUERY_POSTS_INSIGHTS = gql`
-  query QueryPostsInsights {
-    insightsPosts(sort: "publishedAt:desc", pagination: { limit: 99999999 }) {
+export const QUERY_POSTS_INSIGHTS = ({ categories }) => gql`
+  query QueryPostsInsights${ categories ? `(${ categories ? "$categories: [String]" : "" })` : "" } {
+    insightsPosts(${ categories ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" } }, ` : "" }sort: "publishedAt:desc", pagination: { limit: 99999999 }) {
       data {
         id
         attributes {
@@ -25,6 +25,7 @@ export const QUERY_POSTS_INSIGHTS = gql`
             data {
               attributes {
                 Title
+                Slug
               }
             }
           }
@@ -97,6 +98,17 @@ export const QUERY_POST_INSIGHT = gql`
             }
             ... on ComponentEmbedVideoEmbedVideo {
               Link
+            }
+          }
+          Meta_title
+          Meta_description
+          Meta_keywords
+          Meta_image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
             }
           }
         }

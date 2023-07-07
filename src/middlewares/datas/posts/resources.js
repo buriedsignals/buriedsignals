@@ -1,9 +1,9 @@
 // Nodes
 import { gql } from '@apollo/client'
 
-export const QUERY_POSTS_RESOURCES = gql`
-  query QueryPostsResources {
-    resourcesPosts(sort: "publishedAt:desc", pagination: { limit: 99999999 }) {
+export const QUERY_POSTS_RESOURCES = ({ categories }) => gql`
+    query QueryPostsResources${ categories ? `(${ categories ? "$categories: [String]" : "" })` : "" } {
+      resourcesPosts(${ categories ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" } }, ` : "" }sort: "publishedAt:desc", pagination: { limit: 99999999 }) {
       data {
         id
         attributes {
@@ -24,6 +24,7 @@ export const QUERY_POSTS_RESOURCES = gql`
             data {
               attributes {
                 Title
+                Slug
               }
             }
           }

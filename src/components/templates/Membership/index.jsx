@@ -9,45 +9,50 @@ import IncludeCard from "@/components/cards/Include"
 // Links
 import PrimaryLink from "@/components/links/Primary"
 
-export default function MembershipTemplate({ jury, ...props }) {
+export default function MembershipTemplate({ membership, ...props }) {
   return (
     <Layout>
       <MembershipTemplateStyle>
         <div className="membership container-module-large">
           <div className="informations">
-            <h1 className="title typography-04">Membership</h1>
+            <h1 className="title typography-04">{ membership.page.title }</h1>
             <div className="description-container">
-              <p className="typography-07">Whether you want access to additional insights and case studies from experts, a research-based playbook, to participate in private events with creative technologists or journalists sharing their learnings, or if you just want to support the magazine - this is the place for you.</p>
-              <p className="typography-07">Join the waitlist to get a 50% discount, the membership will open in a few months.</p>
+             { (() => {
+                const descriptionSplit = membership.page.description.split('\n')
+                const paragraphes = []
+                descriptionSplit.map(p => {
+                  if (p !== "") {
+                    paragraphes.push(<p className="typography-07">{ p }</p>)
+                  }
+                })
+                return paragraphes
+              })() }
             </div>
             <PrimaryLink href="https://t1ipnnn9dzv.typeform.com/to/khhK4BJ2" intern={ false }>
               <p className="typography-03">Become a member</p>
             </PrimaryLink>
           </div>
-          <div className="includes">
-            <p className="typography-22">Includes</p>
-            <div className="list">
-              <div className="row">
-                <IncludeCard text={ "Featured listing on talent list" } soon={ true } />
-                <IncludeCard text={ "Personal portfolio archiving with WebRecorder" } soon={ true } />
-              </div>
-              <div className="row">
-                <IncludeCard text={ "A free digital copy of the *Effective Authoring Playbook*" } soon={ true } />
-                <IncludeCard text={ "Invitations to 4 Reading Club meetups per year" } />
-              </div>
-              <div className="row">
-                <IncludeCard text={ "Exclusive access to 8 case studies per year, from authors presenting groundbreaking projects" } />
-                <IncludeCard text={ "Access to the Slack channel, with the ability to submit and vote on Inspiration posts" } />
-              </div>
-              <div className="row">
-                <IncludeCard text={ "A social media shoutout" } />
+          { membership.page.flexible_content[0] &&
+            <div className="includes">
+              <p className="typography-22">{ membership.page.flexible_content[0].title }</p>
+              <div className="list">
+                { Array.from({ length: Math.round(membership.page.flexible_content[0].items.length / 2) }).map((el, index) => {
+                  const item1 = membership.page.flexible_content[0].items[index * 2]
+                  const item2 = membership.page.flexible_content[0].items[(index + 1) * 2] ? membership.page.flexible_content[0].items[index + 1] : null
+                  return (
+                    <div key={ `includes-${ index }` } className="row">
+                      <IncludeCard text={ item1.text } soon={ item1.soon } />
+                      { item2 && <IncludeCard text={ item2.text } soon={ item2.soon } /> }
+                    </div>
+                  )
+                }) }
               </div>
             </div>
-          </div>
+          }
         </div>
         <div className="jury">
-          <h2 className="title container-module-large typography-04">{ jury.page.title }</h2>
-          <PostsListModule type="jury" posts={ jury.users } max={ 99999 } />
+          <h2 className="title container-module-large typography-04">Jury</h2>
+          <PostsListModule type="jury" posts={ membership.users } meta={ membership.meta } />
         </div>
       </MembershipTemplateStyle>
     </Layout>
