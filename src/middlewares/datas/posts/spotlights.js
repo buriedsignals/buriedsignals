@@ -63,7 +63,9 @@ export const QUERY_POSTS_SPOTLIGHTS = ({ categories, award, geography }) => gql`
             }
           }
           Metrics_effectiveness_votes
+          Metrics_effectiveness_value
           Metrics_virality_backlinks
+          Metrics_virality_value
           Archive {
             data {
               attributes {
@@ -220,11 +222,8 @@ export const QUERY_POST_SPOTLIGHT = gql`
           }
           Metrics_effectiveness_votes
           Metrics_effectiveness_value
-          Metrics_effectiveness_description_information
-          Metrics_effectiveness_description_vote
           Metrics_virality_backlinks
           Metrics_virality_value
-          Metrics_virality_description_information
         }
       }
     }
@@ -464,7 +463,7 @@ export const UPDATE_POST_SPOTLIGHT_AWARDS = gql`
 `
 
 export const UPDATE_POST_SPOTLIGHT_METRICS_VALUE = gql`
-mutation MutationPostSpotlightMetricsValue($id: ID!, $metricsEffectivenessValue: Float, $metricsViralityValue: Float) {
+mutation MutationPostSpotlightMetricsValue($id: ID!, $metricsEffectivenessValue: Float $metricsViralityValue: Float) {
   updateSpotlightsPost(id: $id, data: { Metrics_effectiveness_value: $metricsEffectivenessValue, Metrics_virality_value: $metricsViralityValue }) {
     data {
       id

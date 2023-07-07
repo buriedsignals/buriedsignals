@@ -79,27 +79,16 @@ export function parsePostSpotlight(data) {
       keywords: data.Meta_keywords ? data.Meta_keywords : "",
       image: data.Meta_image ? data.Meta_image.data ? getImage(data.Meta_image) : getImage(data.Image) : getImage(data.Image)
     },
-    metrics: [
-      {
-        title: "Effectiveness",
-        slug: "effectiveness",
+    metrics: {
+      effectiveness: {
         value: data.Metrics_effectiveness_value ? data.Metrics_effectiveness_value : "--",
         votes: data.Metrics_effectiveness_votes ? data.Metrics_effectiveness_votes.split(',') : [],
-        description: {
-          information: data.Metrics_effectiveness_description_information ? data.Metrics_effectiveness_description_information : "",
-          vote: data.Metrics_effectiveness_description_vote ? data.Metrics_effectiveness_description_vote : ""
-        }
       },
-      {
-        title: "Virality",
-        slug: "virality",
+      virality: {
         value: data.Metrics_virality_value ? data.Metrics_virality_value : "--",
         backlinks: data.Metrics_virality_backlinks ? data.Metrics_virality_backlinks : null,
-        description: {
-          information: data.Metrics_virality_description_information ? data.Metrics_virality_description_information : "",
-        }
       }
-    ],
+    },
     virality_backlinks: data.Metrics_virality_backlinks ? data.Metrics_virality_backlinks : null,
     archive: {
       slug: data.Archive.data ? data.Archive.data.attributes.Slug ? data.Archive.data.attributes.Slug : null : null
@@ -382,6 +371,20 @@ function getDynamicContent(datas) {
         return {
           title: data.Title,
           items: items,
+        }
+      case "ComponentMetricsMetrics":
+        return {
+          effectiveness: {
+            title: data.Title_effectiveness,
+            type: "effectiveness",
+            description_information: data.Description_effectiveness_information,
+            description_vote: data.Description_effectiveness_vote
+          },
+          virality: {
+            title: data.Title_virality,
+            type: "virality",
+            description_information: data.Description_virality_information
+          }
         }
     }
   })

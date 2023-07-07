@@ -10,7 +10,7 @@ import HeadSEOModule from '@/components/modules/HeadSEO';
 export default function Notice({ notice, ...props }) {
   return (
     <>
-      <HeadSEOModule meta={ notice.page.meta } />
+      <HeadSEOModule meta={ notice.meta } />
       <NoticeTemplate legal={ notice } />
     </>
   )

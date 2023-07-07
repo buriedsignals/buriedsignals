@@ -17,8 +17,8 @@ export default function Information({ description, onClickButtonClose, ...props 
     <InformationStyle { ...props }>
       <div ref={ panelRef } className="panel-information">
         <div className="panel-information-container">
-          <h3 className={ `typography-${ useBreakpoint(down('sm')) ? "06" : "03" }` }>Details</h3>
-          <p className={ `typography-${ useBreakpoint(down('sm')) ? "07" : "21" } description` }>{ description }</p>
+          <h3 className={ `typography-${ useBreakpoint(down('sm')) ? "05" : "03" }` }>Details</h3>
+          <p className={ `typography-${ useBreakpoint(down('sm')) ? "12" : "21" } description` }>{ description }</p>
           { useBreakpoint(down('sm')) && <>
             <div className="buttons-container">
               <PrimaryButton color="black03" onClickButton={ (e) => { 

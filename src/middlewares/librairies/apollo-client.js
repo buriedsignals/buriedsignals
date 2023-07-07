@@ -19,8 +19,8 @@ export let USER = {
   slug: null,
   twitter_account: null
 }
-export const STRAPI_ENDPOINT = "http://127.0.0.1:1337" // "https://api.buriedsignals.com"
-const STRAPI_GRAPHQL_ENDPOINT = "/graphql"
+export const STRAPI_ENDPOINT = "https://api.buriedsignals.com"
+const STRAPI_GRAPHQL_ENDPOINT = "/graphql-g6dw7nypzj"
 let client = null
 
 /**

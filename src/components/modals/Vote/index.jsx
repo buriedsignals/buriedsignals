@@ -15,6 +15,8 @@ import ErrorBanner from "@/components/banners/Error"
 // Buttons
 import PrimaryButton from "@/components/buttons/Primary"
 import SecondaryButton from "@/components/buttons/Secondary"
+// Icons
+import CrossIcon from "@/components/icons/Cross"
 
 
 export default function Vote({ metric, description, postId, votes, ...props }) {
@@ -95,53 +97,6 @@ export default function Vote({ metric, description, postId, votes, ...props }) {
       const indexInput = formRef.current.querySelector('.input-index')
       indexInput.classList.add("input-error")
     }
-    // const emailInput = formRef.current.querySelector('.input-email')
-    // const email = emailInput.value.toLowerCase()
-    // const emailError = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
-    // const twitterInput = formRef.current.querySelector('.input-twitter')
-    // const twitter = twitterInput.value
-    // const twitterError = /@([A-Za-z0-9_]+)/.test(twitter)
-    // const descriptionInput = formRef.current.querySelector('.input-description')
-    // const description = descriptionInput.value
-    // const descriptionError = description.length > 0
-    // if (emailError && twitterError && descriptionError) {
-    //   try {
-    //     const body = { 
-    //       id: user.id,
-    //       datas: {
-    //         "email": email, 
-    //         "Twitter_account": twitter,
-    //         "Description": description
-    //       }
-    //     };
-    //     const reponse = await fetch('/api/post-update-user-g44man5ubc/', {
-    //       method: 'POST',
-    //       headers: { 'Content-Type': 'application/json' },
-    //       body: JSON.stringify(body),
-    //     });
-    //     const result = await reponse.json()
-    //     if (result.errors) {
-    //       setInternalError(true)
-    //     } else {
-    //       setModal(!modal)
-    //       window.scrollTo(0, 0)
-    //       setUser(result)
-    //     }
-    //   } catch (error) {
-    //     console.error(error);
-    //     setInternalError(true)
-    //   }
-    // } else {
-    //   if (!emailError) {
-    //     emailInput.parentElement.classList.add("input-error")
-    //   }
-    //   if (!twitterError) {
-    //     twitterInput.parentElement.classList.add("input-error")
-    //   }
-    //   if (!descriptionError) {
-    //     descriptionInput.parentElement.classList.add("input-error")
-    //   }
-    // }
   }
   return (
     <VoteStyle { ...props }>
@@ -153,25 +108,25 @@ export default function Vote({ metric, description, postId, votes, ...props }) {
         <>
           <div ref={ panelRef } className="panel-vote">
             <div className="panel-vote-container">
-              <h3 className="typography-04">Vote</h3>          
-              <p className="typography-07 description">{ description }</p>
+              <button className="close-container" onClick={ () => {
+                setModal(!modal)
+                setIndexVote(null)
+              } }>
+                <CrossIcon />
+              </button>
+              <h3 className="typography-05">Vote</h3>          
+              <p className="typography-12 description">{ description }</p>
               <div ref={ formRef } className="form">
                 <div className="inputs-container input-index">
                   { Array.from({ length: 10 }).map((el, index) => {
-                    return <button key={ `vote-${ index }` } className={ `input-container typography-01 ${ index + 1 == indexVote ? "is-active" : "" }` } data-index={ index + 1 } onClick={ onClickButtonIndex }>
+                    return <button key={ `vote-${ index }` } className={ `input-container typography-15 ${ index + 1 == indexVote ? "is-active" : "" }` } data-index={ index + 1 } onClick={ onClickButtonIndex }>
                       { index + 1 }
                     </button>
                   })}
                 </div>
                 <div className="buttons-container">
                   <PrimaryButton onClickButton={ onClickButtonSubmit }>
-                    <p className="typography-03">Vote</p>
-                  </PrimaryButton>
-                  <PrimaryButton color="black03" onClickButton={ () => {
-                    setModal(!modal)
-                    setIndexVote(null)
-                  } }>
-                    <p className="typography-03">Cancel</p>
+                    <p className="typography-03">Submit vote</p>
                   </PrimaryButton>
                 </div>
               </div>

@@ -11,10 +11,11 @@ export const InformationStyle = styled.div`
   z-index: 2;
   ${down('sm')} {
     position: fixed;
-    top: inherit; right: inherit;
-    width: inherit;
-    height: inherit;
+    top: 0; right: 0;
+    width: 100vw;
+    height: 100vh;
     transform: inherit;
+    background-color: rgba(22,25,27,0.5);
   }
   .panel-information {
     position: absolute;
@@ -59,7 +60,7 @@ export const InformationStyle = styled.div`
         }
         ${down('sm')} {
           max-height: 50vh;
-          margin-bottom: 37.5px;
+          margin-bottom: 15px;
         }
       }
       .inputs-container {
@@ -117,6 +118,9 @@ export const InformationStyle = styled.div`
       .buttons-container {
         display: flex;
         justify-content: center;
+        ${down('sm')} {
+          justify-content: flex-start;
+        }
         button {
           min-width: 140px;
           &:not(:first-child) {

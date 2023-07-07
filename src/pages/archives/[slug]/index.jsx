@@ -18,15 +18,28 @@ export default function Archive({ archive, ...props }) {
   )
 }
 
-export async function getStaticPaths() {
-  const archives = await getPostsSpotlightsArchives()
-  const paths = archives.posts.filter((post) => post.slug !== null).map((post) => ({
-    params: { slug: post.slug },
-  }))
-  return { paths, fallback: "blocking" }
-}
+// export async function getStaticPaths() {
+//   const archives = await getPostsSpotlightsArchives({ page: -1 })
+//   const paths = archives.posts.filter((post) => post.slug !== null).map((post) => ({
+//     params: { slug: post.slug },
+//   }))
+//   return { paths, fallback: "blocking" }
+// }
 
-export async function getStaticProps({params, ...context}) {
+// export async function getStaticProps({params, ...context}) {
+//   const archive = await getPostSpotlightArchive(params.slug)
+//   if (!archive) {
+//     return {
+//       notFound: true,
+//     }
+//   }
+//   return {
+//     props: { archive },
+//     revalidate: 1
+//   }
+// }
+
+export async function getServerSideProps({params, ...context}) {
   const archive = await getPostSpotlightArchive(params.slug)
   if (!archive) {
     return {

@@ -16,15 +16,28 @@ export default function Insight({ insight, ...props }) {
   )
 }
 
-export async function getStaticPaths() {
-  const insights = await getPostsInsights()
-  const paths = insights.posts.filter((post) => post.slug !== null).map((post) => ({
-    params: { slug: post.slug },
-  }))
-  return { paths, fallback: "blocking" }
-}
+// export async function getStaticPaths() {
+//   const insights = await getPostsInsights()
+//   const paths = insights.posts.filter((post) => post.slug !== null).map((post) => ({
+//     params: { slug: post.slug },
+//   }))
+//   return { paths, fallback: "blocking" }
+// }
 
-export async function getStaticProps({params, ...context}) {
+// export async function getStaticProps({params, ...context}) {
+//   const insight = await getPostInsight(params.slug)
+//   if (!insight) {
+//     return {
+//       notFound: true,
+//     }
+//   }
+//   return {
+//     props: { insight },
+//     revalidate: 1
+//   }
+// }
+
+export async function getServerSideProps({params, ...context}) {
   const insight = await getPostInsight(params.slug)
   if (!insight) {
     return {
@@ -32,7 +45,6 @@ export async function getStaticProps({params, ...context}) {
     }
   }
   return {
-    props: { insight },
-    revalidate: 1
+    props: { insight }
   }
 }

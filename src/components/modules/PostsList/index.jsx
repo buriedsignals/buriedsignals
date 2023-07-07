@@ -47,28 +47,6 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
       setInfiniteScroll(false)
     }
   }, [infiniteScroll])
-  
-  // useEffect(() => {
-  //   const handleRouteChange = (url) => {
-  //     window.location.reload();
-  //     // // Check if both the query parameters you're interested in have changed
-  //     // if (
-  //     //   router.asPath !== url && // Ensure the URL has changed
-  //     //   (router.query.param1 !== router.query.param2) // Check for the specific query parameter change
-  //     // ) {
-  //     //   // Reload the page
-  //     //   window.location.reload();
-  //     // }
-  //   };
-
-  //   // Subscribe to route changes
-  //   router.events.on('hashChangeStart', handleRouteChange);
-
-  //   // Clean up the event listener
-  //   return () => {
-  //     router.events.off('hashChangeStart', handleRouteChange);
-  //   };
-  // }, [router]);
   // Handlers
   const onClickButtonMorePosts = () => {
     setSection(section + 1)

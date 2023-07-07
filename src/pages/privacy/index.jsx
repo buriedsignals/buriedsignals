@@ -10,7 +10,7 @@ import HeadSEOModule from '@/components/modules/HeadSEO';
 export default function Privacy({ privacy, ...props }) {
   return (
     <>
-      <HeadSEOModule meta={ privacy.page.meta } />
+      <HeadSEOModule meta={ privacy.meta } />
       <PrivacyTemplate legal={ privacy } />
     </>
   )

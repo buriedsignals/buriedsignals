@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 export const InformationStyle = styled.div`
   position: relative;
-  z-index: 2;
   .modal {
     position: relative;
     display: flex;

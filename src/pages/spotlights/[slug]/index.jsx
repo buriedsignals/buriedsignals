@@ -1,7 +1,6 @@
-// Next
-import Head from 'next/head'
 // Middlewares
-import { getPostsSpotlights, getPostSpotlight } from '@/middlewares/librairies/posts/spotlights';
+import { getPageSpotlight } from '@/middlewares/librairies/pages/spotlight';
+import { getPostSpotlight } from '@/middlewares/librairies/posts/spotlights';
 // Templates
 import SpotlightTemplate from "@/components/templates/Spotlights/Spotlight"
 // Modules
@@ -39,11 +38,17 @@ export default function Spotlight({ spotlight, ...props }) {
 
 export async function getServerSideProps({params, ...context}) {
   const spotlight = await getPostSpotlight(params.slug)
-  if (!spotlight) {
+  const page = await getPageSpotlight()
+  if (!spotlight || !page) {
     return {
       notFound: true,
     }
   }
+  const metricsMerge = {}
+  for (let key in spotlight.metrics) {
+    metricsMerge[key] = Object.assign(spotlight.metrics[key], page.flexible_content[0][key])
+  }
+  spotlight.metrics = metricsMerge
   return {
     props: { spotlight }
   }

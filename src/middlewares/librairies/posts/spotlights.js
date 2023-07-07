@@ -144,7 +144,6 @@ export async function updatePostSpotlightLikes(id, likes) {
 }
 
 export async function updatePostSpotlightVotes(id, votes) {
-  console.log(id, votes)
   const apolloClient = getApolloClient()
   const response = await apolloClient.mutate({
     errorPolicy: 'all',
@@ -207,14 +206,6 @@ export async function deleteSpotlightComment(datas) {
 }
 
 export async function updateMetricsSpotlights() {
-  /* 
-    - Get all spotlights (id, metrics_virality_backlinks) 
-    - Create array of all metrics_virality_backlinks
-    - Create decentile function
-    - For each spotlights
-      - Get notation of the current metrics_virality_backlinks
-      - Update the metrics_virality_value 
-  */  
   const apolloClient = getApolloClient()
   const responseSpotlights = await apolloClient.query({
     query: QUERY_POSTS_SPOTLIGHTS({ categories: null, award: null, geography: null }),
@@ -230,17 +221,22 @@ export async function updateMetricsSpotlights() {
   })
   const responses = []
   posts.posts.forEach(async post => {
-    let metrics_effectiveness_value = post.metrics[0].votes.length != 0 ? post.metrics[0].votes.reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue), 0) / post.metrics[0].votes.length : null
-    metrics_effectiveness_value = metrics_effectiveness_value && Math.round(metrics_effectiveness_value * 100) / 100
-    const metrics_virality_value = post.virality_backlinks ? getDecile(post.virality_backlinks, backlinks) : null
-    console.log(post.virality_backlinks, metrics_effectiveness_value, metrics_virality_value)
-    const response = await apolloClient.mutate({
-      errorPolicy: 'all',
-      mutation: UPDATE_POST_SPOTLIGHT_METRICS_VALUE,
-      variables: { id: post.id, metricsEffectivenessValue: metrics_effectiveness_value, metricsViralityValue: metrics_virality_value }
-    })
-    responses.push(response)
-    if (!response) return null
+      let metrics_effectiveness_value = post.metrics[0].votes.length != 0 ? post.metrics[0].votes.reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue), 0) / post.metrics[0].votes.length : null
+      metrics_effectiveness_value = metrics_effectiveness_value && Math.round(metrics_effectiveness_value * 100) / 100
+      const old_metrics_effectiveness_value = post.metrics[0].value == "--" ? null : post.metrics[0].value
+
+      const metrics_virality_value = post.virality_backlinks ? getDecile(post.virality_backlinks, backlinks) : null
+      const old_metrics_virality_value = post.metrics[1].value == "--" ? null : post.metrics[1].value
+
+      if (old_metrics_virality_value !== metrics_virality_value || old_metrics_effectiveness_value !== metrics_effectiveness_value) {
+        const response = await apolloClient.mutate({
+          errorPolicy: 'all',
+          mutation: UPDATE_POST_SPOTLIGHT_METRICS_VALUE,
+          variables: { id: post.id, metricsEffectivenessValue: metrics_effectiveness_value, metricsViralityValue: metrics_virality_value }
+        })
+        responses.push(response)
+        if (!response) return null
+      }
   })
   return responses
 }

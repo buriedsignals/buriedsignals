@@ -22,14 +22,14 @@ export default function Metric({ metric, postId, ...props }) {
         <div className="header-container">
           <div className="title-container">
             <p className="title typography-03">{ metric.title }</p>
-            { metric.description.information && <InformationModal description={ metric.description.information } />}
+            { metric.description_information && <InformationModal description={ metric.description_information } />}
           </div>
           { metric.votes && metric.votes.length !== 0 && <p className="typography-03">{ `${ metric.votes.length } votes` }</p>}
           { metric.backlinks && <p className="typography-03">{ `${ metric.backlinks } backlinks` }</p>}
         </div>
         <div className="content-container">
           <p className="typography-20">{ metric.value }<span className="typography-21">/10</span></p>
-          { metric.votes && !alreadyVoted && <VoteModal metric={ metric.slug } description={ metric.description.vote } postId={ postId } votes={ metric.votes } /> }
+          { metric.votes && !alreadyVoted && <VoteModal metric={ metric.type } description={ metric.description_vote } postId={ postId } votes={ metric.votes } /> }
         </div>
       </div>
     </MetrictStyle>
