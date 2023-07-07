@@ -337,7 +337,7 @@ function transformToSlug(text) {
 
 function getImage(image) {
   return {
-    alt: image ? image.data ? image.data.attributes.alternativeText : "Image not described" : "Image not described",
+    alt: image ? image.data ? image.data.attributes.alternativeText ? image.data.attributes.alternativeText : "Image not described" : "Image not described" : "Image not described",
     url: image ? image.data ? STRAPI_ENDPOINT + image.data.attributes.url : null : null
   }
 }

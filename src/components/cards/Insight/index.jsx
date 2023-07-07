@@ -31,7 +31,7 @@ export default function Insight({ post, ...props }) {
                 <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="insights"  />
               </div>
               <div className="informations-container">
-                <h3 className="title typography-06">{ limitSizeText(post.title, 40) }</h3>
+                <h2 className="title typography-06">{ limitSizeText(post.title, 40) }</h2>
                 <p className="description typography-07">{ limitSizeText(post.description, 130) }</p>
               </div>
               <div className="more-container">
@@ -64,7 +64,7 @@ export default function Insight({ post, ...props }) {
                   <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="insights" />
                 </div>
                 <div className="informations-container">
-                  <h3 className="title typography-06">{ limitSizeText(post.title, 40) }</h3>
+                  <h2 className="title typography-06">{ limitSizeText(post.title, 40) }</h2>
                   <p className="description typography-07">{ limitSizeText(post.description, 130) }</p>
                 </div>
                 <div className="more-container">

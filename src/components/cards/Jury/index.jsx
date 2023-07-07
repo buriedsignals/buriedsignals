@@ -17,7 +17,7 @@ export default function Jury({ post, ...props }) {
               </div>
               <div className="content-container">
                 <div className="informations-container">
-                  <h3 className="title typography-06">{ limitSizeText(post.name, 40) }</h3>
+                  <h2 className="title typography-06">{ limitSizeText(post.name, 40) }</h2>
                   <p className="description typography-11">{ limitSizeText(post.description, 125) }</p>
                 </div>
               </div>
@@ -32,7 +32,7 @@ export default function Jury({ post, ...props }) {
             </div>
             <div className="content-container">
               <div className="informations-container">
-                <h3 className="title typography-06">{ limitSizeText(post.name, 40) }</h3>
+                <h2 className="title typography-06">{ limitSizeText(post.name, 40) }</h2>
                 <p className="description typography-11">{ limitSizeText(post.description, 125) }</p>
               </div>
             </div>

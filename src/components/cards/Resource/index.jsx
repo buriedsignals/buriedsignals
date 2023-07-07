@@ -26,7 +26,7 @@ export default function Resource({ post, ...props }) {
             <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="resources"  />
           </div>
           <div className="informations-container">
-            <h3 className="title typography-06">{ limitSizeText(post.title, 40) }</h3>
+            <h2 className="title typography-06">{ limitSizeText(post.title, 40) }</h2>
             <p className="description typography-07">{ limitSizeText(post.description, 80) }</p>
           </div>
           <div className="more-container">
