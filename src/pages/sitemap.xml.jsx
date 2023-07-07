@@ -7,13 +7,13 @@ export default function Sitemap() {
 }
 
 export async function getServerSideProps({ res }) {
-  const spotlights = await getPostsSpotlights()
+  const spotlights = await getPostsSpotlights({ page: -1 })
   const slugsSpotlights = spotlights.posts.filter((post) => post.slug !== null).map((post) => (post.slug))
-  const insights = await getPostsInsights()
+  const insights = await getPostsInsights({ page: -1 })
   const slugsInsights = insights.posts.filter((post) => post.slug !== null).map((post) => (post.slug))
-  const members = await getUsersMembers()
+  const members = await getUsersMembers({ page: -1 })
   const slugsMembers = members.users.filter((member) => member.slug !== null).map((member) => (member.slug))
-  const archives = await getPostsSpotlightsArchives()
+  const archives = await getPostsSpotlightsArchives({ page: -1 })
   const slugsArchives = archives.posts.filter((post) => post.slug !== null).map((post) => (post.slug))
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
