@@ -91,7 +91,7 @@ export function parsePostSpotlight(data) {
     },
     virality_backlinks: data.Metrics_virality_backlinks ? data.Metrics_virality_backlinks : null,
     archive: {
-      slug: data.Archive.data ? data.Archive.data.attributes.Slug ? data.Archive.data.attributes.Slug : null : null
+      slug: data.Archive ? data.Archive.data ? data.Archive.data.attributes.Slug ? data.Archive.data.attributes.Slug : null : null : null
     }
   }
 }
