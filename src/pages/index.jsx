@@ -46,4 +46,15 @@ export async function getServerSideProps({ query }) {
   return {
     props: { spotlights }
   }
+  // return {
+  //   props: {
+  //     spotlights: {
+  //       page: {
+  //         title: "Inspiration",
+  //         description: "Lorem Ipsum",
+  //         meta: {}
+  //       }
+  //     }
+  //   }
+  // }
 }

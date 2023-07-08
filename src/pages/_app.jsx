@@ -62,9 +62,13 @@ function App({ Component, pageProps }) {
         <meta name='keywords' content={ keywords } />
         <meta name='robots' content='index,follow' />
         <meta name='distribution' content='web' />
+        <meta itemProp="name" content={ title } />
+        <meta itemProp="description" content={ description } />
+        <meta itemProp='keywords' content={ keywords } />
+        <meta itemProp="image" content={ image } />
         <meta key='og-title' property='og:title' content={ title } />
         <meta property='og:type' content='site' />
-        <meta property='og:url' content={ url } />
+        <meta key='og-url' property='og:url' content={ url } />
         <meta key='og-image' property='og:image' content={ image } />
         <meta property='og:site_name' content={ title } />
         <meta key='og-description' property='og:description' content={ description } />

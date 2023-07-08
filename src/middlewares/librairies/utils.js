@@ -39,7 +39,7 @@ export function parsePostsSpotlights(datas, query) {
   let posts = datas.map(data => {
     return { id: data.id, ...parsePostSpotlight(data.attributes) }
   });
-  posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts)
+  posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts, query.totalPosts)
   const categories = getTaxonomiesPosts(datas, "Categories")
   const awards = getTaxonomiesPosts(datas, "Award")
   const geographies = getTaxonomiesPosts(datas, "Geography")
@@ -67,11 +67,11 @@ export function parsePostSpotlight(data) {
       author: data.Source_author ? data.Source_author : "",
       url: data.Source_link ? data.Source_link : ""
     },
-    submited_by: {
+    submited_by:  data.Submited_by ? {
       image: data.Submited_by.data ? getImage(data.Submited_by.data.attributes.Image) : data.Submited_by_external ? { url:"/images/profile-default.jpg", alt: "Default profile picture" } : "",
       name: data.Submited_by.data ? data.Submited_by.data.attributes.Name : data.Submited_by_external ? data.Submited_by_external : null,
       link: data.Submited_by.data ? data.Submited_by.data.attributes.Portfolio_link : null,
-    },
+    }: null,
     title: data.Title ? data.Title : "",
     meta: {
       title: data.Meta_title ? data.Meta_title : data.Title ? `Buried Signals - ${ data.Title }` : "",
@@ -167,7 +167,7 @@ export function parsePostsInsights(datas, query) {
   let posts = datas.map(data => {
     return { id: data.id, ...parsePostInsight(data.attributes) }
   });
-  posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts)
+  posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts, query.totalPosts)
   const categories = getTaxonomiesPosts(datas, "Categories")
   return {
     posts: posts.posts,
@@ -204,7 +204,7 @@ export function parsePostsResources(datas, query) {
   let posts = datas.map(data => {
     return { id: data.id, ...parsePostResource(data.attributes) }
   });
-  posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts)
+  posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts, query.totalPosts)
   const categories = getTaxonomiesPosts(datas, "Categories")
   return {
     posts: posts.posts,
@@ -231,7 +231,7 @@ export function parseUsersJury(datas, query) {
   let users = datas.map(data => {
     return parseUserJury(data.attributes)
   });
-  users = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, users)
+  users = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, users, query.totalPosts ? query.totalPosts : 1)
   return { 
     users: users.posts,
     meta: users.meta,
@@ -390,14 +390,14 @@ function getDynamicContent(datas) {
   })
 }
 
-const pagination = (page, sectionSize, posts) => {
-  const totalPosts = posts.length
+const pagination = (page, sectionSize, posts, totalPosts) => {
+  // const totalPosts = posts.length
   let pageSize = Math.floor(50 / sectionSize) * sectionSize
   pageSize = totalPosts < pageSize ? totalPosts : pageSize
   const totalPages = Math.ceil(totalPosts / pageSize)
-  const paginatedPosts = page == -1 ? posts : posts.slice((page - 1) * pageSize, ((page - 1) * pageSize) + pageSize)
+  // const paginatedPosts = page == -1 ? posts : posts.slice((page - 1) * pageSize, ((page - 1) * pageSize) + pageSize)
   return {
-    posts: paginatedPosts,
+    posts: posts,
     meta: {
       page,
       sectionSize,

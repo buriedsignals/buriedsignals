@@ -1,9 +1,22 @@
 // Nodes
 import { gql } from '@apollo/client'
 
-export const QUERY_POSTS_INSIGHTS = ({ categories }) => gql`
+export const QUERY_POSTS_INSIGHTS_LITE = ({ categories }) => gql`
   query QueryPostsInsights${ categories ? `(${ categories ? "$categories: [String]" : "" })` : "" } {
     insightsPosts(${ categories ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" } }, ` : "" }sort: "publishedAt:desc", pagination: { limit: 99999999 }) {
+      data {
+        id
+        attributes {
+          Slug
+        }
+      }
+    }
+  }
+`
+
+export const QUERY_POSTS_INSIGHTS = ({ categories, page }) => gql`
+  query QueryPostsInsights${ categories || page ? `(${ categories ? "$categories: [String]" : "" }${ page ? `${ categories ? ", " : "" }$page: Int` : "" })` : "" } {
+    insightsPosts(${ categories ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" } }, ` : "" }sort: "publishedAt:desc", pagination: { page: $page, pageSize: 50 }) {
       data {
         id
         attributes {

@@ -38,7 +38,7 @@ export default function MembershipTemplate({ membership, ...props }) {
               <div className="list">
                 { Array.from({ length: Math.round(membership.page.flexible_content[0].items.length / 2) }).map((el, index) => {
                   const item1 = membership.page.flexible_content[0].items[index * 2]
-                  const item2 = membership.page.flexible_content[0].items[(index + 1) * 2] ? membership.page.flexible_content[0].items[index + 1] : null
+                  const item2 = membership.page.flexible_content[0].items[(index * 2) + 1] ? membership.page.flexible_content[0].items[(index * 2) + 1] : null
                   return (
                     <div key={ `includes-${ index }` } className="row">
                       <IncludeCard text={ item1.text } soon={ item1.soon } />

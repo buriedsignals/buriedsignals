@@ -1,6 +1,6 @@
 // Middlewares
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
-import { CREATE_POST_INSIGHT, QUERY_POSTS_INSIGHTS, QUERY_POST_INSIGHT, UPDATE_POST_INSIGHTS_LIKES } from "@/middlewares/datas/posts/insights"
+import { CREATE_POST_INSIGHT, QUERY_POSTS_INSIGHTS, QUERY_POSTS_INSIGHTS_LITE, QUERY_POST_INSIGHT, UPDATE_POST_INSIGHTS_LIKES } from "@/middlewares/datas/posts/insights"
 import { parsePostsInsights, parsePostInsight } from '../utils'
 
 export async function getPostsInsights(query) {
@@ -9,15 +9,40 @@ export async function getPostsInsights(query) {
   if (query.category) {
     variables.categories = [].concat(query.category)
   }
-  const response = await apolloClient.query({
-    query: QUERY_POSTS_INSIGHTS({
+  const responseInsightsLite = await apolloClient.query({
+    query: QUERY_POSTS_INSIGHTS_LITE({
       categories: query.category || null
     }),
     variables: variables
   })
-  if (!response) return null
-  let posts = response.data.insightsPosts.data
-  return parsePostsInsights(posts, query)
+  if (!responseInsightsLite) return null
+  let postsLite = responseInsightsLite.data.insightsPosts.data
+  variables.page = query.page ? parseInt(query.page) : 1
+  const responseInsights = await apolloClient.query({
+    query: QUERY_POSTS_INSIGHTS({
+      categories: query.category || null,
+      page: query.page || 1
+    }),
+    variables: variables
+  })
+  if (!responseInsights) return null
+  let posts = responseInsights.data.insightsPosts.data
+  variables.totalPosts = postsLite.length - 1
+  return parsePostsInsights(posts, variables)
+  // const apolloClient = getApolloClient()
+  // const variables = {}
+  // if (query.category) {
+  //   variables.categories = [].concat(query.category)
+  // }
+  // const response = await apolloClient.query({
+  //   query: QUERY_POSTS_INSIGHTS({
+  //     categories: query.category || null
+  //   }),
+  //   variables: variables
+  // })
+  // if (!response) return null
+  // let posts = response.data.insightsPosts.data
+  // return parsePostsInsights(posts, query)
 }
 
 export async function getPostInsight(slug) {

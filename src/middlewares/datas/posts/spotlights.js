@@ -1,9 +1,22 @@
 // Nodes
 import { gql } from '@apollo/client'
 
-export const QUERY_POSTS_SPOTLIGHTS = ({ categories, award, geography }) => gql`
+export const QUERY_POSTS_SPOTLIGHTS_LITE = ({ categories, award, geography }) => gql`
   query QueryPostsSpotlights${ categories || award || geography ? `(${ categories ? "$categories: [String]" : "" }${ award ? `${ categories ? ", " : "" }$award: String` : "" }${ geography ? `${ categories || award ? ", " : "" }$geography: String` : "" })` : "" } {
     spotlightsPosts(${ categories || award || geography ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" }${ award ? `${ categories ? "," : "" } Award: { Slug: { eq: $award } }` : "" }${ geography ? `${ categories || award ? "," : "" } Geography: { Slug: { eq: $geography } }` : "" }}, ` : "" }sort: "publishedAt:desc", pagination: { limit: 99999999 }) {
+      data {
+        id
+        attributes {
+          Slug
+        }
+      }
+    }
+  }
+`
+
+export const QUERY_POSTS_SPOTLIGHTS = ({ categories, award, geography, page }) => gql`
+  query QueryPostsSpotlights${ categories || award || geography || page ? `(${ categories ? "$categories: [String]" : "" }${ award ? `${ categories ? ", " : "" }$award: String` : "" }${ geography ? `${ categories || award ? ", " : "" }$geography: String` : "" }${ page ? `${ categories || award || geography ? ", " : "" }$page: Int` : "" })` : "" } {
+    spotlightsPosts(${ categories || award || geography ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" }${ award ? `${ categories ? "," : "" } Award: { Slug: { eq: $award } }` : "" }${ geography ? `${ categories || award ? "," : "" } Geography: { Slug: { eq: $geography } }` : "" }}, ` : "" }sort: "publishedAt:desc", pagination: { page: $page, pageSize: 50 }) {
       data {
         id
         attributes {
@@ -19,7 +32,6 @@ export const QUERY_POSTS_SPOTLIGHTS = ({ categories, award, geography }) => gql`
           }
           Description
           Source_author
-          Source_link
           Categories {
             data {
               attributes {
@@ -45,34 +57,10 @@ export const QUERY_POSTS_SPOTLIGHTS = ({ categories, award, geography }) => gql`
             }
           }
           Likes
-          Submited_by_external
-          Submited_by {
-            data {
-              attributes {
-                Name
-                Image {
-                  data {
-                    attributes {
-                      alternativeText
-                      url
-                    }
-                  }
-                }
-                Portfolio_link
-              }
-            }
-          }
           Metrics_effectiveness_votes
           Metrics_effectiveness_value
           Metrics_virality_backlinks
           Metrics_virality_value
-          Archive {
-            data {
-              attributes {
-                Slug
-              }
-            }
-          }
         }
       }
     }
@@ -523,22 +511,7 @@ export const QUERY_POSTS_SPOTLIGHTS_ARCHIVES = gql`
       data {
         id
         attributes {
-          Title
           Slug
-          File_wacz {
-            data {
-              attributes {
-                url
-              }
-            }
-          }
-          Spotlight {
-            data {
-              attributes {
-                Title
-              }
-            }
-          }
         }
       }
     }

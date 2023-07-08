@@ -1,6 +1,6 @@
 // Middlewares
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
-import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_LATEST, QUERY_POSTS_SPOTLIGHTS_WEEK, QUERY_POSTS_SPOTLIGHTS_MONTH, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_SPOTLIGHT_COMMENT, UPDATE_POST_SPOTLIGHT_METRICS_VALUE, QUERY_POST_SPOTLIGHT_ARCHIVE, QUERY_POSTS_SPOTLIGHTS_ARCHIVES, UPDATE_POST_SPOTLIGHT_VOTES } from "@/middlewares/datas/posts/spotlights"
+import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_LATEST, QUERY_POSTS_SPOTLIGHTS_WEEK, QUERY_POSTS_SPOTLIGHTS_MONTH, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_SPOTLIGHT_COMMENT, UPDATE_POST_SPOTLIGHT_METRICS_VALUE, QUERY_POST_SPOTLIGHT_ARCHIVE, QUERY_POSTS_SPOTLIGHTS_ARCHIVES, UPDATE_POST_SPOTLIGHT_VOTES, QUERY_POSTS_SPOTLIGHTS_LITE } from "@/middlewares/datas/posts/spotlights"
 // Scripts
 import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments, parseArchivesSpotlights, parseArchiveSpotlight } from '../utils'
 import { getDecile, transformToSlug } from '@/scripts/utils'
@@ -19,29 +19,42 @@ export async function getPostsSpotlights(query) {
   if (query.geography) {
     variables.geography = query.geography
   }
-  const responseSpotlights = await apolloClient.query({
-    query: QUERY_POSTS_SPOTLIGHTS({
+  const responseSpotlightsLite = await apolloClient.query({
+    query: QUERY_POSTS_SPOTLIGHTS_LITE({
       categories: query.category || null,
       award: query.award || null,
       geography: query.geography || null
     }),
     variables: variables
   })
+  if (!responseSpotlightsLite) return null
+  let postsLite = responseSpotlightsLite.data.spotlightsPosts.data
+  variables.page = query.page ? parseInt(query.page) : 1
+  const responseSpotlights = await apolloClient.query({
+    query: QUERY_POSTS_SPOTLIGHTS({
+      categories: query.category || null,
+      award: query.award || null,
+      geography: query.geography || null,
+      page: query.page || 1
+    }),
+    variables: variables
+  })
   if (!responseSpotlights) return null
   let posts = responseSpotlights.data.spotlightsPosts.data
-  posts = parsePostsSpotlights(posts, query)
+  variables.totalPosts = postsLite.length - 1
+  posts = parsePostsSpotlights(posts, variables)
 
   for (let i = 0; i < posts.posts.length; i++) {
     const post = posts.posts[i]
-    const responseComments = await apolloClient.query({
-      query: QUERY_SPOTLIGHT_COMMENTS,
-      variables: { relation: `api::spotlights-post.spotlights-post:${post.id}` }
-    })
-    if (!responseComments) return null
-    let commentsDatas = responseComments.data.findAllFlat.data
-    commentsDatas = parseComments(commentsDatas)
-    post.comments = commentsDatas.comments
-    post.comments_length = commentsDatas.comments_length
+    // const responseComments = await apolloClient.query({
+    //   query: QUERY_SPOTLIGHT_COMMENTS,
+    //   variables: { relation: `api::spotlights-post.spotlights-post:${post.id}` }
+    // })
+    // if (!responseComments) return null
+    // let commentsDatas = responseComments.data.findAllFlat.data
+    // commentsDatas = parseComments(commentsDatas)
+    post.comments = null // commentsDatas.comments
+    post.comments_length = 0 // commentsDatas.comments_length
   }
   return posts
 }
