@@ -36,6 +36,7 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
   // posts = useArray(posts)
   // Effects
   useEffect(() => {
+    window.history.scrollRestoration = 'manual'
     window.addEventListener('scroll', onScrollWindow)
     return () => {
       window.removeEventListener('scroll', onScrollWindow)
