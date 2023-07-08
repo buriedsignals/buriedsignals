@@ -6,3 +6,5 @@ Disallow: /profiles/reset-password$
 # Allow all crawlers
 User-agent: *
 Allow: /
+
+Sitemap: https://buriedsignals.com/sitemap.xml
