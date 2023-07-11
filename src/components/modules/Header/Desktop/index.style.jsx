@@ -86,10 +86,12 @@ export const HeaderDesktopStyle = styled.header`
                 color: var(--color-green);
                 transition: all 0.25s ease-out;
               }
-              svg {
-                path {
-                  fill: var(--color-green);
-                  transition: all 0.25s ease-out;
+              &:not(.sponsor) {
+                svg {
+                  path {
+                    fill: var(--color-green);
+                    transition: all 0.25s ease-out;
+                  }
                 }
               }
             }

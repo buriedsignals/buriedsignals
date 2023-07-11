@@ -21,6 +21,7 @@ import ArrowIcon from "@/components/icons/Arrow"
 import TwitterIcon from "@/components/icons/Twitter"
 import SlackIcon from "@/components/icons/Slack"
 import WebrecorderIcon from "@/components/icons/Webrecorder"
+import SponsorIcon from "@/components/icons/Sponsor"
 
 export default function HeaderMobile() {
   // Router
@@ -154,7 +155,7 @@ export default function HeaderMobile() {
                   </Link>
                 </li>
               </ul>
-              <SponsorButton href="https://www.webrecorder.net" text="WebRecorder" icon={ () => <WebrecorderIcon /> } />
+              <SponsorButton href="https://informationplusconference.com/" title="Sponsor for" text="Information+ Conference" icon={ () => <SponsorIcon /> } />
             </div>
           </div>
       }

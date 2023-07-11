@@ -21,6 +21,7 @@ import LogoIcon from "@/components/icons/Logo"
 import TwitterIcon from "@/components/icons/Twitter"
 import SlackIcon from "@/components/icons/Slack"
 import WebrecorderIcon from "@/components/icons/Webrecorder"
+import SponsorIcon from "@/components/icons/Sponsor"
 
 export default function HeaderDesktop() {
   // Router
@@ -99,7 +100,7 @@ export default function HeaderDesktop() {
         <div className="right-container">
           <ul className="actions">
             <li className="action">
-              <SponsorButton href="https://www.webrecorder.net" text="WebRecorder" icon={ () => <WebrecorderIcon /> } />
+              <SponsorButton href="https://informationplusconference.com/" title="Sponsor for" text="Information+ Conference" icon={ () => <SponsorIcon /> } />
             </li>
             { user.connected ?
                 <li className="action">
