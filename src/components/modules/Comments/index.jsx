@@ -37,6 +37,10 @@ export default function Comments({ comments, comments_length, postId, max = 5, .
               id: user.id, 
               name: user.name
             }
+          },
+          post: {
+            id: postId,
+            comments: comments_length
           }
         };
         const reponse = await fetch('/api/post-create-comment-2i9sft3rs6/', {
@@ -70,6 +74,7 @@ export default function Comments({ comments, comments_length, postId, max = 5, .
           <div className="panel-container">
             { comments.map((comment, index) => {
               if (index < max * page) {
+                comment.total_comments = comments_length
                 return <div key={ index }>
                   <CommentCard comment={ comment } postId={ postId } />
                   { comment.comments && <CommentsThreadModule comments={ comment.comments } postId={ postId } /> }

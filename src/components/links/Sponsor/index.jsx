@@ -1,11 +1,11 @@
 // Styles
 import { SponsorStyle } from "./index.style"
 
-export default function Sponsor({ href, icon, text, ...props }) {
+export default function Sponsor({ href, icon, title, text, ...props }) {
   return (
-    <SponsorStyle href={ href } target="_blank" rel="noopener noreferrer" { ...props }>
+    <SponsorStyle className="sponsor" href={ href } target="_blank" rel="noopener noreferrer" { ...props }>
       { icon() }
-      <p className="text"><span className="typography-13">Partner of</span><span className="typography-01">{ text }</span></p>
+      <p className="text"><span className="typography-13">{ title }</span><span className="typography-01">{ text }</span></p>
     </SponsorStyle>
   )
 }

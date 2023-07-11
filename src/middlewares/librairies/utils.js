@@ -62,6 +62,7 @@ export function parsePostSpotlight(data) {
     geography: data.Geography && data.Geography.data ? data.Geography.data.attributes.Title : "",
     likes: data.Likes ? data.Likes : 0,
     liked: USER.liked.spotlights ? USER.liked.spotlights.filter(spotlight => spotlight === data.Slug).length > 0 : false, // Get by user
+    total_comments: data.Comments ? data.Comments : 0,
     slug: data.Slug ? data.Slug : null,
     source: {
       author: data.Source_author ? data.Source_author : "",
@@ -297,6 +298,15 @@ export async function createImage(url, title) {
   const extension = url.split(/[#?]/)[0].split('.').pop().trim()
   const form = new FormData()
   form.append("files", responseImage.data, `post-${ transformToSlug(title) }.${ extension }`)
+  const responseUpload = await axios.post(`${STRAPI_ENDPOINT}/api/upload`, form)
+  return responseUpload.data[0].id
+} 
+
+export async function createFile(url, title) {
+  const responseFile = await axios.get(url, { responseType: "arraybuffer" })
+  const extension = url.split(/[#?]/)[0].split('.').pop().trim()
+  const form = new FormData()
+  form.append("files", responseFile.data, `post-${ transformToSlug(title) }.${ extension }`)
   const responseUpload = await axios.post(`${STRAPI_ENDPOINT}/api/upload`, form)
   return responseUpload.data[0].id
 } 

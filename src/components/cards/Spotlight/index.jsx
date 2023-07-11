@@ -39,7 +39,7 @@ export default function Spotlight({ post, ...props }) {
             <div className="actions-container">
               <LikeButton likes={ post.likes } liked={ post.liked } postId={ post.id } type="spotlights" />
               <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="spotlights" />
-              <CommentButton comments={ post.comments_length } />
+              <CommentButton comments={ post.total_comments } />
             </div>
           </div>
         </div>

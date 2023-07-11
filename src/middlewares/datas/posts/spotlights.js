@@ -57,6 +57,7 @@ export const QUERY_POSTS_SPOTLIGHTS = ({ categories, award, geography, page }) =
             }
           }
           Likes
+          Comments
           Metrics_effectiveness_votes
           Metrics_effectiveness_value
           Metrics_virality_backlinks
@@ -173,6 +174,7 @@ export const QUERY_POST_SPOTLIGHT = gql`
             }
           }
           Likes
+          Comments
           Submited_by_external
           Submited_by {
             data {
@@ -430,6 +432,16 @@ export const UPDATE_POST_SPOTLIGHT_LIKES = gql`
   }
 `
 
+export const UPDATE_POST_SPOTLIGHT_COMMENTS = gql`
+  mutation MutationPostSpotlightComments($id: ID!, $comments: Int) {
+    updateSpotlightsPost(id: $id, data: { Comments: $comments }) {
+      data {
+        id
+      }
+    }
+  }
+`
+
 export const UPDATE_POST_SPOTLIGHT_VOTES = gql`
   mutation MutationPostSpotlightVotes($id: ID!, $votes: String) {
     updateSpotlightsPost(id: $id, data: { Metrics_effectiveness_votes: $votes }) {
@@ -451,13 +463,13 @@ export const UPDATE_POST_SPOTLIGHT_AWARDS = gql`
 `
 
 export const UPDATE_POST_SPOTLIGHT_METRICS_VALUE = gql`
-mutation MutationPostSpotlightMetricsValue($id: ID!, $metricsEffectivenessValue: Float $metricsViralityValue: Float) {
-  updateSpotlightsPost(id: $id, data: { Metrics_effectiveness_value: $metricsEffectivenessValue, Metrics_virality_value: $metricsViralityValue }) {
-    data {
-      id
+  mutation MutationPostSpotlightMetricsValue($id: ID!, $metricsEffectivenessValue: Float $metricsViralityValue: Float) {
+    updateSpotlightsPost(id: $id, data: { Metrics_effectiveness_value: $metricsEffectivenessValue, Metrics_virality_value: $metricsViralityValue }) {
+      data {
+        id
+      }
     }
   }
-}
 `
 
 export const CREATE_SPOTLIGHT_COMMENT = gql`
@@ -518,7 +530,6 @@ export const QUERY_POSTS_SPOTLIGHTS_ARCHIVES = gql`
   }
 `
 
-
 export const QUERY_POST_SPOTLIGHT_ARCHIVE = gql`
   query QueryPostSpotlightArchive($slug: String) {
     spotlightsArchives(filters: { Slug: { eq: $slug } }) {
@@ -562,6 +573,16 @@ export const QUERY_POST_SPOTLIGHT_ARCHIVE = gql`
             }
           }
         }
+      }
+    }
+  }
+`
+
+export const CREATE_POST_SPOTLIGHT_ARCHIVE = gql`
+  mutation CreatePostSpotlightsArchive($data: SpotlightsArchiveInput!) {
+    createSpotlightsArchive(data: $data) {
+      data {
+        id
       }
     }
   }

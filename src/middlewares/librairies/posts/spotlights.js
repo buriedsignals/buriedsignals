@@ -1,8 +1,8 @@
 // Middlewares
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
-import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_LATEST, QUERY_POSTS_SPOTLIGHTS_WEEK, QUERY_POSTS_SPOTLIGHTS_MONTH, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_SPOTLIGHT_COMMENT, UPDATE_POST_SPOTLIGHT_METRICS_VALUE, QUERY_POST_SPOTLIGHT_ARCHIVE, QUERY_POSTS_SPOTLIGHTS_ARCHIVES, UPDATE_POST_SPOTLIGHT_VOTES, QUERY_POSTS_SPOTLIGHTS_LITE } from "@/middlewares/datas/posts/spotlights"
+import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_LATEST, QUERY_POSTS_SPOTLIGHTS_WEEK, QUERY_POSTS_SPOTLIGHTS_MONTH, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_SPOTLIGHT_COMMENT, UPDATE_POST_SPOTLIGHT_METRICS_VALUE, QUERY_POST_SPOTLIGHT_ARCHIVE, QUERY_POSTS_SPOTLIGHTS_ARCHIVES, UPDATE_POST_SPOTLIGHT_VOTES, QUERY_POSTS_SPOTLIGHTS_LITE, CREATE_POST_SPOTLIGHT_ARCHIVE, UPDATE_POST_SPOTLIGHT_COMMENTS } from "@/middlewares/datas/posts/spotlights"
 // Scripts
-import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments, parseArchivesSpotlights, parseArchiveSpotlight } from '../utils'
+import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments, parseArchivesSpotlights, parseArchiveSpotlight, createFile } from '../utils'
 import { getDecile, transformToSlug } from '@/scripts/utils'
 
 export let authorId = null
@@ -43,19 +43,6 @@ export async function getPostsSpotlights(query) {
   let posts = responseSpotlights.data.spotlightsPosts.data
   variables.totalPosts = postsLite.length - 1
   posts = parsePostsSpotlights(posts, variables)
-
-  for (let i = 0; i < posts.posts.length; i++) {
-    const post = posts.posts[i]
-    // const responseComments = await apolloClient.query({
-    //   query: QUERY_SPOTLIGHT_COMMENTS,
-    //   variables: { relation: `api::spotlights-post.spotlights-post:${post.id}` }
-    // })
-    // if (!responseComments) return null
-    // let commentsDatas = responseComments.data.findAllFlat.data
-    // commentsDatas = parseComments(commentsDatas)
-    post.comments = null // commentsDatas.comments
-    post.comments_length = 0 // commentsDatas.comments_length
-  }
   return posts
 }
 
@@ -179,7 +166,7 @@ export async function updatePostSpotlightAwards(id, awardId) {
   return response
 }
 
-export async function createSpotlightComment(datas) {
+export async function createSpotlightComment(datas, post) {
   const apolloClient = getApolloClient()
   const response = await apolloClient.mutate({
     errorPolicy: 'all',
@@ -187,10 +174,16 @@ export async function createSpotlightComment(datas) {
     variables: { datas }
   })
   if (!response) return null
+  const responseSpotlight = await apolloClient.mutate({
+    errorPolicy: 'all',
+    mutation: UPDATE_POST_SPOTLIGHT_COMMENTS,
+    variables: { id: post.id, comments: (parseInt(post.comments) + 1) }
+  })
+  if (!responseSpotlight) return null
   return response
 }
 
-export async function updateSpotlightComment(datasDelete, datasCreate) {
+export async function updateSpotlightComment(datasDelete, datasCreate, post) {
   const apolloClient = getApolloClient()
   const responseDelete = await apolloClient.mutate({
     errorPolicy: 'all',
@@ -207,7 +200,7 @@ export async function updateSpotlightComment(datasDelete, datasCreate) {
   return responseCreate
 }
 
-export async function deleteSpotlightComment(datas) {
+export async function deleteSpotlightComment(datas, post) {
   const apolloClient = getApolloClient()
   const response = await apolloClient.mutate({
     errorPolicy: 'all',
@@ -215,6 +208,12 @@ export async function deleteSpotlightComment(datas) {
     variables: { datas }
   })
   if (!response) return null
+  const responseSpotlight = await apolloClient.mutate({
+    errorPolicy: 'all',
+    mutation: UPDATE_POST_SPOTLIGHT_COMMENTS,
+    variables: { id: post.id, comments: (parseInt(post.comments) - 1) }
+  })
+  if (!responseSpotlight) return null
   return response
 }
 
@@ -276,4 +275,28 @@ export async function getPostSpotlightArchive(slug) {
   if (!responseSpotlightArchive) return null
   const post = responseSpotlightArchive.data.spotlightsArchives.data[0].attributes
   return parseArchiveSpotlight(post)
+}
+
+export async function createArchiveSpotlight(id, title, slug, link_source) {
+  // Récupérer le fichier wacz
+
+  // Ensuite créer l'archive
+  const currentDate = new Date();
+  const publishedAt = currentDate.toISOString();
+  const data = {
+    Title: title, 
+    Slug: slug, 
+    File_wacz: createFile(link_source, `wacz-${ slug }`), 
+    Spotlight: id, 
+    publishedAt: publishedAt
+  }
+  const apolloClient = getApolloClient()
+  const responseSpotlightArchive = await apolloClient.query({
+    query: CREATE_POST_SPOTLIGHT_ARCHIVE,
+    variables: { data }
+  })
+  if (!responseSpotlightArchive) return null
+  const post = responseSpotlightArchive.data.spotlightsArchives.data[0].attributes
+  return parseArchiveSpotlight(post)
+
 }

@@ -4,7 +4,6 @@ import { CommentStyle } from "./index.style"
 import CommentIcon from "@/components/icons/Comment"
 
 export default function Comment({ comments, commented = false, ...props }) {
-  console.log(typeof comments)
   // Handlers
   const onClickButton = () => {}
   return (
