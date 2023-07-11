@@ -100,7 +100,7 @@ export default function HeaderDesktop() {
         <div className="right-container">
           <ul className="actions">
             <li className="action">
-              <SponsorButton href="https://informationplusconference.com/" title="Sponsor for" text="Information+ Conference" icon={ () => <SponsorIcon /> } />
+              <SponsorButton href="https://informationplusconference.com/" title="Sponsor" text="Information+ Conference" icon={ () => <SponsorIcon /> } />
             </li>
             { user.connected ?
                 <li className="action">

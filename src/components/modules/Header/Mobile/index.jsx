@@ -155,7 +155,7 @@ export default function HeaderMobile() {
                   </Link>
                 </li>
               </ul>
-              <SponsorButton href="https://informationplusconference.com/" title="Sponsor for" text="Information+ Conference" icon={ () => <SponsorIcon /> } />
+              <SponsorButton href="https://informationplusconference.com/" title="Sponsor" text="Information+ Conference" icon={ () => <SponsorIcon /> } />
             </div>
           </div>
       }

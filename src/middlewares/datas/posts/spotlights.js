@@ -57,7 +57,6 @@ export const QUERY_POSTS_SPOTLIGHTS = ({ categories, award, geography, page }) =
             }
           }
           Likes
-          Comments
           Metrics_effectiveness_votes
           Metrics_effectiveness_value
           Metrics_virality_backlinks
@@ -174,7 +173,6 @@ export const QUERY_POST_SPOTLIGHT = gql`
             }
           }
           Likes
-          Comments
           Submited_by_external
           Submited_by {
             data {
