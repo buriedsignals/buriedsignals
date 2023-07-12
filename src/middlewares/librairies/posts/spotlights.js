@@ -208,39 +208,48 @@ export async function deleteSpotlightComment(datas) {
 export async function updateMetricsSpotlights() {
   const apolloClient = getApolloClient()
   const responseSpotlights = await apolloClient.query({
-    query: QUERY_POSTS_SPOTLIGHTS({ categories: null, award: null, geography: null }),
+    query: QUERY_POSTS_SPOTLIGHTS_LITE({ categories: null, award: null, geography: null }),
   })
   if (!responseSpotlights) return null
+  /*
+    Metrics_effectiveness_votes
+    Metrics_effectiveness_value
+    Metrics_virality_backlinks
+    Metrics_virality_value
+  */
   let posts = responseSpotlights.data.spotlightsPosts.data
-  posts = parsePostsSpotlights(posts, { page: -1 })
   const backlinks = []
-  posts.posts.forEach(post => {
-    if (post.virality_backlinks) {
-      backlinks.push(post.virality_backlinks)
+  posts.forEach(post => {
+    post = post.attributes
+    if (post.Metrics_virality_backlinks) {
+      backlinks.push(post.Metrics_virality_backlinks)
     }
+    post.Metrics_effectiveness_votes = post.Metrics_effectiveness_votes ? post.Metrics_effectiveness_votes.split(',') : []
+
   })
   const responses = []
-  posts.posts.forEach(async post => {
-      let metrics_effectiveness_value = post.metrics[0].votes.length != 0 ? post.metrics[0].votes.reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue), 0) / post.metrics[0].votes.length : null
-      metrics_effectiveness_value = metrics_effectiveness_value && Math.round(metrics_effectiveness_value * 100) / 100
-      const old_metrics_effectiveness_value = post.metrics[0].value == "--" ? null : post.metrics[0].value
+  posts.forEach(async post => {
+    const postID = post.id
+    post = post.attributes
+    let metrics_effectiveness_value = post.Metrics_effectiveness_votes.length != 0 ? post.Metrics_effectiveness_votes.reduce((accumulator, currentValue) => parseInt(accumulator) + parseInt(currentValue), 0) / post.Metrics_effectiveness_votes.length : null
+    metrics_effectiveness_value = metrics_effectiveness_value && Math.round(metrics_effectiveness_value * 100) / 100
+    const old_metrics_effectiveness_value = post.Metrics_effectiveness_value
 
-      const metrics_virality_value = post.virality_backlinks ? getDecile(post.virality_backlinks, backlinks) : null
-      const old_metrics_virality_value = post.metrics[1].value == "--" ? null : post.metrics[1].value
+    const metrics_virality_value = post.Metrics_virality_backlinks ? getDecile(post.Metrics_virality_backlinks, backlinks) : null
+    const old_metrics_virality_value = post.Metrics_virality_value
 
-      if (old_metrics_virality_value !== metrics_virality_value || old_metrics_effectiveness_value !== metrics_effectiveness_value) {
-        const response = await apolloClient.mutate({
-          errorPolicy: 'all',
-          mutation: UPDATE_POST_SPOTLIGHT_METRICS_VALUE,
-          variables: { id: post.id, metricsEffectivenessValue: metrics_effectiveness_value, metricsViralityValue: metrics_virality_value }
-        })
-        responses.push(response)
-        if (!response) return null
-      }
+    if (old_metrics_virality_value !== metrics_virality_value || old_metrics_effectiveness_value !== metrics_effectiveness_value) {
+      const response = await apolloClient.mutate({
+        errorPolicy: 'all',
+        mutation: UPDATE_POST_SPOTLIGHT_METRICS_VALUE,
+        variables: { id: postID, metricsEffectivenessValue: metrics_effectiveness_value, metricsViralityValue: metrics_virality_value }
+      })
+      responses.push(response)
+      if (!response) return null
+    }
   })
   return responses
 }
-
 
 export async function getPostsSpotlightsArchives(query) {
   const apolloClient = getApolloClient()
@@ -252,7 +261,6 @@ export async function getPostsSpotlightsArchives(query) {
   posts = parseArchivesSpotlights(posts, query)
   return posts
 }
-
 
 export async function getPostSpotlightArchive(slug) {
   const apolloClient = getApolloClient()

@@ -8,6 +8,10 @@ export const QUERY_POSTS_SPOTLIGHTS_LITE = ({ categories, award, geography }) =>
         id
         attributes {
           Slug
+          Metrics_effectiveness_votes
+          Metrics_effectiveness_value
+          Metrics_virality_backlinks
+          Metrics_virality_value
         }
       }
     }
