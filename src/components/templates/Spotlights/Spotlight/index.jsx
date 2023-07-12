@@ -98,7 +98,7 @@ export default function SpotlightTemplate({ spotlight, ...props }) {
         </div>
         <div className="container-module-large metrics-container">
           <MetricBanner metric={ spotlight.metrics.effectiveness } postId={ spotlight.id } />
-          <MetricBanner metric={ spotlight.metrics.virality } postId={ spotlight.id } />
+          { spotlight.metrics.effectiveness.value !== "--" && <MetricBanner metric={ spotlight.metrics.virality } postId={ spotlight.id } /> }
         </div>
         <div className="container-module-large banner-container">
           <SpotlightBanner post={ spotlight } />

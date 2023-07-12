@@ -4,6 +4,7 @@ import { down } from "styled-breakpoints";
 export const MetrictStyle = styled.div`
   display: block;
   width: 100%;
+  max-width: 529px;
   .metric-container {
     padding: 12px 16px;
     border: 1px solid #2A2E31;

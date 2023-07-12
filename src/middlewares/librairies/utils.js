@@ -62,7 +62,6 @@ export function parsePostSpotlight(data) {
     geography: data.Geography && data.Geography.data ? data.Geography.data.attributes.Title : "",
     likes: data.Likes ? data.Likes : 0,
     liked: USER.liked.spotlights ? USER.liked.spotlights.filter(spotlight => spotlight === data.Slug).length > 0 : false, // Get by user
-    total_comments: data.Comments ? data.Comments : 0,
     slug: data.Slug ? data.Slug : null,
     source: {
       author: data.Source_author ? data.Source_author : "",

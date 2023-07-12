@@ -1,6 +1,6 @@
 // Middlewares
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
-import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_LATEST, QUERY_POSTS_SPOTLIGHTS_WEEK, QUERY_POSTS_SPOTLIGHTS_MONTH, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_SPOTLIGHT_COMMENT, UPDATE_POST_SPOTLIGHT_METRICS_VALUE, QUERY_POST_SPOTLIGHT_ARCHIVE, QUERY_POSTS_SPOTLIGHTS_ARCHIVES, UPDATE_POST_SPOTLIGHT_VOTES, QUERY_POSTS_SPOTLIGHTS_LITE, CREATE_POST_SPOTLIGHT_ARCHIVE, UPDATE_POST_SPOTLIGHT_COMMENTS } from "@/middlewares/datas/posts/spotlights"
+import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_LATEST, QUERY_POSTS_SPOTLIGHTS_WEEK, QUERY_POSTS_SPOTLIGHTS_MONTH, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_SPOTLIGHT_COMMENT, UPDATE_POST_SPOTLIGHT_METRICS_VALUE, QUERY_POST_SPOTLIGHT_ARCHIVE, QUERY_POSTS_SPOTLIGHTS_ARCHIVES, UPDATE_POST_SPOTLIGHT_VOTES, QUERY_POSTS_SPOTLIGHTS_LITE, CREATE_POST_SPOTLIGHT_ARCHIVE } from "@/middlewares/datas/posts/spotlights"
 // Scripts
 import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments, parseArchivesSpotlights, parseArchiveSpotlight, createFile } from '../utils'
 import { getDecile, transformToSlug } from '@/scripts/utils'
@@ -166,7 +166,7 @@ export async function updatePostSpotlightAwards(id, awardId) {
   return response
 }
 
-export async function createSpotlightComment(datas, post) {
+export async function createSpotlightComment(datas) {
   const apolloClient = getApolloClient()
   const response = await apolloClient.mutate({
     errorPolicy: 'all',
@@ -174,12 +174,6 @@ export async function createSpotlightComment(datas, post) {
     variables: { datas }
   })
   if (!response) return null
-  const responseSpotlight = await apolloClient.mutate({
-    errorPolicy: 'all',
-    mutation: UPDATE_POST_SPOTLIGHT_COMMENTS,
-    variables: { id: post.id, comments: (parseInt(post.comments) + 1) }
-  })
-  if (!responseSpotlight) return null
   return response
 }
 
@@ -200,7 +194,7 @@ export async function updateSpotlightComment(datasDelete, datasCreate, post) {
   return responseCreate
 }
 
-export async function deleteSpotlightComment(datas, post) {
+export async function deleteSpotlightComment(datas) {
   const apolloClient = getApolloClient()
   const response = await apolloClient.mutate({
     errorPolicy: 'all',
@@ -208,12 +202,6 @@ export async function deleteSpotlightComment(datas, post) {
     variables: { datas }
   })
   if (!response) return null
-  const responseSpotlight = await apolloClient.mutate({
-    errorPolicy: 'all',
-    mutation: UPDATE_POST_SPOTLIGHT_COMMENTS,
-    variables: { id: post.id, comments: (parseInt(post.comments) - 1) }
-  })
-  if (!responseSpotlight) return null
   return response
 }
 

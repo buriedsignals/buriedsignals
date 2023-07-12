@@ -9,7 +9,7 @@ import ErrorBanner from "@/components/banners/Error"
 // Icons
 import DeleteIcon from "@/components/icons/Delete"
 
-export default function Delete({ comment, postId, authorId, ...props }) {
+export default function Delete({ commentId, postId, authorId, ...props }) {
   // States
   const [internalError, setInternalError] = useState(false)
   // Router
@@ -20,15 +20,11 @@ export default function Delete({ comment, postId, authorId, ...props }) {
     try {
       const body = { 
         datas: {
-          id: comment.id,
+          id: commentId,
           relation: `api::spotlights-post.spotlights-post:${postId}`,
           author: {
             id: authorId
           }
-        },
-        post: {
-          id: postId,
-          comments: comment.total_comments
         }
       };
       const reponse = await fetch('/api/post-delete-comment-ezym751f1p/', {

@@ -42,10 +42,6 @@ export default function Comment({ comment, postId, ...props }) {
             id: comment.author.id, 
             name: comment.author.name
           }
-        },
-        post: {
-          id: postId,
-          comments: comment.comments_length
         }
       };
       const reponse = await fetch('/api/post-update-comment-we4b1h29zb/', {
@@ -78,10 +74,6 @@ export default function Comment({ comment, postId, ...props }) {
             id: comment.author.id, 
             name: comment.author.name
           }
-        },
-        post: {
-          id: postId,
-          comments: comment.comments_length
         }
       };
       const reponse = await fetch('/api/post-create-comment-2i9sft3rs6/', {
@@ -117,9 +109,9 @@ export default function Comment({ comment, postId, ...props }) {
             <div className="header-actions">
               { 
                 userCookies.connected && <>
-                  {
+                  { 
                     (comment.author.id == userCookies.id) && <>
-                      <DeleteButton comment={ comment } postId={ postId } authorId={ comment.author.id } />
+                      <DeleteButton commentId={ comment.id } postId={ postId } authorId={ comment.author.id } />
                       <EditButton onClickButton={ () => setEditMode(!editMode) } />
                     </>
                   }
@@ -132,9 +124,9 @@ export default function Comment({ comment, postId, ...props }) {
             <div className="footer-actions">
               { 
                 userCookies.connected && <>
-                  {
+                  { 
                     (comment.author.id == userCookies.id) && <>
-                      <DeleteButton comment={ comment } postId={ postId } authorId={ comment.author.id } />
+                      <DeleteButton commentId={ comment.id } postId={ postId } authorId={ comment.author.id } />
                       <EditButton onClickButton={ () => setEditMode(!editMode) } />
                     </>
                   }

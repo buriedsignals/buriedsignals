@@ -430,16 +430,6 @@ export const UPDATE_POST_SPOTLIGHT_LIKES = gql`
   }
 `
 
-export const UPDATE_POST_SPOTLIGHT_COMMENTS = gql`
-  mutation MutationPostSpotlightComments($id: ID!, $comments: Int) {
-    updateSpotlightsPost(id: $id, data: { Comments: $comments }) {
-      data {
-        id
-      }
-    }
-  }
-`
-
 export const UPDATE_POST_SPOTLIGHT_VOTES = gql`
   mutation MutationPostSpotlightVotes($id: ID!, $votes: String) {
     updateSpotlightsPost(id: $id, data: { Metrics_effectiveness_votes: $votes }) {

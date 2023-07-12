@@ -29,12 +29,14 @@ export const SpotlightTemplateStyle = styled.div`
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    margin-bottom: 20px;
     ${down('lg')} {
       padding: 0 16px;
     }
     ${down('md')} {
       flex-wrap: wrap;
+    }
+    & > div {
+      margin-bottom: 20px;
     }
   }
   .banner-container {
