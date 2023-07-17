@@ -11,7 +11,6 @@ export default async function handle(req, res) {
     // Submited_by: (req.body.Submited_by == "" || req.body.Submited_by == null) ? null : req.body.Submited_by,
     Image: req.body.Image
   }
-  console.log("datas", datas)
   const resultPost = await createPostSpotlight(datas)
   res.json(resultPost)
 }

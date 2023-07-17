@@ -4,6 +4,8 @@ import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_LA
 // Scripts
 import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments, parseArchivesSpotlights, parseArchiveSpotlight, createFile } from '../utils'
 import { getDecile, transformToSlug } from '@/scripts/utils'
+// Modules
+import axios from 'axios'
 
 export let authorId = null
 
@@ -281,14 +283,68 @@ export async function getPostSpotlightArchive(slug) {
 
 export async function createArchiveSpotlight(id, title, slug, link_source) {
   // Récupérer le fichier wacz
-
+  const username = "remy.benjamin.dumas%40gmail.com"
+  const password = "L!dqgKWVIwH4v)VU"
+  const oid = "9177b288-2706-4fc5-b8b8-cc9ee1490e95"
+  const responseLogin = await axios.post(
+    'https://beta.browsertrix.cloud/api/auth/jwt/login',
+    `grant_type=&username=${ username }&password=${ password }&scope=&client_id=&client_secret=`,
+    {
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
+  )
+  if (!responseLogin) return null
+  const token = responseLogin.data.access_token
+  const responseBrowsertrix = await axios.post(
+    `https://beta.browsertrix.cloud/api/orgs/${ oid }/crawlconfigs/`,
+    {
+      'runNow': true,
+      'config': {
+        'seeds': [
+          {
+            'url': 'https://www.remydumas.fr'
+          }
+        ]
+      },
+      'name': title
+    },
+    {
+      headers: {
+        'accept': 'application/json',
+        'Authorization': `Bearer ${ token }`,
+        'Content-Type': 'application/json'
+      }
+    }
+  )
+  if (!responseBrowsertrix) return null
+  const archiveId = responseBrowsertrix.data.run_now_job
+  let isReady = false
+  let urlFile = null
+  while(!isReady) {
+    const response = await axios.get(
+      `https://beta.browsertrix.cloud/api/orgs/${ oid }/crawls/${ archiveId }/replay.json`, {
+      headers: {
+        'accept': 'application/json',
+        'Authorization': `Bearer ${ token }`,
+      }
+    })
+    if (response.data && response.data.resources[0]) {
+      urlFile = response.data.resources[0].path
+      isReady = true
+    } else {
+      await new Promise(r => setTimeout(r, 1 * 60 * 1000))
+    }
+  }
   // Ensuite créer l'archive
   const currentDate = new Date();
   const publishedAt = currentDate.toISOString();
   const data = {
     Title: title, 
     Slug: slug, 
-    File_wacz: createFile(link_source, `wacz-${ slug }`), 
+    File_wacz: await createFile(urlFile, `wacz-${ slug }`), 
     Spotlight: id, 
     publishedAt: publishedAt
   }
@@ -298,7 +354,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
     variables: { data }
   })
   if (!responseSpotlightArchive) return null
-  const post = responseSpotlightArchive.data.spotlightsArchives.data[0].attributes
-  return parseArchiveSpotlight(post)
+  const post = responseSpotlightArchive.data.createSpotlightsArchive.data
+  return post
 
 }
