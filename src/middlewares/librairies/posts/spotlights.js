@@ -88,7 +88,7 @@ export async function getPostsSpotlightsWeek() {
   })
   if (!response) return null
   let posts = response.data.spotlightsPosts.data
-  return parsePostsSpotlights(posts)
+  return parsePostsSpotlights(posts, { page: 1 })
 }
 
 export async function getPostsSpotlightsMonth() {
@@ -108,11 +108,17 @@ export async function getPostsSpotlightsMonth() {
   const limit = 4
   const apolloClient = getApolloClient()
   const response = await apolloClient.query({
-    query: QUERY_POSTS_SPOTLIGHTS
+    query: QUERY_POSTS_SPOTLIGHTS({
+      categories: null,
+      award: null,
+      geography: null,
+      page: 1
+    }),
+    variables: { categories: null, award: null, geography: null }
   })
   if (!response) return null
   let posts = response.data.spotlightsPosts.data
-  posts = parsePostsSpotlights(posts)
+  posts = parsePostsSpotlights(posts, { page: 1 })
   posts.posts = posts.posts.filter(post => post.awards == "Week")
   return posts.posts.slice(0, limit);
 }

@@ -7,10 +7,11 @@ export default async function handle(req, res) {
     Slug: req.body.Slug,
     Source_author: req.body.Source_author,
     Source_link: req.body.Source_link,
-    Categories: (req.body.Categories == "" || req.body.Categories == null) ? [] : req.body.Categories,
-    Submited_by: (req.body.Submited_by == "" || req.body.Submited_by == null) ? null : req.body.Submited_by,
+    // Categories: (req.body.Categories == "" || req.body.Categories == null) ? [] : req.body.Categories,
+    // Submited_by: (req.body.Submited_by == "" || req.body.Submited_by == null) ? null : req.body.Submited_by,
     Image: req.body.Image
   }
+  console.log("datas", datas)
   const resultPost = await createPostSpotlight(datas)
   res.json(resultPost)
 }

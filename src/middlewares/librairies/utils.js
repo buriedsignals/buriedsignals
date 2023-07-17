@@ -293,6 +293,7 @@ export function parseUserMember(data) {
 }
 
 export async function createImage(url, title) {
+  console.log(url, title)
   const responseImage = await axios.get(url, { responseType: "arraybuffer" })
   const extension = url.split(/[#?]/)[0].split('.').pop().trim()
   const form = new FormData()
