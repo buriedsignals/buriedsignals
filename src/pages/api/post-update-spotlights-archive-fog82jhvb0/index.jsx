@@ -7,6 +7,7 @@ export default async function handle(req, res) {
   if (model == "spotlights-post") {
     if (post.Source_link && !post.Archive) {
       const result = await createArchiveSpotlight(post.id, post.Title, post.Slug, post.Source_link)
+      console.log('end request', result)
       res.json(result)
     }
   }

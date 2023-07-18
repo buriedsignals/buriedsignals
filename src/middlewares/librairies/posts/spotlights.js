@@ -6,6 +6,7 @@ import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments, p
 import { getDecile, transformToSlug } from '@/scripts/utils'
 // Modules
 import axios from 'axios'
+import { CronJob } from 'cron'
 
 export let authorId = null
 
@@ -282,50 +283,85 @@ export async function getPostSpotlightArchive(slug) {
 }
 
 export async function createArchiveSpotlight(id, title, slug, link_source) {
-  // console.log("start")
+  console.log("start")
   // Récupérer le fichier wacz
-  // const username = "remy.benjamin.dumas%40gmail.com"
-  // const password = "L!dqgKWVIwH4v)VU"
-  // const oid = "9177b288-2706-4fc5-b8b8-cc9ee1490e95"
-  // const responseLogin = await axios.post(
-  //   'https://beta.browsertrix.cloud/api/auth/jwt/login',
-  //   `grant_type=&username=${ username }&password=${ password }&scope=&client_id=&client_secret=`,
-  //   {
-  //     headers: {
-  //       'accept': 'application/json',
-  //       'Content-Type': 'application/x-www-form-urlencoded'
-  //     }
-  //   }
-  // )
-  // if (!responseLogin) return null
-  // const token = responseLogin.data.access_token
-  // console.log("token", token)
-  // const responseBrowsertrix = await axios.post(
-  //   `https://beta.browsertrix.cloud/api/orgs/${ oid }/crawlconfigs/`,
-  //   {
-  //     'runNow': true,
-  //     'config': {
-  //       'seeds': [
-  //         {
-  //           'url': link_source
-  //         }
-  //       ]
-  //     },
-  //     'name': title
-  //   },
-  //   {
-  //     headers: {
-  //       'accept': 'application/json',
-  //       'Authorization': `Bearer ${ token }`,
-  //       'Content-Type': 'application/json'
-  //     }
-  //   }
-  // )
-  // if (!responseBrowsertrix) return null
-  // const archiveId = responseBrowsertrix.data.run_now_job
-  // console.log("archiveId", archiveId)
-  // let isReady = false
-  // let urlFile = null
+  const username = "remy.benjamin.dumas%40gmail.com"
+  const password = "L!dqgKWVIwH4v)VU"
+  const oid = "9177b288-2706-4fc5-b8b8-cc9ee1490e95"
+  const responseLogin = await axios.post(
+    'https://beta.browsertrix.cloud/api/auth/jwt/login',
+    `grant_type=&username=${ username }&password=${ password }&scope=&client_id=&client_secret=`,
+    {
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
+  )
+  if (!responseLogin) return null
+  const token = responseLogin.data.access_token
+  console.log("token", token)
+  const responseBrowsertrix = await axios.post(
+    `https://beta.browsertrix.cloud/api/orgs/${ oid }/crawlconfigs/`,
+    {
+      'runNow': true,
+      'config': {
+        'seeds': [
+          {
+            'url': link_source
+          }
+        ]
+      },
+      'name': title
+    },
+    {
+      headers: {
+        'accept': 'application/json',
+        'Authorization': `Bearer ${ token }`,
+        'Content-Type': 'application/json'
+      }
+    }
+  )
+  if (!responseBrowsertrix) return null
+  const archiveId = responseBrowsertrix.data.run_now_job
+  console.log("archiveId", archiveId)
+  let isReady = false
+  let urlFile = null
+  const job = new CronJob('0 */1 * * * *', async function() {
+      const response = await axios.get(
+        `https://beta.browsertrix.cloud/api/orgs/${ oid }/crawls/${ archiveId }/replay.json`, {
+        headers: {
+          'accept': 'application/json',
+          'Authorization': `Bearer ${ token }`,
+        }
+      })
+      if (response.data && response.data.resources[0]) {
+        console.log("Finish !!!")
+        job.stop();
+        urlFile = response.data.resources[0].path
+        const currentDate = new Date();
+        const publishedAt = currentDate.toISOString();
+        const data = {
+          Title: title, 
+          Slug: slug, 
+          File_wacz: await createFile(urlFile, `wacz-${ slug }`), 
+          Spotlight: id, 
+          publishedAt: publishedAt
+        }
+        console.log("data", data)
+        const apolloClient = getApolloClient()
+        const responseSpotlightArchive = await apolloClient.query({
+          query: CREATE_POST_SPOTLIGHT_ARCHIVE,
+          variables: { data }
+        })
+        if (!responseSpotlightArchive) return null
+        return "plop"
+      } else {
+        console.log("repeat")
+      }
+  });
+  console.log('After job instantiation')
+  job.start()
   // while(!isReady) {
   //   const response = await axios.get(
   //     `https://beta.browsertrix.cloud/api/orgs/${ oid }/crawls/${ archiveId }/replay.json`, {
@@ -343,26 +379,26 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
   //   }
   // }
   // console.log("urlFile", urlFile)
-  // Ensuite créer l'archive
-  let urlFile = "https://ams3.digitaloceanspaces.com/btrix-beta2/crawls/9177b288-2706-4fc5-b8b8-cc9ee1490e95/20230717152551315-0e404d12-f19-0.wacz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=DO00PFR8T6YNBUE7U4E6%2F20230718%2F%2Fs3%2Faws4_request&X-Amz-Date=20230718T092120Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=1a653d54f0a66db61e8b8c8269c389a4b30aebbc32b715628f8e9e09c39ade35"
-  const currentDate = new Date();
-  const publishedAt = currentDate.toISOString();
-  const data = {
-    Title: title, 
-    Slug: slug, 
-    File_wacz: await createFile(urlFile, `wacz-${ slug }`), 
-    Spotlight: id, 
-    publishedAt: publishedAt
-  }
-  console.log("data", data)
-  const apolloClient = getApolloClient()
-  const responseSpotlightArchive = await apolloClient.query({
-    query: CREATE_POST_SPOTLIGHT_ARCHIVE,
-    variables: { data }
-  })
-  if (!responseSpotlightArchive) return null
-  // console.log("responseSpotlightArchive", responseSpotlightArchive.data.createSpotlightsArchive.data)
-  const post = responseSpotlightArchive.data.createSpotlightsArchive.data
-  return post
-
+  // // Ensuite créer l'archive
+  // const currentDate = new Date();
+  // const publishedAt = currentDate.toISOString();
+  // const data = {
+  //   Title: title, 
+  //   Slug: slug, 
+  //   File_wacz: await createFile(urlFile, `wacz-${ slug }`), 
+  //   Spotlight: id, 
+  //   publishedAt: publishedAt
+  // }
+  // console.log("data", data)
+  // const apolloClient = getApolloClient()
+  // const responseSpotlightArchive = await apolloClient.query({
+  //   query: CREATE_POST_SPOTLIGHT_ARCHIVE,
+  //   variables: { data }
+  // })
+  // if (!responseSpotlightArchive) return null
+  // // console.log("responseSpotlightArchive", responseSpotlightArchive.data.createSpotlightsArchive.data)
+  // const post = responseSpotlightArchive.data.createSpotlightsArchive.data
+  // return post
+  console.log('okok')
+  return "ok"
 }
