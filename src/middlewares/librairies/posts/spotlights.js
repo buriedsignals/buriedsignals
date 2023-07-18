@@ -383,12 +383,11 @@ export async function createArchiveSpotlightCron(archiveId, scheduleId) {
   })
   if (responseArchive.data && responseArchive.data.resources[0]) {
     const responseCron = await axios.delete(
-      `https://api.mergent.co/v2/schedules/${ scheduleId }`,
+      `https://api.mergent.co/v2/schedules/${ scheduleId }`, 
       {
         headers: {
           'Accept': 'application/json',
-          'Authorization': 'Bearer BFSawcbm6LFDoA0yzyqX',
-          'Content-Type': 'application/json'
+          'Authorization': 'Bearer BFSawcbm6LFDoA0yzyqX'
         }
       }
     )
