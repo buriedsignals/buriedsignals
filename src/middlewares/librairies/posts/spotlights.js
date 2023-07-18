@@ -381,6 +381,7 @@ export async function createArchiveSpotlightCron(archiveId, scheduleId) {
       'Authorization': `Bearer ${ token }`,
     }
   })
+  console.log(responseArchive.data)
   if (responseArchive.data && responseArchive.data.resources[0]) {
     const responseCron = await axios.delete(
       `https://api.mergent.co/v2/schedules/${ scheduleId }`, 
@@ -393,6 +394,7 @@ export async function createArchiveSpotlightCron(archiveId, scheduleId) {
     )
     if (responseArchive.data.state != "complete") return 
     let urlFile = responseArchive.data.resources[0].path
+    console.log("urlFile", urlFile)
     const currentDate = new Date();
     const publishedAt = currentDate.toISOString()
     const data = {
@@ -402,11 +404,13 @@ export async function createArchiveSpotlightCron(archiveId, scheduleId) {
       Spotlight: id, 
       publishedAt: publishedAt
     }
+    console.log("data", data)
     const apolloClient = getApolloClient()
     const responseSpotlightArchive = await apolloClient.query({
       query: CREATE_POST_SPOTLIGHT_ARCHIVE,
       variables: { data }
     })
+    console.log("responseSpotlightArchive", responseSpotlightArchive)
     if (!responseSpotlightArchive) return null
   }
   return {}
