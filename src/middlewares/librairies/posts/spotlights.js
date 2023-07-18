@@ -334,7 +334,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
     {
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer BFSawcbm6LFDoA0yzyqX',
+        'Authorization': 'Bearer qtxSH4iS0T3Z93U5yijC',
         'Content-Type': 'application/json'
       }
     }
@@ -351,7 +351,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
     {
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer BFSawcbm6LFDoA0yzyqX',
+        'Authorization': 'Bearer qtxSH4iS0T3Z93U5yijC',
         'Content-Type': 'application/json'
       }
     }
@@ -387,7 +387,7 @@ export async function createArchiveSpotlightCron(id, title, slug, archiveId, sch
       {
         headers: {
           'Accept': 'application/json',
-          'Authorization': 'Bearer BFSawcbm6LFDoA0yzyqX'
+          'Authorization': 'Bearer qtxSH4iS0T3Z93U5yijC'
         }
       }
     )
