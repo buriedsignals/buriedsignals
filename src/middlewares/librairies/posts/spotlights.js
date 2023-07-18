@@ -7,6 +7,7 @@ import { getDecile, transformToSlug } from '@/scripts/utils'
 // Modules
 import axios from 'axios'
 import { CronJob } from 'cron'
+import Mergent from 'mergent'
 
 export let authorId = null
 
@@ -283,90 +284,173 @@ export async function getPostSpotlightArchive(slug) {
 }
 
 export async function createArchiveSpotlight(id, title, slug, link_source) {
-  console.log("start")
-  // Récupérer le fichier wacz
-  const username = "remy.benjamin.dumas%40gmail.com"
-  const password = "L!dqgKWVIwH4v)VU"
-  const oid = "9177b288-2706-4fc5-b8b8-cc9ee1490e95"
-  const responseLogin = await axios.post(
-    'https://beta.browsertrix.cloud/api/auth/jwt/login',
-    `grant_type=&username=${ username }&password=${ password }&scope=&client_id=&client_secret=`,
+  // console.log("start")
+  // // Récupérer le fichier wacz
+  // const username = "remy.benjamin.dumas%40gmail.com"
+  // const password = "L!dqgKWVIwH4v)VU"
+  // const oid = "9177b288-2706-4fc5-b8b8-cc9ee1490e95"
+  // const responseLogin = await axios.post(
+  //   'https://beta.browsertrix.cloud/api/auth/jwt/login',
+  //   `grant_type=&username=${ username }&password=${ password }&scope=&client_id=&client_secret=`,
+  //   {
+  //     headers: {
+  //       'accept': 'application/json',
+  //       'Content-Type': 'application/x-www-form-urlencoded'
+  //     }
+  //   }
+  // )
+  // if (!responseLogin) return null
+  // const token = responseLogin.data.access_token
+  // console.log("token", token)
+  // const responseBrowsertrix = await axios.post(
+  //   `https://beta.browsertrix.cloud/api/orgs/${ oid }/crawlconfigs/`,
+  //   {
+  //     'runNow': true,
+  //     'config': {
+  //       'seeds': [
+  //         {
+  //           'url': link_source
+  //         }
+  //       ]
+  //     },
+  //     'name': title
+  //   },
+  //   {
+  //     headers: {
+  //       'accept': 'application/json',
+  //       'Authorization': `Bearer ${ token }`,
+  //       'Content-Type': 'application/json'
+  //     }
+  //   }
+  // )
+  // if (!responseBrowsertrix) return null
+  // const archiveId = responseBrowsertrix.data.run_now_job
+  // console.log("archiveId", archiveId)
+  // let isReady = false
+  // let urlFile = null
+
+
+
+  // const response = await axios.post(
+  //   'https://api.mergent.co/v2/tasks',
+  //   {
+  //     'request': {
+  //       'url': 'https://www.buriedsignals.com/api/test-cron-repeat'
+  //     }
+  //   },
+  //   {
+  //     headers: {
+  //       'Authorization': 'Bearer BFSawcbm6LFDoA0yzyqX',
+  //       'Content-Type': 'application/json'
+  //     }
+  //   }
+  // );
+  // const mergent = new Mergent("BFSawcbm6LFDoA0yzyqX")
+  // const schedule = await mergent.schedules.create({
+  //   request: {
+  //     url: "https://www.buriedsignals.com/api/test-cron-repeat"
+  //   },
+  //   cron: "* * * * *",
+  // })
+  // const res = await mergent.schedules.update(schedule.id, {
+  //   request: {
+  //     body: {
+  //       idCron: schedule.id
+  //     }
+  //   }
+  // })
+  // console.log('res', res)
+  // mergent.tasks
+  // .create({
+  //   request: {
+  //     headers: { "Authorization": "Bearer BFSawcbm6LFDoA0yzyqX" }, // Optional
+  //     url: "https://www.buriedsignals.com/api/test-cron-repeat",
+  //     body: "..." // Optional
+  //   },
+  //   scheduledFor: new Date(), // Optional: Set an exact time, OR
+  //   delay: { minutes: 5 } // Optional: Set a 5 minute delay
+  // })
+  // .then((task) => console.log(task))
+  // .catch((error) => console.error(error));
+
+  let schedule = await axios.post(
+    'https://api.mergent.co/v2/schedules',
     {
-      headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded'
+      'cron': '* * * * *',
+      'request': {
+        'url': 'https://www.buriedsignals.com/api/test-cron-repeat'
       }
-    }
-  )
-  if (!responseLogin) return null
-  const token = responseLogin.data.access_token
-  console.log("token", token)
-  const responseBrowsertrix = await axios.post(
-    `https://beta.browsertrix.cloud/api/orgs/${ oid }/crawlconfigs/`,
-    {
-      'runNow': true,
-      'config': {
-        'seeds': [
-          {
-            'url': link_source
-          }
-        ]
-      },
-      'name': title
     },
     {
       headers: {
-        'accept': 'application/json',
-        'Authorization': `Bearer ${ token }`,
+        'Accept': 'application/json',
+        'Authorization': 'Bearer BFSawcbm6LFDoA0yzyqX',
         'Content-Type': 'application/json'
       }
     }
   )
-  if (!responseBrowsertrix) return null
-  const archiveId = responseBrowsertrix.data.run_now_job
-  console.log("archiveId", archiveId)
-  let isReady = false
-  let urlFile = null
-  const job = new CronJob('0 */1 * * * *', async function() {
-      console.log("+1 cron")
-      await axios.get("https://www.buriedsignals.com/api/test-cron-repeat")
-      console.log("response url")
-      const response = await axios.get(
-        `https://beta.browsertrix.cloud/api/orgs/${ oid }/crawls/${ archiveId }/replay.json`, {
-        headers: {
-          'accept': 'application/json',
-          'Authorization': `Bearer ${ token }`,
-        }
-      })
-      if (response.data && response.data.resources[0]) {
-        console.log("Finish !!!")
-        job.stop()
-        if (response.data.state == "complete") return 
-        await axios.get("https://www.buriedsignals.com/api/test-cron-finish")
-        urlFile = response.data.resources[0].path
-        const currentDate = new Date();
-        const publishedAt = currentDate.toISOString()
-        const data = {
-          Title: title, 
-          Slug: slug, 
-          File_wacz: await createFile(urlFile, `wacz-${ slug }`), 
-          Spotlight: id, 
-          publishedAt: publishedAt
-        }
-        console.log("data", data)
-        const apolloClient = getApolloClient()
-        const responseSpotlightArchive = await apolloClient.query({
-          query: CREATE_POST_SPOTLIGHT_ARCHIVE,
-          variables: { data }
-        })
-        if (!responseSpotlightArchive) return null
-        return "plop"
-      } else {
-        console.log("repeat")
+  schedule = await axios.patch(
+    `https://api.mergent.co/v2/schedules/${ schedule.data.id }`,
+    {
+      'cron': '* * * * *',
+      'request': {
+        'url': 'https://www.buriedsignals.com/api/test-cron-repeat',
+        'body': schedule.data.id
       }
-  });
-  console.log('After job instantiation', job)
-  job.start()
+    },
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer BFSawcbm6LFDoA0yzyqX',
+        'Content-Type': 'application/json'
+      }
+    }
+  )
+  console.log(schedule.data)
+
+
+
+
+  // const job = new CronJob('0 */1 * * * *', async function() {
+  //     console.log("+1 cron")
+  //     await axios.get("https://www.buriedsignals.com/api/test-cron-repeat")
+  //     console.log("response url")
+  //     const response = await axios.get(
+  //       `https://beta.browsertrix.cloud/api/orgs/${ oid }/crawls/${ archiveId }/replay.json`, {
+  //       headers: {
+  //         'accept': 'application/json',
+  //         'Authorization': `Bearer ${ token }`,
+  //       }
+  //     })
+  //     if (response.data && response.data.resources[0]) {
+  //       console.log("Finish !!!")
+  //       job.stop()
+  //       if (response.data.state == "complete") return 
+  //       await axios.get("https://www.buriedsignals.com/api/test-cron-finish")
+  //       urlFile = response.data.resources[0].path
+  //       const currentDate = new Date();
+  //       const publishedAt = currentDate.toISOString()
+  //       const data = {
+  //         Title: title, 
+  //         Slug: slug, 
+  //         File_wacz: await createFile(urlFile, `wacz-${ slug }`), 
+  //         Spotlight: id, 
+  //         publishedAt: publishedAt
+  //       }
+  //       console.log("data", data)
+  //       const apolloClient = getApolloClient()
+  //       const responseSpotlightArchive = await apolloClient.query({
+  //         query: CREATE_POST_SPOTLIGHT_ARCHIVE,
+  //         variables: { data }
+  //       })
+  //       if (!responseSpotlightArchive) return null
+  //       return "plop"
+  //     } else {
+  //       console.log("repeat")
+  //     }
+  // });
+  // console.log('After job instantiation', job)
+  // job.start()
   // while(!isReady) {
   //   const response = await axios.get(
   //     `https://beta.browsertrix.cloud/api/orgs/${ oid }/crawls/${ archiveId }/replay.json`, {
