@@ -6,8 +6,7 @@ import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments, p
 import { getDecile, transformToSlug } from '@/scripts/utils'
 // Modules
 import axios from 'axios'
-import { CronJob } from 'cron'
-import Mergent from 'mergent'
+// import { CronJob } from 'cron'
 
 export let authorId = null
 
