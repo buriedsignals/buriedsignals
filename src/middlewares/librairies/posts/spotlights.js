@@ -325,10 +325,10 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
   let schedule = await axios.post(
     'https://api.mergent.co/v2/schedules',
     {
-      'cron': '* * * * *',
+      'cron': '*/5 * * * *',
       'request': {
         'url': 'https://www.buriedsignals.com/api/post-update-spotlights-archive-cron-3k4qt81hmr',
-        'body': `${ id },${ title },${ slug },${ archiveId }`
+        'body': `${ archiveId },${ id },${ slug },${ title }`
       }
     },
     {
@@ -342,10 +342,10 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
   schedule = await axios.patch(
     `https://api.mergent.co/v2/schedules/${ schedule.data.id }`,
     {
-      'cron': '* * * * *',
+      'cron': '*/5 * * * *',
       'request': {
         'url': 'https://www.buriedsignals.com/api/post-update-spotlights-archive-cron-3k4qt81hmr',
-        'body': `${ id },${ title },${ slug },${ archiveId },${ schedule.data.id }`
+        'body': `${ schedule.data.id },${ archiveId },${ id },${ slug },${ title }`
       }
     },
     {
