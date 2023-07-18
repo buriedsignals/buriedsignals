@@ -47,8 +47,7 @@ export async function getServerSideProps({params, ...context}) {
     }
   }
   return {
-    props: { archive },
-    revalidate: 1
+    props: { archive }
   }
 }
 
