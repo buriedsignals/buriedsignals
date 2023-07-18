@@ -1,4 +1,4 @@
 export default async function handle(req, res) {
-  console.log("repeat")
+  console.log("url repeat")
   res.json("repeat")
 }

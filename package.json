@@ -29,6 +29,7 @@
     "next": "12.1.6",
     "next-auth": "^4.22.1",
     "next-session": "^4.0.5",
+    "node-cron": "^3.0.2",
     "path": "^0.12.7",
     "percentile": "^1.6.0",
     "prisma": "^4.3.1",
