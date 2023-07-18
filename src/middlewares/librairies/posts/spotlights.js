@@ -7,7 +7,6 @@ import { getDecile, transformToSlug } from '@/scripts/utils'
 // Modules
 import axios from 'axios'
 import { CronJob } from 'cron'
-import cron from 'node-cron'
 
 export let authorId = null
 
@@ -328,8 +327,10 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
   console.log("archiveId", archiveId)
   let isReady = false
   let urlFile = null
-  const job = cron.schedule('* * * * *', async function() {
+  const job = new CronJob('0 */1 * * * *', async function() {
+      console.log("+1 cron")
       await axios.get("https://www.buriedsignals.com/api/test-cron-repeat")
+      console.log("response url")
       const response = await axios.get(
         `https://beta.browsertrix.cloud/api/orgs/${ oid }/crawls/${ archiveId }/replay.json`, {
         headers: {
@@ -344,7 +345,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
         await axios.get("https://www.buriedsignals.com/api/test-cron-finish")
         urlFile = response.data.resources[0].path
         const currentDate = new Date();
-        const publishedAt = currentDate.toISOString();
+        const publishedAt = currentDate.toISOString()
         const data = {
           Title: title, 
           Slug: slug, 
@@ -364,7 +365,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
         console.log("repeat")
       }
   });
-  console.log('After job instantiation')
+  console.log('After job instantiation', job)
   job.start()
   // while(!isReady) {
   //   const response = await axios.get(
