@@ -328,6 +328,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
   let isReady = false
   let urlFile = null
   const job = new CronJob('0 */1 * * * *', async function() {
+      await axios.get("https://www.buriedsignals.com/api/test-cron-repeat")
       const response = await axios.get(
         `https://beta.browsertrix.cloud/api/orgs/${ oid }/crawls/${ archiveId }/replay.json`, {
         headers: {
@@ -338,6 +339,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
       if (response.data && response.data.resources[0]) {
         console.log("Finish !!!")
         job.stop();
+        await axios.get("https://www.buriedsignals.com/api/test-cron-finish")
         urlFile = response.data.resources[0].path
         const currentDate = new Date();
         const publishedAt = currentDate.toISOString();
