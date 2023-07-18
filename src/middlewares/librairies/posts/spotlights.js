@@ -358,7 +358,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
   )
   return {}
 }
-export async function createArchiveSpotlight(archiveId, scheduleId) {
+export async function createArchiveSpotlightCron(archiveId, scheduleId) {
   const username = "remy.benjamin.dumas%40gmail.com"
   const password = "L!dqgKWVIwH4v)VU"
   const oid = "9177b288-2706-4fc5-b8b8-cc9ee1490e95"
