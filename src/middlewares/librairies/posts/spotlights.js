@@ -393,7 +393,7 @@ export async function createArchiveSpotlightCron(archiveId, scheduleId) {
       }
     )
     if (responseArchive.data.state != "complete") return 
-    urlFile = responseArchive.data.resources[0].path
+    let urlFile = responseArchive.data.resources[0].path
     const currentDate = new Date();
     const publishedAt = currentDate.toISOString()
     const data = {
@@ -403,7 +403,6 @@ export async function createArchiveSpotlightCron(archiveId, scheduleId) {
       Spotlight: id, 
       publishedAt: publishedAt
     }
-    console.log("data", data)
     const apolloClient = getApolloClient()
     const responseSpotlightArchive = await apolloClient.query({
       query: CREATE_POST_SPOTLIGHT_ARCHIVE,
