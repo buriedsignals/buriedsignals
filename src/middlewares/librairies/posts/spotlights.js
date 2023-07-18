@@ -392,7 +392,7 @@ export async function createArchiveSpotlightCron(archiveId, scheduleId) {
         }
       }
     )
-    if (responseArchive.data.state == "complete") return 
+    if (responseArchive.data.state != "complete") return 
     urlFile = responseArchive.data.resources[0].path
     const currentDate = new Date();
     const publishedAt = currentDate.toISOString()
