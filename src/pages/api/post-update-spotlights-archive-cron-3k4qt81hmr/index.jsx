@@ -1,14 +1,14 @@
 import { createArchiveSpotlightCron } from "@/middlewares/librairies/posts/spotlights";
-import axios from "axios";
 
 export default async function handle(req, res) {
-  console.log(req.body)
   const post = req.body.split(',')
-  console.log(post)
-  if (post.length == 2) {
-    const archiveId = post[0]
-    const scheduleId = post[1]
-    const result = await createArchiveSpotlightCron(archiveId, scheduleId)
+  if (post.length == 5) {
+    const postId = post[0]
+    const title = post[1]
+    const slug = post[2]
+    const archiveId = post[3]
+    const scheduleId = post[4]
+    const result = await createArchiveSpotlightCron(postId, title, slug, archiveId, scheduleId)
     res.json(result)
   }
 }

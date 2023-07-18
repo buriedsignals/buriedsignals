@@ -328,7 +328,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
       'cron': '* * * * *',
       'request': {
         'url': 'https://www.buriedsignals.com/api/post-update-spotlights-archive-cron-3k4qt81hmr',
-        'body': `${ archiveId }`
+        'body': `${ id },${ title },${ slug },${ archiveId }`
       }
     },
     {
@@ -345,7 +345,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
       'cron': '* * * * *',
       'request': {
         'url': 'https://www.buriedsignals.com/api/post-update-spotlights-archive-cron-3k4qt81hmr',
-        'body': `${ archiveId },${ schedule.data.id }`
+        'body': `${ id },${ title },${ slug },${ archiveId },${ schedule.data.id }`
       }
     },
     {
@@ -358,7 +358,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
   )
   return {}
 }
-export async function createArchiveSpotlightCron(archiveId, scheduleId) {
+export async function createArchiveSpotlightCron(id, title, slug, archiveId, scheduleId) {
   const username = "remy.benjamin.dumas%40gmail.com"
   const password = "L!dqgKWVIwH4v)VU"
   const oid = "9177b288-2706-4fc5-b8b8-cc9ee1490e95"
@@ -381,7 +381,6 @@ export async function createArchiveSpotlightCron(archiveId, scheduleId) {
       'Authorization': `Bearer ${ token }`,
     }
   })
-  console.log(responseArchive.data)
   if (responseArchive.data && responseArchive.data.resources[0]) {
     const responseCron = await axios.delete(
       `https://api.mergent.co/v2/schedules/${ scheduleId }`, 
@@ -394,7 +393,6 @@ export async function createArchiveSpotlightCron(archiveId, scheduleId) {
     )
     if (responseArchive.data.state != "complete") return 
     let urlFile = responseArchive.data.resources[0].path
-    console.log("urlFile", urlFile)
     const currentDate = new Date();
     const publishedAt = currentDate.toISOString()
     const data = {
@@ -404,13 +402,11 @@ export async function createArchiveSpotlightCron(archiveId, scheduleId) {
       Spotlight: id, 
       publishedAt: publishedAt
     }
-    console.log("data", data)
     const apolloClient = getApolloClient()
     const responseSpotlightArchive = await apolloClient.query({
       query: CREATE_POST_SPOTLIGHT_ARCHIVE,
       variables: { data }
     })
-    console.log("responseSpotlightArchive", responseSpotlightArchive)
     if (!responseSpotlightArchive) return null
   }
   return {}
