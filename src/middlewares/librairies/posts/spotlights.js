@@ -267,8 +267,13 @@ export async function getPostsSpotlightsArchives(query) {
   })
   if (!responseSpotlightsArchives) return null
   let posts = responseSpotlightsArchives.data.spotlightsArchives.data
-  posts = parseArchivesSpotlights(posts, query)
-  return posts
+  // posts = parseArchivesSpotlights(posts, query)
+  posts = posts.map(data => {
+    return { id: data.id, slug: data.attributes.Slug }
+  })
+  return {
+    posts: posts
+  }
 }
 
 export async function getPostSpotlightArchive(slug) {
