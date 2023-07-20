@@ -283,7 +283,6 @@ export async function getPostSpotlightArchive(slug) {
 }
 
 export async function createArchiveSpotlight(id, title, slug, link_source) {
-  // Récupérer le fichier wacz
   const username = "remy.benjamin.dumas%40gmail.com"
   const password = "L!dqgKWVIwH4v)VU"
   const oid = "9177b288-2706-4fc5-b8b8-cc9ee1490e95"
@@ -334,7 +333,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
     {
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer qtxSH4iS0T3Z93U5yijC',
+        'Authorization': 'Bearer BFSawcbm6LFDoA0yzyqX', // qtxSH4iS0T3Z93U5yijC
         'Content-Type': 'application/json'
       }
     }
@@ -351,7 +350,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
     {
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer qtxSH4iS0T3Z93U5yijC',
+        'Authorization': 'Bearer BFSawcbm6LFDoA0yzyqX',
         'Content-Type': 'application/json'
       }
     }
@@ -387,7 +386,7 @@ export async function createArchiveSpotlightCron(id, title, slug, archiveId, sch
       {
         headers: {
           'Accept': 'application/json',
-          'Authorization': 'Bearer qtxSH4iS0T3Z93U5yijC'
+          'Authorization': 'Bearer BFSawcbm6LFDoA0yzyqX'
         }
       }
     )
