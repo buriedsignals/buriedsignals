@@ -386,15 +386,29 @@ export async function createArchiveSpotlightCron(id, title, slug, archiveId, sch
     }
   })
   if (responseArchive.data && responseArchive.data.resources[0]) {
-    const responseCron = await axios.delete(
-      `https://api.mergent.co/v2/schedules/${ scheduleId }`, 
-      {
-        headers: {
-          'Accept': 'application/json',
-          'Authorization': 'Bearer BFSawcbm6LFDoA0yzyqX'
-        }
+    const responseCron = await axios.get('https://api.mergent.co/v2/schedules', {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer BFSawcbm6LFDoA0yzyqX'
       }
-    )
+    });
+    let cronExist = false
+    responseCron.data.forEach(cron => {
+      if (cron.id == scheduleId) {
+        cronExist = true
+      }
+    });
+    if (cronExist) {
+      await axios.delete(
+        `https://api.mergent.co/v2/schedules/${ scheduleId }`, 
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer BFSawcbm6LFDoA0yzyqX'
+          }
+        }
+      )
+    }
     if (responseArchive.data.state != "complete") return 
     let urlFile = responseArchive.data.resources[0].path
     const currentDate = new Date();
