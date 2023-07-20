@@ -10,7 +10,7 @@ export default async function handle(req, res) {
       accessToken: '1399628894295269376-P6Y9G3kmRVFaK9nWzuKN89JnB6lcHm',
       accessSecret: 'yorQCPngtT66lx9Ouew4PfHVeOSDnJXu4BtKHZeKtSeKu',
     });    
-    const author = datas.Source_author_twitter_account ? datas.Source_author_twitter_account.startsWith('@') ? datas.Source_author_twitter_account : `@${ datas.Source_author_twitter_account }` : datas.Source_author
+    const author = datas.Source_title
     const description = `\n\n${ datas.Description }\n\n•`
     const url = datas.Source_link
     const categories = datas.Categories.length !== 0 ? ` | ${ datas.Categories[0].Title }` : ""
