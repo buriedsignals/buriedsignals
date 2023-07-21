@@ -51,7 +51,7 @@ export default function MembershipTemplate({ membership, ...props }) {
           }
         </div>
         <div className="jury">
-          <h2 className="title container-module-large typography-04">Jury</h2>
+          <h2 className="title container-module-large typography-04">Featured Members</h2>
           <PostsListModule type="jury" posts={ membership.users } meta={ membership.meta } />
         </div>
       </MembershipTemplateStyle>
