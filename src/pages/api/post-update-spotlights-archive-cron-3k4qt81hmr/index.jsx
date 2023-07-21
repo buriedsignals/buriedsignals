@@ -1,7 +1,7 @@
 import { createArchiveSpotlightCron } from "@/middlewares/librairies/posts/spotlights";
 
 export default async function handle(req, res) {
-  const post = req.body.split(',')
+  const post = req.body.split('//')
   let result = {}
   if (post.length == 5) {
     const scheduleId = post[0]
@@ -13,3 +13,5 @@ export default async function handle(req, res) {
   }    
   res.json(result)
 }
+manual-20230721101651-bdc4aaa0-b1b
+manual-20230721095905-bdc4aaa0-b1b

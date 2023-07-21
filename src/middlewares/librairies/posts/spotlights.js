@@ -332,7 +332,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
       'cron': '*/5 * * * *',
       'request': {
         'url': 'https://www.buriedsignals.com/api/post-update-spotlights-archive-cron-3k4qt81hmr',
-        'body': `${ archiveId },${ id },${ slug },${ title }`
+        'body': `${ archiveId }//${ id }//${ slug }//${ title }`
       }
     },
     {
@@ -349,7 +349,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
       'cron': '*/5 * * * *',
       'request': {
         'url': 'https://www.buriedsignals.com/api/post-update-spotlights-archive-cron-3k4qt81hmr',
-        'body': `${ schedule.data.id },${ archiveId },${ id },${ slug },${ title }`
+        'body': `${ schedule.data.id }//${ archiveId }//${ id }//${ slug }//${ title }`
       }
     },
     {
