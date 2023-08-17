@@ -40,9 +40,9 @@ export function parsePostsSpotlights(datas, query) {
     return { id: data.id, ...parsePostSpotlight(data.attributes) }
   });
   posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts, query.totalPosts)
-  const categories = getTaxonomiesPosts(datas, "Categories")
-  const awards = getTaxonomiesPosts(datas, "Award")
-  const geographies = getTaxonomiesPosts(datas, "Geography")
+  const categories = getTaxonomiesPosts(query.posts, "Categories")
+  const awards = getTaxonomiesPosts(query.posts, "Award")
+  const geographies = getTaxonomiesPosts(query.posts, "Geography")
   return {
     posts: posts.posts,
     meta: posts.meta,
@@ -168,7 +168,7 @@ export function parsePostsInsights(datas, query) {
     return { id: data.id, ...parsePostInsight(data.attributes) }
   });
   posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts, query.totalPosts)
-  const categories = getTaxonomiesPosts(datas, "Categories")
+  const categories = getTaxonomiesPosts(query.posts, "Categories")
   return {
     posts: posts.posts,
     meta: posts.meta,
@@ -205,7 +205,7 @@ export function parsePostsResources(datas, query) {
     return { id: data.id, ...parsePostResource(data.attributes) }
   });
   posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts, query.totalPosts)
-  const categories = getTaxonomiesPosts(datas, "Categories")
+  const categories = getTaxonomiesPosts(query.posts, "Categories")
   return {
     posts: posts.posts,
     meta: posts.meta,

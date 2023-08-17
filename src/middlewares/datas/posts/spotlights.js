@@ -8,6 +8,30 @@ export const QUERY_POSTS_SPOTLIGHTS_LITE = ({ categories, award, geography }) =>
         id
         attributes {
           Slug
+          Categories {
+            data {
+              attributes {
+                Title
+                Slug
+              }
+            }
+          }
+          Award {
+            data {
+              attributes {
+                Title
+                Slug
+              }
+            }
+          }
+          Geography {
+            data {
+              attributes {
+                Title
+                Slug
+              }
+            }
+          }
           Metrics_effectiveness_votes
           Metrics_effectiveness_value
           Metrics_virality_backlinks
@@ -21,6 +45,11 @@ export const QUERY_POSTS_SPOTLIGHTS_LITE = ({ categories, award, geography }) =>
 export const QUERY_POSTS_SPOTLIGHTS = ({ categories, award, geography, page }) => gql`
   query QueryPostsSpotlights${ categories || award || geography || page ? `(${ categories ? "$categories: [String]" : "" }${ award ? `${ categories ? ", " : "" }$award: String` : "" }${ geography ? `${ categories || award ? ", " : "" }$geography: String` : "" }${ page ? `${ categories || award || geography ? ", " : "" }$page: Int` : "" })` : "" } {
     spotlightsPosts(${ categories || award || geography ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" }${ award ? `${ categories ? "," : "" } Award: { Slug: { eq: $award } }` : "" }${ geography ? `${ categories || award ? "," : "" } Geography: { Slug: { eq: $geography } }` : "" }}, ` : "" }sort: "publishedAt:desc", pagination: { page: $page, pageSize: 50 }) {
+      meta {
+        pagination {
+          total
+        }
+      }
       data {
         id
         attributes {

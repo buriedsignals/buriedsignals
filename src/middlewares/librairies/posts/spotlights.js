@@ -22,16 +22,19 @@ export async function getPostsSpotlights(query) {
   if (query.geography) {
     variables.geography = query.geography
   }
-  const responseSpotlightsLite = await apolloClient.query({
-    query: QUERY_POSTS_SPOTLIGHTS_LITE({
-      categories: query.category || null,
-      award: query.award || null,
-      geography: query.geography || null
-    }),
-    variables: variables
-  })
-  if (!responseSpotlightsLite) return null
-  let postsLite = responseSpotlightsLite.data.spotlightsPosts.data
+  let postsLite = null
+  // if (query.category || query.award || query.geography) {
+    const responseSpotlightsLite = await apolloClient.query({
+      query: QUERY_POSTS_SPOTLIGHTS_LITE({
+        categories: query.category || null,
+        award: query.award || null,
+        geography: query.geography || null
+      }),
+      variables: variables
+    })
+    if (!responseSpotlightsLite) return null
+    postsLite = responseSpotlightsLite.data.spotlightsPosts.data
+  // }
   variables.page = query.page ? parseInt(query.page) : 1
   const responseSpotlights = await apolloClient.query({
     query: QUERY_POSTS_SPOTLIGHTS({
@@ -44,7 +47,12 @@ export async function getPostsSpotlights(query) {
   })
   if (!responseSpotlights) return null
   let posts = responseSpotlights.data.spotlightsPosts.data
-  variables.totalPosts = postsLite.length - 1
+  // if (postsLite) {
+    variables.posts = postsLite
+    variables.totalPosts = postsLite.length - 1
+  // } else {
+  //   variables.totalPosts = responseSpotlights.data.spotlightsPosts.meta.pagination.total
+  // }
   posts = parsePostsSpotlights(posts, variables)
   return posts
 }

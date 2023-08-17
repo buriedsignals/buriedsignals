@@ -160,6 +160,34 @@ export default function HeaderMobile() {
           </div>
       }
       </div>
+      { router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ?  
+        <div className="subheader">
+          <div className="subheader-mobile-container">
+            <Link href="/">
+              <a className={ router.pathname == "/" ? "is-active" : "" }>
+                <p className="typography-01">Inspiration</p>
+              </a>
+            </Link>
+            <Link href="/insights">
+              <a className={ router.pathname == "/insights" ? "is-active" : "" }>
+                <p className="typography-01">Insights</p>
+              </a>
+            </Link>
+            <Link href="/resources">
+              <a className={ router.pathname == "/resources" ? "is-active" : "" }>
+                <p className="typography-01">Resources</p>
+              </a>
+            </Link>
+            {/* <Link href="/resources">
+              <a className={ router.pathname == "/resources" ? "is-active" : "" }>
+                <p className="typography-01">Directory</p>
+              </a>
+            </Link> */}
+          </div>
+        </div>
+        :
+        <></>
+      }
     </HeaderMobileStyle>
   )
 }

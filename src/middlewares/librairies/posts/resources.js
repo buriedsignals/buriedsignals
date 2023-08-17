@@ -9,14 +9,17 @@ export async function getPostsResources(query) {
   if (query.category) {
     variables.categories = [].concat(query.category)
   }
-  const responseRessourcesLite = await apolloClient.query({
-    query: QUERY_POSTS_RESOURCES_LITE({
-      categories: query.category || null
-    }),
-    variables: variables
-  })
-  if (!responseRessourcesLite) return null
-  let postsLite = responseRessourcesLite.data.resourcesPosts.data
+  let postsLite = null
+  // if (query.category) {
+    const responseRessourcesLite = await apolloClient.query({
+      query: QUERY_POSTS_RESOURCES_LITE({
+        categories: query.category || null
+      }),
+      variables: variables
+    })
+    if (!responseRessourcesLite) return null
+    postsLite = responseRessourcesLite.data.resourcesPosts.data
+  // }
   variables.page = query.page ? parseInt(query.page) : 1
   const responseRessources = await apolloClient.query({
     query: QUERY_POSTS_RESOURCES({
@@ -27,6 +30,11 @@ export async function getPostsResources(query) {
   })
   if (!responseRessources) return null
   let posts = responseRessources.data.resourcesPosts.data
-  variables.totalPosts = postsLite.length - 1
+  // if (postsLite) {
+    variables.totalPosts = postsLite.length - 1
+    variables.posts = postsLite
+  // } else {
+  //   variables.totalPosts = responseRessources.data.resourcesPosts.meta.pagination.total
+  // }
   return parsePostsResources(posts, variables)
 }

@@ -2,15 +2,20 @@
 import { HeaderStyle } from "./index.style"
 // React
 import { useEffect, useRef, useState } from "react";
+// Next
+import { useRouter } from "next/router";
 // Nodes
 import { down } from "styled-breakpoints"
 import { useBreakpoint } from 'styled-breakpoints/react-styled';
+// Hooks
+import useStore from "@/hooks/useStore";
 // Modules
 import HeaderDesktop from "@/components/modules/Header/Desktop"
 import HeaderMobile from "@/components/modules/Header/Mobile"
-import useStore from "@/hooks/useStore";
 
 export default function Header() {
+  // Router
+  const router = useRouter()
   // References
   const lastScroll = useRef(0)
   // Hooks
@@ -42,7 +47,7 @@ export default function Header() {
     lastScroll.current = window.pageYOffset
   }
   return (
-    <HeaderStyle className={ `header ${ show ? "is-show" : "" } ${ stick ? "is-stick" : "" }` }>
+    <HeaderStyle className={ `header ${ router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ? "header-complex" : "" } ${ show ? "is-show" : "" } ${ stick ? "is-stick" : "" }` }>
       { useBreakpoint(down('lg')) ?
           <HeaderMobile />
         : 

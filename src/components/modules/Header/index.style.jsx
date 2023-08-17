@@ -8,11 +8,26 @@ export const HeaderStyle = styled.div`
     top: -86px;
     transition: top 0.25s ease;
   }
+  &.header-complex {
+    header {
+      top: -145px;
+      transition: top 0.25s ease;
+    }
+  }
   ${down('md')} {
     padding-bottom: 66px;
     header {
       top: -66px;
       transition: top 0.25s ease;
+      &.header-complex {
+        top: -145px;
+      }
+    }
+    &.header-complex {
+      header {
+        top: -145px;
+        transition: top 0.25s ease;
+      }
     }
   }
   &.is-stick {

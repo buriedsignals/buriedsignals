@@ -8,6 +8,14 @@ export const QUERY_POSTS_INSIGHTS_LITE = ({ categories }) => gql`
         id
         attributes {
           Slug
+          Categories {
+            data {
+              attributes {
+                Title
+                Slug
+              }
+            }
+          }
         }
       }
     }
@@ -17,6 +25,11 @@ export const QUERY_POSTS_INSIGHTS_LITE = ({ categories }) => gql`
 export const QUERY_POSTS_INSIGHTS = ({ categories, page }) => gql`
   query QueryPostsInsights${ categories || page ? `(${ categories ? "$categories: [String]" : "" }${ page ? `${ categories ? ", " : "" }$page: Int` : "" })` : "" } {
     insightsPosts(${ categories ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" } }, ` : "" }sort: "publishedAt:desc", pagination: { page: $page, pageSize: 50 }) {
+      meta {
+        pagination {
+          total
+        }
+      }
       data {
         id
         attributes {

@@ -53,7 +53,8 @@ export async function getServerSideProps({ query }) {
   //         title: "Inspiration",
   //         description: "Lorem Ipsum",
   //         meta: {}
-  //       }
+  //       },
+  //       posts: []
   //     }
   //   }
   // }

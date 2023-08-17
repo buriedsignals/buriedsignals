@@ -6,27 +6,30 @@ import Link from "next/link"
 import useToggle from "@/hooks/useToggle"
 // Icons
 import ArrowIcon from "@/components/icons/Arrow"
+import { useEffect } from "react"
 
-export default function Dropdown({ buttonName = "", listActions = [], isActive = false, ...props }) {
+export default function Dropdown({ buttonName = "", listActions = [], isActive = false, setDropdown, ...props }) {
   // Hooks
   const [modal, setModal] = useToggle(false) 
+  // Effects
+  useEffect(() => {
+    if (modal || isActive) {
+      setDropdown(true)
+    } else {
+      setDropdown(false)
+    }
+  }, [modal])
+  // Handlers
+  const handleHover = () => {
+    setModal(!modal)
+  }
   return (
     <DropdownStyle { ...props } onMouseEnter={ () => setModal(true) } onMouseLeave={ () => setModal(false) }>
-      <button className={ `modal${ modal ? ' is-open' : '' } ${ isActive ? "is-active" : "" }` } onClick={ () => setModal(!modal) }>
-        <p className="typography-01">{ buttonName }</p>
-        <ArrowIcon />
-      </button>
-      {/* { modal &&  */}
-        <div className={ `panel ${ modal ? 'is-show' : '' }` }>
-          <ul className="links">
-            { listActions.map((itemAction, index) => {
-                return <li key={ `item-${index}` } className="link" onClick={ () => setModal(false) }>
-                  { itemAction }
-                </li>
-            }) }
-          </ul>
-        </div>
-     {/* } */}
+      <Link href="/">
+        <a className={ `modal${ modal ? ' is-open' : '' } ${ isActive ? "is-active" : "" }` } onMouseEnter={ handleHover }>
+          <p className="typography-01">{ buttonName }</p>
+        </a>
+      </Link>
     </DropdownStyle>
   )
 }

@@ -6,6 +6,34 @@ export const HeaderMobileStyle = styled.header`
   top: 0; left: 0;
   width: 100%;
   z-index: 10;
+  .subheader {
+    padding: 0 16px;
+    background-color: var(--color-black04);
+    .subheader-mobile-container {
+      max-width: 774px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      a {
+        width: 100%;
+        padding: 18px 0;
+        text-align: center;
+        border-bottom: 1px solid var(--color-black04);
+        transition: all 0.25s ease-in;
+        p {
+          color: var(--color-white);
+        }
+        &:hover {
+          border-bottom: 1px solid var(--color-green);
+          transition: all 0.25s ease-out;
+        }
+        &.is-active {
+          border-bottom: 1px solid var(--color-green);
+        }
+      }
+    }
+  }
   .header-mobile-container {
     .top-container {
       display: flex;

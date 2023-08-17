@@ -19,7 +19,7 @@ import SecondaryButton from "@/components/buttons/Secondary"
 import CrossIcon from "@/components/icons/Cross"
 
 
-export default function Vote({ metric, description, postId, votes, ...props }) {
+export default function Vote({ metric, description, postId, votes, setUserVote, ...props }) {
   // Router
   const router = useRouter()
   // Cookies
@@ -87,7 +87,7 @@ export default function Vote({ metric, description, postId, votes, ...props }) {
           window.scrollTo(0, 0)
           user.voted.spotlights = votedSpotlights
           setCookieObject("voted", user.voted)
-          router.reload()
+          setUserVote(indexVote)
         }
       } catch (error) {
         console.error(error);

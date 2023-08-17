@@ -1,6 +1,7 @@
 # Block all crawlers for /api
 User-agent: *
 Disallow: /api
+Disallow: /archives
 Disallow: /profiles/reset-password$
 
 # Allow all crawlers

@@ -13,8 +13,6 @@ export async function getServerSideProps({ res }) {
   const slugsInsights = insights.posts.filter((post) => post.slug !== null).map((post) => (post.slug))
   const members = await getUsersMembers({ page: -1 })
   const slugsMembers = members.users.filter((member) => member.slug !== null).map((member) => (member.slug))
-  const archives = await getPostsSpotlightsArchives({ page: -1 })
-  const slugsArchives = archives.posts.filter((post) => post.slug !== null).map((post) => (post.slug))
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -74,15 +72,6 @@ export async function getServerSideProps({ res }) {
           return `
               <url>
                  <loc>https://buriedsignals.com/profiles/${slug}</loc>
-              </url>
-            `
-        }).join('')
-      }
-      ${slugsArchives.map(
-        (slug) => {
-          return `
-              <url>
-                 <loc>https://buriedsignals.com/archives/${slug}</loc>
               </url>
             `
         }).join('')

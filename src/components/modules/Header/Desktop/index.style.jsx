@@ -5,13 +5,41 @@ export const HeaderDesktopStyle = styled.header`
   position: fixed;
   top: 0; left: 0;
   width: 100%;
-  padding: 18px 36px;
-  background-color: var(--color-black02);
   z-index: 10;
+  .subheader {
+    padding: 0 36px;
+    background-color: var(--color-black04);
+    .subheader-desktop-container {
+      max-width: 774px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      a {
+        width: 100%;
+        padding: 18px 0;
+        text-align: center;
+        border-bottom: 1px solid var(--color-black04);
+        transition: all 0.25s ease-in;
+        p {
+          color: var(--color-white);
+        }
+        &:hover {
+          border-bottom: 1px solid var(--color-green);
+          transition: all 0.25s ease-out;
+        }
+        &.is-active {
+          border-bottom: 1px solid var(--color-green);
+        }
+      }
+    }
+  }
   .header-desktop-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 18px 36px;
+    background-color: var(--color-black02);
     .left-container {
       display: flex;
       align-items: center;
@@ -38,7 +66,7 @@ export const HeaderDesktopStyle = styled.header`
               color: var(--color-white);
               transition: all 0.25s ease-in;
             }
-            &:hover {
+            &:hover, &.is-hover {
               p {
                 color: var(--color-green);
                 transition: all 0.25s ease-out;

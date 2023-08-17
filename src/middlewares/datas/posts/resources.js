@@ -8,6 +8,14 @@ export const QUERY_POSTS_RESOURCES_LITE = ({ categories }) => gql`
         id
         attributes {
           Slug
+          Categories {
+            data {
+              attributes {
+                Title
+                Slug
+              }
+            }
+          }
         }
       }
     }
@@ -15,8 +23,13 @@ export const QUERY_POSTS_RESOURCES_LITE = ({ categories }) => gql`
 `
 
 export const QUERY_POSTS_RESOURCES = ({ categories, page }) => gql`
-    query QueryPostsResources${ categories || page ? `(${ categories ? "$categories: [String]" : "" }${ page ? `${ categories ? ", " : "" }$page: Int` : "" })` : "" } {
-      resourcesPosts(${ categories ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" } }, ` : "" }sort: "publishedAt:desc", pagination: { page: $page, pageSize: 50 }) {
+  query QueryPostsResources${ categories || page ? `(${ categories ? "$categories: [String]" : "" }${ page ? `${ categories ? ", " : "" }$page: Int` : "" })` : "" } {
+    resourcesPosts(${ categories ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" } }, ` : "" }sort: "publishedAt:desc", pagination: { page: $page, pageSize: 50 }) {
+      meta {
+        pagination {
+          total
+        }
+      }
       data {
         id
         attributes {

@@ -28,69 +28,52 @@ export default function HeaderDesktop() {
   const router = useRouter()
   // Cookies
   const [user, setUser] = useState({ connected: false, slug: '' })
+  const [dropdown, setDropdown] = useState(false)
   useEffect(() => {
     setUser(getUserCookies())
   }, [])
   return (
-    <HeaderDesktopStyle>
+    <HeaderDesktopStyle  onMouseLeave={ () => setDropdown(false) }>
       <div className="header-desktop-container">
         <div className="left-container">
           <Link href="/">
-            <a className="logo">
+            <a className="logo" onMouseEnter={ () => setDropdown(false) }>
               <LogoIcon type="small" />
             </a>
           </Link>
           <ul className="pages">
             <li className="page">
-              <DropdownModule 
+              {/* <DropdownModule 
                 buttonName="Magazine"
                 isActive={ router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ? "is-active" : "" }
-                listActions={ (() => {
-                  return [
-                    (() => <Link href="/">
-                      <a className={ router.pathname == "/" ? "is-active" : "" }>
-                        <p className="typography-01">Inspiration</p>
-                      </a>
-                    </Link>)(),
-                    (() => <Link href="/insights">
-                      <a className={ router.pathname == "/insights" ? "is-active" : "" }>
-                        <p className="typography-01">Insights</p>
-                      </a>
-                    </Link>)(),
-                    (() => <Link href="/resources">
-                      <a className={ router.pathname == "/resources" ? "is-active" : "" }>
-                        <p className="typography-01">Resources</p>
-                      </a>
-                    </Link>)(),
-                    // (() => <Link href="/directory">
-                    //   <a className={ router.pathname == "/directory" ? "is-active" : "" }>
-                    //     <p className="typography-01">Directory</p>
-                    //   </a>
-                    // </Link>)(),
-                  ]
-                })() }
-              />
+                setDropdown={ setDropdown }
+              /> */}
+              <Link href="/">
+                <a className={ `${ router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ? "is-active" : "" } ${ dropdown ? "is-hover" : "" }` }  onMouseEnter={ () => setDropdown(true) }>
+                  <p className="typography-01">Magazine</p>
+                </a>
+              </Link>
             </li>
             <li className="page">
-              <a href="https://www.studio.buriedsignals.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.studio.buriedsignals.com" target="_blank" rel="noopener noreferrer" onMouseEnter={ () => setDropdown(false) }>
                 <p className="typography-01">Studio</p>
               </a>
             </li>
             <li className="page">
               <Link href="/membership">
-                <a className={ router.pathname == "/membership" ? "is-active" : "" }>
+                <a className={ router.pathname == "/membership" ? "is-active" : "" } onMouseEnter={ () => setDropdown(false) }>
                   <p className="typography-01">Membership</p>
                 </a>
               </Link>
             </li>
             <li className="page">
-              <a href="https://buriedsignals.substack.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://buriedsignals.substack.com" target="_blank" rel="noopener noreferrer" onMouseEnter={ () => setDropdown(false) }>
                 <p className="typography-01">Newsletter</p>
               </a>
             </li>
             <li className="page">
               <Link href="/about">
-                <a className={ router.pathname == "/about" ? "is-active" : "" }>
+                <a className={ router.pathname == "/about" ? "is-active" : "" } onMouseEnter={ () => setDropdown(false) }>
                   <p className="typography-01">About</p>
                 </a>
               </Link>
@@ -99,13 +82,13 @@ export default function HeaderDesktop() {
         </div>
         <div className="right-container">
           <ul className="actions">
-            <li className="action">
+            <li className="action" onMouseEnter={ () => setDropdown(false) }>
               <SponsorButton href="https://informationplusconference.com/" title="Sponsor" text="Information+ Conference" icon={ () => <SponsorIcon /> } />
             </li>
             { user.connected ?
                 <li className="action">
                   <Link href={ `/profiles/${ user.connected ? user.slug : 'signin' }` }>
-                    <a>
+                    <a onMouseEnter={ () => setDropdown(false) }>
                       <p className="typography-01">Profile</p>
                     </a>
                   </Link>
@@ -114,14 +97,14 @@ export default function HeaderDesktop() {
               <>
                 <li className="action">
                   <Link href="/profiles/signin">
-                    <a>
+                    <a onMouseEnter={ () => setDropdown(false) }>
                       <p className="typography-01">Sign In</p>
                     </a>
                   </Link>
                 </li>
               </>
             }
-            <li className="action">
+            <li className="action" onMouseEnter={ () => setDropdown(false) }>
               <PrimaryLink href="https://t1ipnnn9dzv.typeform.com/to/YrFFaQjA" intern={ false }>
                 <p className="typography-03">{ useBreakpoint(down('xl')) ? "Submit" : "Submit a project" }</p>
               </PrimaryLink>
@@ -129,6 +112,29 @@ export default function HeaderDesktop() {
           </ul>
         </div>
       </div>
+      { dropdown || router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ?  
+        <div className="subheader">
+          <div className="subheader-desktop-container">
+            <Link href="/">
+              <a className={ router.pathname == "/" ? "is-active" : "" }>
+                <p className="typography-01">Inspiration</p>
+              </a>
+            </Link>
+            <Link href="/insights">
+              <a className={ router.pathname == "/insights" ? "is-active" : "" }>
+                <p className="typography-01">Insights</p>
+              </a>
+            </Link>
+            <Link href="/resources">
+              <a className={ router.pathname == "/resources" ? "is-active" : "" }>
+                <p className="typography-01">Resources</p>
+              </a>
+            </Link>
+          </div>
+        </div>
+        :
+        <></>
+      }
     </HeaderDesktopStyle>
   )
 }

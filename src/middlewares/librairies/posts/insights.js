@@ -9,14 +9,17 @@ export async function getPostsInsights(query) {
   if (query.category) {
     variables.categories = [].concat(query.category)
   }
-  const responseInsightsLite = await apolloClient.query({
-    query: QUERY_POSTS_INSIGHTS_LITE({
-      categories: query.category || null
-    }),
-    variables: variables
-  })
-  if (!responseInsightsLite) return null
-  let postsLite = responseInsightsLite.data.insightsPosts.data
+  let postsLite = null
+  // if (query.category) {
+    const responseInsightsLite = await apolloClient.query({
+      query: QUERY_POSTS_INSIGHTS_LITE({
+        categories: query.category || null
+      }),
+      variables: variables
+    })
+    if (!responseInsightsLite) return null
+    postsLite = responseInsightsLite.data.insightsPosts.data
+  // }
   variables.page = query.page ? parseInt(query.page) : 1
   const responseInsights = await apolloClient.query({
     query: QUERY_POSTS_INSIGHTS({
@@ -27,7 +30,12 @@ export async function getPostsInsights(query) {
   })
   if (!responseInsights) return null
   let posts = responseInsights.data.insightsPosts.data
-  variables.totalPosts = postsLite.length - 1
+  // if (postsLite) {
+    variables.totalPosts = postsLite.length - 1
+    variables.posts = postsLite
+  // } else {
+  //   variables.totalPosts = responseInsights.data.insightsPosts.meta.pagination.total
+  // }
   return parsePostsInsights(posts, variables)
   // const apolloClient = getApolloClient()
   // const variables = {}
