@@ -102,8 +102,8 @@ export const FlexibleContentStyle = styled.div`
     margin: 0 auto;
     /* ----------------------- */
     height: auto;
-    padding-left: 15px;
-    padding-right: 15px;
+    // padding-left: 15px;
+    // padding-right: 15px;
     padding-bottom: 40px;
   }
   @media screen and (max-width: 858px) {

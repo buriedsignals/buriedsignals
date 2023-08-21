@@ -318,7 +318,8 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
       'config': {
         'seeds': [
           {
-            'url': link_source
+            'url': link_source,
+            'scopeType': 'page'
           }
         ]
       },
