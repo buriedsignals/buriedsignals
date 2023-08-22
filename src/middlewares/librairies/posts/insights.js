@@ -1,7 +1,7 @@
 // Middlewares
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
 import { CREATE_POST_INSIGHT, QUERY_POSTS_INSIGHTS, QUERY_POSTS_INSIGHTS_LITE, QUERY_POST_INSIGHT, UPDATE_POST_INSIGHTS_LIKES } from "@/middlewares/datas/posts/insights"
-import { parsePostsInsights, parsePostInsight } from '../utils'
+import { parsePostsInsights, parsePostInsight, maxPostsByPage, maxPostsBySectionByPage } from '../utils'
 
 export async function getPostsInsights(query) {
   const apolloClient = getApolloClient()
@@ -21,10 +21,12 @@ export async function getPostsInsights(query) {
     postsLite = responseInsightsLite.data.insightsPosts.data
   // }
   variables.page = query.page ? parseInt(query.page) : 1
+  let pageSize = Math.floor(maxPostsByPage / maxPostsBySectionByPage) * maxPostsBySectionByPage
   const responseInsights = await apolloClient.query({
     query: QUERY_POSTS_INSIGHTS({
       categories: query.category || null,
-      page: query.page || 1
+      page: query.page || 1,
+      pageSize: pageSize
     }),
     variables: variables
   })

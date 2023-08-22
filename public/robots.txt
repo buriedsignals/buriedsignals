@@ -2,10 +2,12 @@
 User-agent: *
 Disallow: /api
 Disallow: /archives
-Disallow: /profiles/reset-password$
+Disallow: /profiles
 
 # Allow all crawlers
 User-agent: *
 Allow: /
+Allow: /profiles/signin$
+Allow: /profiles/signup$
 
 Sitemap: https://buriedsignals.com/sitemap.xml

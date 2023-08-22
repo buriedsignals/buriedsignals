@@ -22,9 +22,9 @@ export const QUERY_POSTS_INSIGHTS_LITE = ({ categories }) => gql`
   }
 `
 
-export const QUERY_POSTS_INSIGHTS = ({ categories, page }) => gql`
+export const QUERY_POSTS_INSIGHTS = ({ categories, page, pageSize }) => gql`
   query QueryPostsInsights${ categories || page ? `(${ categories ? "$categories: [String]" : "" }${ page ? `${ categories ? ", " : "" }$page: Int` : "" })` : "" } {
-    insightsPosts(${ categories ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" } }, ` : "" }sort: "publishedAt:desc", pagination: { page: $page, pageSize: 50 }) {
+    insightsPosts(${ categories ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" } }, ` : "" }sort: "publishedAt:desc", pagination: { page: $page, pageSize: ${ pageSize } }) {
       meta {
         pagination {
           total

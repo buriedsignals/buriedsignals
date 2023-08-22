@@ -1,7 +1,7 @@
 // Middlewares
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
 import { QUERY_POSTS_RESOURCES, QUERY_POSTS_RESOURCES_LITE } from "@/middlewares/datas/posts/resources"
-import { parsePostsResources } from '../utils'
+import { maxPostsByPage, maxPostsBySectionByPage, parsePostsResources } from '../utils'
 
 export async function getPostsResources(query) {
   const apolloClient = getApolloClient()
@@ -21,10 +21,12 @@ export async function getPostsResources(query) {
     postsLite = responseRessourcesLite.data.resourcesPosts.data
   // }
   variables.page = query.page ? parseInt(query.page) : 1
+  let pageSize = Math.floor(maxPostsByPage / maxPostsBySectionByPage) * maxPostsBySectionByPage
   const responseRessources = await apolloClient.query({
     query: QUERY_POSTS_RESOURCES({
       categories: query.category || null,
-      page: query.page || 1
+      page: query.page || 1,
+      pageSize: pageSize
     }),
     variables: variables
   })

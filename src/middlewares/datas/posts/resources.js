@@ -22,9 +22,9 @@ export const QUERY_POSTS_RESOURCES_LITE = ({ categories }) => gql`
   }
 `
 
-export const QUERY_POSTS_RESOURCES = ({ categories, page }) => gql`
+export const QUERY_POSTS_RESOURCES = ({ categories, page, pageSize }) => gql`
   query QueryPostsResources${ categories || page ? `(${ categories ? "$categories: [String]" : "" }${ page ? `${ categories ? ", " : "" }$page: Int` : "" })` : "" } {
-    resourcesPosts(${ categories ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" } }, ` : "" }sort: "publishedAt:desc", pagination: { page: $page, pageSize: 50 }) {
+    resourcesPosts(${ categories ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" } }, ` : "" }sort: "publishedAt:desc", pagination: { page: $page, pageSize: ${ pageSize } }) {
       meta {
         pagination {
           total

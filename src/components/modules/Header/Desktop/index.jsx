@@ -112,7 +112,7 @@ export default function HeaderDesktop() {
           </ul>
         </div>
       </div>
-      { dropdown || router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ?  
+      { router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ?  
         <div className="subheader">
           <div className="subheader-desktop-container">
             <Link href="/">

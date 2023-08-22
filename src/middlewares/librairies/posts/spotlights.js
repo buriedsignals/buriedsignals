@@ -2,7 +2,7 @@
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
 import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_LATEST, QUERY_POSTS_SPOTLIGHTS_WEEK, QUERY_POSTS_SPOTLIGHTS_MONTH, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_SPOTLIGHT_COMMENT, UPDATE_POST_SPOTLIGHT_METRICS_VALUE, QUERY_POST_SPOTLIGHT_ARCHIVE, QUERY_POSTS_SPOTLIGHTS_ARCHIVES, UPDATE_POST_SPOTLIGHT_VOTES, QUERY_POSTS_SPOTLIGHTS_LITE, CREATE_POST_SPOTLIGHT_ARCHIVE } from "@/middlewares/datas/posts/spotlights"
 // Scripts
-import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments, parseArchivesSpotlights, parseArchiveSpotlight, createFile } from '../utils'
+import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments, parseArchivesSpotlights, parseArchiveSpotlight, createFile, maxPostsByPage, maxPostsBySectionByPage } from '../utils'
 import { getDecile, transformToSlug } from '@/scripts/utils'
 // Modules
 import axios from 'axios'
@@ -36,12 +36,14 @@ export async function getPostsSpotlights(query) {
     postsLite = responseSpotlightsLite.data.spotlightsPosts.data
   // }
   variables.page = query.page ? parseInt(query.page) : 1
+  let pageSize = Math.floor(maxPostsByPage / maxPostsBySectionByPage) * maxPostsBySectionByPage
   const responseSpotlights = await apolloClient.query({
     query: QUERY_POSTS_SPOTLIGHTS({
       categories: query.category || null,
       award: query.award || null,
       geography: query.geography || null,
-      page: query.page || 1
+      page: query.page || 1,
+      pageSize: pageSize
     }),
     variables: variables
   })

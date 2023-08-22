@@ -42,9 +42,9 @@ export const QUERY_POSTS_SPOTLIGHTS_LITE = ({ categories, award, geography }) =>
   }
 `
 
-export const QUERY_POSTS_SPOTLIGHTS = ({ categories, award, geography, page }) => gql`
+export const QUERY_POSTS_SPOTLIGHTS = ({ categories, award, geography, page, pageSize }) => gql`
   query QueryPostsSpotlights${ categories || award || geography || page ? `(${ categories ? "$categories: [String]" : "" }${ award ? `${ categories ? ", " : "" }$award: String` : "" }${ geography ? `${ categories || award ? ", " : "" }$geography: String` : "" }${ page ? `${ categories || award || geography ? ", " : "" }$page: Int` : "" })` : "" } {
-    spotlightsPosts(${ categories || award || geography ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" }${ award ? `${ categories ? "," : "" } Award: { Slug: { eq: $award } }` : "" }${ geography ? `${ categories || award ? "," : "" } Geography: { Slug: { eq: $geography } }` : "" }}, ` : "" }sort: "publishedAt:desc", pagination: { page: $page, pageSize: 50 }) {
+    spotlightsPosts(${ categories || award || geography ? `filters: {${ categories ? " Categories: { Slug: { in: $categories } }" : "" }${ award ? `${ categories ? "," : "" } Award: { Slug: { eq: $award } }` : "" }${ geography ? `${ categories || award ? "," : "" } Geography: { Slug: { eq: $geography } }` : "" }}, ` : "" }sort: "publishedAt:desc", pagination: { page: $page, pageSize: ${ pageSize } }) {
       meta {
         pagination {
           total

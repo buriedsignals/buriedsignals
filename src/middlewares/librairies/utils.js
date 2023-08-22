@@ -5,6 +5,7 @@ import { USER, STRAPI_ENDPOINT } from "./apollo-client";
 import { forEach } from "lodash";
 
 export const maxPostsBySectionByPage = 6
+export const maxPostsByPage = 25
 
 export function parsePageSimple(datas) {
   return {
@@ -39,7 +40,7 @@ export function parsePostsSpotlights(datas, query) {
   let posts = datas.map(data => {
     return { id: data.id, ...parsePostSpotlight(data.attributes) }
   });
-  posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts, query.totalPosts)
+  posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts, query.totalPosts, maxPostsByPage)
   const categories = getTaxonomiesPosts(query.posts, "Categories")
   const awards = getTaxonomiesPosts(query.posts, "Award")
   const geographies = getTaxonomiesPosts(query.posts, "Geography")
@@ -167,7 +168,7 @@ export function parsePostsInsights(datas, query) {
   let posts = datas.map(data => {
     return { id: data.id, ...parsePostInsight(data.attributes) }
   });
-  posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts, query.totalPosts)
+  posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts, query.totalPosts, maxPostsByPage)
   const categories = getTaxonomiesPosts(query.posts, "Categories")
   return {
     posts: posts.posts,
@@ -204,7 +205,7 @@ export function parsePostsResources(datas, query) {
   let posts = datas.map(data => {
     return { id: data.id, ...parsePostResource(data.attributes) }
   });
-  posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts, query.totalPosts)
+  posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts, query.totalPosts, maxPostsByPage)
   const categories = getTaxonomiesPosts(query.posts, "Categories")
   return {
     posts: posts.posts,
@@ -231,7 +232,7 @@ export function parseUsersJury(datas, query) {
   let users = datas.map(data => {
     return parseUserJury(data.attributes)
   });
-  users = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, users, query.totalPosts ? query.totalPosts : 1)
+  users = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, users, query.totalPosts ? query.totalPosts : 1, maxPostsByPage)
   return { 
     users: users.posts,
     meta: users.meta,
@@ -399,9 +400,9 @@ function getDynamicContent(datas) {
   })
 }
 
-const pagination = (page, sectionSize, posts, totalPosts) => {
+const pagination = (page, sectionSize, posts, totalPosts, maxPageSize) => {
   // const totalPosts = posts.length
-  let pageSize = Math.floor(50 / sectionSize) * sectionSize
+  let pageSize = Math.floor(maxPageSize / sectionSize) * sectionSize
   pageSize = totalPosts < pageSize ? totalPosts : pageSize
   const totalPages = Math.ceil(totalPosts / pageSize)
   // const paginatedPosts = page == -1 ? posts : posts.slice((page - 1) * pageSize, ((page - 1) * pageSize) + pageSize)

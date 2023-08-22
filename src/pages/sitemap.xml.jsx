@@ -1,7 +1,6 @@
 // Middlewares
 import { getPostsSpotlights, getPostsSpotlightsArchives } from '@/middlewares/librairies/posts/spotlights';
 import { getPostsInsights } from '@/middlewares/librairies/posts/insights';
-import { getUsersMembers } from '@/middlewares/librairies/users/member';
 
 export default function Sitemap() {
 }
@@ -10,9 +9,7 @@ export async function getServerSideProps({ res }) {
   const spotlights = await getPostsSpotlights({ page: -1 })
   const slugsSpotlights = spotlights.posts.filter((post) => post.slug !== null).map((post) => (post.slug))
   const insights = await getPostsInsights({ page: -1 })
-  const slugsInsights = insights.posts.filter((post) => post.slug !== null).map((post) => (post.slug))
-  const members = await getUsersMembers({ page: -1 })
-  const slugsMembers = members.users.filter((member) => member.slug !== null).map((member) => (member.slug))
+  const slugsInsights = insights.posts.filter((post) => post.slug !== null && post.source.url == null).map((post) => (post.slug))
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -66,15 +63,6 @@ export async function getServerSideProps({ res }) {
               </url>
             `
           }).join('')
-      }
-      ${slugsMembers.map(
-        (slug) => {
-          return `
-              <url>
-                 <loc>https://buriedsignals.com/profiles/${slug}</loc>
-              </url>
-            `
-        }).join('')
       }
     </urlset>
   `;
