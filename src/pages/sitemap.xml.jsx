@@ -1,15 +1,15 @@
 // Middlewares
-import { getPostsSpotlights, getPostsSpotlightsArchives } from '@/middlewares/librairies/posts/spotlights';
-import { getPostsInsights } from '@/middlewares/librairies/posts/insights';
+import { getPostsSpotlightsLite } from '@/middlewares/librairies/posts/spotlights';
+import { getPostsInsightsLite } from '@/middlewares/librairies/posts/insights';
 
 export default function Sitemap() {
 }
 
 export async function getServerSideProps({ res }) {
-  const spotlights = await getPostsSpotlights({ page: -1 })
-  const slugsSpotlights = spotlights.posts.filter((post) => post.slug !== null).map((post) => (post.slug))
-  const insights = await getPostsInsights({ page: -1 })
-  const slugsInsights = insights.posts.filter((post) => post.slug !== null && post.source.url == null).map((post) => (post.slug))
+  const spotlights = await getPostsSpotlightsLite({ page: -1 })
+  const slugsSpotlights = spotlights.filter((post) => post.attributes.Slug !== null).map((post) => (post.attributes.Slug))
+  const insights = await getPostsInsightsLite({ page: -1 })
+  const slugsInsights = insights.filter((post) =>post.attributes.Slug !== null && post.attributes.Source_link == null).map((post) => (post.attributes.Slug))
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

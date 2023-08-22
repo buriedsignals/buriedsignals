@@ -59,6 +59,32 @@ export async function getPostsSpotlights(query) {
   return posts
 }
 
+export async function getPostsSpotlightsLite(query) {
+  const apolloClient = getApolloClient()
+  const variables = {}
+  if (query.category) {
+    variables.categories = [].concat(query.category)
+  }
+  if (query.award) {
+    variables.award = query.award
+  }
+  if (query.geography) {
+    variables.geography = query.geography
+  }
+  let postsLite = null
+  const responseSpotlightsLite = await apolloClient.query({
+    query: QUERY_POSTS_SPOTLIGHTS_LITE({
+      categories: query.category || null,
+      award: query.award || null,
+      geography: query.geography || null
+    }),
+    variables: variables
+  })
+  if (!responseSpotlightsLite) return null
+  postsLite = responseSpotlightsLite.data.spotlightsPosts.data
+  return postsLite
+}
+
 export async function getPostSpotlight(slug) {
   const apolloClient = getApolloClient()
   const responseSpotlight = await apolloClient.query({

@@ -55,6 +55,24 @@ export async function getPostsInsights(query) {
   // return parsePostsInsights(posts, query)
 }
 
+export async function getPostsInsightsLite(query) {
+  const apolloClient = getApolloClient()
+  const variables = {}
+  if (query.category) {
+    variables.categories = [].concat(query.category)
+  }
+  let postsLite = null
+  const responseInsightsLite = await apolloClient.query({
+    query: QUERY_POSTS_INSIGHTS_LITE({
+      categories: query.category || null
+    }),
+    variables: variables
+  })
+  if (!responseInsightsLite) return null
+  postsLite = responseInsightsLite.data.insightsPosts.data
+  return postsLite
+}
+
 export async function getPostInsight(slug) {
   const apolloClient = getApolloClient()
   const response = await apolloClient.query({

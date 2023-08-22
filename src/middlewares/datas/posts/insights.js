@@ -8,6 +8,7 @@ export const QUERY_POSTS_INSIGHTS_LITE = ({ categories }) => gql`
         id
         attributes {
           Slug
+          Source_link
           Categories {
             data {
               attributes {
