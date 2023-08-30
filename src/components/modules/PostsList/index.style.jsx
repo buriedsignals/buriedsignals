@@ -77,12 +77,13 @@ export const PostsListStyle = styled.div`
         }
       }
     }
-    &.type-project {
+    &.type-directory {
       display: flex;
       flex-wrap: wrap;
       column-gap: 20px;
       justify-content: flex-start;
       padding-top: 0;
+      padding-bottom: 25px;
       ${down('md')} {
         padding-left: 16px;
         padding-right: 16px;
@@ -125,7 +126,16 @@ export const PostsListStyle = styled.div`
     display: flex;
     gap: 12px;
     width: fit-content;
-    margin: 0 auto;
+    margin: 0 auto 40px;
+    padding-bottom: 20px;
+    &.is-hide {
+      display: none;
+      width: 0;
+      height: 0;
+      margin: 0 !important;
+      opacity: 0;
+      visibility: hidden;
+    }
     .page {
       position: relative;
       color: var(--color-white);

@@ -13,7 +13,7 @@ import SpotlightCard from "@/components/cards/Spotlight"
 import InsightCard from "@/components/cards/Insight"
 import ResourceCard from "@/components/cards/Resource"
 import JuryCard from "@/components/cards/Jury"
-import ProjectCard from "@/components/cards/Project"
+import DirectoryCard from "@/components/cards/Directory"
 // Buttons
 import ThirstyButton from "@/components/buttons/Thirsty"
 
@@ -29,6 +29,7 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
   const router = useRouter();
   // References
   const listRef = useRef()
+  const sectionRef = useRef()
   // States
   const [section, setSection] = useState(1)
   const [infiniteScroll, setInfiniteScroll] = useState(false)
@@ -43,6 +44,9 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
     }
   }, [])
   useEffect(() => {
+    sectionRef.current = section
+  }, [section])
+  useEffect(() => {
     if (infiniteScroll) {
       setSection(section + 1)
       setInfiniteScroll(false)
@@ -55,9 +59,9 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
   const onScrollWindow = () => {
     const listBounding = listRef.current.getBoundingClientRect()
     const maxScroll = listBounding.height - (4 * window.innerHeight / 5)
-    if (listBounding.top * -1 >= maxScroll) {
+    if (listBounding.top * -1 >= maxScroll && posts.length > max * sectionRef.current) {
       setInfiniteScroll(true)
-    }  
+    }
   }
   return (
     <PostsListStyle { ...props } >
@@ -75,8 +79,8 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
                       return <ResourceCard post={ post } />
                     case 'jury':
                       return <JuryCard post={ post } />
-                    case 'project':
-                      return <ProjectCard post={ post } />
+                    case 'directory':
+                      return <DirectoryCard post={ post } />
                   }
                 })()}
               </li>
@@ -91,14 +95,20 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
           <ThirstyButton onClickButton={ onClickButtonMorePosts }>Load more</ThirstyButton>
         </div>
       }
-      { meta && posts.length <= max * section && maxPages > 1 &&
-        <div className="container-module-large more-pages">
+      {/* { meta && posts.length <= max * section && maxPages > 1 && */}
+        <div className={ `container-module-large more-pages ${ (meta && posts.length <= max * section && maxPages > 1) ? 'is-show' : 'is-hide' }` }>
           { currentPage !== 1 && 
-            <button onClick={ () => {
-              router.push({ pathname: router.pathname, query: { ...router.query, page: currentPage - 1 } }, undefined, { shallow: true }).then(() => router.reload())
-            } } className="page typography-01" >
-              <p className="typography-01 arrow-left">{ "<" }</p> 
-            </button>
+            <Link href={{
+              pathname: router.pathname,
+              query: { ...router.query, page: currentPage - 1 }
+            }} passHref>
+              <a onClick={ (e) => {
+                e.preventDefault()
+                router.push({ pathname: router.pathname, query: { ...router.query, page: currentPage - 1 } }, undefined, { shallow: true }).then(() => router.reload())
+              } } className="page typography-01" >
+                <p className="typography-01 arrow-left">{ "<" }</p> 
+              </a>
+            </Link>
           }
           { Array.from({ length: maxPagesShow }).map((el, index) => {
             let page = currentPage
@@ -110,22 +120,33 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
             }
             page = page + index - offset
             return (
-                <button key={ `page-${ index }` } onClick={ () => {
+              <Link key={ `page-${ index }` } href={{
+                pathname: router.pathname,
+                query: { ...router.query, page: page }
+              }} passHref>
+                <a onClick={ (e) => {
                   router.push({ pathname: router.pathname, query: { ...router.query, page: page } }, undefined, { shallow: true }).then(() => router.reload())
                 } } className={ `${ (page == currentPage) ? 'is-active' : '' } page typography-01` }>
                   <p className="typography-01">{ page }</p> 
-                </button>
+                </a>
+              </Link>
             )
           }) }
           { currentPage !== maxPages && 
-            <button onClick={ () => {
-              router.push({ pathname: router.pathname, query: { ...router.query, page: currentPage + 1 } }, undefined, { shallow: true }).then(() => router.reload())
-            } } className="page typography-01">
-              <p className="typography-01 arrow-right">{ ">" }</p> 
-            </button>
+            <Link href={{
+              pathname: router.pathname,
+              query: { ...router.query, page: currentPage + 1 }
+            }} passHref>
+              <a onClick={ (e) => {
+                e.preventDefault()
+                router.push({ pathname: router.pathname, query: { ...router.query, page: currentPage + 1 } }, undefined, { shallow: true }).then(() => router.reload())
+              } } className="page typography-01">
+                <p className="typography-01 arrow-right">{ ">" }</p> 
+              </a>
+            </Link>
           }
         </div>
-      }
+      {/* } */}
     </PostsListStyle>
   )
 }
