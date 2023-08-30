@@ -13,7 +13,7 @@ import SpotlightCard from "@/components/cards/Spotlight"
 import InsightCard from "@/components/cards/Insight"
 import ResourceCard from "@/components/cards/Resource"
 import JuryCard from "@/components/cards/Jury"
-import DirectoryCard from "@/components/cards/Directory"
+// import DirectoryCard from "@/components/cards/Directory"
 // Buttons
 import ThirstyButton from "@/components/buttons/Thirsty"
 
@@ -79,8 +79,8 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
                       return <ResourceCard post={ post } />
                     case 'jury':
                       return <JuryCard post={ post } />
-                    case 'directory':
-                      return <DirectoryCard post={ post } />
+                    // case 'directory':
+                    //   return <DirectoryCard post={ post } />
                   }
                 })()}
               </li>
