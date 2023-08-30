@@ -125,6 +125,7 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
                 query: { ...router.query, page: page }
               }} passHref>
                 <a onClick={ (e) => {
+                  e.preventDefault()
                   router.push({ pathname: router.pathname, query: { ...router.query, page: page } }, undefined, { shallow: true }).then(() => router.reload())
                 } } className={ `${ (page == currentPage) ? 'is-active' : '' } page typography-01` }>
                   <p className="typography-01">{ page }</p> 
