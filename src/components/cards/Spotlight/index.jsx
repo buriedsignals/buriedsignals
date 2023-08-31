@@ -15,11 +15,11 @@ import { useBreakpoint } from 'styled-breakpoints/react-styled';
 export default function Spotlight({ post, ...props }) {
   return (
     <Link href={ `/spotlights/${ post.slug }` } passHref>
-      <SpotlightStyle { ...props } target="_blank" rel="dofollow">
+      <SpotlightStyle { ...props } target="_blank">
         <div className="spotlight-container">
           <div className="visual-container">
             { post.awards && <div className="awards">
-              <p className="typography-13">{ `Spotlight of the ${ post.awards }` }</p>
+              <p className="typography-13">{ `Inspiration of the ${ post.awards }` }</p>
             </div> }
             <img src={ post.image.url } alt={ post.image.alt } />
           </div>
