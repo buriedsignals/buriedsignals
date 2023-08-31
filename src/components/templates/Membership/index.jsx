@@ -28,7 +28,7 @@ export default function MembershipTemplate({ membership, ...props }) {
                 return paragraphes
               })() }
             </div>
-            <PrimaryLink href="https://t1ipnnn9dzv.typeform.com/to/khhK4BJ2" intern={ false }>
+            <PrimaryLink href="https://www.patreon.com/BuriedSignals" intern={ false }>
               <p className="typography-03">Become a member</p>
             </PrimaryLink>
           </div>
