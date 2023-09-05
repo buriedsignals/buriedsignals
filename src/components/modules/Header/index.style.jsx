@@ -3,9 +3,9 @@ import styled from "styled-components";
 
 export const HeaderStyle = styled.div`
   position: relative;
-  padding-bottom: 86px;
+  padding-bottom: 78px;
   header {
-    top: -86px;
+    top: -78px;
     transition: top 0.25s ease;
   }
   &.header-complex {

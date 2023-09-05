@@ -47,7 +47,7 @@ export const EditStyle = styled.div`
     ${down('md')} {
       top: 85px; left: 0;
       max-width: inherit;
-      height: calc(100vh - 86px);
+      height: calc(100vh - 78px);
       border-radius: 0;
       transform: inherit;
     }
