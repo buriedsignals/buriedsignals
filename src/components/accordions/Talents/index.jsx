@@ -15,6 +15,8 @@ import PortfolioIcon from "@/components/icons/Portfolio"
 export default function Talents({ talents, ...props }) {
   // States
   const [selected, setSelected] = useState(null)
+  // Hooks
+  const breakpoint = useBreakpoint(down('talents'))
   // Handlers
   const onClickTalent = (index) => {
     if (selected == index) {
@@ -42,7 +44,7 @@ export default function Talents({ talents, ...props }) {
     <TalentStyle { ...props }>
       <div className="talents container-module-large">
         <ul className="talents-container">
-          { useBreakpoint(down('talents')) ||
+          { breakpoint ||
             <li className="talent-container">
               <div className="profile-container">
                 <p className="head typography-03">Name</p>
@@ -53,8 +55,8 @@ export default function Talents({ talents, ...props }) {
             </li>
           }
           { talents.map((talent, index) => {
-            return (<>
-              { useBreakpoint(down('talents')) ?
+            return <>
+              { breakpoint ?
                 <li key={ `talent-${ index }` } className={ `talent-container-mobile ${ selected == index ? "is-open" : "" }` } { ...props }>
                   <button className="head-container" onClick={ () => onClickTalent(index) }>
                     <div className="profile-container">
@@ -102,7 +104,7 @@ export default function Talents({ talents, ...props }) {
                   </div>
                 </li>
               }
-            </>)
+            </>
           }) }
         </ul>
       </div>
