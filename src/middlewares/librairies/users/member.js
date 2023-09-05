@@ -68,7 +68,7 @@ export async function loginUserMember(datas) {
   if (!responseLogin) return null
   const responseUser = await apolloClient.query({
     query: QUERY_USER_MEMBER,
-    variables: { slug: transformToSlug(responseLogin.data.login.user.username) }
+    variables: { username: responseLogin.data.login.user.username }
   })
   if (!responseUser) return null
   let user = {...responseUser.data.usersPermissionsUsers.data[0].attributes}

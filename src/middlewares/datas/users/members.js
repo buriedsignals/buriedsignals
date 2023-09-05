@@ -41,8 +41,8 @@ export const QUERY_USERS_MEMBERS = gql`
 `
 
 export const QUERY_USER_MEMBER = gql`
-  query QueryUsersMember($slug: String) {
-    usersPermissionsUsers(filters: { Slug: { eq: $slug } }) {
+  query QueryUsersMember($username: String) {
+    usersPermissionsUsers(filters: { username: { eq: $username } }) {
       data {
         id
         attributes {
