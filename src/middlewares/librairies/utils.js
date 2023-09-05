@@ -281,8 +281,8 @@ export function parseUsersDirectory(datas, query) {
   const members = datas.map(data => {
     return parseUserMember(data.attributes)
   }).filter(member => member.show_in_directory)
-  let spotlights = [...members.filter(member => member.type == "Premium"), ...members.filter(member => member.type == "Ghost")]
-  const talents = members.filter(member => member.type == "Free")
+  let spotlights = members.filter(member => member.type == "Premium")
+  const talents = [...members.filter(member => member.type == "Free"), ...members.filter(member => member.type == "Ghost")]
   const posts = pagination(query.page ? query.page : 1, 6, spotlights, spotlights.length, 6)
   return {
     spotlights: posts.posts,
@@ -423,7 +423,6 @@ function getTaxonomiesPosts(datas, type) {
   taxonomies = taxonomies.filter((taxonomy, index) => {
     return taxonomies.map(e => e && e.slug).indexOf(taxonomy && taxonomy.slug) === index && taxonomy !== null
   })
-  // console.log("taxonomies 01", taxonomies)
   return taxonomies
 }
 

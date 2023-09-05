@@ -1,12 +1,8 @@
 import { TwitterApi } from 'twitter-api-v2';
 
 export default async function handle(req, res) {
-  const datas = {
-    
-  }
-  const model = "spotlights-post"
-  // const datas = req.body.entry
-  // const model = req.body.model
+  const datas = req.body.entry
+  const model = req.body.model
   if (model == "spotlights-post") {
     const twitterClient = new TwitterApi({
       appKey: 'ZsaE2Ble7fulgBxgzvqyhH42D',
@@ -41,8 +37,7 @@ export default async function handle(req, res) {
         template = templateWithoutCategoryAndAuthor
       }
     }
-    console.log('okok')
-    // const data = await twitterClient.v2.tweet(template, {});
-    // res.json(data)
+    const data = await twitterClient.v2.tweet(template, {});
+    res.json(data)
   }
 }

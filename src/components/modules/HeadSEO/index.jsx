@@ -21,6 +21,7 @@ export default function HeadSEO({ meta, ...props }) {
         { meta.description && <meta key='tw-description' name='twitter:description' content={ meta.description } /> }
         { meta.image && <meta key='tw-image' name='twitter:image:src' content={ meta.image.url } /> }
         <meta key='og-url' property='og:url' content={ "https://www.buriedsignals.com" + router.asPath } />
+        <link rel="canonical" href={ "https://www.buriedsignals.com" + router.pathname } />
       </Head>
     </>
   )

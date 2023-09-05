@@ -15,9 +15,9 @@ export const HeaderStyle = styled.div`
     }
   }
   ${down('md')} {
-    padding-bottom: 66px;
+    padding-bottom: 86px;
     header {
-      top: -66px;
+      top: -86px;
       transition: top 0.25s ease;
       &.header-complex {
         top: -145px;
