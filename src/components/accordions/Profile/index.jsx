@@ -23,7 +23,7 @@ export default function Accordion({ panels, ...props }) {
         <div className="container-module-large select-container">
           { Object.keys(panels).map((key) => (
             <button key={ `panel-${key}` } className={ key == panelSelected ? 'is-active' : '' } onClick={ () => onClickButton(key) } >
-              <p className="typography-05">{ key === "spotlights" ? "visuals" : key }</p>
+              <p className="typography-05">{ key === "spotlights" ? "inspirations" : key }</p>
             </button>
           )) }
         </div>

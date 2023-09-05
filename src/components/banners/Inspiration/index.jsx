@@ -18,7 +18,7 @@ export default function Spotlight({ post, ...props }) {
       <div className="spotlight-container">
         <a className="visual-container" href={ post.source.url } target="_blank" rel="noopener noreferrer">
           { post.awards && <div className="awards">
-            <p className="typography-13">{ `Inspiration of the ${ post.awards }` }</p>
+            <p className="typography-13">{ `Spotlight of the ${ post.awards }` }</p>
           </div> }
           <img src={ post.image.url } alt={ post.image.alt } />
         </a>
@@ -39,9 +39,8 @@ export default function Spotlight({ post, ...props }) {
             <div className="actions-container">
               <LikeButton likes={ post.likes } liked={ post.liked } postId={ post.id } type="spotlights" />
               <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="spotlights"  />
-              {/* <CommentButton comments={ post.total_comments } /> */}
               <SecondaryLink href={ post.source.url }>
-                <p className="typography-03">Visit Spotlight</p>
+                <p className="typography-03">Visit Inspiration</p>
                 <ExternalLinkIcon />
               </SecondaryLink>
             </div>

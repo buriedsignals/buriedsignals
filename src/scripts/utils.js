@@ -85,6 +85,12 @@ export function loginUserCookies(datas) {
   setCookie("name", datas.name)
   setCookie("slug", datas.slug)
   setCookie("twitter_account", datas.twitter_account)
+  setCookie("instagram_account", datas.instagram_account)
+  setCookie("behance_account", datas.behance_account)
+  setCookie("portfolio", datas.portfolio)
+  setCookie("show_in_directory", datas.show_in_directory)
+  setCookie("expertises", datas.expertises)
+  setCookie("type", datas.type)
 }
 // Get cookies user
 export function getUserCookies() {
@@ -100,6 +106,12 @@ export function getUserCookies() {
     name: getCookie("name") ? getCookie("name") : null,
     slug: getCookie("slug") ? getCookie("slug") : null,
     twitter_account: getCookie("twitter_account") ? getCookie("twitter_account") : null,
+    instagram_account: getCookie("instagram_account") ? getCookie("instagram_account") : null,
+    behance_account: getCookie("behance_account") ? getCookie("behance_account") : null,
+    portfolio: getCookie("portfolio") ? getCookie("portfolio") : null,
+    show_in_directory: getCookie("show_in_directory") ? getCookie("show_in_directory") : null,
+    expertises: getCookie("expertises") ? getCookie("expertises") : null,
+    type: getCookie("type") ? getCookie("type") : null,
   }
 }
 // Logout cookies user
@@ -115,6 +127,12 @@ export function logoutUserCookies() {
   setCookie("name", null)
   setCookie("slug", null)
   setCookie("twitter_account", null)
+  setCookie("instagram_account", null)
+  setCookie("behance_account", null)
+  setCookie("portfolio", null)
+  setCookie("show_in_directory", null)
+  setCookie("expertises", null)
+  setCookie("type", null)
 }
 
 export function setCookieObject(dataName, object) {

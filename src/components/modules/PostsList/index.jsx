@@ -9,11 +9,11 @@ import { useRouter } from "next/router"
 import PostsFilterModule from "../PostsFilter"
 import NewsletterModule from "../Newsletter"
 // Cards
-import SpotlightCard from "@/components/cards/Spotlight"
+import SpotlightCard from "@/components/cards/Inspiration"
 import InsightCard from "@/components/cards/Insight"
 import ResourceCard from "@/components/cards/Resource"
 import JuryCard from "@/components/cards/Jury"
-// import DirectoryCard from "@/components/cards/Directory"
+import DirectoryCard from "@/components/cards/Directory"
 // Buttons
 import ThirstyButton from "@/components/buttons/Thirsty"
 
@@ -79,8 +79,8 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
                       return <ResourceCard post={ post } />
                     case 'jury':
                       return <JuryCard post={ post } />
-                    // case 'directory':
-                    //   return <DirectoryCard post={ post } />
+                    case 'directory':
+                      return <DirectoryCard post={ post } />
                   }
                 })()}
               </li>
@@ -95,59 +95,57 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
           <ThirstyButton onClickButton={ onClickButtonMorePosts }>Load more</ThirstyButton>
         </div>
       }
-      {/* { meta && posts.length <= max * section && maxPages > 1 && */}
-        <div className={ `container-module-large more-pages ${ (meta && posts.length <= max * section && maxPages > 1) ? 'is-show' : 'is-hide' }` }>
-          { currentPage !== 1 && 
-            <Link href={{
+      <div className={ `container-module-large more-pages ${ (meta && posts.length <= max * section && maxPages > 1) ? 'is-show' : 'is-hide' }` }>
+        { currentPage !== 1 && 
+          <Link href={{
+            pathname: router.pathname,
+            query: { ...router.query, page: currentPage - 1 }
+          }} passHref>
+            <a onClick={ (e) => {
+              e.preventDefault()
+              router.push({ pathname: router.pathname, query: { ...router.query, page: currentPage - 1 } }, undefined, { shallow: true }).then(() => router.reload())
+            } } className="page typography-01" >
+              <p className="typography-01 arrow-left">{ "<" }</p> 
+            </a>
+          </Link>
+        }
+        { Array.from({ length: maxPagesShow }).map((el, index) => {
+          let page = currentPage
+          let offset = maxPagesShow % 2 ? Math.floor(maxPagesShow / 2) : Math.floor(maxPagesShow / 2) - 1
+          if (page - offset <= 0) {
+            offset = page - 1
+          } else if (page + offset >= maxPages) {
+            offset = maxPagesShow - (maxPages - page) - 1
+          }
+          page = page + index - offset
+          return (
+            <Link key={ `page-${ index }` } href={{
               pathname: router.pathname,
-              query: { ...router.query, page: currentPage - 1 }
+              query: { ...router.query, page: page }
             }} passHref>
               <a onClick={ (e) => {
                 e.preventDefault()
-                router.push({ pathname: router.pathname, query: { ...router.query, page: currentPage - 1 } }, undefined, { shallow: true }).then(() => router.reload())
-              } } className="page typography-01" >
-                <p className="typography-01 arrow-left">{ "<" }</p> 
+                router.push({ pathname: router.pathname, query: { ...router.query, page: page } }, undefined, { shallow: true }).then(() => router.reload())
+              } } className={ `${ (page == currentPage) ? 'is-active' : '' } page typography-01` }>
+                <p className="typography-01">{ page }</p> 
               </a>
             </Link>
-          }
-          { Array.from({ length: maxPagesShow }).map((el, index) => {
-            let page = currentPage
-            let offset = maxPagesShow % 2 ? Math.floor(maxPagesShow / 2) : Math.floor(maxPagesShow / 2) - 1
-            if (page - offset <= 0) {
-              offset = page - 1
-            } else if (page + offset >= maxPages) {
-              offset = maxPagesShow - (maxPages - page) - 1
-            }
-            page = page + index - offset
-            return (
-              <Link key={ `page-${ index }` } href={{
-                pathname: router.pathname,
-                query: { ...router.query, page: page }
-              }} passHref>
-                <a onClick={ (e) => {
-                  e.preventDefault()
-                  router.push({ pathname: router.pathname, query: { ...router.query, page: page } }, undefined, { shallow: true }).then(() => router.reload())
-                } } className={ `${ (page == currentPage) ? 'is-active' : '' } page typography-01` }>
-                  <p className="typography-01">{ page }</p> 
-                </a>
-              </Link>
-            )
-          }) }
-          { currentPage !== maxPages && 
-            <Link href={{
-              pathname: router.pathname,
-              query: { ...router.query, page: currentPage + 1 }
-            }} passHref>
-              <a onClick={ (e) => {
-                e.preventDefault()
-                router.push({ pathname: router.pathname, query: { ...router.query, page: currentPage + 1 } }, undefined, { shallow: true }).then(() => router.reload())
-              } } className="page typography-01">
-                <p className="typography-01 arrow-right">{ ">" }</p> 
-              </a>
-            </Link>
-          }
-        </div>
-      {/* } */}
+          )
+        }) }
+        { currentPage !== maxPages && 
+          <Link href={{
+            pathname: router.pathname,
+            query: { ...router.query, page: currentPage + 1 }
+          }} passHref>
+            <a onClick={ (e) => {
+              e.preventDefault()
+              router.push({ pathname: router.pathname, query: { ...router.query, page: currentPage + 1 } }, undefined, { shallow: true }).then(() => router.reload())
+            } } className="page typography-01">
+              <p className="typography-01 arrow-right">{ ">" }</p> 
+            </a>
+          </Link>
+        }
+      </div>
     </PostsListStyle>
   )
 }

@@ -100,71 +100,6 @@ export const QUERY_POSTS_SPOTLIGHTS = ({ categories, award, geography, page, pag
   }
 `
 
-export const QUERY_POSTS_SPOTLIGHTS_OLD = gql`
-  query QueryPostsSpotlights {
-    spotlightsPosts(sort: "publishedAt:desc", pagination: { limit: 99999999 }) {
-      data {
-        id
-        attributes {
-          Title
-          Slug
-          Image {
-            data {
-              attributes {
-                alternativeText
-                url
-              }
-            }
-          }
-          Description
-          Source_author
-          Source_link
-          Categories {
-            data {
-              attributes {
-                Title
-              }
-            }
-          }
-          Award {
-            data {
-              attributes {
-                Title
-              }
-            }
-          }
-          Geography {
-            data {
-              attributes {
-                Title
-              }
-            }
-          }
-          Likes
-          Submited_by_external
-          Submited_by {
-            data {
-              attributes {
-                Name
-                Image {
-                  data {
-                    attributes {
-                      alternativeText
-                      url
-                    }
-                  }
-                }
-                Portfolio_link
-              }
-            }
-          }
-          Metrics_virality_backlinks
-        }
-      }
-    }
-  }
-`
-
 export const QUERY_POST_SPOTLIGHT = gql`
   query QueryPostSpotlight($slug: String) {
     spotlightsPosts(filters: { Slug: { eq: $slug } }) {
@@ -210,7 +145,7 @@ export const QUERY_POST_SPOTLIGHT = gql`
           Submited_by {
             data {
               attributes {
-                Name
+                username
                 Image {
                   data {
                     attributes {
@@ -296,7 +231,7 @@ export const QUERY_POSTS_SPOTLIGHTS_LATEST = gql`
           Submited_by {
             data {
               attributes {
-                Name
+                username
                 Image {
                   data {
                     attributes {
@@ -360,7 +295,7 @@ export const QUERY_POSTS_SPOTLIGHTS_WEEK = gql`
           Submited_by {
             data {
               attributes {
-                Name
+                username
                 Image {
                   data {
                     attributes {
@@ -424,7 +359,7 @@ export const QUERY_POSTS_SPOTLIGHTS_MONTH = gql`
           Submited_by {
             data {
               attributes {
-                Name
+                username
                 Image {
                   data {
                     attributes {
@@ -604,6 +539,19 @@ export const CREATE_POST_SPOTLIGHT_ARCHIVE = gql`
     createSpotlightsArchive(data: $data) {
       data {
         id
+      }
+    }
+  }
+`
+
+export const QUERY_CATEGORIES_SPOTLIGHTS = gql`
+  query QueryCategoriesSpotlights {
+    spotlightsCategories {
+      data {
+        id
+        attributes {
+          Title
+        }
       }
     }
   }

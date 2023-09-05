@@ -9,6 +9,6 @@ export async function getUsersJury(query) {
     query: QUERY_USERS_JURY,
   })
   if (!response) return null
-  let posts = response.data.juries.data
+  let posts = response.data.usersPermissionsUsers.data
   return parseUsersJury(posts, query)
 }

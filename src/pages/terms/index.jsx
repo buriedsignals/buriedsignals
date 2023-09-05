@@ -7,7 +7,7 @@ import HeadSEOModule from '@/components/modules/HeadSEO';
 
 export default function Terms({ terms, ...props }) {
   return (
-    <>
+    <>  
       <HeadSEOModule meta={ terms.meta } />
       <TermsTemplate legal={ terms } />
     </>

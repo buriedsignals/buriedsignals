@@ -1,7 +1,5 @@
 // Middlewares
-import { getUsersMembers, getUserMember } from '@/middlewares/librairies/users/member';
-// React
-import { useEffect } from 'react';
+import { getUserMember } from '@/middlewares/librairies/users/member';
 // Hooks
 import useArray from '@/hooks/useArray';
 // Templates
@@ -18,15 +16,7 @@ export default function Profile({ member }) {
   )
 }
 
-export async function getStaticPaths() {
-  const members = await getUsersMembers()
-  const paths = members.users.filter((member) => member.slug !== null).map((member) => ({
-    params: { slug: member.slug },
-  }))
-  return { paths, fallback: "blocking" }
-}
-
-export async function getStaticProps({params, ...context}) {
+export async function getServerSideProps({params, ...context}) {
   const member = await getUserMember(params.slug)
   if (!member) {
     return {
@@ -34,7 +24,6 @@ export async function getStaticProps({params, ...context}) {
     }
   }
   return {
-    props: { member },
-    revalidate: 1
+    props: { member }
   }
 }

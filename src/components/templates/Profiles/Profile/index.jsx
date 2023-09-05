@@ -8,15 +8,18 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 // Layouts
 import Layout from "@/components/layouts/main"
-// Modules
-import AccordionModule from "@/components/modules/Accordion"
+// Accordions
+import AccordionModule from "@/components/accordions/Profile"
 // Modals
 import Edit from "@/components/modals/Edit"
 // Buttons
 import SecondaryButton from "@/components/buttons/Secondary"
 // Icons
-import TwitterIcon from "@/components/icons/Twitter"
 import MailIcon from "@/components/icons/Mail"
+import InstagramIcon from "@/components/icons/Instagram"
+import TwitterIcon from "@/components/icons/Twitter"
+import BehanceIcon from "@/components/icons/Behance"
+import PortfolioIcon from "@/components/icons/Portfolio"
 
 export default function ProfileTemplate({ member, ...props }) {
   // Cookies
@@ -50,35 +53,36 @@ export default function ProfileTemplate({ member, ...props }) {
                 </ul>
               </div>
           }
-          <h1 className="name container-module-large typography-04">{ user.name }</h1>
-          <div className="container-module-large extras-container">
-            <ul className="social-container">
-              <li>
-                {/* <SecondaryButton onClickButton={ () => copyClipboard(user.twitter_account) } >
-                  <TwitterIcon size="small" />
-                </SecondaryButton> */}
-                <div className="icon-container">
-                  <div className="icon">
-                    <TwitterIcon size="small" />
-                  </div>
-                </div>
-                <p className="typography-05">{ user.twitter_account }</p>
-              </li>
-              <li>
-                {/* <SecondaryButton onClickButton={ () => copyClipboard(user.email) } >
-                  <MailIcon size="small" />
-                </SecondaryButton> */}
-                <div className="icon-container">
-                  <div className="icon">
-                    <MailIcon size="small" />
-                  </div>
-                </div>
-                <p className="typography-05">{ user.email }</p>
-              </li>
-            </ul>
+          <div className="profile container-module-large">
+            <h1 className="name typography-04">{ user.name }</h1>
+            <p className="type typography-10">{ user.type }</p>
           </div>
           <div className="container-module-large description-container">
             <p className="typography-07">{ user.description }</p>
+          </div>
+          <div className="container-module-large extras-container">
+            <div className="extras">
+              <ul className="expertises-container">
+                <li>
+                  <p className="subtitle typography-05">Expertises</p>
+                </li>
+                { user.expertises.filter(expertise => expertise.checked).map((expertise, index) => {  
+                  return <li key={ `expertise-${ index }` } className="expertise-container">
+                    <p className="typography-05">{ expertise.title }</p>
+                  </li>
+                }) }
+              </ul>
+              <div className="networks">
+                <p className="subtitle typography-05">Social</p>
+                <div className="networks-container">
+                  { user.email && <a className="email" href={ `mailto:${ user.email }` }  target="_blank" rel="noopener noreferrer"><MailIcon /></a> }
+                  { user.instagram_account && <a className="instagram" href={ `https://www.instagram.com/${ user.instagram_account }` }  target="_blank" rel="noopener noreferrer"><InstagramIcon /></a> }
+                  { user.twitter_account && <a className="twitter" href={ `https://twitter.com/${ user.twitter_account }` }  target="_blank" rel="noopener noreferrer"><TwitterIcon /></a> }
+                  { user.behance_account && <a className="behance" href={ `https://www.behance.net/${ user.behance_account }` }  target="_blank" rel="noopener noreferrer"><BehanceIcon /></a> }
+                  { user.portfolio && <a className="portfolio" href={ user.portfolio }  target="_blank" rel="noopener noreferrer"><PortfolioIcon /></a> }
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <AccordionModule panels={ user.bookmarked } />

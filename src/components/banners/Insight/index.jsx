@@ -23,7 +23,7 @@ export default function Insight({ post, ...props }) {
           </div>
           <div className="informations-container">
             <h1 className="title typography-06">{ limitSizeText(post.title, 40) }</h1>
-            <p className="description typography-07">{ limitSizeText(post.description, 67) }</p>
+            <p className="description typography-24">{ limitSizeText(post.description, 237) }</p>
           </div>
           <div className="actions-container">
             <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="insights" />

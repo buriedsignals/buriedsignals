@@ -5,7 +5,7 @@ import { copyClipboard } from "@/scripts/utils"
 // Layouts
 import Layout from "@/components/layouts/main"
 // Modules
-import SpotlightBanner from "@/components/banners/Spotlight"
+import SpotlightBanner from "@/components/banners/Inspiration"
 import CommentsModule from "@/components/modules/Comments"
 // Banners
 import MetricBanner from "@/components/banners/Metric"
@@ -18,56 +18,6 @@ import FacebookIcon from "@/components/icons/Facebook"
 import TwitterIcon from "@/components/icons/Twitter"
 import LinkIcon from "@/components/icons/Link"
 import ArrowIcon from "@/components/icons/Arrow"
-
-const comments = [
-  {
-    "id": 1,
-    "content": "Hello",
-    "updatedAt": "2022-09-24T11:21:20.136Z",
-    "author": {
-      "id": "45",
-      "name": "Toto"
-    },
-    comments: [
-      {
-        "id": 1,
-        "content": "Hello",
-        "updatedAt": "2022-09-24T11:21:20.136Z",
-        "author": {
-          "id": "45",
-          "name": "Toto"
-        }
-      },
-      {
-        "id": 1,
-        "content": "Hello",
-        "updatedAt": "2022-09-24T11:21:20.136Z",
-        "author": {
-          "id": "45",
-          "name": "Toto"
-        }
-      }
-    ]
-  },
-  {
-    "id": 1,
-    "content": "Hello",
-    "updatedAt": "2022-09-24T11:21:20.136Z",
-    "author": {
-      "id": "45",
-      "name": "Toto"
-    }
-  },
-  {
-    "id": 1,
-    "content": "Hello",
-    "updatedAt": "2022-09-24T11:21:20.136Z",
-    "author": {
-      "id": "45",
-      "name": "Toto"
-    }
-  }
-]
 
 export default function SpotlightTemplate({ spotlight, ...props }) {
   return (

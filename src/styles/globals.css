@@ -125,7 +125,7 @@ button {
 :root {
   --color-black01: #16191B; 
   --color-black02: #1C1E1F;
-  --color-black03: #1F2427;
+  --color-black03: #272d30;
   --color-black04: #131414;
   --color-grey01: #636363;
   --color-grey02: #818181;
@@ -509,6 +509,22 @@ button, a {
   font-size: 20px;
   line-height: 26px;
 }
+
+.typography-23 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 34px;
+}
+
+.typography-24 {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+}
+
 
 /* Container */
 

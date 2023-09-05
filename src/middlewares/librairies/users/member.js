@@ -1,17 +1,19 @@
 // Middlewares
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
-import { QUERY_USERS_MEMBERS, QUERY_USER_MEMBER, REGISTER_USER_MEMBER, UPDATE_USER_MEMBER, UPDATE_USER_MEMBER_LIKED_SPOTLIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_SPOTLIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_INSIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_RESOURCES, LOGIN_USER_MEMBER, FORGOT_PASSWORD_USER_MEMBER, RESET_PASSWORD_USER_MEMBER, UPDATE_USER_MEMBER_VOTED_SPOTLIGHTS } from "@/middlewares/datas/users/members"
-import { parseUsersMembers, parseUserMember } from '../utils'
+import { QUERY_USERS_MEMBERS, QUERY_USER_MEMBER, QUERY_EXPERTISES_MEMBERS, REGISTER_USER_MEMBER, UPDATE_USER_MEMBER, UPDATE_USER_MEMBER_LIKED_SPOTLIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_SPOTLIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_INSIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_RESOURCES, LOGIN_USER_MEMBER, FORGOT_PASSWORD_USER_MEMBER, RESET_PASSWORD_USER_MEMBER, UPDATE_USER_MEMBER_VOTED_SPOTLIGHTS } from "@/middlewares/datas/users/members"
+import { parseUsersDirectory, parseUserMember, parseExpertisesMembers } from '../utils'
 import { transformToSlug } from '@/scripts/utils'
 
-export async function getUsersMembers() {
+export async function getUsersDirectory(query) {
   const apolloClient = getApolloClient()
   const response = await apolloClient.query({
     query: QUERY_USERS_MEMBERS,
   })
   if (!response) return null
   let posts = response.data.usersPermissionsUsers.data
-  return parseUsersMembers(posts)
+  const variables = {}
+  variables.page = query.page ? parseInt(query.page) : 1
+  return parseUsersDirectory(posts, variables)
 }
 
 export async function getUserMember(slug) {
@@ -22,9 +24,21 @@ export async function getUserMember(slug) {
   })
   if (!response) return null
   let post = {...response.data.usersPermissionsUsers.data[0].attributes}
-  post = parseUserMember(post)
+  const expertises = await getExpertisesMembers()
+  post = parseUserMember(post, expertises)
   post.id = response.data.usersPermissionsUsers.data[0].id
   return post
+}
+
+
+export async function getExpertisesMembers() {
+  const apolloClient = getApolloClient()
+  const responseSpotlight = await apolloClient.query({
+    query: QUERY_EXPERTISES_MEMBERS
+  })
+  if (!responseSpotlight) return null
+  const expertises = responseSpotlight.data.userExpertises.data
+  return parseExpertisesMembers(expertises)
 }
 
 export async function createUserMember(datasRegister, datasUpdateUser) {
@@ -58,7 +72,8 @@ export async function loginUserMember(datas) {
   })
   if (!responseUser) return null
   let user = {...responseUser.data.usersPermissionsUsers.data[0].attributes}
-  user = parseUserMember(user)
+  const expertises = await getExpertisesMembers()
+  user = parseUserMember(user, expertises)
   user.id = responseUser.data.usersPermissionsUsers.data[0].id
   user.jwt = responseLogin.data.login.jwt
   return user
@@ -95,7 +110,8 @@ export async function updateUserMember(id, datas) {
   })
   if (!response) return null
   let post = {...response.data.updateUsersPermissionsUser.data.attributes}
-  post = parseUserMember(post)
+  const expertises = await getExpertisesMembers()
+  post = parseUserMember(post, expertises)
   post.id = response.data.updateUsersPermissionsUser.data.id
   return post
 }

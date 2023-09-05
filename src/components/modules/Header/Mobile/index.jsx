@@ -59,7 +59,6 @@ export default function HeaderMobile() {
             </li>
             {  user.connected ?
                 <li className="action">
-                  {/* <ProfileLink imgURL="/images/img-profil.jpg" /> */}
                   <Link href={ `/profiles/${ user.slug }` }>
                     <a className={ router.asPath == `/profiles/${ user.slug }` ? "is-active" : "" } onClick={ () => setModalMenu(false) }>
                       <p className="typography-01">Profile</p>
@@ -118,13 +117,13 @@ export default function HeaderMobile() {
                           </a>
                         </Link>
                       </li>
-                      {/* <li className="link">
+                      <li className="link">
                         <Link href="/directory">
                           <a className={ router.pathname == "/directory" ? "is-active" : "" }>
                             <p className="typography-01">Directory</p>
                           </a>
                         </Link>
-                      </li> */}
+                      </li>
                     </ul>
                   }
                 </li>
@@ -178,11 +177,11 @@ export default function HeaderMobile() {
                 <p className="typography-01">Resources</p>
               </a>
             </Link>
-            {/* <Link href="/resources">
-              <a className={ router.pathname == "/resources" ? "is-active" : "" }>
+            <Link href="/directory">
+              <a className={ router.pathname == "/directory" ? "is-active" : "" }>
                 <p className="typography-01">Directory</p>
               </a>
-            </Link> */}
+            </Link>
           </div>
         </div>
         :

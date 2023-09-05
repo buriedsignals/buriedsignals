@@ -1,16 +1,81 @@
 // Middlewares
-import { getApolloClient } from '@/middlewares/librairies/apollo-client'
-import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_LATEST, QUERY_POSTS_SPOTLIGHTS_WEEK, QUERY_POSTS_SPOTLIGHTS_MONTH, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_SPOTLIGHT_COMMENT, UPDATE_POST_SPOTLIGHT_METRICS_VALUE, QUERY_POST_SPOTLIGHT_ARCHIVE, QUERY_POSTS_SPOTLIGHTS_ARCHIVES, UPDATE_POST_SPOTLIGHT_VOTES, QUERY_POSTS_SPOTLIGHTS_LITE, CREATE_POST_SPOTLIGHT_ARCHIVE } from "@/middlewares/datas/posts/spotlights"
+import { STRAPI_ENDPOINT, getApolloClient } from '@/middlewares/librairies/apollo-client'
+import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_LATEST, QUERY_POSTS_SPOTLIGHTS_WEEK, QUERY_POSTS_SPOTLIGHTS_MONTH, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_SPOTLIGHT_COMMENT, UPDATE_POST_SPOTLIGHT_METRICS_VALUE, QUERY_POST_SPOTLIGHT_ARCHIVE, QUERY_POSTS_SPOTLIGHTS_ARCHIVES, UPDATE_POST_SPOTLIGHT_VOTES, QUERY_POSTS_SPOTLIGHTS_LITE, CREATE_POST_SPOTLIGHT_ARCHIVE, QUERY_CATEGORIES_SPOTLIGHTS } from "@/middlewares/datas/posts/spotlights"
 // Scripts
-import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments, parseArchivesSpotlights, parseArchiveSpotlight, createFile, maxPostsByPage, maxPostsBySectionByPage } from '../utils'
+import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments, parseArchivesSpotlights, parseArchiveSpotlight, createFile, maxPostsByPage, maxPostsBySectionByPage, parseCategoriesSpotlights, maxPageSize, parseMetaPagination } from '../utils'
 import { getDecile, transformToSlug } from '@/scripts/utils'
-// Modules
+// Nodes
 import axios from 'axios'
-// import { CronJob } from 'cron'
+import qs from 'qs';
 
 export let authorId = null
 
 export async function getPostsSpotlights(query) {
+  let filters = {}
+  if (query.category) {
+    const categories = [].concat(query.category)
+    if (categories.length > 0) {
+      filters["Categories"] = {
+        "Slug": {
+          $in: categories,
+        }
+      }
+    }
+  }
+  if (query.award) {
+    filters["Award"] = {
+      "Slug": {
+        $eq: query.award,
+      }
+    }
+  }
+  if (query.geography) {
+    filters["Geography"] = {
+      "Slug": {
+        $eq: query.geography,
+      }
+    }
+  }
+  let params = qs.stringify({
+    populate: '*',
+    filters: filters,
+    sort: "publishedAt:desc",
+    pagination: {
+      page: query.page ? parseInt(query.page) : 1,
+      pageSize: maxPageSize
+    }
+  }, { encodeValuesOnly: true });
+  const responseSpotlights = await axios.get(`${ STRAPI_ENDPOINT }/api/spotlights-posts?${ params }`)
+  if (!responseSpotlights) return null
+  const posts = parsePostsSpotlights(responseSpotlights.data.data)
+  const meta = parseMetaPagination(responseSpotlights.data.meta.pagination)
+  // ---
+  params = qs.stringify({
+    populate: '*',
+    sort: "publishedAt:desc",
+    pagination: {
+      limit: 99999999
+    }
+  }, { encodeValuesOnly: true });
+  const responseSpotlightsCategories = await axios.get(`${ STRAPI_ENDPOINT }/api/spotlights-categories?${ params }`)
+  if (!responseSpotlightsCategories) return null
+  const categories = parseCategoriesSpotlights(responseSpotlightsCategories.data.data)
+  const responseSpotlightsAwards = await axios.get(`${ STRAPI_ENDPOINT }/api/spotlights-awards?${ params }`)
+  if (!responseSpotlightsAwards) return null
+  const awards = parseCategoriesSpotlights(responseSpotlightsAwards.data.data)
+  const responseSpotlightsGeographies = await axios.get(`${ STRAPI_ENDPOINT }/api/spotlights-geographies?${ params }`)
+  if (!responseSpotlightsGeographies) return null
+  const geographies = parseCategoriesSpotlights(responseSpotlightsGeographies.data.data)
+  return {
+    posts: posts,
+    meta: meta,
+    categories: categories,
+    awards: awards,
+    geographies: geographies
+  }
+}
+
+export async function _old_getPostsSpotlights(query) {
   const apolloClient = getApolloClient()
   const variables = {}
   if (query.category) {
@@ -256,12 +321,6 @@ export async function updateMetricsSpotlights() {
     query: QUERY_POSTS_SPOTLIGHTS_LITE({ categories: null, award: null, geography: null }),
   })
   if (!responseSpotlights) return null
-  /*
-    Metrics_effectiveness_votes
-    Metrics_effectiveness_value
-    Metrics_virality_backlinks
-    Metrics_virality_value
-  */
   let posts = responseSpotlights.data.spotlightsPosts.data
   const backlinks = []
   posts.forEach(post => {
@@ -399,6 +458,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
   )
   return {}
 }
+
 export async function createArchiveSpotlightCron(id, title, slug, archiveId, scheduleId) {
   const username = "remy.benjamin.dumas%40gmail.com"
   const password = "L!dqgKWVIwH4v)VU"
@@ -465,4 +525,14 @@ export async function createArchiveSpotlightCron(id, title, slug, archiveId, sch
     if (!responseSpotlightArchive) return null
   }
   return {}
+}
+
+export async function getCategoriesSpotlights() {
+  const apolloClient = getApolloClient()
+  const responseSpotlight = await apolloClient.query({
+    query: QUERY_CATEGORIES_SPOTLIGHTS
+  })
+  if (!responseSpotlight) return null
+  const categories = responseSpotlight.data.spotlightsCategories.data
+  return parseCategoriesSpotlights(categories)
 }

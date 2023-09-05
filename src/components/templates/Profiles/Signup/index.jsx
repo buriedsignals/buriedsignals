@@ -2,30 +2,49 @@
 import { SignupTemplateStyle } from "./index.style"
 // Scripts
 import { loginUserCookies, logoutUserCookies, transformToSlug } from "@/scripts/utils"
+import { createImage } from "@/middlewares/librairies/utils"
 // React
 import { useRef, useState } from "react"
 // Next
 import Link from "next/link"
-import { useRouter } from "next/router"
 // Layouts
 import Layout from "@/components/layouts/main"
 // Banners
 import ErrorBanner from "@/components/banners/Error"
 import ValidateEmailBanner from "@/components/banners/ValidateEmail"
+// Modals
+import ExpertisesModal from "@/components/modals/Expertises"
 // Buttons
 import PrimaryButton from "@/components/buttons/Primary"
 // Icons
 import TwitterIcon from "@/components/icons/Twitter"
+import InstagramIcon from "@/components/icons/Instagram"
+import BehanceIcon from "@/components/icons/Behance"
+import PortfolioIcon from "@/components/icons/Portfolio"
 
-export default function SignupTemplate({ ...props }) {
+export default function SignupTemplate({ categories, ...props }) {
   // References
   const formRef = useRef()
+  const fileRef = useRef()
   // States
   const [internalError, setInternalError] = useState(false)
   const [registered, setRegistered] = useState(false)
-  // Router
-  const router = useRouter()
   // Handlers
+  const onChangeInputImage = (e) => {
+    fileRef.current = e.target.files[0]
+    const value = e.target.value
+    const parentEl = e.target.parentNode
+    const imageEl = parentEl.querySelector('.button img')
+    const labelEl = parentEl.parentNode.querySelector('p')
+    if (fileRef.current) {
+      const reader = new FileReader()
+      reader.readAsDataURL(fileRef.current)
+      reader.onload = function(e) {
+        imageEl.src = e.target.result
+        labelEl.innerHTML = fileRef.current.name
+      }
+    }
+  }
   const onClickButtonSignup = async () => {
     const usernameInput = formRef.current.querySelector('.input-username')
     const username = usernameInput.value
@@ -37,14 +56,32 @@ export default function SignupTemplate({ ...props }) {
     const password = passwordInput.value
     const passwordError = /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/.test(password)
     const slug = transformToSlug(username)
-    const twitterInput = formRef.current.querySelector('.input-twitter')
-    const twitter = twitterInput.value
-    const twitterError = /@([A-Za-z0-9_]+)/.test(twitter)
+    const imageInput = formRef.current.querySelector('.input-image')
+    const image = fileRef.current
+    const imageError = image != null
     const descriptionInput = formRef.current.querySelector('.input-description')
     const description = descriptionInput.value
-    const descriptionError = description.length > 0
-    if (usernameError && emailError && passwordError && twitterError && descriptionError) {
+    const descriptionError = true
+    const expertisesInput = formRef.current.querySelector('.input-expertises')
+    const expertises = expertisesInput.dataset.value
+    const expertisesError = expertises != ''
+    const twitterInput = formRef.current.querySelector('.input-twitter')
+    const twitter = twitterInput.value
+    const twitterError = /@([A-Za-z0-9_]+)/.test(twitter) || twitter == ''
+    const instagramInput = formRef.current.querySelector('.input-instagram')
+    const instagram = instagramInput.value
+    const instagramError = /([A-Za-z0-9_]+)/.test(instagram) || instagram == ''
+    const behanceInput = formRef.current.querySelector('.input-behance')
+    const behance = behanceInput.value
+    const behanceError = /([A-Za-z0-9_]+)/.test(behance) || behance == ''
+    const portfolioInput = formRef.current.querySelector('.input-portfolio')
+    const portfolio = portfolioInput.value
+    const portfolioError = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/.test(portfolio) || portfolio == ''
+    const showDirectoryInput = formRef.current.querySelector('.input-talent input')
+    const showDirectory = showDirectoryInput.checked
+    if (usernameError && emailError && passwordError && descriptionError && twitterError && instagramError && behanceError && portfolioError && imageError) {
       try {
+        const imageID = await createImage(image, username)
         const body = { 
           datasRegister: {
             "username": username,
@@ -53,8 +90,15 @@ export default function SignupTemplate({ ...props }) {
           },
           datasUpdateUser: {
             "Slug": transformToSlug(username),
+            "Description": description,
+            "Type": "Free",
+            "Show_in_directory": showDirectory,
+            "Image": imageID,
+            "Portfolio_link": portfolio,
+            "Behance_account": behance,
             "Twitter_account": twitter,
-            "Description": description
+            "Instagram_account": instagram,
+            "Expertises": expertises.split(',')
           }
         };
         const reponse = await fetch('/api/post-create-user-9ha71tnmfm/', {
@@ -84,11 +128,26 @@ export default function SignupTemplate({ ...props }) {
       if (!passwordError) {
         passwordInput.classList.add("input-error")
       }
-      if (!twitterError) {
-        twitterInput.classList.add("input-error")
+      if (!imageError) {
+        imageInput.classList.add("input-error")
       }
       if (!descriptionError) {
         descriptionInput.classList.add("input-error")
+      }
+      if (!expertisesError) {
+        expertisesInput.classList.add("input-error")
+      }
+      if (!twitterError) {
+        twitterInput.parentNode.classList.add("input-error")
+      }
+      if (!instagramError) {
+        instagramInput.parentNode.classList.add("input-error")
+      }
+      if (!behanceError) {
+        behanceInput.parentNode.classList.add("input-error")
+      }
+      if (!portfolioError) {
+        portfolioInput.parentNode.classList.add("input-error")
       }
     }
   }
@@ -102,24 +161,57 @@ export default function SignupTemplate({ ...props }) {
         <div className="container-module-extra-small signup-container">
           <h1 className="title typography-04">Sign up</h1>
           <div className="form-container">
-            {/* <a href="" className="connect-twitter">
-              <TwitterIcon />
-              <p className="typography-17">Sign up with Twitter</p>
-            </a>
-            <p className="label typography-01">Sign up with e-mail</p> */}
             <div ref={ formRef } className="form">
               <div className="inputs-container">
-                <input className="typography-01 input-username" type="text" placeholder="Your Name" />
-                <input className="typography-01 input-email" type="email" placeholder="Your E-mail" />
-                <input className="typography-01 input-password" type="password" placeholder="Your Password" />
-                <input className="typography-01 input-twitter" type="text" placeholder="Your Twitter Account" onChange={ onChangeTwitterAccount } />
-                <textarea className="typography-01 input-description" name="description" cols="30" rows="7" placeholder="Your Description"></textarea>
+                <label className="input-talent">
+                  <input className="input" type="checkbox" name="checkbox" />
+                  <p className="typography-01">I want to appear in the talent directory</p>
+                </label>
+                <p className="subtitle typography-01">Profile</p>
+                <label className="input-image" data-value="">
+                  <div className="button">
+                    <input type="file" accept="image/*" name="image" onChange={ onChangeInputImage } />
+                    <img src="" alt="" />
+                  </div>
+                  <p className="typography-01">Your Profile Picture</p>
+                </label>
+                <input className="typography-01 input input-username" type="text" placeholder="Your Name" />
+                <input className="typography-01 input input-email" type="email" placeholder="Your Email" />
+                <input className="typography-01 input input-password" type="password" placeholder="Your Password" />
+                <textarea className="typography-01 input input-description" name="description" cols="30" rows="7" placeholder="Your Description"></textarea>
+                <p className="subtitle typography-01">Expertises</p>
+                <ExpertisesModal expertises={ categories } />
+                <p className="subtitle typography-01">Social</p>
+                <div className="input input-icon">
+                  <div className="icon-container">
+                    <TwitterIcon size="small" />
+                  </div>
+                  <input className="typography-01 input-twitter" type="text" placeholder="Your Twitter Account" onChange={ onChangeTwitterAccount } />
+                </div>
+                <div className="input input-icon">
+                  <div className="icon-container">
+                    <InstagramIcon size="small" />
+                  </div>
+                  <input className="typography-01 input-instagram" type="text" placeholder="Your Instagram Account" />
+                </div>
+                <div className="input input-icon">
+                  <div className="icon-container">
+                    <BehanceIcon size="small" />
+                  </div>
+                  <input className="typography-01 input-behance" type="text" placeholder="Your Behance Account" />
+                </div>
+                <div className="input input-icon">
+                  <div className="icon-container">
+                    <PortfolioIcon size="small" />
+                  </div>
+                  <input className="typography-01 input-portfolio" type="text" placeholder="Your Website Link" />
+                </div>
               </div>
               <PrimaryButton onClickButton={ onClickButtonSignup }>
                 <p className="typography-03">Sign up</p>
               </PrimaryButton>
               <Link href="/profiles/signin">
-                <a>
+                <a className="more-action">
                   <p  className="typography-01">Sign in now</p>
                 </a>
               </Link>

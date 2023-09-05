@@ -17,21 +17,6 @@ export default function Insights({ insights, ...props }) {
   )
 }
 
-// export async function getStaticProps(context) {
-//   const insights = await getPostsInsights()
-//   const page = await getPageInsights()
-//   if (!insights || !page) {
-//     return {
-//       notFound: true,
-//     }
-//   }
-//   insights.page = page
-//   return {
-//     props: { insights },
-//     revalidate: 1
-//   }
-// }
-
 export async function getServerSideProps({ query }) {
   const insights = await getPostsInsights(query)
   const page = await getPageInsights()

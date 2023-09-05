@@ -3,10 +3,16 @@ import { gql } from '@apollo/client'
 
 export const QUERY_USERS_JURY = gql`
   query QueryUsersJury {
-    juries(sort: "Ordering_date:desc", pagination: { limit: 99999999 }) {
+    usersPermissionsUsers(filters: { Show_in_membership: { eq: true } }, sort: "Ordering_date:desc", pagination: { limit: 99999999 }) {
       data {
+        id
         attributes {
-          Name
+          username
+          Slug
+          email
+          Type
+          Show_in_membership
+          Show_in_directory
           Description
           Image {
             data {
@@ -17,6 +23,17 @@ export const QUERY_USERS_JURY = gql`
             }
           }
           Portfolio_link
+          Behance_account
+          Twitter_account
+          Instagram_account
+          Expertises {
+            data {
+              id
+              attributes {
+                Title
+              }
+            }
+          }
         }
       }
     }

@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const InsightsTemplateStyle = styled.div`
-  padding: 115px 0 85px;
+export const DirectoryTemplateStyle = styled.div`
+  padding: 115px 0;
   & > .title {
     width: auto;
+    padding-bottom: 50px;
     ${down('lg')} {
       margin-left: 48px;
       margin-right: 48px;
@@ -14,20 +15,16 @@ export const InsightsTemplateStyle = styled.div`
       margin-right: 32px;
     }
   }
-  .description-container {
-    padding-top: 40px;
+  & > .subtitle {
+    width: auto;
+    padding-bottom: 25px;
     ${down('lg')} {
-      padding-left: 48px;
-      padding-right: 48px;
+      margin-left: 48px;
+      margin-right: 48px;
     }
     ${down('md')} {
-      order: 3;
-      padding-left: 32px;
-      padding-right: 32px;
-    }
-    p {
-      max-width: 640px;
-      color: var(--color-grey03);
+      margin-left: 32px;
+      margin-right: 32px;
     }
   }
 `

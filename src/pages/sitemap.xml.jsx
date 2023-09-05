@@ -50,7 +50,7 @@ export async function getServerSideProps({ res }) {
         (slug) => {
           return `
               <url>
-                <loc>https://buriedsignals.com/spotlights/${slug}</loc>
+                <loc>https://buriedsignals.com/inspirations/${slug}</loc>
               </url>
             `
           }).join('')

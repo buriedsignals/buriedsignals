@@ -2,7 +2,7 @@
 import { getPageSpotlight } from '@/middlewares/librairies/pages/spotlight';
 import { getPostSpotlight } from '@/middlewares/librairies/posts/spotlights';
 // Templates
-import SpotlightTemplate from "@/components/templates/Spotlights/Spotlight"
+import SpotlightTemplate from "@/components/templates/Inspirations/Inspiration"
 // Modules
 import HeadSEOModule from '@/components/modules/HeadSEO';
 
@@ -14,27 +14,6 @@ export default function Spotlight({ spotlight, ...props }) {
     </>
   )
 }
-
-// export async function getStaticPaths() {
-//   const spotlights = await getPostsSpotlights()
-//   const paths = spotlights.posts.filter((post) => post.slug !== null).map((post) => ({
-//     params: { slug: post.slug },
-//   }))
-//   return { paths, fallback: "blocking" }
-// }
-
-// export async function getStaticProps({params, ...context}) {
-//   const spotlight = await getPostSpotlight(params.slug)
-//   if (!spotlight) {
-//     return {
-//       notFound: true,
-//     }
-//   }
-//   return {
-//     props: { spotlight },
-//     revalidate: 1
-//   }
-// }
 
 export async function getServerSideProps({params, ...context}) {
   const spotlight = await getPostSpotlight(params.slug)

@@ -43,11 +43,6 @@ export default function HeaderDesktop() {
           </Link>
           <ul className="pages">
             <li className="page">
-              {/* <DropdownModule 
-                buttonName="Magazine"
-                isActive={ router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ? "is-active" : "" }
-                setDropdown={ setDropdown }
-              /> */}
               <Link href="/">
                 <a className={ `${ router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ? "is-active" : "" } ${ dropdown ? "is-hover" : "" }` }  onMouseEnter={ () => setDropdown(true) }>
                   <p className="typography-01">Magazine</p>
@@ -128,6 +123,11 @@ export default function HeaderDesktop() {
             <Link href="/resources">
               <a className={ router.pathname == "/resources" ? "is-active" : "" }>
                 <p className="typography-01">Resources</p>
+              </a>
+            </Link>
+            <Link href="/directory">
+              <a className={ router.pathname == "/directory" ? "is-active" : "" }>
+                <p className="typography-01">Directory</p>
               </a>
             </Link>
           </div>

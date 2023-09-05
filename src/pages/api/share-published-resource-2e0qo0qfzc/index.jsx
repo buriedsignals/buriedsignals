@@ -24,10 +24,10 @@ export default async function handle(req, res) {
     })
     let link = await responseLink.json()
     link = link.link
-    let template = `Resource: ${ datas.Title } by ${ author }${ categories }\n\n•\n\n${ link }\n\n#narrativevisualisation #datastorytelling`
-    const templateExtra = `Resource: ${ datas.Title } by ${ author }${ categories }\n\n•${ description }\n\n${ link }\n\n#narrativevisualisation #datastorytelling`
-    const templateWithoutCategory = `Resource: ${ datas.Title } by ${ author }\n\n•\n\n${ link }\n\n#narrativevisualisation #datastorytelling`
-    const templateWithoutCategoryAndAuthor = `Resource: ${ datas.Title }\n\n•\n\n${ link }\n\n#narrativevisualisation #datastorytelling`
+    let template = `Resource: ${ datas.Title } by ${ author }${ categories }\n\n•\n\n${ link }\n\n#visualjournalism #datastorytelling`
+    const templateExtra = `Resource: ${ datas.Title } by ${ author }${ categories }\n\n•${ description }\n\n${ link }\n\n#visualjournalism #datastorytelling`
+    const templateWithoutCategory = `Resource: ${ datas.Title } by ${ author }\n\n•\n\n${ link }\n\n#visualjournalism #datastorytelling`
+    const templateWithoutCategoryAndAuthor = `Resource: ${ datas.Title }\n\n•\n\n${ link }\n\n#visualjournalism #datastorytelling`
     if (templateExtra.length <= 270) {
       template = templateExtra
     } else if (template.length > 270) {

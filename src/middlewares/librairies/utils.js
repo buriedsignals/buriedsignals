@@ -3,9 +3,12 @@ import axios from "axios";
 import FormData from "form-data";
 import { USER, STRAPI_ENDPOINT } from "./apollo-client";
 import { forEach } from "lodash";
+import { getCategoriesSpotlights } from "./posts/spotlights";
 
 export const maxPostsBySectionByPage = 6
 export const maxPostsByPage = 25
+export const maxPageSize = Math.floor(maxPostsByPage / maxPostsBySectionByPage) * maxPostsBySectionByPage
+
 
 export function parsePageSimple(datas) {
   return {
@@ -36,21 +39,11 @@ export function parsePageFlexible(datas) {
   }
 }
 
-export function parsePostsSpotlights(datas, query) {
+export function parsePostsSpotlights(datas) {
   let posts = datas.map(data => {
     return { id: data.id, ...parsePostSpotlight(data.attributes) }
-  });
-  posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts, query.totalPosts, maxPostsByPage)
-  const categories = getTaxonomiesPosts(query.posts, "Categories")
-  const awards = getTaxonomiesPosts(query.posts, "Award")
-  const geographies = getTaxonomiesPosts(query.posts, "Geography")
-  return {
-    posts: posts.posts,
-    meta: posts.meta,
-    categories: categories,
-    awards: awards,
-    geographies: geographies
-  }
+  })
+  return posts
 }
 
 export function parsePostSpotlight(data) {
@@ -68,9 +61,9 @@ export function parsePostSpotlight(data) {
       author: data.Source_author ? data.Source_author : "",
       url: data.Source_link ? data.Source_link : ""
     },
-    submited_by:  data.Submited_by ? {
-      image: data.Submited_by.data ? getImage(data.Submited_by.data.attributes.Image) : data.Submited_by_external ? { url:"/images/profile-default.jpg", alt: "Default profile picture" } : "",
-      name: data.Submited_by.data ? data.Submited_by.data.attributes.Name : data.Submited_by_external ? data.Submited_by_external : null,
+    submited_by: data.Submited_by ? {
+      image: data.Submited_by.data ? getImage(data.Submited_by.data.attributes.Image) : data.Submited_by_external ? { url:"/images/profile-default.jpg", alt: "Default profile picture" } : { url:"/images/profile-default.jpg", alt: "Default profile picture" },
+      name: data.Submited_by.data ? data.Submited_by.data.attributes.username : data.Submited_by_external ? data.Submited_by_external : "Dark Vador",
       link: data.Submited_by.data ? data.Submited_by.data.attributes.Portfolio_link : null,
     }: null,
     title: data.Title ? data.Title : "",
@@ -133,7 +126,7 @@ export function parseComment(data) {
     blocked: data.blocked,
     author: {
       id: data.author.id,
-      name: data.author.name
+      name: data.author.username
     }
   }
 }
@@ -164,17 +157,27 @@ export function parseArchiveSpotlight(data) {
   }
 }
 
-export function parsePostsInsights(datas, query) {
+export function parseCategoriesSpotlights(datas) {
+  const categories = datas.map(data => {
+    const category = parseCategorySpotlights(data.attributes)
+    category.id = data.id
+    return category
+  })
+  return categories
+}
+
+export function parseCategorySpotlights(data) {
+  return {
+    title: data.Title ? data.Title : "",
+    slug: data.Slug ? data.Slug : ""
+  }
+}
+
+export function parsePostsInsights(datas) {
   let posts = datas.map(data => {
     return { id: data.id, ...parsePostInsight(data.attributes) }
-  });
-  posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts, query.totalPosts, maxPostsByPage)
-  const categories = getTaxonomiesPosts(query.posts, "Categories")
-  return {
-    posts: posts.posts,
-    meta: posts.meta,
-    categories: categories,
-  }
+  })
+  return posts
 }
 
 export function parsePostInsight(data) {
@@ -201,17 +204,27 @@ export function parsePostInsight(data) {
   }
 }
 
-export function parsePostsResources(datas, query) {
+export function parseCategoriesInsights(datas) {
+  const categories = datas.map(data => {
+    const category = parseCategoryInsights(data.attributes)
+    category.id = data.id
+    return category
+  })
+  return categories
+}
+
+export function parseCategoryInsights(data) {
+  return {
+    title: data.Title ? data.Title : "",
+    slug: data.Slug ? data.Slug : ""
+  }
+}
+
+export function parsePostsResources(datas) {
   let posts = datas.map(data => {
     return { id: data.id, ...parsePostResource(data.attributes) }
-  });
-  posts = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, posts, query.totalPosts, maxPostsByPage)
-  const categories = getTaxonomiesPosts(query.posts, "Categories")
-  return {
-    posts: posts.posts,
-    meta: posts.meta,
-    categories: categories
-  }
+  })
+  return posts
 }
 
 export function parsePostResource(data) {
@@ -228,11 +241,27 @@ export function parsePostResource(data) {
   }
 }
 
+export function parseCategoriesResources(datas) {
+  const categories = datas.map(data => {
+    const category = parseCategoryResources(data.attributes)
+    category.id = data.id
+    return category
+  })
+  return categories
+}
+
+export function parseCategoryResources(data) {
+  return {
+    title: data.Title ? data.Title : "",
+    slug: data.Slug ? data.Slug : ""
+  }
+}
+
 export function parseUsersJury(datas, query) {
   let users = datas.map(data => {
-    return parseUserJury(data.attributes)
-  });
-  users = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, users, query.totalPosts ? query.totalPosts : 1, maxPostsByPage)
+    return parseUserMember(data.attributes)
+  })
+  users = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, users, users.length, maxPostsByPage)
   return { 
     users: users.posts,
     meta: users.meta,
@@ -243,29 +272,52 @@ export function parseUserJury(data) {
   return {    
     description: data.Description,
     image: getImage(data.Image),
-    name: data.Name,
+    name: data.username,
     portfolio: data.Portfolio_link ? data.Portfolio_link : "",
   }
 }
 
-export function parseUsersMembers(datas) {
-  const users = datas.map(data => {
-    return {
-      slug: data.attributes.Slug,
-    }
-  });
-  return { 
-    users: users
+export function parseUsersDirectory(datas, query) {
+  const members = datas.map(data => {
+    return parseUserMember(data.attributes)
+  }).filter(member => member.show_in_directory)
+  let spotlights = [...members.filter(member => member.type == "Premium"), ...members.filter(member => member.type == "Ghost")]
+  const talents = members.filter(member => member.type == "Free")
+  const posts = pagination(query.page ? query.page : 1, 6, spotlights, spotlights.length, 6)
+  return {
+    spotlights: posts.posts,
+    talents: talents,
+    meta: posts.meta,
   }
 }
 
-export function parseUserMember(data) {
-  return {   
-    slug: data.Slug ? data.Slug : null,
+export function parseUserMember(data, categories = null) {
+  let expertises = data.Expertises ? data.Expertises.data.map(expertise => {
+    return expertise.attributes.Title
+  }) : null
+  if (categories) {
+    categories.map(category => {
+      category.checked = data.Expertises.data.some(expertise => {
+        return expertise.attributes.Title == category.title
+      })
+      return category
+    })
+    expertises = categories
+  }
+  return {
     name: data.username ? data.username : "",
-    twitter_account: data.Twitter_account ? data.Twitter_account : "",
+    slug: data.Slug ? data.Slug : null,
     email: data.email ? data.email : "",
+    type: data.Type ? data.Type : "Free",
+    show_in_membership: data.Show_in_membership ? data.Show_in_membership : false,
+    show_in_directory: data.Show_in_directory ? data.Show_in_directory : false,
     description: data.Description ? data.Description : "",
+    image: data.Image.data ? getImage(data.Image) : { url:"/images/profile-default.jpg", alt: "Default profile picture" },
+    portfolio: data.Portfolio_link ? data.Portfolio_link : "",
+    behance_account: data.Behance_account ? data.Behance_account : "",
+    twitter_account: data.Twitter_account ? data.Twitter_account : "",
+    instagram_account: data.Instagram_account ? data.Instagram_account : "",
+    expertises: expertises,
     bookmarked: {
       spotlights: data.Bookmarked_spotlights ? data.Bookmarked_spotlights.data.map(spotlight => {
         return { id: spotlight.id, ...parsePostSpotlight(spotlight.attributes) }
@@ -293,9 +345,42 @@ export function parseUserMember(data) {
   }
 }
 
-export async function createImage(url, title) {
-  const responseImage = await axios.get(url, { responseType: "arraybuffer" })
-  const extension = url.split(/[#?]/)[0].split('.').pop().trim()
+export function parseExpertisesMembers(datas) {
+  const expertises = datas.map(data => {
+    const expertise = parseExpertiseMembers(data.attributes)
+    expertise.id = data.id
+    return expertise
+  })
+  return expertises
+}
+
+export function parseExpertiseMembers(data) {
+  return {
+    title: data.Title ? data.Title : ""
+  }
+}
+
+export function parseMetaPagination(meta) {
+  return {
+    page: meta.page,
+    sectionSize: maxPostsBySectionByPage,
+    pageSize: meta.pageSize,
+    totalPosts: meta.total,
+    totalPages: meta.pageCount
+  }
+}
+
+export async function createImage(datas, title) {
+  let responseImage = {}
+  let extension = null
+  if (typeof datas == "string") {
+    const url = datas
+    responseImage = await axios.get(url, { responseType: "arraybuffer" })
+    extension = url.split(/[#?]/)[0].split('.').pop().trim()
+  } else {
+    responseImage = { data: datas }
+    extension = datas.type.split("/")[1]   
+  }
   const form = new FormData()
   form.append("files", responseImage.data, `post-${ transformToSlug(title) }.${ extension }`)
   const responseUpload = await axios.post(`${STRAPI_ENDPOINT}/api/upload`, form)
@@ -338,6 +423,7 @@ function getTaxonomiesPosts(datas, type) {
   taxonomies = taxonomies.filter((taxonomy, index) => {
     return taxonomies.map(e => e && e.slug).indexOf(taxonomy && taxonomy.slug) === index && taxonomy !== null
   })
+  // console.log("taxonomies 01", taxonomies)
   return taxonomies
 }
 
@@ -397,6 +483,49 @@ function getDynamicContent(datas) {
           }
         }
     }
+    switch (data.__component) {
+      case "body.body":
+        return {
+          markdown: data.Content,
+          type: "Body"
+        }
+      case "illustration.illustration":
+        return {
+          image: getImage(data.Image),
+          type: "Illustration"
+        }
+      case "embed-video.embed-video":
+        return {
+          link: data.Link,
+          type: "EmbedVideo"
+        }
+      case "list-includes.list-includes":
+        const items = []
+        data.Items.forEach(item => {
+          items.push({
+            text: item.Text,
+            soon: item.Soon
+          })
+        });
+        return {
+          title: data.Title,
+          items: items,
+        }
+      case "metrics.metrics":
+        return {
+          effectiveness: {
+            title: data.Title_effectiveness,
+            type: "effectiveness",
+            description_information: data.Description_effectiveness_information,
+            description_vote: data.Description_effectiveness_vote
+          },
+          virality: {
+            title: data.Title_virality,
+            type: "virality",
+            description_information: data.Description_virality_information
+          }
+        }
+    }
   })
 }
 
@@ -405,9 +534,9 @@ const pagination = (page, sectionSize, posts, totalPosts, maxPageSize) => {
   let pageSize = Math.floor(maxPageSize / sectionSize) * sectionSize
   pageSize = totalPosts < pageSize ? totalPosts : pageSize
   const totalPages = Math.ceil(totalPosts / pageSize)
-  // const paginatedPosts = page == -1 ? posts : posts.slice((page - 1) * pageSize, ((page - 1) * pageSize) + pageSize)
+  const paginatedPosts = posts.length <= pageSize ? posts : posts.slice((page - 1) * pageSize, ((page - 1) * pageSize)+ pageSize);
   return {
-    posts: posts,
+    posts: paginatedPosts,
     meta: {
       page,
       sectionSize,

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
 export const ResourcesTemplateStyle = styled.div`
-  padding: 115px 0;
+  padding: 115px 0 85px;
   & > .title {
     width: auto;
     ${down('lg')} {

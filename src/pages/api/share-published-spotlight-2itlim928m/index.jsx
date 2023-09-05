@@ -1,8 +1,12 @@
 import { TwitterApi } from 'twitter-api-v2';
 
 export default async function handle(req, res) {
-  const datas = req.body.entry
-  const model = req.body.model
+  const datas = {
+    
+  }
+  const model = "spotlights-post"
+  // const datas = req.body.entry
+  // const model = req.body.model
   if (model == "spotlights-post") {
     const twitterClient = new TwitterApi({
       appKey: 'ZsaE2Ble7fulgBxgzvqyhH42D',
@@ -24,10 +28,10 @@ export default async function handle(req, res) {
     })
     let link = await responseLink.json()
     link = link.link
-    let template = `Inspiration: ${ datas.Title } by ${ author }${ categories }\n\n•\n\n${ link }\n\n#narrativevisualisation #datastorytelling`
-    const templateExtra = `Inspiration: ${ datas.Title } by ${ author }${ categories }\n\n•${ description }\n\n${ link }\n\n#narrativevisualisation #datastorytelling`
-    const templateWithoutCategory = `Inspiration: ${ datas.Title } by ${ author }\n\n•\n\n${ link }\n\n#narrativevisualisation #datastorytelling`
-    const templateWithoutCategoryAndAuthor = `Inspiration: ${ datas.Title }\n\n•\n\n${ link }\n\n#narrativevisualisation #datastorytelling`
+    let template = `Inspiration: ${ datas.Title } by ${ author }${ categories }\n\n•\n\n${ link }\n\n#visualjournalism #datastorytelling`
+    const templateExtra = `Inspiration: ${ datas.Title } by ${ author }${ categories }\n\n•${ description }\n\n${ link }\n\n#visualjournalism #datastorytelling`
+    const templateWithoutCategory = `Inspiration: ${ datas.Title } by ${ author }\n\n•\n\n${ link }\n\n#visualjournalism #datastorytelling`
+    const templateWithoutCategoryAndAuthor = `Inspiration: ${ datas.Title }\n\n•\n\n${ link }\n\n#visualjournalism #datastorytelling`
     if (templateExtra.length <= 270) {
       template = templateExtra
     } else if (template.length > 270) {
@@ -37,7 +41,8 @@ export default async function handle(req, res) {
         template = templateWithoutCategoryAndAuthor
       }
     }
-    const data = await twitterClient.v2.tweet(template, {});
-    res.json(data)
+    console.log('okok')
+    // const data = await twitterClient.v2.tweet(template, {});
+    // res.json(data)
   }
 }

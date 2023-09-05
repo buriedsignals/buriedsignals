@@ -3,11 +3,37 @@ import { gql } from '@apollo/client'
 
 export const QUERY_USERS_MEMBERS = gql`
   query QueryUsersMembers {
-    usersPermissionsUsers {
+    usersPermissionsUsers(sort: "Ordering_date:desc", pagination: { limit: 99999999 }) {
       data {
         id
         attributes {
+          username
           Slug
+          email
+          Type
+          Show_in_membership
+          Show_in_directory
+          Description
+          Image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
+            }
+          }
+          Portfolio_link
+          Behance_account
+          Twitter_account
+          Instagram_account
+          Expertises {
+            data {
+              id
+              attributes {
+                Title
+              }
+            }
+          }
         }
       }
     }
@@ -22,9 +48,31 @@ export const QUERY_USER_MEMBER = gql`
         attributes {
           username
           Slug
-          Twitter_account
           email
+          Type
+          Show_in_membership
+          Show_in_directory
           Description
+          Image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
+            }
+          }
+          Portfolio_link
+          Behance_account
+          Twitter_account
+          Instagram_account
+          Expertises {
+            data {
+              id
+              attributes {
+                Title
+              }
+            }
+          }
           Bookmarked_spotlights {
             data {
               id
@@ -61,7 +109,7 @@ export const QUERY_USER_MEMBER = gql`
                 Submited_by {
                   data {
                     attributes {
-                      Name
+                      username
                       Image {
                         data {
                           attributes {
@@ -175,8 +223,30 @@ export const CREATE_USER_MEMBER = gql`
         attributes {
           username
           Slug
-          Twitter_account
           email
+          Type
+          Show_in_membership
+          Description
+          Image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
+            }
+          }
+          Portfolio_link
+          Behance_account
+          Twitter_account
+          Instagram_account
+          Expertises {
+            data {
+              id
+              attributes {
+                Title
+              }
+            }
+          }
           Description
             Bookmarked_spotlights {
               data {
@@ -214,7 +284,7 @@ export const CREATE_USER_MEMBER = gql`
                   Submited_by {
                     data {
                       attributes {
-                        Name
+                        username
                         Image {
                           data {
                             attributes {
@@ -369,9 +439,30 @@ export const UPDATE_USER_MEMBER = gql`
         attributes {
           username
           Slug
-          Twitter_account
           email
+          Type
+          Show_in_membership
           Description
+          Image {
+            data {
+              attributes {
+                alternativeText
+                url
+              }
+            }
+          }
+          Portfolio_link
+          Behance_account
+          Twitter_account
+          Instagram_account
+          Expertises {
+            data {
+              id
+              attributes {
+                Title
+              }
+            }
+          }
             Bookmarked_spotlights {
               data {
                 id
@@ -408,7 +499,7 @@ export const UPDATE_USER_MEMBER = gql`
                   Submited_by {
                     data {
                       attributes {
-                        Name
+                        username
                         Image {
                           data {
                             attributes {
@@ -559,6 +650,19 @@ export const UPDATE_USER_MEMBER_BOOKMARKED_RESOURCES = gql`
     updateUsersPermissionsUser(id: $memberId, data: { Bookmarked_resources: $postIds }) {
       data {
         id
+      }
+    }
+  }
+`
+
+export const QUERY_EXPERTISES_MEMBERS = gql`
+  query QueryExpertisesMembers {
+    userExpertises {
+      data {
+        id
+        attributes {
+          Title
+        }
       }
     }
   }

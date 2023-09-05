@@ -1,8 +1,8 @@
 // Middlewares
-// import { getPageDirectory } from '@/middlewares/librairies/pages/directories';
-// import { getPostsDirectories } from '@/middlewares/librairies/posts/directories';
+import { getPageDirectory } from '@/middlewares/librairies/pages/directory';
+import { getUsersDirectory } from '@/middlewares/librairies/users/member';
 // Templates
-// import DirectoryTemplate from "@/components/templates/Directory"
+import DirectoryTemplate from "@/components/templates/Directory"
 // Modules
 import HeadSEOModule from '@/components/modules/HeadSEO'
 
@@ -10,14 +10,14 @@ export default function Directory({ directory, ...props }) {
   return (
     <>
       <HeadSEOModule meta={ directory.page.meta } />
-      {/* <DirectoryTemplate Directory={ directory } /> */}
+      <DirectoryTemplate directory={ directory } />
     </>
   )
 }
 
-export async function getStaticProps(context) {
-  const directory = null //await getPostsDirectories()
-  const page = null //await getPageDirectory()
+export async function getServerSideProps({ query }) {
+  const directory = await getUsersDirectory(query)
+  const page = await getPageDirectory()
   if (!directory || !page) {
     return {
       notFound: true,
@@ -25,7 +25,6 @@ export async function getStaticProps(context) {
   }
   directory.page = page
   return {
-    props: { directory },
-    revalidate: 1
+    props: { directory }
   }
 }
