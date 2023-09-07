@@ -1,5 +1,5 @@
 // Middlewares
-import { getCategoriesSpotlights } from '@/middlewares/librairies/posts/spotlights';
+import { getExpertisesMembers } from '@/middlewares/librairies/users/member';
 // Templates
 import SignupTemplate from "@/components/templates/Profiles/Signup"
 // Modules
@@ -17,7 +17,7 @@ export default function Signup({ categories, ...props }) {
 }
 
 export async function getStaticProps(context) {
-  const categories = await getCategoriesSpotlights()
+  const categories = await getExpertisesMembers()
   if (!categories) {
     return {
       notFound: true,

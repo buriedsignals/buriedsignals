@@ -4,7 +4,7 @@ import { SignupTemplateStyle } from "./index.style"
 import { loginUserCookies, logoutUserCookies, transformToSlug } from "@/scripts/utils"
 import { createImage } from "@/middlewares/librairies/utils"
 // React
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 // Next
 import Link from "next/link"
 // Layouts
@@ -27,6 +27,7 @@ export default function SignupTemplate({ categories, ...props }) {
   const formRef = useRef()
   const fileRef = useRef()
   // States
+  const [waiting, setWaiting] = useState(false)
   const [internalError, setInternalError] = useState(false)
   const [registered, setRegistered] = useState(false)
   // Handlers
@@ -81,6 +82,7 @@ export default function SignupTemplate({ categories, ...props }) {
     const showDirectory = showDirectoryInput.checked
     if (usernameError && emailError && passwordError && descriptionError && twitterError && instagramError && behanceError && portfolioError && imageError) {
       try {
+        setWaiting(true)
         const imageID = await createImage(image, username)
         const body = { 
           datasRegister: {
@@ -113,10 +115,12 @@ export default function SignupTemplate({ categories, ...props }) {
         } else {
           setRegistered(true)
         }
+        setWaiting(false)
       } catch (error) {
         console.error('catch', error);
         logoutUserCookies()
         setInternalError(true)
+        setWaiting(false)
       }
     } else {
       if (!usernameError) {
@@ -207,7 +211,7 @@ export default function SignupTemplate({ categories, ...props }) {
                   <input className="typography-01 input-portfolio" type="text" placeholder="Your Website Link" />
                 </div>
               </div>
-              <PrimaryButton onClickButton={ onClickButtonSignup }>
+              <PrimaryButton onClickButton={ onClickButtonSignup } waiting={ waiting }>
                 <p className="typography-03">Sign up</p>
               </PrimaryButton>
               <Link href="/profiles/signin">

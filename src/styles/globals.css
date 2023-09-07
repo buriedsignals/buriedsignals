@@ -170,6 +170,14 @@ button, a {
   overflow: hidden;
 }
 
+.is-waiting {
+  cursor: progress;
+}
+
+.is-waiting main {
+  pointer-events: none;
+}
+
 .html-container {
   margin: 80px 0;
 }

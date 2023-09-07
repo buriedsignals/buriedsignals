@@ -28,6 +28,7 @@ export default function Edit({ user, setUser, ...props }) {
   // Hooks
   const [modal, setModal] = useToggle(false)
   // States
+  const [waiting, setWaiting] = useState(false)
   const [internalError, setInternalError] = useState(false)
   // Effects
   useEffect(() => {
@@ -85,6 +86,7 @@ export default function Edit({ user, setUser, ...props }) {
     const showDirectory = showDirectoryInput.checked
     if (usernameError && emailError && descriptionError && twitterError && instagramError && behanceError && portfolioError && imageError) {
       try {
+        setWaiting(true)
         const body = { 
           id: user.id,
           datas: {
@@ -117,9 +119,11 @@ export default function Edit({ user, setUser, ...props }) {
           window.scrollTo(0, 0)
           setUser(result)
         }
+        setWaiting(false)
       } catch (error) {
         console.error(error);
         setInternalError(true)
+        setWaiting(false)
       }
     } else {
       if (!usernameError) {
@@ -211,7 +215,7 @@ export default function Edit({ user, setUser, ...props }) {
                     <input className="typography-01 input-portfolio" type="text" placeholder="Your Website Link" defaultValue={ user.portfolio } />
                   </div>
                 </div>
-                <PrimaryButton onClickButton={ onClickButtonSignup }>
+                <PrimaryButton onClickButton={ onClickButtonSignup } waiting={ waiting }>
                   <p className="typography-03">Save</p>
                 </PrimaryButton>
               </div>

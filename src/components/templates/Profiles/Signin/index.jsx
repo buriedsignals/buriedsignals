@@ -25,6 +25,7 @@ export default function SigninTemplate({ ...props }) {
   // References
   const formRef = useRef()
   // States
+  const [waiting, setWaiting] = useState(false)
   const [internalError, setInternalError] = useState(false)
   // Router
   const router = useRouter()
@@ -41,6 +42,7 @@ export default function SigninTemplate({ ...props }) {
     
     if (emailError && passwordError) {
       try {
+        setWaiting(true)
         const body = { 
           datas: {
             "identifier": email, 
@@ -67,10 +69,12 @@ export default function SigninTemplate({ ...props }) {
             document.location.href = window.location.protocol + "//" + window.location.host
           }
         }
+        setWaiting(false)
       } catch (error) {
         console.error(error);
         logoutUserCookies()
         setInternalError(true)
+        setWaiting(false)
       }
     } else {
       if (!emailError) {
@@ -92,7 +96,7 @@ export default function SigninTemplate({ ...props }) {
                 <input className="typography-01 input-email" type="email" placeholder="Your E-mail" />
                 <input className="typography-01 input-password" type="password" placeholder="Password" />
               </div>
-              <PrimaryButton onClickButton={ onClickButtonSignin }>
+              <PrimaryButton onClickButton={ onClickButtonSignin } waiting={ waiting }>
                 <p className="typography-03">Sign in</p>
               </PrimaryButton>
               <div className="links">

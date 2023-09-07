@@ -4,8 +4,20 @@ export const PrimaryStyle = styled.button`
   display: flex;
   align-items: center;
   padding: 13px 36px;
-  background-color: var(--color-${ (props) => props.color });
-  border: 1px solid var(--color-${ (props) => props.color });
+  background-color: var(--color-${ (props) => {
+    if(props.color == "waiting") {
+      return ""
+    } else {
+      return props.color
+    }
+  } });
+  border: 1px solid var(--color-${ (props) => {
+    if(props.color == "waiting") {
+      return "grey02"
+    } else {
+      return props.color
+    }
+  } });
   border-radius: 4px;
   text-transform: uppercase;
   white-space: nowrap;
@@ -16,6 +28,8 @@ export const PrimaryStyle = styled.button`
       switch (props.color) {
         case "black03":
           return "white";
+        case "waiting":
+          return "grey02";
         default:
           return props.color;
       }
@@ -26,6 +40,8 @@ export const PrimaryStyle = styled.button`
         switch (props.color) {
           case "black03":
             return "white";
+          case "waiting":
+            return "grey02";
           default:
             return props.color;
         }
@@ -45,6 +61,8 @@ export const PrimaryStyle = styled.button`
           return "white";
         case "white":
           return "black02";
+        case "waiting":
+          return "grey02";
       }
     }}) !important;
     transition: all 0.25s ease-in;
