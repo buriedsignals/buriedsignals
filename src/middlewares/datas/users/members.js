@@ -657,7 +657,7 @@ export const UPDATE_USER_MEMBER_BOOKMARKED_RESOURCES = gql`
 
 export const QUERY_EXPERTISES_MEMBERS = gql`
   query QueryExpertisesMembers {
-    userExpertises {
+    userExpertises(sort: "Title:asc", pagination: { limit: 99999999 }) {
       data {
         id
         attributes {
