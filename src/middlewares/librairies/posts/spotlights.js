@@ -75,55 +75,6 @@ export async function getPostsSpotlights(query) {
   }
 }
 
-export async function _old_getPostsSpotlights(query) {
-  const apolloClient = getApolloClient()
-  const variables = {}
-  if (query.category) {
-    variables.categories = [].concat(query.category)
-  }
-  if (query.award) {
-    variables.award = query.award
-  }
-  if (query.geography) {
-    variables.geography = query.geography
-  }
-  let postsLite = null
-  // if (query.category || query.award || query.geography) {
-    const responseSpotlightsLite = await apolloClient.query({
-      query: QUERY_POSTS_SPOTLIGHTS_LITE({
-        categories: query.category || null,
-        award: query.award || null,
-        geography: query.geography || null
-      }),
-      variables: variables
-    })
-    if (!responseSpotlightsLite) return null
-    postsLite = responseSpotlightsLite.data.spotlightsPosts.data
-  // }
-  variables.page = query.page ? parseInt(query.page) : 1
-  let pageSize = Math.floor(maxPostsByPage / maxPostsBySectionByPage) * maxPostsBySectionByPage
-  const responseSpotlights = await apolloClient.query({
-    query: QUERY_POSTS_SPOTLIGHTS({
-      categories: query.category || null,
-      award: query.award || null,
-      geography: query.geography || null,
-      page: query.page || 1,
-      pageSize: pageSize
-    }),
-    variables: variables
-  })
-  if (!responseSpotlights) return null
-  let posts = responseSpotlights.data.spotlightsPosts.data
-  // if (postsLite) {
-    variables.posts = postsLite
-    variables.totalPosts = postsLite.length - 1
-  // } else {
-  //   variables.totalPosts = responseSpotlights.data.spotlightsPosts.meta.pagination.total
-  // }
-  posts = parsePostsSpotlights(posts, variables)
-  return posts
-}
-
 export async function getPostsSpotlightsLite(query) {
   const apolloClient = getApolloClient()
   const variables = {}
@@ -173,58 +124,41 @@ export async function getPostSpotlight(slug) {
 }
 
 export async function getPostsSpotlightsWeek() {
-  // const date = new Date()
-  // const week_end = date.toISOString()
-  // const week_start = new Date(date.setDate(date.getDate() - 7)).toISOString()
-  // const apolloClient = getApolloClient()
-  // const response = await apolloClient.query({
-  //   query: QUERY_POSTS_SPOTLIGHTS_WEEK,
-  //   variables: { week_start, week_end }
-  // })
-  // if (!response) return null
-  // let posts = response.data.spotlightsPosts.data
-  // return parsePostsSpotlights(posts)
   const limit = 7
-  const apolloClient = getApolloClient()
-  const response = await apolloClient.query({
-    query: QUERY_POSTS_SPOTLIGHTS_LATEST,
-    variables: { limit }
-  })
-  if (!response) return null
-  let posts = response.data.spotlightsPosts.data
-  return parsePostsSpotlights(posts, { page: 1 })
+  let params = qs.stringify({
+    populate: '*',
+    sort: "publishedAt:desc",
+    pagination: { 
+      limit: limit 
+    }
+  }, { encodeValuesOnly: true });  
+  const responseSpotlights = await axios.get(`${ STRAPI_ENDPOINT }/api/spotlights-posts?${ params }`)
+  if (!responseSpotlights) return null
+  const posts = parsePostsSpotlights(responseSpotlights.data.data)
+  return posts
 }
 
 export async function getPostsSpotlightsMonth() {
-  // const date = new Date()
-  // const month_end = date.toISOString()
-  // const month_start = new Date(date.setDate(date.getDate() - 31)).toISOString()
-  // const apolloClient = getApolloClient()
-  // const response = await apolloClient.query({
-  //   query: QUERY_POSTS_SPOTLIGHTS_MONTH,
-  //   variables: { month_start, month_end }
-  // })
-  // if (!response) return null
-  // let posts = response.data.spotlightsPosts.data
-  // posts = parsePostsSpotlights(posts)
-  // posts.posts = posts.posts.filter(post => post.awards == "Week")
-  // return posts
   const limit = 4
-  const apolloClient = getApolloClient()
-  const response = await apolloClient.query({
-    query: QUERY_POSTS_SPOTLIGHTS({
-      categories: null,
-      award: null,
-      geography: null,
-      page: 1
-    }),
-    variables: { categories: null, award: null, geography: null }
-  })
-  if (!response) return null
-  let posts = response.data.spotlightsPosts.data
-  posts = parsePostsSpotlights(posts, { page: 1 })
-  posts.posts = posts.posts.filter(post => post.awards == "Week")
-  return posts.posts.slice(0, limit);
+  let filters = {}
+  filters["Award"] = {
+    "Slug": {
+      $eq: "Week",
+    }
+  }
+  let params = qs.stringify({
+    populate: '*',
+    filters: filters,
+    sort: "publishedAt:desc",
+    pagination: { 
+      limit: limit 
+    }
+  }, { encodeValuesOnly: true });  
+  console.log(`${ STRAPI_ENDPOINT }/api/spotlights-posts?${ params }`)
+  const responseSpotlights = await axios.get(`${ STRAPI_ENDPOINT }/api/spotlights-posts?${ params }`)
+  if (!responseSpotlights) return null
+  const posts = parsePostsSpotlights(responseSpotlights.data.data)
+  return posts
 }
 
 // Récupérer les ID des catégories + l'ID de la personne qui à soumis le spotlight

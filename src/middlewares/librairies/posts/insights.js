@@ -51,59 +51,6 @@ export async function getPostsInsights(query) {
   }
 }
 
-
-export async function _old_getPostsInsights(query) {
-  const apolloClient = getApolloClient()
-  const variables = {}
-  if (query.category) {
-    variables.categories = [].concat(query.category)
-  }
-  let postsLite = null
-  // if (query.category) {
-    const responseInsightsLite = await apolloClient.query({
-      query: QUERY_POSTS_INSIGHTS_LITE({
-        categories: query.category || null
-      }),
-      variables: variables
-    })
-    if (!responseInsightsLite) return null
-    postsLite = responseInsightsLite.data.insightsPosts.data
-  // }
-  variables.page = query.page ? parseInt(query.page) : 1
-  let pageSize = Math.floor(maxPostsByPage / maxPostsBySectionByPage) * maxPostsBySectionByPage
-  const responseInsights = await apolloClient.query({
-    query: QUERY_POSTS_INSIGHTS({
-      categories: query.category || null,
-      page: query.page || 1,
-      pageSize: pageSize
-    }),
-    variables: variables
-  })
-  if (!responseInsights) return null
-  let posts = responseInsights.data.insightsPosts.data
-  // if (postsLite) {
-    variables.totalPosts = postsLite.length - 1
-    variables.posts = postsLite
-  // } else {
-  //   variables.totalPosts = responseInsights.data.insightsPosts.meta.pagination.total
-  // }
-  return parsePostsInsights(posts, variables)
-  // const apolloClient = getApolloClient()
-  // const variables = {}
-  // if (query.category) {
-  //   variables.categories = [].concat(query.category)
-  // }
-  // const response = await apolloClient.query({
-  //   query: QUERY_POSTS_INSIGHTS({
-  //     categories: query.category || null
-  //   }),
-  //   variables: variables
-  // })
-  // if (!response) return null
-  // let posts = response.data.insightsPosts.data
-  // return parsePostsInsights(posts, query)
-}
-
 export async function getPostsInsightsLite(query) {
   const apolloClient = getApolloClient()
   const variables = {}
