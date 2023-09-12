@@ -1,8 +1,8 @@
 // Middlewares
 import { STRAPI_ENDPOINT, getApolloClient } from '@/middlewares/librairies/apollo-client'
-import { QUERY_POSTS_SPOTLIGHTS, QUERY_POST_SPOTLIGHT, QUERY_POSTS_SPOTLIGHTS_LATEST, QUERY_POSTS_SPOTLIGHTS_WEEK, QUERY_POSTS_SPOTLIGHTS_MONTH, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_SPOTLIGHT_COMMENT, UPDATE_POST_SPOTLIGHT_METRICS_VALUE, QUERY_POST_SPOTLIGHT_ARCHIVE, QUERY_POSTS_SPOTLIGHTS_ARCHIVES, UPDATE_POST_SPOTLIGHT_VOTES, QUERY_POSTS_SPOTLIGHTS_LITE, CREATE_POST_SPOTLIGHT_ARCHIVE, QUERY_CATEGORIES_SPOTLIGHTS } from "@/middlewares/datas/posts/spotlights"
+import { QUERY_POST_SPOTLIGHT, CREATE_POST_SPOTLIGHT, UPDATE_POST_SPOTLIGHT_LIKES, UPDATE_POST_SPOTLIGHT_AWARDS, CREATE_SPOTLIGHT_COMMENT, QUERY_SPOTLIGHT_COMMENTS, DELETE_SPOTLIGHT_COMMENT, UPDATE_POST_SPOTLIGHT_METRICS_VALUE, QUERY_POST_SPOTLIGHT_ARCHIVE, QUERY_POSTS_SPOTLIGHTS_ARCHIVES, UPDATE_POST_SPOTLIGHT_VOTES, QUERY_POSTS_SPOTLIGHTS_LITE, CREATE_POST_SPOTLIGHT_ARCHIVE, QUERY_CATEGORIES_SPOTLIGHTS } from "@/middlewares/datas/posts/spotlights"
 // Scripts
-import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments, parseArchivesSpotlights, parseArchiveSpotlight, createFile, maxPostsByPage, maxPostsBySectionByPage, parseCategoriesSpotlights, maxPageSize, parseMetaPagination } from '../utils'
+import { parsePostsSpotlights, parsePostSpotlight, createImage, parseComments, parseArchiveSpotlight, createFile, parseCategoriesSpotlights, maxPageSize, parseMetaPagination } from '../utils'
 import { getDecile, transformToSlug } from '@/scripts/utils'
 // Nodes
 import axios from 'axios'
@@ -107,7 +107,7 @@ export async function getPostSpotlight(slug) {
     query: QUERY_POST_SPOTLIGHT,
     variables: { slug }
   })
-  if (!responseSpotlight) return null
+  if (!responseSpotlight || !responseSpotlight.data.spotlightsPosts.data[0]) return null
   const responseComments = await apolloClient.query({
     query: QUERY_SPOTLIGHT_COMMENTS,
     variables: { relation: `api::spotlights-post.spotlights-post:${responseSpotlight.data.spotlightsPosts.data[0].id}` }
@@ -361,7 +361,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
     {
       'cron': '*/5 * * * *',
       'request': {
-        'url': 'https://www.buriedsignals.com/api/post-update-spotlights-archive-cron-3k4qt81hmr',
+        'url': 'https://buriedsignals.com/api/post-update-spotlights-archive-cron-3k4qt81hmr',
         'body': `${ archiveId }//${ id }//${ slug }//${ title }`
       }
     },
@@ -378,7 +378,7 @@ export async function createArchiveSpotlight(id, title, slug, link_source) {
     {
       'cron': '*/5 * * * *',
       'request': {
-        'url': 'https://www.buriedsignals.com/api/post-update-spotlights-archive-cron-3k4qt81hmr',
+        'url': 'https://buriedsignals.com/api/post-update-spotlights-archive-cron-3k4qt81hmr',
         'body': `${ schedule.data.id }//${ archiveId }//${ id }//${ slug }//${ title }`
       }
     },

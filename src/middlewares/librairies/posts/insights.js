@@ -1,7 +1,7 @@
 // Middlewares
 import { STRAPI_ENDPOINT, getApolloClient } from '@/middlewares/librairies/apollo-client'
-import { CREATE_POST_INSIGHT, QUERY_POSTS_INSIGHTS, QUERY_POSTS_INSIGHTS_LITE, QUERY_POST_INSIGHT, UPDATE_POST_INSIGHTS_LIKES } from "@/middlewares/datas/posts/insights"
-import { parsePostsInsights, parsePostInsight, maxPostsByPage, maxPostsBySectionByPage, maxPageSize, parseMetaPagination, parseCategoriesInsights } from '../utils'
+import { CREATE_POST_INSIGHT, QUERY_POSTS_INSIGHTS_LITE, QUERY_POST_INSIGHT, UPDATE_POST_INSIGHTS_LIKES } from "@/middlewares/datas/posts/insights"
+import { parsePostsInsights, parsePostInsight, maxPageSize, parseMetaPagination, parseCategoriesInsights } from '../utils'
 // Nodes
 import axios from 'axios'
 import qs from 'qs';
@@ -75,7 +75,7 @@ export async function getPostInsight(slug) {
     query: QUERY_POST_INSIGHT,
     variables: { slug }
   })
-  if (!response) return null
+  if (!response || !response.data.insightsPosts.data[0]) return null
   let post = response.data.insightsPosts.data[0].attributes
   post = parsePostInsight(post)
   post.id = response.data.insightsPosts.data[0].id

@@ -13,7 +13,7 @@ export default async function handle(req, res) {
     const author = datas.Source_author_twitter_account ? datas.Source_author_twitter_account.startsWith('@') ? datas.Source_author_twitter_account : `@${ datas.Source_author_twitter_account }` : datas.Source_author
     const description = `\n\n${ datas.Description }\n\n•`
     const categories = datas.Categories.length !== 0 ? ` | ${ datas.Categories[0].Title }` : ""
-    const url = "https://www.buriedsignals.com/spotlights/"
+    const url = "https://buriedsignals.com/spotlights/"
     const responseLink = await fetch('https://api-ssl.bitly.com/v4/shorten', {
       method: 'POST',
       headers: {

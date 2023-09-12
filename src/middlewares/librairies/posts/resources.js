@@ -1,6 +1,5 @@
 // Middlewares
-import { STRAPI_ENDPOINT, getApolloClient } from '@/middlewares/librairies/apollo-client'
-import { QUERY_POSTS_RESOURCES, QUERY_POSTS_RESOURCES_LITE } from "@/middlewares/datas/posts/resources"
+import { STRAPI_ENDPOINT } from '@/middlewares/librairies/apollo-client'
 import { maxPageSize, parseCategoriesResources, parseMetaPagination, parsePostsResources } from '../utils'
 // Nodes
 import axios from 'axios'

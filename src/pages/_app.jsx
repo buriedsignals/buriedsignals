@@ -16,7 +16,7 @@ import Layout from '@/components/layouts';
 
 // Metas
 const title = 'Buried Signals'
-const url = 'https://www.buriedsignals.com/'
+const url = 'https://buriedsignals.com/'
 const description = "Discover the world's best visual narratives. Inspiration, insights and resources for interactive storytelling."
 const keywords = 'dataviz, information, design, visualisation, narrative, interactive, visual, journalism, awards, resources, insights, courses, community, data'
 const author = 'Buried Signals'
