@@ -54,7 +54,10 @@ export const SpotlightStyle = styled.a`
         transform: translate3D(-50%, -50%, 0);
       }
     }
-    .content-container {
+    .content-container {    
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       padding: 32px 48px;
       ${down('md')} {
         padding: 41px 23px;

@@ -9,6 +9,7 @@ import InstagramIcon from "@/components/icons/Instagram"
 import TwitterIcon from "@/components/icons/Twitter"
 import LinkedinIcon from "@/components/icons/Linkedin"
 import Logo from "@/components/icons/Logo"
+import YoutubeIcon from "@/components/icons/Youtube"
 
 export default function Footer() {
   // States
@@ -23,9 +24,10 @@ export default function Footer() {
     <FooterStyle className={ `footer ${ show ? "is-show" : "" }` }>
       <div className="footer-container">
         <div className="links">
-          <div className="socials">
-            <a href="https://www.instagram.com/buriedsignals" className="network" target="_blank" rel="noopener noreferrer"><InstagramIcon /></a>
+          <div className="socials">            
             <a href="https://twitter.com/buriedsignals" className="network" target="_blank" rel="noopener noreferrer"><TwitterIcon /></a>
+            <a href="https://youtube.com/@buriedsignals" className="network" target="_blank" rel="noopener noreferrer"><YoutubeIcon /></a>
+            <a href="https://www.instagram.com/buriedsignals" className="network" target="_blank" rel="noopener noreferrer"><InstagramIcon /></a>
             <a href="https://www.linkedin.com/company/buried-signals" className="network" target="_blank" rel="noopener noreferrer"><LinkedinIcon /></a>
           </div>
           <div className="buried">

@@ -10,7 +10,6 @@ export const QUERY_USERS_MEMBERS = gql`
           username
           Slug
           email
-          Type
           Show_in_membership
           Show_in_directory
           Description
@@ -49,7 +48,6 @@ export const QUERY_USER_MEMBER = gql`
           username
           Slug
           email
-          Type
           Show_in_membership
           Show_in_directory
           Description
@@ -224,7 +222,6 @@ export const CREATE_USER_MEMBER = gql`
           username
           Slug
           email
-          Type
           Show_in_membership
           Description
           Image {
@@ -440,7 +437,6 @@ export const UPDATE_USER_MEMBER = gql`
           username
           Slug
           email
-          Type
           Show_in_membership
           Description
           Image {

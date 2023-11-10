@@ -5,6 +5,13 @@ import { parseUsersDirectory, parseUserMember, parseExpertisesMembers } from '..
 import { transformToSlug } from '@/scripts/utils'
 
 export async function getUsersDirectory(query) {
+  // const apolloClient = getApolloClient()
+  // const response = await apolloClient.query({
+  //   query: QUERY_USERS_MEMBERS,
+  // })
+  // if (!response) return null
+  // let posts = response.data.usersPermissionsUsers.data
+  // return parseUsersDirectory(posts)
   const apolloClient = getApolloClient()
   const response = await apolloClient.query({
     query: QUERY_USERS_MEMBERS,

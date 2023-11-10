@@ -66,7 +66,7 @@ export default function SpotlightTemplate({ spotlight, ...props }) {
               </div>
           }
         </div>
-        <CommentsModule comments={ spotlight.comments } comments_length={ spotlight.comments_length } postId={ spotlight.id } />
+        {/* <CommentsModule comments={ spotlight.comments } comments_length={ spotlight.comments_length } postId={ spotlight.id } /> */}
       </SpotlightTemplateStyle>
     </Layout>
   )

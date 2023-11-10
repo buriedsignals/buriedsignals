@@ -277,16 +277,39 @@ export function parseUserJury(data) {
   }
 }
 
+// export function parseUsersDirectory(datas) {
+//   let members = datas.map(data => {
+//     return parseUserMember(data.attributes)
+//   }).filter(member => member.show_in_directory)
+
+//   let currentIndex = members.length
+//   let randomIndex = null
+//   while (currentIndex > 0) {
+//     randomIndex = Math.floor(Math.random() * currentIndex)
+//     currentIndex--
+//     [members[currentIndex], members[randomIndex]] = [members[randomIndex], members[currentIndex]]
+//   }
+  
+//   // let spotlights = members.filter(member => member.type == "Premium")
+//   // const talents = [...members.filter(member => member.type == "Free"), ...members.filter(member => member.type == "Ghost")]
+//   // const posts = pagination(query.page ? query.page : 1, 6, spotlights, spotlights.length, 6)
+//   // return {
+//   //   spotlights: posts.posts,
+//   //   talents: talents,
+//   //   meta: posts.meta,
+//   // }
+//   return {
+//     spotlights: members
+//   }
+// }
+
 export function parseUsersDirectory(datas, query) {
   const members = datas.map(data => {
     return parseUserMember(data.attributes)
   }).filter(member => member.show_in_directory)
-  let spotlights = members.filter(member => member.type == "Premium")
-  const talents = [...members.filter(member => member.type == "Free"), ...members.filter(member => member.type == "Ghost")]
-  const posts = pagination(query.page ? query.page : 1, 6, spotlights, spotlights.length, 6)
+  const posts = pagination(query.page ? query.page : 1, 6, members, members.length, 6)
   return {
     spotlights: posts.posts,
-    talents: talents,
     meta: posts.meta,
   }
 }
@@ -308,7 +331,6 @@ export function parseUserMember(data, categories = null) {
     name: data.username ? data.username : "",
     slug: data.Slug ? data.Slug : null,
     email: data.email ? data.email : "",
-    type: data.Type ? data.Type : "Free",
     show_in_membership: data.Show_in_membership ? data.Show_in_membership : false,
     show_in_directory: data.Show_in_directory ? data.Show_in_directory : false,
     description: data.Description ? data.Description : "",

@@ -1,7 +1,7 @@
 // Styles
 import { SpotlightStyle } from "./index.style"
 // Scripts
-import { limitSizeText } from "@/scripts/utils"
+import { getUserCookies, limitSizeText } from "@/scripts/utils"
 // Next
 import Link from "next/link"
 // Buttons
@@ -13,6 +13,8 @@ import { down } from "styled-breakpoints"
 import { useBreakpoint } from 'styled-breakpoints/react-styled';
 
 export default function Spotlight({ post, ...props }) {
+  // Cookies
+  const user = getUserCookies()
   return (
     <Link href={ `/spotlights/${ post.slug }` } passHref>
       <SpotlightStyle { ...props } target="_blank">
@@ -37,7 +39,9 @@ export default function Spotlight({ post, ...props }) {
               <p className="description typography-07">{ limitSizeText(post.description, useBreakpoint(down('md')) ? 110 : 180) }</p>
             </div>
             <div className="actions-container">
-              <LikeButton likes={ post.likes } liked={ post.liked } postId={ post.id } type="spotlights" />
+              {
+                user.connected && <LikeButton likes={ post.likes } liked={ post.liked } postId={ post.id } type="spotlights" />
+              }
               <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="spotlights" />
             </div>
           </div>

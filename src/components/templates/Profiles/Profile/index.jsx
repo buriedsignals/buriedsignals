@@ -64,7 +64,7 @@ export default function ProfileTemplate({ member, ...props }) {
             <div className="extras">
               <ul className="expertises-container">
                 <li>
-                  <p className="subtitle typography-05">Expertises</p>
+                  <p className="subtitle typography-05">Expertise</p>
                 </li>
                 { user.expertises.filter(expertise => expertise.checked).map((expertise, index) => {  
                   return <li key={ `expertise-${ index }` } className="expertise-container">

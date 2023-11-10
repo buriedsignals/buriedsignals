@@ -10,7 +10,6 @@ export const QUERY_USERS_JURY = gql`
           username
           Slug
           email
-          Type
           Show_in_membership
           Show_in_directory
           Description

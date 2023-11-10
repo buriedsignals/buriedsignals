@@ -21,11 +21,15 @@ export default function Accordion({ panels, ...props }) {
     <AccordionStyle { ...props }>
       <div className="accordion-container">
         <div className="container-module-large select-container">
-          { Object.keys(panels).map((key) => (
-            <button key={ `panel-${key}` } className={ key == panelSelected ? 'is-active' : '' } onClick={ () => onClickButton(key) } >
-              <p className="typography-05">{ key === "spotlights" ? "inspirations" : key }</p>
-            </button>
-          )) }
+          { Object.keys(panels).map((key) => {
+            if (panels[key].length > 0) {
+              return (
+                <button key={ `panel-${key}` } className={ key == panelSelected ? 'is-active' : '' } onClick={ () => onClickButton(key) } >
+                  <p className="typography-05">{ key === "spotlights" ? "inspirations" : key }</p>
+                </button>
+              )
+            }
+          }) }
         </div>
         <div className="panel-container">
           { showPanel && <PostsListModule type={ panelSelected.slice(0, -1) } posts={ panels[panelSelected] } /> }

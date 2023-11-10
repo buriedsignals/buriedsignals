@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
 export const DirectoryTemplateStyle = styled.div`
-  padding: 115px 0;
+  padding: 115px 0 57.5px;
   & > .title {
     width: auto;
     padding-bottom: 50px;

@@ -187,7 +187,7 @@ export default function Edit({ user, setUser, ...props }) {
                   <input className="typography-01 input input-username" type="text" placeholder="Your Name" defaultValue={ user.name } />
                   <input className="typography-01 input input-email" type="email" placeholder="Your Email" defaultValue={ user.email } />
                   <textarea className="typography-01 input input-description" name="description" cols="30" rows="7" placeholder="Your Description" defaultValue={ user.description }></textarea>
-                  <p className="subtitle typography-01">Expertises</p>
+                  <p className="subtitle typography-01">Expertise</p>
                   <ExpertisesModal expertises={ user.expertises } />
                   <p className="subtitle typography-01">Social</p>
                   <div className="input input-icon">

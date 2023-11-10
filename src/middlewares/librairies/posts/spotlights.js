@@ -108,18 +108,18 @@ export async function getPostSpotlight(slug) {
     variables: { slug }
   })
   if (!responseSpotlight || !responseSpotlight.data.spotlightsPosts.data[0]) return null
-  const responseComments = await apolloClient.query({
-    query: QUERY_SPOTLIGHT_COMMENTS,
-    variables: { relation: `api::spotlights-post.spotlights-post:${responseSpotlight.data.spotlightsPosts.data[0].id}` }
-  })
-  if (!responseComments) return null
-  let commentsDatas = responseComments.data.findAllFlat.data
-  commentsDatas = parseComments(commentsDatas)
+  // const responseComments = await apolloClient.query({
+  //   query: QUERY_SPOTLIGHT_COMMENTS,
+  //   variables: { relation: `api::spotlights-post.spotlights-post:${responseSpotlight.data.spotlightsPosts.data[0].id}` }
+  // })
+  // if (!responseComments) return null
+  // let commentsDatas = responseComments.data.findAllFlat.data
+  // commentsDatas = parseComments(commentsDatas)
   let post = responseSpotlight.data.spotlightsPosts.data[0].attributes
   post = parsePostSpotlight(post)
   post.id = responseSpotlight.data.spotlightsPosts.data[0].id
-  post.comments = commentsDatas.comments
-  post.comments_length = commentsDatas.comments_length
+  // post.comments = commentsDatas.comments
+  // post.comments_length = commentsDatas.comments_length
   return post
 }
 
@@ -154,7 +154,6 @@ export async function getPostsSpotlightsMonth() {
       limit: limit 
     }
   }, { encodeValuesOnly: true });  
-  console.log(`${ STRAPI_ENDPOINT }/api/spotlights-posts?${ params }`)
   const responseSpotlights = await axios.get(`${ STRAPI_ENDPOINT }/api/spotlights-posts?${ params }`)
   if (!responseSpotlights) return null
   const posts = parsePostsSpotlights(responseSpotlights.data.data)

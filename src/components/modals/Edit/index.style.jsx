@@ -31,10 +31,10 @@ export const EditStyle = styled.div`
   }
   .panel-edit {
     position: fixed;
-    top: calc(316px - 89px); left: 50%;
+    top: 89px; left: 50%;
     width: 100%;
     max-width: 860px;
-    height: calc(100vh - ((316px - 89px) * 2));
+    height: calc(100vh - 89px);
     background: var(--color-black01);
     border-radius: 4px;
     transform: translate3D(-50%, 0, 0);
