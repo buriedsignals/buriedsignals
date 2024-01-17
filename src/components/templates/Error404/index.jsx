@@ -19,7 +19,7 @@ export default function Error404Template({ resources, ...props }) {
           </div>
         </h1>
         <div className="description-container">
-          <p className="typography-04">Oups... looks like there is no signal in here</p>
+          <p className="typography-04">Oups... looks like there is no signal here</p>
           <SecondaryLink href="/" intern={ true } className="back">
             <ArrowIcon className="arrow" />
             <p className="typography-03">Back to home</p>

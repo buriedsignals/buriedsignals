@@ -14,6 +14,7 @@ import InsightCard from "@/components/cards/Insight"
 import ResourceCard from "@/components/cards/Resource"
 import JuryCard from "@/components/cards/Jury"
 import DirectoryCard from "@/components/cards/Directory"
+import InvestigationCard from "@/components/cards/Investigation"
 // Buttons
 import ThirstyButton from "@/components/buttons/Thirsty"
 
@@ -81,10 +82,12 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
                       return <JuryCard post={ post } />
                     case 'directory':
                       return <DirectoryCard post={ post } />
+                    case 'investigation':
+                      return <InvestigationCard post={ post } />
                   }
                 })()}
               </li>
-              { index % max == maxPostsBeforeNewsletter - 1 && type === 'spotlight' && <li key={ `newsletter-${ section }` } className={ `${ (index < max * section) ? 'is-show' : 'is-hide' } newsletter-container` }><NewsletterModule /></li> }
+              { index % max == maxPostsBeforeNewsletter - 1 && (type === 'spotlight' || type === 'investigation') && <li key={ `newsletter-${ section }` } className={ `${ (index < max * section) ? 'is-show' : 'is-hide' } newsletter-container` }><NewsletterModule /></li> }
               </>
           }) : <li key="post-0" className="container-module-large item-container">
             <p className="no-result typography-06">No results...</p>

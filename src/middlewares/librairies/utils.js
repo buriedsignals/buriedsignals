@@ -382,6 +382,35 @@ export function parseExpertiseMembers(data) {
   }
 }
 
+
+
+export function parsePostsInvestigations(datas) {
+  let posts = datas.map(data => {
+    return { id: data.id, ...parsePostInvestigation(data.attributes) }
+  })
+  return posts
+}
+
+export function parsePostInvestigation(data) {
+  return {
+    bookmarked: USER.bookmarked.investigations ? USER.bookmarked.investigations.filter(investigation => investigation.slug === data.Slug).length > 0 : false, // Get by user
+    description: data.Description ? data.Description : "",
+    image: getImage(data.Image),
+    slug: data.Slug ? data.Slug : null,
+    source: {
+      author: data.Source_author ? data.Source_author : "",
+      url: data.Source_link ? data.Source_link : ""
+    },
+    title: data.Title ? data.Title : "",
+    meta: {
+      title: data.Meta_title ? data.Meta_title : data.Title ? `Buried Signals - ${ data.Title }` : "",
+      description: data.Meta_description ? data.Meta_description : data.Description ? data.Description : "",
+      keywords: data.Meta_keywords ? data.Meta_keywords : "",
+      image: data.Meta_image ? data.Meta_image.data ? getImage(data.Meta_image) : getImage(data.Image) : getImage(data.Image)
+    }
+  }
+}
+
 export function parseMetaPagination(meta) {
   return {
     page: meta.page,

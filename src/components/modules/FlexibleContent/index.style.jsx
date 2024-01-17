@@ -107,8 +107,19 @@ export const FlexibleContentStyle = styled.div`
     padding-bottom: 40px;
   }
   @media screen and (max-width: 858px) {
+    .container-image {
+      width: calc(100% - 50px);
+      margin-left: 25px;
+      margin-right: 25px;
+      padding-left: inherit;
+      padding-right: inherit;
+      overflow: hidden;
+    }
     img {
+      position: relative;
+      left: 50%;
       max-width: 100%;
+      transform: translate3D(-50%, 0, 0);
     }
   }
   img:not(:first-child) {

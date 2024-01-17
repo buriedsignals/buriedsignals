@@ -48,7 +48,7 @@ export default function Header() {
   }
   return (
     <HeaderStyle className={ `header ${ router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ? "header-complex" : "" } ${ show ? "is-show" : "" } ${ stick ? "is-stick" : "" }` }>
-      { useBreakpoint(down('lg')) ?
+      { useBreakpoint(down('header')) ?
           <HeaderMobile />
         : 
           <HeaderDesktop />

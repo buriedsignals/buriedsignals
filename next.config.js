@@ -19,7 +19,7 @@ const nextConfig = {
         // Add your new rewrite rule here
         source: '/viz-gpt',
         destination: 'https://chat.openai.com/g/g-2kHhAt0Vv-vizgpt', // Replace with your desired external URL
-      },
+      }
     ]
   },
 }

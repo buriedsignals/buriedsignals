@@ -1,14 +1,13 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const SpotlightStyle = styled.div`
+export const InvestigationStyle = styled.a`
   display: block;
-  width: 100%;
   background-color: var(--color-black03);
   ${down('md')} {
     width: 343px;
   }
-  .spotlight-container {
+  .investigation-container {
     display: flex;
     height: 302px;
     ${down('md')} {
@@ -25,28 +24,8 @@ export const SpotlightStyle = styled.div`
     }
     .visual-container {
       position: relative;
-      display: block;
       ${down('md')} {
         height: 218px;
-      }
-      .awards {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%;
-        height: 40px;
-        background-color: var(--color-green);
-        transform: translate3d(-38.75%, 100%, 0) rotate3d(0, 0, 1, -45deg);
-        z-index: 1;
-        ${down('md')} {
-          transform: translate3d(-33.75%,95%,0) rotate3d(0,0,1,-45deg);
-        }
-        p {
-          position: absolute;
-          top: 50%; left: 50%;
-          color: var(--color-black02);
-          text-transform: uppercase;
-          transform: translate3D(-50%, -50%, 0);
-        }
       }
       img {
         position: absolute;
@@ -57,7 +36,10 @@ export const SpotlightStyle = styled.div`
         transform: translate3D(-50%, -50%, 0);
       }
     }
-    .content-container {
+    .content-container {    
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       padding: 32px 48px;
       ${down('md')} {
         padding: 41px 23px;
@@ -75,16 +57,6 @@ export const SpotlightStyle = styled.div`
         .author {
           margin-right: 22.5px;
           white-space: nowrap;
-        }
-        .categories-container {
-          display: flex;
-          align-items: center;
-          opacity: 0.5;
-          .category {
-            &:not(:first-child) {
-              margin-left: 22.5px;
-            }
-          }
         }
       }
       .informations-container {
@@ -104,30 +76,6 @@ export const SpotlightStyle = styled.div`
             font-size: 14px;
             line-height: 18px;
           // }
-        }
-      }
-      .actions {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-        gap: 15px;
-        .actions-container {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 7.5px;
-          a {
-            width: inherit;
-            .secondary-container {
-              ${down('md')} {
-                padding: 12px 8px;
-              }
-            }
-          }
-        }
-        & > a {
-          width: inherit;
-          margin: 0;
         }
       }
     }

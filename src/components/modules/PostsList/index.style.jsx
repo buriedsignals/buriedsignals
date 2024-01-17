@@ -100,6 +100,24 @@ export const PostsListStyle = styled.div`
         display: none;
       }
     }
+    &.type-investigation {
+      ${down('md')} {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 40px;
+        justify-content: center;
+        padding-top: 48px;
+        padding-bottom: 48px;
+      }
+      & > * {
+        &:not(:last-child) {
+          margin-bottom: 80px;
+          ${down('md')} {
+            margin-bottom: 40px;
+          }
+        }
+      }
+    }
     .item-container {
       ${down('md')} {
         width: auto;

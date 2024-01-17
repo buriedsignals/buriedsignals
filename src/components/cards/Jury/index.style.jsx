@@ -20,8 +20,9 @@ export const JuryStyle = styled.div`
       img {
         position: absolute;
         top: 50%; left: 50%;
-        width: auto;
+        width: 100%;
         height: 100%;
+        object-fit: cover;
         transform: translate3D(-50%, -50%, 0);
       }
     }

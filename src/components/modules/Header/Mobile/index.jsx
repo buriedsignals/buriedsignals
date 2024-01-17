@@ -128,6 +128,13 @@ export default function HeaderMobile() {
                   }
                 </li>
                 <li className="page">
+                  <Link href="/investigations">
+                    <a className={ router.pathname == "/investigations" ? "is-active" : "" } onMouseEnter={ () => setDropdown(false) }>
+                      <p className="typography-01">Investigations</p>
+                    </a>
+                  </Link>
+                </li>
+                <li className="page">
                   <a href="https://www.studio.buriedsignals.com">
                     <p className="typography-01">Studio</p>
                   </a>
@@ -140,11 +147,9 @@ export default function HeaderMobile() {
                   </Link>
                 </li>
                 <li className="page">
-                  <Link href="/newsletter">
-                    <a className={ router.pathname == "/newsletter" ? "is-active" : "" }>
-                      <p className="typography-01">Newsletter</p>
-                    </a>
-                  </Link>
+                  <a href="https://buriedsignals.substack.com" target="_blank" rel="noopener noreferrer" onMouseEnter={ () => setDropdown(false) }>
+                    <p className="typography-01">Newsletter</p>
+                  </a>
                 </li>
                 <li className="page">
                   <Link href="/about">

@@ -117,12 +117,12 @@ export function getUserCookies() {
 // Logout cookies user
 export function logoutUserCookies() {
   setCookie("connected", false)
-  setCookieObject("bookmarked", { spotlights: [], insights: [], resources: [] })
+  setCookieObject("bookmarked", { spotlights: [], insights: [], resources: [], investigations: [] })
   setCookie("description", null)
   setCookie("email", null)
   setCookie("id", null)
   setCookie("jwt", null)
-  setCookieObject("liked", { spotlights: [] })
+  setCookieObject("liked", { spotlights: [], investigations: [] })
   setCookieObject("voted", { spotlights: [] })
   setCookie("name", null)
   setCookie("slug", null)
