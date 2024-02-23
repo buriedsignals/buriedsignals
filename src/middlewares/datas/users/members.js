@@ -602,7 +602,7 @@ export const UPDATE_USER_MEMBER = gql`
 `
 
 export const UPDATE_USER_MEMBER_LIKED_SPOTLIGHTS = gql`
-  mutation UpdateUserMemberLikedSpotlights($memberId: ID!, $postIds: [Id]) {
+  mutation UpdateUserMemberLikedSpotlights($memberId: ID!, $postIds: [ID]) {
     updateUsersPermissionsUser(id: $memberId, data: { Liked_spotlights: $postIds }) {
       data {
         id
@@ -612,7 +612,7 @@ export const UPDATE_USER_MEMBER_LIKED_SPOTLIGHTS = gql`
 `
 
 export const UPDATE_USER_MEMBER_VOTED_SPOTLIGHTS = gql`
-  mutation UpdateUserMemberVotedSpotlights($memberId: ID!, $postIds: [Id]) {
+  mutation UpdateUserMemberVotedSpotlights($memberId: ID!, $postIds: [ID]) {
     updateUsersPermissionsUser(id: $memberId, data: { Voted_effectiveness_spotlights: $postIds }) {
       data {
         id
@@ -622,7 +622,7 @@ export const UPDATE_USER_MEMBER_VOTED_SPOTLIGHTS = gql`
 `
 
 export const UPDATE_USER_MEMBER_BOOKMARKED_SPOTLIGHTS = gql`
-  mutation UpdateUserMemberBookmarkedSpotlights($memberId: ID!, $postIds: [Id]) {
+  mutation UpdateUserMemberBookmarkedSpotlights($memberId: ID!, $postIds: [ID]) {
     updateUsersPermissionsUser(id: $memberId, data: { Bookmarked_spotlights: $postIds }) {
       data {
         id
@@ -632,7 +632,7 @@ export const UPDATE_USER_MEMBER_BOOKMARKED_SPOTLIGHTS = gql`
 `
 
 export const UPDATE_USER_MEMBER_BOOKMARKED_INSIGHTS = gql`
-  mutation UpdateUserMemberBookmarkedInsights($memberId: ID!, $postIds: [Id]) {
+  mutation UpdateUserMemberBookmarkedInsights($memberId: ID!, $postIds: [ID]) {
     updateUsersPermissionsUser(id: $memberId, data: { Bookmarked_insights: $postIds }) {
       data {
         id
@@ -642,7 +642,7 @@ export const UPDATE_USER_MEMBER_BOOKMARKED_INSIGHTS = gql`
 `
 
 export const UPDATE_USER_MEMBER_BOOKMARKED_RESOURCES = gql`
-  mutation UpdateUserMemberBookmarkedResources($memberId: ID!, $postIds: [Id]) {
+  mutation UpdateUserMemberBookmarkedResources($memberId: ID!, $postIds: [ID]) {
     updateUsersPermissionsUser(id: $memberId, data: { Bookmarked_resources: $postIds }) {
       data {
         id

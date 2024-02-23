@@ -93,7 +93,6 @@ export default function Edit({ user, setUser, ...props }) {
             "username": username,
             "email": email, 
             "Description": description,
-            "Type": "Free",
             "Show_in_directory": showDirectory,
             "Portfolio_link": portfolio,
             "Behance_account": behance,

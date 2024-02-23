@@ -93,7 +93,6 @@ export default function SignupTemplate({ categories, ...props }) {
           datasUpdateUser: {
             "Slug": transformToSlug(username),
             "Description": description,
-            "Type": "Free",
             "Show_in_directory": showDirectory,
             "Image": imageID,
             "Portfolio_link": portfolio,

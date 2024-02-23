@@ -124,7 +124,7 @@ export async function updateUserMember(id, datas) {
 }
 
 export async function updateUserMemberLikedSpotlights(memberId, postIds) {
-  const apolloClient = getApolloClient()
+  const apolloClient = getApolloClient()  
   const response = await apolloClient.mutate({
     errorPolicy: 'all',
     mutation: UPDATE_USER_MEMBER_LIKED_SPOTLIGHTS,

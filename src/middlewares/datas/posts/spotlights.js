@@ -409,7 +409,7 @@ export const UPDATE_POST_SPOTLIGHT_VOTES = gql`
 `
 
 export const UPDATE_POST_SPOTLIGHT_AWARDS = gql`
-  mutation MutationPostSpotlightAwards($id: ID!, $awardId: Id) {
+  mutation MutationPostSpotlightAwards($id: ID!, $awardId: ID) {
     updateSpotlightsPost(id: $id, data: { Award: $awardId }) {
       data {
         id
