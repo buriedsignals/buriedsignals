@@ -100,9 +100,9 @@ export default function SigninTemplate({ ...props }) {
                 <p className="typography-03">Sign in</p>
               </PrimaryButton>
               <div className="links">
-                <Link href="/events">
+                <Link href="/support">
                   <a>
-                    <p  className="typography-01">Become a member</p>
+                    <p  className="typography-01">Become a supporter</p>
                   </a>
                 </Link>
                 <Link href="/profiles/forgot-password">

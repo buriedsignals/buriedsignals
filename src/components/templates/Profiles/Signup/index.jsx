@@ -168,7 +168,7 @@ export default function SignupTemplate({ categories, ...props }) {
               <div className="inputs-container">
                 <label className="input-talent">
                   <input className="input" type="checkbox" name="checkbox" />
-                  <p className="typography-01">I want to appear in the talent directory</p>
+                  <p className="typography-01">I want to appear in the experts directory</p>
                 </label>
                 <p className="subtitle typography-01">Profile</p>
                 <label className="input-image" data-value="">
