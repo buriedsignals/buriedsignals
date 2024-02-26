@@ -90,7 +90,7 @@ export default function HeaderMobile() {
             <div className="header-panel-container">
               <ul className="pages">
                 <li className="page">
-                  <button className={ `modal${ modalDropdown ? ' is-open' : '' } ${ router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ? "is-active" : "" }` } onClick={ setModalDropdown }>
+                  <button className={ `modal${ modalDropdown ? ' is-open' : '' } ${ router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" ? "is-active" : "" }` } onClick={ setModalDropdown }>
                     <p className="typography-01">Magazine</p>                  
                     <ArrowIcon />
                   </button>
@@ -117,13 +117,6 @@ export default function HeaderMobile() {
                           </a>
                         </Link>
                       </li>
-                      <li className="link">
-                        <Link href="/directory">
-                          <a className={ router.pathname == "/directory" ? "is-active" : "" }>
-                            <p className="typography-01">Directory</p>
-                          </a>
-                        </Link>
-                      </li>
                     </ul>
                   }
                 </li>
@@ -140,9 +133,9 @@ export default function HeaderMobile() {
                   </a>
                 </li>
                 <li className="page">
-                  <Link href="/membership">
-                    <a className={ router.pathname == "/membership" ? "is-active" : "" }>
-                      <p className="typography-01">Membership</p>
+                  <Link href="/experts">
+                    <a className={ router.pathname == "/experts" ? "is-active" : "" }>
+                      <p className="typography-01">Experts</p>
                     </a>
                   </Link>
                 </li>
@@ -164,7 +157,7 @@ export default function HeaderMobile() {
           </div>
       }
       </div>
-      { router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ?  
+      { router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" ?  
         <div className="subheader">
           <div className="subheader-mobile-container">
             <Link href="/">
@@ -180,11 +173,6 @@ export default function HeaderMobile() {
             <Link href="/resources">
               <a className={ router.pathname == "/resources" ? "is-active" : "" }>
                 <p className="typography-01">Resources</p>
-              </a>
-            </Link>
-            <Link href="/directory">
-              <a className={ router.pathname == "/directory" ? "is-active" : "" }>
-                <p className="typography-01">Directory</p>
               </a>
             </Link>
           </div>

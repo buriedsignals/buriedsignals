@@ -1,14 +1,14 @@
 // Middlewares
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
-import { QUERY_USERS_JURY } from "@/middlewares/datas/users/jury"
-import { parseUsersJury } from '../utils'
+import { QUERY_USERS_SUPPORTER } from "@/middlewares/datas/users/supporter"
+import { parseUsersSupporter } from '../utils'
 
-export async function getUsersJury(query) {
+export async function getUsersSupporter(query) {
   const apolloClient = getApolloClient()
   const response = await apolloClient.query({
-    query: QUERY_USERS_JURY,
+    query: QUERY_USERS_SUPPORTER,
   })
   if (!response) return null
   let posts = response.data.usersPermissionsUsers.data
-  return parseUsersJury(posts, query)
+  return parseUsersSupporter(posts, query)
 }

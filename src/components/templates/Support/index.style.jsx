@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const MembershipTemplateStyle = styled.div`
+export const SupportTemplateStyle = styled.div`
   padding: 115px 0;
-  .membership {
+  .support {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -81,7 +81,7 @@ export const MembershipTemplateStyle = styled.div`
       }
     }
   }
-  .jury {
+  .supporter {
     padding-top: 125px;
     .title {
       width: auto;

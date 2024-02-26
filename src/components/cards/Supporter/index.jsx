@@ -1,17 +1,17 @@
 // Styles
-import { JuryStyle } from "./index.style"
+import { SupporterStyle } from "./index.style"
 // Scripts
 import { limitSizeText } from "@/scripts/utils"
 // Icon
 import ExternalLinkIcon from "@/components/icons/ExternalLink"
 
-export default function Jury({ post, ...props }) {
+export default function Supporter({ post, ...props }) {
   return (
     <>
       { (post.portfolio && post.portfolio.length != 0) ?
         <a href={ post.portfolio } target="_blank" rel="noopener noreferrer">
-          <JuryStyle { ...props }>
-            <div className="jury-container">
+          <SupporterStyle { ...props }>
+            <div className="supporter-container">
               <div className="visual-container">
                 <img src={ post.image.url } alt={ post.image.alt } />
               </div>
@@ -22,11 +22,11 @@ export default function Jury({ post, ...props }) {
                 </div>
               </div>
             </div>
-          </JuryStyle>
+          </SupporterStyle>
         </a>
         :
-        <JuryStyle { ...props }>
-          <div className="jury-container">
+        <SupporterStyle { ...props }>
+          <div className="supporter-container">
             <div className="visual-container">
               <img src={ post.image.url } alt={ post.image.alt } />
             </div>
@@ -37,7 +37,7 @@ export default function Jury({ post, ...props }) {
               </div>
             </div>
           </div>
-        </JuryStyle>
+        </SupporterStyle>
       }
     </>
   )

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const JuryStyle = styled.div`
+export const SupporterStyle = styled.div`
   display: block;
   background-color: var(--color-black03);
   width: 308px;
-  .jury-container {
+  .supporter-container {
     height: 505px;
     padding: 25px;
     .visual-container, .content-container {

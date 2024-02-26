@@ -1,17 +1,17 @@
 // Middlewares
 import { getApolloClient } from '@/middlewares/librairies/apollo-client'
 import { QUERY_USERS_MEMBERS, QUERY_USER_MEMBER, QUERY_EXPERTISES_MEMBERS, REGISTER_USER_MEMBER, UPDATE_USER_MEMBER, UPDATE_USER_MEMBER_LIKED_SPOTLIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_SPOTLIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_INSIGHTS, UPDATE_USER_MEMBER_BOOKMARKED_RESOURCES, LOGIN_USER_MEMBER, FORGOT_PASSWORD_USER_MEMBER, RESET_PASSWORD_USER_MEMBER, UPDATE_USER_MEMBER_VOTED_SPOTLIGHTS } from "@/middlewares/datas/users/members"
-import { parseUsersDirectory, parseUserMember, parseExpertisesMembers } from '../utils'
+import { parseUsersExperts, parseUserMember, parseExpertisesMembers } from '../utils'
 import { transformToSlug } from '@/scripts/utils'
 
-export async function getUsersDirectory(query) {
+export async function getUsersExperts(query) {
   // const apolloClient = getApolloClient()
   // const response = await apolloClient.query({
   //   query: QUERY_USERS_MEMBERS,
   // })
   // if (!response) return null
   // let posts = response.data.usersPermissionsUsers.data
-  // return parseUsersDirectory(posts)
+  // return parseUsersExperts(posts)
   const apolloClient = getApolloClient()
   const response = await apolloClient.query({
     query: QUERY_USERS_MEMBERS,
@@ -20,7 +20,7 @@ export async function getUsersDirectory(query) {
   let posts = response.data.usersPermissionsUsers.data
   const variables = {}
   variables.page = query.page ? parseInt(query.page) : 1
-  return parseUsersDirectory(posts, variables)
+  return parseUsersExperts(posts, variables)
 }
 
 export async function getUserMember(slug) {

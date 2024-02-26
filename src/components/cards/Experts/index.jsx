@@ -1,5 +1,5 @@
 // Styles
-import { DirectoryStyle } from "./index.style"
+import { ExpertsStyle } from "./index.style"
 // Icons
 import MailIcon from "@/components/icons/Mail"
 import InstagramIcon from "@/components/icons/Instagram"
@@ -7,7 +7,7 @@ import TwitterIcon from "@/components/icons/Twitter"
 import BehanceIcon from "@/components/icons/Behance"
 import PortfolioIcon from "@/components/icons/Portfolio"
 
-export default function Directory({ post, ...props }) {
+export default function Experts({ post, ...props }) {
   // Handlers
   const onScrollExpertises = (e) => {
     const scrollPos = e.currentTarget.scrollLeft
@@ -27,8 +27,8 @@ export default function Directory({ post, ...props }) {
   }
 
   return (
-    <DirectoryStyle { ...props }>
-      <div className="directory-container">
+    <ExpertsStyle { ...props }>
+      <div className="experts-container">
         <div className="profile-container">
           <div className="photo-container">
             <img src={ post.image.url } alt={ post.image.alt } />
@@ -54,6 +54,6 @@ export default function Directory({ post, ...props }) {
           { post.portfolio && <a className="portfolio" href={ post.portfolio }  target="_blank" rel="noopener noreferrer"><PortfolioIcon /></a> }
         </div>
       </div>
-    </DirectoryStyle>
+    </ExpertsStyle>
   )
 }

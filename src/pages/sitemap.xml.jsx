@@ -23,7 +23,10 @@ export async function getServerSideProps({ res }) {
         <loc>https://buriedsignals.com/resources</loc>
       </url>
       <url>
-        <loc>https://buriedsignals.com/membership</loc>
+        <loc>https://buriedsignals.com/support</loc>
+      </url>
+      <url>
+        <loc>https://buriedsignals.com/experts</loc>
       </url>
       <url>
         <loc>https://buriedsignals.com/about</loc>

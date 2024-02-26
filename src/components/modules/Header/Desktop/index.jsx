@@ -44,7 +44,7 @@ export default function HeaderDesktop() {
           <ul className="pages">
             <li className="page">
               <Link href="/">
-                <a className={ `${ router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ? "is-active" : "" } ${ dropdown ? "is-hover" : "" }` }  onMouseEnter={ () => setDropdown(true) }>
+                <a className={ `${ router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" ? "is-active" : "" } ${ dropdown ? "is-hover" : "" }` }  onMouseEnter={ () => setDropdown(true) }>
                   <p className="typography-01">Magazine</p>
                 </a>
               </Link>
@@ -62,9 +62,9 @@ export default function HeaderDesktop() {
               </a>
             </li>
             <li className="page">
-              <Link href="/membership">
-                <a className={ router.pathname == "/membership" ? "is-active" : "" } onMouseEnter={ () => setDropdown(false) }>
-                  <p className="typography-01">Membership</p>
+              <Link href="/experts">
+                <a className={ router.pathname == "/experts" ? "is-active" : "" } onMouseEnter={ () => setDropdown(false) }>
+                  <p className="typography-01">Experts</p>
                 </a>
               </Link>
             </li>
@@ -114,7 +114,7 @@ export default function HeaderDesktop() {
           </ul>
         </div>
       </div>
-      { router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" || router.pathname == "/directory" ?  
+      { router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" ?  
         <div className="subheader">
           <div className="subheader-desktop-container">
             <Link href="/">
@@ -130,11 +130,6 @@ export default function HeaderDesktop() {
             <Link href="/resources">
               <a className={ router.pathname == "/resources" ? "is-active" : "" }>
                 <p className="typography-01">Resources</p>
-              </a>
-            </Link>
-            <Link href="/directory">
-              <a className={ router.pathname == "/directory" ? "is-active" : "" }>
-                <p className="typography-01">Directory</p>
               </a>
             </Link>
           </div>

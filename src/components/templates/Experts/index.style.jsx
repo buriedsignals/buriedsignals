@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const DirectoryTemplateStyle = styled.div`
+export const ExpertsTemplateStyle = styled.div`
   padding: 115px 0 57.5px;
   & > .title {
     width: auto;
-    padding-bottom: 50px;
     ${down('lg')} {
       margin-left: 48px;
       margin-right: 48px;
@@ -15,16 +14,24 @@ export const DirectoryTemplateStyle = styled.div`
       margin-right: 32px;
     }
   }
-  & > .subtitle {
-    width: auto;
-    padding-bottom: 25px;
+  .description-container {
+    padding-top: 50px;
     ${down('lg')} {
-      margin-left: 48px;
-      margin-right: 48px;
+      padding-left: 48px;
+      padding-right: 48px;
     }
     ${down('md')} {
-      margin-left: 32px;
-      margin-right: 32px;
+      order: 3;
+      padding-left: 32px;
+      padding-right: 32px;
     }
+    p {
+      max-width: 640px;
+      color: var(--color-grey03);
+    }
+  }
+
+  .posts-container {
+    padding-top: 50px;
   }
 `

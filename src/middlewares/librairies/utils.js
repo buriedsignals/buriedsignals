@@ -257,7 +257,7 @@ export function parseCategoryResources(data) {
   }
 }
 
-export function parseUsersJury(datas, query) {
+export function parseUsersSupporter(datas, query) {
   let users = datas.map(data => {
     return parseUserMember(data.attributes)
   })
@@ -268,7 +268,7 @@ export function parseUsersJury(datas, query) {
   }
 }
 
-export function parseUserJury(data) {
+export function parseUserSupporter(data) {
   return {    
     description: data.Description,
     image: getImage(data.Image),
@@ -277,7 +277,7 @@ export function parseUserJury(data) {
   }
 }
 
-// export function parseUsersDirectory(datas) {
+// export function parseUsersExperts(datas) {
 //   let members = datas.map(data => {
 //     return parseUserMember(data.attributes)
 //   }).filter(member => member.show_in_directory)
@@ -303,13 +303,13 @@ export function parseUserJury(data) {
 //   }
 // }
 
-export function parseUsersDirectory(datas, query) {
+export function parseUsersExperts(datas, query) {
   const members = datas.map(data => {
     return parseUserMember(data.attributes)
   }).filter(member => member.show_in_directory)
-  const posts = pagination(query.page ? query.page : 1, 6, members, members.length, 6)
+  const posts = pagination(query.page ? query.page : 1, 12, members, members.length, 12)
   return {
-    spotlights: posts.posts,
+    spotlights: members.sort((a, b) => 0.5 - Math.random()),
     meta: posts.meta,
   }
 }

@@ -15,9 +15,11 @@ export default function InvestigationsTemplate({ investigations }) {
     <Layout>
       <InvestigationsTemplateStyle>
         <h1 className="title container-module-large typography-04">{ investigations.page.title }</h1>
-        <div className="container-module-large description-container">
-          <p className="typography-07">{ investigations.page.description }</p>
-        </div>
+        { investigations.page.description && 
+          <div className="container-module-large description-container">
+            <p className="typography-07">{ investigations.page.description }</p>
+          </div>
+        }
         <PostsListModule type="investigation" posts={ investigations.posts } meta={ investigations.meta } />
       </InvestigationsTemplateStyle>
     </Layout>

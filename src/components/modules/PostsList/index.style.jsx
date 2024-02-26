@@ -59,7 +59,7 @@ export const PostsListStyle = styled.div`
         }
       }
     }
-    &.type-jury {
+    &.type-supporter {
       display: flex;
       flex-wrap: wrap;
       column-gap: 77px;

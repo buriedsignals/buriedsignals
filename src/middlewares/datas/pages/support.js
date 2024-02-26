@@ -1,14 +1,23 @@
 // Nodes
 import { gql } from '@apollo/client'
 
-export const QUERY_PAGE_DIRECTORY = gql`
-  query QueryPageDirectory {
-    pages(filters: { Slug: { eq: "directory" } }) {
+export const QUERY_PAGE_SUPPORT = gql`
+  query QueryPageSupport {
+    pages(filters: { Slug: { eq: "support" } }) {
       data {
         attributes {
           Title
           Slug
           Description
+          Dynamic_content {
+            ... on ComponentListIncludesListIncludes {
+              Title
+              Items {
+                Text
+                Soon
+              }
+            }
+          }
           Meta_title
           Meta_description
           Meta_keywords

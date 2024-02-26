@@ -1,8 +1,8 @@
 // Nodes
 import { gql } from '@apollo/client'
 
-export const QUERY_USERS_JURY = gql`
-  query QueryUsersJury {
+export const QUERY_USERS_SUPPORTER = gql`
+  query QueryUsersSupporter {
     usersPermissionsUsers(filters: { Show_in_membership: { eq: true } }, sort: "Ordering_date:desc", pagination: { limit: 99999999 }) {
       data {
         id

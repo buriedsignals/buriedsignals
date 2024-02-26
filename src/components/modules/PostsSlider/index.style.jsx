@@ -5,7 +5,7 @@ export const PostsSliderStyle = styled.div`
   .list-container {  
     padding-top: 60px;
     padding-bottom: 60px;
-    &.type-directory {
+    &.type-experts {
       display: flex;
       flex-wrap: wrap;
       column-gap: 20px;

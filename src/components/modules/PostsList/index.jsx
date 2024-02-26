@@ -12,8 +12,8 @@ import NewsletterModule from "../Newsletter"
 import SpotlightCard from "@/components/cards/Inspiration"
 import InsightCard from "@/components/cards/Insight"
 import ResourceCard from "@/components/cards/Resource"
-import JuryCard from "@/components/cards/Jury"
-import DirectoryCard from "@/components/cards/Directory"
+import SupporterCard from "@/components/cards/Supporter"
+import DirectoryCard from "@/components/cards/Experts"
 import InvestigationCard from "@/components/cards/Investigation"
 // Buttons
 import ThirstyButton from "@/components/buttons/Thirsty"
@@ -78,8 +78,8 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
                       return <InsightCard post={ post } />
                     case 'resource':
                       return <ResourceCard post={ post } />
-                    case 'jury':
-                      return <JuryCard post={ post } />
+                    case 'supporter':
+                      return <SupporterCard post={ post } />
                     case 'directory':
                       return <DirectoryCard post={ post } />
                     case 'investigation':

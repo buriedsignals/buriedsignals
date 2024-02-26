@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const DirectoryStyle = styled.div`
+export const ExpertsStyle = styled.div`
   display: block;
   width: 346px;
   padding: 32px;
   background-color: var(--color-black02);
-  .directory-container {
+  .experts-container {
     .profile-container {
       display: flex;
       margin-bottom: 20px;
