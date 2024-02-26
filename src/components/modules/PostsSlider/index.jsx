@@ -2,20 +2,10 @@
 import { PostsSliderStyle } from "./index.style"
 // React
 import { useEffect, useRef, useState } from "react"
-// Next
-import Link from "next/link"
-import { useRouter } from "next/router"
-// Modules
-import PostsFilterModule from "../PostsFilter"
-import NewsletterModule from "../Newsletter"
 // Cards
-import SpotlightCard from "@/components/cards/Inspiration"
-import InsightCard from "@/components/cards/Insight"
-import ResourceCard from "@/components/cards/Resource"
-import SupporterCard from "@/components/cards/Supporter"
 import ExpertsCard from "@/components/cards/Experts"
-// Buttons
-import ThirstyButton from "@/components/buttons/Thirsty"
+// Icons
+import ArrowIcon from "@/components/icons/Arrow"
 
 export default function PostsSlider({ type, posts, meta, ...props }) {
   // States
@@ -76,12 +66,12 @@ export default function PostsSlider({ type, posts, meta, ...props }) {
       <div className="container-module-large more-slides">
         { currentIndexSlider !== 0 && 
           <button onClick={ onClickButtonPreviousPosts } className="slide typography-01">
-              <p className="typography-01 arrow-left">{ "< Previous" }</p> 
+              <p className="typography-01 arrow-left"><ArrowIcon />{ "Previous" }</p> 
           </button>
         }
         { currentIndexSlider !== totalSlides - 1 &&
           <button onClick={ onClickButtonNextPosts } className="slide typography-01">
-              <p className="typography-01 arrow-right">{ "Next >" }</p> 
+              <p className="typography-01 arrow-right">{ "Next" }<ArrowIcon /></p> 
           </button>
         }
       </div>

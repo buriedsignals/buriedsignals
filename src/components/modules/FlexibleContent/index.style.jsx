@@ -97,7 +97,7 @@ export const FlexibleContentStyle = styled.div`
   img {
     display: block;
     /* .container-module-medium */
-    width: auto;
+    width: 100%;
     max-width: 858px;
     margin: 0 auto;
     /* ----------------------- */

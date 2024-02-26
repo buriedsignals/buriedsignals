@@ -95,6 +95,10 @@ export const PostsSliderStyle = styled.div`
       transform: translate3D(0, 0, 0);
       transition: transform 0.25s ease-in;
       cursor: pointer;
+      svg {
+        margin-right: 5px;
+        transform: translate3D(0, -40%, 0) rotate3d(0, 0, 1, 90deg);
+      }
       &:hover {
         transform: translate3D(-1.5px, 0, 0) scale3D(1, 1, 1);
         transition: transform 0.25s ease-out;
@@ -104,6 +108,10 @@ export const PostsSliderStyle = styled.div`
       transform: translate3D(0, 0, 0);
       transition: transform 0.25s ease-in;
       cursor: pointer;
+      svg {
+        margin-left: 5px;
+        transform: translate3D(0, -40%, 0) rotate3d(0, 0, 1, -90deg);
+      }
       &:hover {
         transform: translate3D(1.5px, 0, 0) scale3D(1.1, 1.1, 1.1);
         transition: transform 0.25s ease-out;
