@@ -20,7 +20,6 @@ export default function PostsSlider({ type, posts, meta, ...props }) {
     currentPosts = posts.slice(currentIndexSlider * maxBySlide, (currentIndexSlider + 1) * maxBySlide)
   }, [currentIndexSlider])
   useEffect(() => {
-    console.log(document.querySelector('main'))
     if (show) {
       document.querySelector('main').classList.add("is-show")
     } else {

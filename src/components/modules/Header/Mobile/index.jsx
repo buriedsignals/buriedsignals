@@ -133,9 +133,9 @@ export default function HeaderMobile() {
                   </a>
                 </li>
                 <li className="page">
-                  <Link href="/experts">
-                    <a className={ router.pathname == "/experts" ? "is-active" : "" }>
-                      <p className="typography-01">Experts</p>
+                  <Link href="/supporters">
+                    <a className={ router.pathname == "/supporters" ? "is-active" : "" }>
+                      <p className="typography-01">Supporters</p>
                     </a>
                   </Link>
                 </li>

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const SupportTemplateStyle = styled.div`
+export const SupportersTemplateStyle = styled.div`
   padding: 115px 0;
-  .support {
+  .supporters {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -92,6 +92,28 @@ export const SupportTemplateStyle = styled.div`
       ${down('md')} {
         margin-left: 32px;
         margin-right: 32px;
+      }
+    }
+    .description-container {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      ${down('lg')} {
+        margin-left: 48px;
+        margin-right: 48px;
+      }
+      ${down('md')} {
+        margin-left: 32px;
+        margin-right: 32px;
+      }
+      p {
+        max-width: 420px;
+        color: var(--color-grey03);
+        ${down('lg')} {
+          max-width: 640px;
+        }
+        &:not(:last-child) {
+          padding-bottom: 16px;
+        }
       }
     }
   }

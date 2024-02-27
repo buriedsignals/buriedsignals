@@ -70,7 +70,7 @@ export const SigninTemplateStyle = styled.div`
           column-gap: 10px;
           a {
             display: block;
-            width: 128px;
+            width: 145px;
             margin-top: 24px;
             color: var(--color-grey02);
             text-decoration: underline;

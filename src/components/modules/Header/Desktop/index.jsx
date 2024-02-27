@@ -62,9 +62,9 @@ export default function HeaderDesktop() {
               </a>
             </li>
             <li className="page">
-              <Link href="/experts">
-                <a className={ router.pathname == "/experts" ? "is-active" : "" } onMouseEnter={ () => setDropdown(false) }>
-                  <p className="typography-01">Experts</p>
+              <Link href="/supporters">
+                <a className={ router.pathname == "/supporters" ? "is-active" : "" } onMouseEnter={ () => setDropdown(false) }>
+                  <p className="typography-01">Supporters</p>
                 </a>
               </Link>
             </li>

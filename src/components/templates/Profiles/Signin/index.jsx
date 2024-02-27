@@ -100,7 +100,7 @@ export default function SigninTemplate({ ...props }) {
                 <p className="typography-03">Sign in</p>
               </PrimaryButton>
               <div className="links">
-                <Link href="/support">
+                <Link href="/supporters">
                   <a>
                     <p  className="typography-01">Become a supporter</p>
                   </a>
