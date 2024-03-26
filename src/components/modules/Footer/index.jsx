@@ -25,16 +25,16 @@ export default function Footer() {
       <div className="footer-container">
         <div className="links">
           <div className="socials">            
-            <a href="https://twitter.com/buriedsignals" className="network" target="_blank" rel="noopener noreferrer"><TwitterIcon /></a>
-            <a href="https://youtube.com/@buriedsignals" className="network" target="_blank" rel="noopener noreferrer"><YoutubeIcon /></a>
-            <a href="https://www.instagram.com/buriedsignals" className="network" target="_blank" rel="noopener noreferrer"><InstagramIcon /></a>
-            <a href="https://www.linkedin.com/company/buried-signals" className="network" target="_blank" rel="noopener noreferrer"><LinkedinIcon /></a>
+            <a href="https://twitter.com/_tomvaillant" className="network" target="_blank" rel="noopener noreferrer"><TwitterIcon /></a>
+            <a href="https://www.youtube.com/@_tomvaillant" className="network" target="_blank" rel="noopener noreferrer"><YoutubeIcon /></a>
+            <a href="https://www.instagram.com/_tomvaillant" className="network" target="_blank" rel="noopener noreferrer"><InstagramIcon /></a>
+            <a href="https://www.linkedin.com/in/tomvaillant" className="network" target="_blank" rel="noopener noreferrer"><LinkedinIcon /></a>
           </div>
           <div className="buried">
-            <Link href="/"><a className="typography-01">Magazine</a></Link>
-            <a href="https://www.studio.buriedsignals.com" className="typography-01" target="_blank" rel="noopener noreferrer">Studio</a>
-            <Link href="/supporters"><a className="typography-01">Supporters</a></Link>
-            <a href="https://buriedsignals.substack.com" className="typography-01" target="_blank" rel="noopener noreferrer">Subscribe</a>
+            <Link href="/"><a className="typography-01">Blog</a></Link>
+            <Link href="/portfolio"><a className="typography-01">Portfolio</a></Link>
+            <a href="https://www.studio.tomvaillant.com" className="typography-01" target="_blank" rel="noopener noreferrer">Studio</a>
+            <a href="https://www.youtube.com/@_tomvaillant" className="typography-01" target="_blank" rel="noopener noreferrer">Channel</a>
             <Link href="/about"><a className="typography-01">About</a></Link>
           </div>
         </div>

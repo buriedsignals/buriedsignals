@@ -2,8 +2,6 @@
 import { InsightStyle } from "./index.style"
 // Scripts
 import { limitSizeText } from "@/scripts/utils"
-// Buttons
-import BookmarkButton from "@/components/buttons/Bookmark"
 
 export default function Insight({ post, ...props }) {
   return (
@@ -24,9 +22,6 @@ export default function Insight({ post, ...props }) {
           <div className="informations-container">
             <h1 className="title typography-06">{ limitSizeText(post.title, 40) }</h1>
             <p className="description typography-24">{ limitSizeText(post.description, 237) }</p>
-          </div>
-          <div className="actions-container">
-            <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="insights" />
           </div>
         </div>
       </div>

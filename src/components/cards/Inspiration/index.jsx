@@ -1,20 +1,14 @@
 // Styles
 import { SpotlightStyle } from "./index.style"
 // Scripts
-import { getUserCookies, limitSizeText } from "@/scripts/utils"
+import { limitSizeText } from "@/scripts/utils"
 // Next
 import Link from "next/link"
-// Buttons
-import LikeButton from "@/components/buttons/Like"
-import BookmarkButton from "@/components/buttons/Bookmark"
-import CommentButton from "@/components/buttons/Comment"
 // Nodes
 import { down } from "styled-breakpoints"
 import { useBreakpoint } from 'styled-breakpoints/react-styled';
 
 export default function Spotlight({ post, ...props }) {
-  // Cookies
-  const user = getUserCookies()
   return (
     <Link href={ `/spotlights/${ post.slug }` } passHref>
       <SpotlightStyle { ...props } target="_blank">
@@ -37,12 +31,6 @@ export default function Spotlight({ post, ...props }) {
             <div className="informations-container">
               <h2 className="title typography-06">{ limitSizeText(post.title, useBreakpoint(down('md')) ? 50 : 100) }</h2>
               <p className="description typography-07">{ limitSizeText(post.description, useBreakpoint(down('md')) ? 110 : 180) }</p>
-            </div>
-            <div className="actions-container">
-              {
-                user.connected && <LikeButton likes={ post.likes } liked={ post.liked } postId={ post.id } type="spotlights" />
-              }
-              <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="spotlights" />
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@ export default function Error404({ ...props }) {
   return (
     <>
       <HeadSEOModule meta={ {
-        title: "Buried signals - 404"
+        title: "Tom Vaillant - 404"
       } } />
       <Error404Template />
     </>

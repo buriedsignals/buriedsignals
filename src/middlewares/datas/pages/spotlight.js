@@ -8,15 +8,6 @@ export const QUERY_PAGE_SPOTLIGHT = gql`
         attributes {
           Title
           Slug
-          Dynamic_content {
-            ... on ComponentMetricsMetrics {
-              Title_effectiveness
-              Description_effectiveness_information
-              Description_effectiveness_vote
-              Title_virality
-              Description_virality_information
-            }
-          }
         }
       }
     }

@@ -170,11 +170,3 @@ export const CREATE_POST_INSIGHT = gql`
     }
   }
 `
-
-export const UPDATE_POST_INSIGHTS_LIKES = gql`
-  mutation UpdatePostInsightsLikes($slug: String, $likes: Int) {
-    entry(collection: "insights", slug: $slug, data: { likes: $likes }) {
-      likes
-    }
-  }
-`

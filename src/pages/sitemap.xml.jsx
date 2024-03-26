@@ -14,43 +14,37 @@ export async function getServerSideProps({ res }) {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <url>
-        <loc>https://buriedsignals.com</loc>
+        <loc>https://tomvaillant.com</loc>
       </url>
       <url>
-        <loc>https://buriedsignals.com/insights</loc>
+        <loc>https://tomvaillant.com/insights</loc>
       </url>
       <url>
-        <loc>https://buriedsignals.com/resources</loc>
+        <loc>https://tomvaillant.com/resources</loc>
       </url>
       <url>
-        <loc>https://buriedsignals.com/supporters</loc>
+        <loc>https://tomvaillant.com/portfolio</loc>
       </url>
       <url>
-        <loc>https://buriedsignals.com/about</loc>
+        <loc>https://tomvaillant.com/about</loc>
       </url>
       <url>
-        <loc>https://buriedsignals.com/profiles/signin</loc>
+        <loc>https://tomvaillant.com/privacy</loc>
       </url>
       <url>
-        <loc>https://buriedsignals.com/profiles/signup</loc>
+        <loc>https://tomvaillant.com/notice</loc>
       </url>
       <url>
-        <loc>https://buriedsignals.com/privacy</loc>
+        <loc>https://tomvaillant.com/terms</loc>
       </url>
       <url>
-        <loc>https://buriedsignals.com/notice</loc>
-      </url>
-      <url>
-        <loc>https://buriedsignals.com/terms</loc>
-      </url>
-      <url>
-        <loc>https://buriedsignals.com/404</loc>
+        <loc>https://tomvaillant.com/404</loc>
       </url>
       ${slugsSpotlights.map(
         (slug) => {
           return `
               <url>
-                <loc>https://buriedsignals.com/spotlights/${slug}</loc>
+                <loc>https://tomvaillant.com/spotlights/${slug}</loc>
               </url>
             `
           }).join('')
@@ -59,7 +53,7 @@ export async function getServerSideProps({ res }) {
         (slug) => {
           return `
               <url>
-                <loc>https://buriedsignals.com/insights/${slug}</loc>
+                <loc>https://tomvaillant.com/insights/${slug}</loc>
               </url>
             `
           }).join('')

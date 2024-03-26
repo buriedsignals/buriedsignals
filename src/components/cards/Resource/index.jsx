@@ -2,8 +2,6 @@
 import { ResourceStyle } from "./index.style"
 // Scripts
 import { limitSizeText } from "@/scripts/utils"
-// Buttons
-import BookmarkButton from "@/components/buttons/Bookmark"
 // Icon
 import ExternalLinkIcon from "@/components/icons/ExternalLink"
 
@@ -23,7 +21,6 @@ export default function Resource({ post, ...props }) {
                 }) }
               </div>
             </div>
-            <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="resources"  />
           </div>
           <div className="informations-container">
             <h2 className="title typography-06">{ limitSizeText(post.title, 40) }</h2>

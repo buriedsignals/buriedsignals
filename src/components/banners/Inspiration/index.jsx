@@ -1,11 +1,7 @@
 // Styles
 import { SpotlightStyle } from "./index.style"
 // Scripts
-import { getUserCookies, limitSizeText } from "@/scripts/utils"
-// Buttons
-import LikeButton from "@/components/buttons/Like"
-import BookmarkButton from "@/components/buttons/Bookmark"
-import CommentButton from "@/components/buttons/Comment"
+import { limitSizeText } from "@/scripts/utils"
 // Links
 import SecondaryLink from "@/components/links/Secondary"
 import ThirstyLink from "@/components/links/Thirsty"
@@ -13,8 +9,6 @@ import ThirstyLink from "@/components/links/Thirsty"
 import ExternalLinkIcon from "@/components/icons/ExternalLink"
 
 export default function Spotlight({ post, ...props }) {
-  // Cookies
-  const user = getUserCookies()
   return (
     <SpotlightStyle { ...props }>
       <div className="spotlight-container">
@@ -39,21 +33,11 @@ export default function Spotlight({ post, ...props }) {
           </div>
           <div className="actions">
             <div className="actions-container">
-
-              {
-                user.connected && <LikeButton likes={ post.likes } liked={ post.liked } postId={ post.id } type="spotlights" />
-              }
-              <BookmarkButton bookmarked={ post.bookmarked } postId={ post.id } type="spotlights"  />
               <SecondaryLink href={ post.source.url }>
                 <p className="typography-03">Check it out</p>
                 <ExternalLinkIcon />
               </SecondaryLink>
             </div>
-            { post.archive.slug && 
-              <ThirstyLink href={ `/archives/${ post.archive.slug }` } size="small">
-                Archive
-              </ThirstyLink> 
-            }
           </div>
         </div>
       </div>

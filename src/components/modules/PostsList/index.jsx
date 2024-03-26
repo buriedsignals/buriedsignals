@@ -12,9 +12,7 @@ import NewsletterModule from "../Newsletter"
 import SpotlightCard from "@/components/cards/Inspiration"
 import InsightCard from "@/components/cards/Insight"
 import ResourceCard from "@/components/cards/Resource"
-import SupporterCard from "@/components/cards/Supporter"
-import DirectoryCard from "@/components/cards/Experts"
-import InvestigationCard from "@/components/cards/Investigation"
+import ProjectCard from "@/components/cards/Project"
 // Buttons
 import ThirstyButton from "@/components/buttons/Thirsty"
 
@@ -78,16 +76,12 @@ export default function PostsList({ type, posts, categories, awards = [], geogra
                       return <InsightCard post={ post } />
                     case 'resource':
                       return <ResourceCard post={ post } />
-                    case 'supporter':
-                      return <SupporterCard post={ post } />
-                    case 'directory':
-                      return <DirectoryCard post={ post } />
-                    case 'investigation':
-                      return <InvestigationCard post={ post } />
+                    case 'project':
+                      return <ProjectCard post={ post } />
                   }
                 })()}
               </li>
-              { index % max == maxPostsBeforeNewsletter - 1 && (type === 'spotlight' || type === 'investigation') && <li key={ `newsletter-${ section }` } className={ `${ (index < max * section) ? 'is-show' : 'is-hide' } newsletter-container` }><NewsletterModule /></li> }
+              { index % max == maxPostsBeforeNewsletter - 1 && (type === 'spotlight' || type === 'project') && <li key={ `newsletter-${ section }` } className={ `${ (index < max * section) ? 'is-show' : 'is-hide' } newsletter-container` }><NewsletterModule /></li> }
               </>
           }) : <li key="post-0" className="container-module-large item-container">
             <p className="no-result typography-06">No results...</p>

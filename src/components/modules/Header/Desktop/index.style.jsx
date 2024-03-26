@@ -92,12 +92,6 @@ export const HeaderDesktopStyle = styled.header`
             //   display: none;
             // }
           }
-          &:first-child {
-            margin-right: 96px;
-            ${down('xl')} {
-              margin-right: 32px;
-            }
-          }
           a, button {
             svg {
               path {
@@ -121,6 +115,24 @@ export const HeaderDesktopStyle = styled.header`
                     transition: all 0.25s ease-out;
                   }
                 }
+              }
+            }
+          }
+        }
+        .socials {
+          display: flex;
+          gap: 16px;
+          svg {
+            width: 18px;
+            height: 18px;
+            path {
+              fill: var(--color-white);
+              transition: fill 0.25s ease-in;
+            }
+            &:hover {
+              path {
+                fill: var(--color-green);
+                transition: fill 0.25s ease-out;
               }
             }
           }

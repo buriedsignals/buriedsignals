@@ -1,25 +1,7 @@
 // Nodes
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 
-export let USER = {
-  connected: false,
-  id: null,
-  slug: null,
-  bookmarked: {
-    insights: [],
-    spotlights: [],
-    resources: []
-  },
-  description: null,
-  email: null,
-  liked: {
-    spotlights: []
-  },
-  name: null,
-  slug: null,
-  twitter_account: null
-}
-export const STRAPI_ENDPOINT = "https://api.buriedsignals.com" // "http://127.0.0.1:1337" //  
+export const STRAPI_ENDPOINT = "https://api.buriedsignals.com" // "http://127.0.0.1:1337" // 
 const STRAPI_GRAPHQL_ENDPOINT = "/graphql-g6dw7nypzj"
 let client = null
 

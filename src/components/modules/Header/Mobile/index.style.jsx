@@ -219,10 +219,23 @@ export const HeaderMobileStyle = styled.header`
                 }
               }
             }
-            &.socials-container {
-              display: inline-flex;
-              align-items: center;
-              gap: 26px;
+          }
+        }
+        .socials {
+          display: flex;
+          gap: 16px;
+          svg {
+            width: 18px;
+            height: 18px;
+            path {
+              fill: var(--color-white);
+              transition: fill 0.25s ease-in;
+            }
+            &:hover {
+              path {
+                fill: var(--color-green);
+                transition: fill 0.25s ease-out;
+              }
             }
           }
         }

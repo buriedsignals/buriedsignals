@@ -20,8 +20,8 @@ export default function HeadSEO({ meta, ...props }) {
         { meta.title && <meta key='tw-title' name='twitter:title' content={ meta.title } /> }
         { meta.description && <meta key='tw-description' name='twitter:description' content={ meta.description } /> }
         { meta.image && <meta key='tw-image' name='twitter:image:src' content={ meta.image.url } /> }
-        <meta key='og-url' property='og:url' content={ "https://buriedsignals.com" + router.asPath } />
-        <link rel="canonical" href={ "https://buriedsignals.com" + (router.pathname.replace(/\[[^\]]+\]/g, "") + (router.query.slug ? router.query.slug : "" )) } />
+        <meta key='og-url' property='og:url' content={ "https://tomvaillant.com" + router.asPath } />
+        <link rel="canonical" href={ "https://tomvaillant.com" + (router.pathname.replace(/\[[^\]]+\]/g, "") + (router.query.slug ? router.query.slug : "" )) } />
       </Head>
     </>
   )

@@ -59,24 +59,6 @@ export const PostsListStyle = styled.div`
         }
       }
     }
-    &.type-supporter {
-      display: flex;
-      flex-wrap: wrap;
-      column-gap: 77px;
-      justify-content: flex-start;
-      ${down('md')} {
-        padding-left: 40px;
-        padding-right: 40px;
-      }
-      ${down('list')} {
-        justify-content: center;
-      }
-      .item-container {
-        &:not(:last-child) {
-          margin-bottom: 20px;
-        }
-      }
-    }
     &.type-directory {
       display: flex;
       flex-wrap: wrap;
@@ -100,7 +82,7 @@ export const PostsListStyle = styled.div`
         display: none;
       }
     }
-    &.type-investigation {
+    &.type-project {
       ${down('md')} {
         display: flex;
         flex-wrap: wrap;

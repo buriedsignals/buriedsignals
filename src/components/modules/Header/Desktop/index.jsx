@@ -1,37 +1,28 @@
 // Styles
 import { HeaderDesktopStyle } from "./index.style"
-// Scripts
-import { getUserCookies } from "@/scripts/utils"
 // React
-import { useEffect, useState } from "react"
+import { useState } from "react"
 // Next
 import Link from "next/link"
 import { useRouter } from "next/router"
 // Nodes
 import { down } from "styled-breakpoints"
 import { useBreakpoint } from 'styled-breakpoints/react-styled';
-// Modules
-import DropdownModule from "@/components/modals/Dropdown"
 // Links
 import PrimaryLink from "@/components/links/Primary"
-import SponsorButton from "@/components/links/Sponsor"
-// import ProfileLink from "@/components/links/Profile"
+import SupportButton from "@/components/links/Support"
 // Icons
 import LogoIcon from "@/components/icons/Logo"
+import InstagramIcon from "@/components/icons/Instagram"
 import TwitterIcon from "@/components/icons/Twitter"
-import SlackIcon from "@/components/icons/Slack"
-import WebrecorderIcon from "@/components/icons/Webrecorder"
-import SponsorIcon from "@/components/icons/Sponsor"
+import LinkedinIcon from "@/components/icons/Linkedin"
+import YoutubeIcon from "@/components/icons/Youtube"
+import SupportIcon from "@/components/icons/Support"
 
 export default function HeaderDesktop() {
   // Router
   const router = useRouter()
-  // Cookies
-  const [user, setUser] = useState({ connected: false, slug: '' })
   const [dropdown, setDropdown] = useState(false)
-  useEffect(() => {
-    setUser(getUserCookies())
-  }, [])
   return (
     <HeaderDesktopStyle  onMouseLeave={ () => setDropdown(false) }>
       <div className="header-desktop-container">
@@ -45,32 +36,25 @@ export default function HeaderDesktop() {
             <li className="page">
               <Link href="/">
                 <a className={ `${ router.pathname == "/" || router.pathname == "/insights" || router.pathname == "/resources" ? "is-active" : "" } ${ dropdown ? "is-hover" : "" }` }  onMouseEnter={ () => setDropdown(true) }>
-                  <p className="typography-01">Magazine</p>
+                  <p className="typography-01">Blog</p>
                 </a>
               </Link>
             </li>
             <li className="page">
-              <Link href="/investigations">
-                <a className={ router.pathname == "/investigations" ? "is-active" : "" } onMouseEnter={ () => setDropdown(false) }>
-                  <p className="typography-01">Investigations</p>
+              <Link href="/portfolio">
+                <a className={ router.pathname == "/portfolio" ? "is-active" : "" } onMouseEnter={ () => setDropdown(false) }>
+                  <p className="typography-01">Portfolio</p>
                 </a>
               </Link>
             </li>
             <li className="page">
-              <a href="https://www.studio.buriedsignals.com" target="_blank" rel="noopener noreferrer" onMouseEnter={ () => setDropdown(false) }>
+              <a href="https://www.studio.tomvaillant.com" target="_blank" rel="noopener noreferrer" onMouseEnter={ () => setDropdown(false) }>
                 <p className="typography-01">Studio</p>
               </a>
             </li>
             <li className="page">
-              <Link href="/supporters">
-                <a className={ router.pathname == "/supporters" ? "is-active" : "" } onMouseEnter={ () => setDropdown(false) }>
-                  <p className="typography-01">Supporters</p>
-                </a>
-              </Link>
-            </li>
-            <li className="page">
-              <a href="https://buriedsignals.substack.com" target="_blank" rel="noopener noreferrer" onMouseEnter={ () => setDropdown(false) }>
-                <p className="typography-01">Newsletter</p>
+              <a href="https://www.youtube.com/@_tomvaillant" target="_blank" rel="noopener noreferrer" onMouseEnter={ () => setDropdown(false) }>
+                <p className="typography-01">Channel</p>
               </a>
             </li>
             <li className="page">
@@ -84,33 +68,20 @@ export default function HeaderDesktop() {
         </div>
         <div className="right-container">
           <ul className="actions">
+            <div className="action socials">            
+              <a href="https://twitter.com/_tomvaillant" className="network" target="_blank" rel="noopener noreferrer"><TwitterIcon /></a>
+              <a href="https://www.youtube.com/@_tomvaillant" className="network" target="_blank" rel="noopener noreferrer"><YoutubeIcon /></a>
+              <a href="https://www.instagram.com/_tomvaillant" className="network" target="_blank" rel="noopener noreferrer"><InstagramIcon /></a>
+              <a href="https://www.linkedin.com/in/tomvaillant" className="network" target="_blank" rel="noopener noreferrer"><LinkedinIcon /></a>
+            </div>
             <li className="action" onMouseEnter={ () => setDropdown(false) }>
-              <SponsorButton href="https://informationplusconference.com/" title="Sponsor" text="Information+ Conference" icon={ () => <SponsorIcon /> } />
+              <SupportButton href="https://informationplusconference.com/" title="Support" text="Buy me a coffee" icon={ () => <SupportIcon /> } />
             </li>
-            { user.connected ?
-                <li className="action">
-                  <Link href={ `/profiles/${ user.connected ? user.slug : 'signin' }` }>
-                    <a onMouseEnter={ () => setDropdown(false) }>
-                      <p className="typography-01">Profile</p>
-                    </a>
-                  </Link>
-                </li>
-              :
-              <>
-                <li className="action">
-                  <Link href="/profiles/signin">
-                    <a onMouseEnter={ () => setDropdown(false) }>
-                      <p className="typography-01">Sign In</p>
-                    </a>
-                  </Link>
-                </li>
-              </>
-            }
-            <li className="action" onMouseEnter={ () => setDropdown(false) }>
+            {/* <li className="action" onMouseEnter={ () => setDropdown(false) }>
               <PrimaryLink href="https://t1ipnnn9dzv.typeform.com/to/YrFFaQjA" intern={ false }>
                 <p className="typography-03">{ useBreakpoint(down('xl')) ? "Submit" : "Submit a project" }</p>
               </PrimaryLink>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

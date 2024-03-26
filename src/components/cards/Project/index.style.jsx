@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const InsightStyle = styled.div`
+export const ProjectStyle = styled.a`
   display: block;
   background-color: var(--color-black03);
   ${down('md')} {
-    width: 100%;
+    width: 343px;
   }
-  .insight-container {
+  .project-container {
     display: flex;
     height: 302px;
     ${down('md')} {
@@ -36,7 +36,10 @@ export const InsightStyle = styled.div`
         transform: translate3D(-50%, -50%, 0);
       }
     }
-    .content-container {
+    .content-container {    
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       padding: 32px 48px;
       ${down('md')} {
         padding: 41px 23px;
@@ -55,16 +58,6 @@ export const InsightStyle = styled.div`
           margin-right: 22.5px;
           white-space: nowrap;
         }
-        .categories-container {
-          display: flex;
-          align-items: center;
-          opacity: 0.5;
-          .category {
-            &:not(:first-child) {
-              margin-left: 22.5px;
-            }
-          }
-        }
       }
       .informations-container {
         height: 124px;
@@ -72,9 +65,17 @@ export const InsightStyle = styled.div`
         .title {
           margin-bottom: 12.5px;
           color: var(--color-white);
+          // ${down('md')} {
+            font-size: 18px;
+            line-height: 24px;
+          // }
         }
         .description {
           color: var(--color-grey03);
+          // ${down('md')} {    
+            font-size: 14px;
+            line-height: 18px;
+          // }
         }
       }
     }

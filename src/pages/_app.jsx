@@ -15,11 +15,11 @@ import useStore from '@/hooks/useStore'
 import Layout from '@/components/layouts';
 
 // Metas
-const title = 'Buried Signals'
-const url = 'https://buriedsignals.com/'
+const title = 'Tom Vaillant'
+const url = 'https://tomvaillant.com/'
 const description = "Discover the world's best visual narratives. Inspiration, insights and resources for interactive storytelling."
 const keywords = 'dataviz, information, design, visualisation, narrative, interactive, visual, journalism, awards, resources, insights, courses, community, data'
-const author = 'Buried Signals'
+const author = 'Tom Vaillant'
 const image = url + 'images/img-meta.png'
 
 function App({ Component, pageProps }) {
@@ -31,7 +31,7 @@ function App({ Component, pageProps }) {
     xl: "1440px",
     list: "1078px",
     talents: "650px",
-    header: "1330px",
+    header: "1020px", //"1330px",
   });
   // Hooks
   const [scroll] = useStore((state) => [state.scroll])
@@ -77,10 +77,10 @@ function App({ Component, pageProps }) {
         <meta name='viewport' content='width=device-width, minimum-scale=1, initial-scale=1.0, user-scalable=no' />
         <link rel='shortcut icon' href='/icons/favicon.ico' />
         <meta name='twitter:card' content='summary_large_image' />
-        <meta name='twitter:site' content='@buriedsignals' />
+        <meta name='twitter:site' content='@_tomvaillant' />
         <meta key='tw-title' name='twitter:title' content={ title } />
         <meta key='tw-description' name='twitter:description' content={ description } />
-        <meta name='twitter:creator' content='@buriedsignals' />
+        <meta name='twitter:creator' content='@_tomvaillant' />
         <meta key='tw-image' name='twitter:image:src' content={ image } />
       </Head>
       <ThemeProvider theme={ breakpoints }>

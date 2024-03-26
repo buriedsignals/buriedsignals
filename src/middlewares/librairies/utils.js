@@ -1,9 +1,6 @@
-import { getUserCookies } from "@/scripts/utils";
 import axios from "axios";
 import FormData from "form-data";
-import { USER, STRAPI_ENDPOINT } from "./apollo-client";
-import { forEach } from "lodash";
-import { getCategoriesSpotlights } from "./posts/spotlights";
+import { STRAPI_ENDPOINT } from "./apollo-client";
 
 export const maxPostsBySectionByPage = 6
 export const maxPostsByPage = 25
@@ -16,7 +13,7 @@ export function parsePageSimple(datas) {
     slug: datas.Slug ? datas.Slug : null,
     description: datas.Description ? datas.Description : "",
     meta: {
-      title: datas.Meta_title ? datas.Meta_title : datas.Title ? `Buried Signals - ${ datas.Title }` : "",
+      title: datas.Meta_title ? datas.Meta_title : datas.Title ? `Tom Vaillant - ${ datas.Title }` : "",
       description: datas.Meta_description ? datas.Meta_description : datas.Description ? datas.Description : "",
       keywords: datas.Meta_keywords ? datas.Meta_keywords : "",
       image: datas.Meta_image ? datas.Meta_image.data ? getImage(datas.Meta_image) : null : null
@@ -31,7 +28,7 @@ export function parsePageFlexible(datas) {
     description: datas.Description ? datas.Description : "",
     flexible_content: getDynamicContent(datas.Dynamic_content),
     meta: {
-      title: datas.Meta_title ? datas.Meta_title : datas.Title ? `Buried Signals - ${ datas.Title }` : "",
+      title: datas.Meta_title ? datas.Meta_title : datas.Title ? `Tom Vaillant - ${ datas.Title }` : "",
       description: datas.Meta_description ? datas.Meta_description : datas.Description ? datas.Description : "",
       keywords: datas.Meta_keywords ? datas.Meta_keywords : "",
       image: datas.Meta_image ? datas.Meta_image.data ? getImage(datas.Meta_image) : null : null
@@ -49,13 +46,10 @@ export function parsePostsSpotlights(datas) {
 export function parsePostSpotlight(data) {
   return {
     awards: data.Award.data ? data.Award.data.attributes.Title : "",
-    bookmarked: USER.bookmarked.spotlights ? USER.bookmarked.spotlights.filter(spotlight => spotlight.slug === data.Slug).length > 0 : false, // Get by user
     categories: data.Categories ? data.Categories.data.map(category => category.attributes.Title) : [],
     description: data.Description ? data.Description : "",
     image: getImage(data.Image),
     geography: data.Geography && data.Geography.data ? data.Geography.data.attributes.Title : "",
-    likes: data.Likes ? data.Likes : 0,
-    liked: USER.liked.spotlights ? USER.liked.spotlights.filter(spotlight => spotlight === data.Slug).length > 0 : false, // Get by user
     slug: data.Slug ? data.Slug : null,
     source: {
       author: data.Source_author ? data.Source_author : "",
@@ -68,92 +62,11 @@ export function parsePostSpotlight(data) {
     }: null,
     title: data.Title ? data.Title : "",
     meta: {
-      title: data.Meta_title ? data.Meta_title : data.Title ? `Buried Signals - ${ data.Title }` : "",
+      title: data.Meta_title ? data.Meta_title : data.Title ? `Tom Vaillant - ${ data.Title }` : "",
       description: data.Meta_description ? data.Meta_description : data.Description ? data.Description : "",
       keywords: data.Meta_keywords ? data.Meta_keywords : "",
       image: data.Meta_image ? data.Meta_image.data ? getImage(data.Meta_image) : getImage(data.Image) : getImage(data.Image)
-    },
-    metrics: {
-      effectiveness: {
-        value: data.Metrics_effectiveness_value ? data.Metrics_effectiveness_value : "--",
-        votes: data.Metrics_effectiveness_votes ? data.Metrics_effectiveness_votes.split(',') : [],
-      },
-      virality: {
-        value: data.Metrics_virality_value ? data.Metrics_virality_value : "--",
-        backlinks: data.Metrics_virality_backlinks ? data.Metrics_virality_backlinks : null,
-      }
-    },
-    virality_backlinks: data.Metrics_virality_backlinks ? data.Metrics_virality_backlinks : null,
-    archive: {
-      slug: data.Archive ? data.Archive.data ? data.Archive.data.attributes.Slug ? data.Archive.data.attributes.Slug : null : null : null
     }
-  }
-}
-
-export function parseComments(datas) {
-  let comments = datas.map(data => {
-    return parseComment(data)
-  });
-  let commentsThread = comments.filter(comment => comment.threadOf && !comment.blocked)
-  comments = comments.filter(comment => !comment.threadOf && !comment.blocked)
-  comments.forEach(comment => {
-    commentsThread.map(commentThread => {
-      if (comment.id == commentThread.threadOf) {
-        if (!comment.comments) {
-          comment.comments = []
-        }
-        comment.comments.push(commentThread)
-      }
-    })
-  })
-  let comments_length = 0
-  comments.forEach(comment => {
-    if (comment.comments) {
-      comments_length += 1 + comment.comments.length
-    } else {
-      comments_length += 1
-    }
-  })
-  return { comments, comments_length }
-}
-
-export function parseComment(data) {
-  return {
-    id: data.id,
-    content: data.content,
-    published_at: data.createdAt,
-    threadOf: data.threadOf ? data.threadOf.id : null,
-    blocked: data.blocked,
-    author: {
-      id: data.author.id,
-      name: data.author.username
-    }
-  }
-}
-
-export function parseArchivesSpotlights(datas) {
-  let posts = datas.map(data => {
-    return { id: data.id, ...parseArchiveSpotlight(data.attributes) }
-  })
-  return {
-    posts: posts
-  }
-}
-
-export function parseArchiveSpotlight(data) {
-  return {
-    slug: data.Slug ? data.Slug : null,
-    title: data.Title ? data.Title : "",
-    source: {
-      file: data.File_wacz ? data.File_wacz.data ? STRAPI_ENDPOINT + data.File_wacz.data.attributes.url : null : null,
-      link: data.Spotlight ? data.Spotlight.data ? data.Spotlight.data.attributes.Source_link : null : null,
-    },
-    meta: {
-      title: data.Title ? `Buried Signals - Archive : ${ data.Title }` : "",
-      description: data.Spotlight ? data.Spotlight.data ? data.Spotlight.data.attributes.Meta_description ? data.Spotlight.data.attributes.Meta_description : data.Spotlight.data.attributes.Description ? data.Spotlight.data.attributes.Description : "" : "" : "",
-      keywords: data.Spotlight ? data.Spotlight.data ? data.Spotlight.data.attributes.Meta_keywords ? data.Spotlight.data.attributes.Meta_keywords : "" : "" : "",
-      image: data.Spotlight ? data.Spotlight.data ? data.Spotlight.data.attributes.Meta_image ? data.Spotlight.data.attributes.Meta_image.data ? getImage(data.Spotlight.data.attributes.Meta_image) : getImage(data.Spotlight.data.attributes.Image) : getImage(data.Spotlight.data.attributes.Image) : getImage(data.Spotlight.data.attributes.Image) : getImage(data.Spotlight.data.attributes.Image)
-    },
   }
 }
 
@@ -182,7 +95,6 @@ export function parsePostsInsights(datas) {
 
 export function parsePostInsight(data) {
   return {
-    bookmarked: USER.bookmarked.insights ? USER.bookmarked.insights.filter(insight => insight.slug === data.Slug).length > 0 : false, // Get by user
     categories: data.Categories ? data.Categories.data.map(category => category.attributes.Title) : [],
     flexible_content: getDynamicContent(data.Dynamic_content),
     description: data.Description ? data.Description : "",
@@ -196,7 +108,7 @@ export function parsePostInsight(data) {
     },
     title: data.Title ? data.Title : "",
     meta: {
-      title: data.Meta_title ? data.Meta_title : data.Title ? `Buried Signals - ${ data.Title }` : "",
+      title: data.Meta_title ? data.Meta_title : data.Title ? `Tom Vaillant - ${ data.Title }` : "",
       description: data.Meta_description ? data.Meta_description : data.Description ? data.Description : "",
       keywords: data.Meta_keywords ? data.Meta_keywords : "",
       image: data.Meta_image ? data.Meta_image.data ? getImage(data.Meta_image) : getImage(data.Image) : getImage(data.Image)
@@ -257,143 +169,15 @@ export function parseCategoryResources(data) {
   }
 }
 
-export function parseUsersSupporter(datas, query) {
-  let users = datas.map(data => {
-    return parseUserMember(data.attributes)
-  })
-  users = pagination(query.page ? query.page : 1, maxPostsBySectionByPage, users, users.length, maxPostsByPage)
-  return { 
-    users: users.posts,
-    meta: users.meta,
-  }
-}
-
-export function parseUserSupporter(data) {
-  return {    
-    description: data.Description,
-    image: getImage(data.Image),
-    name: data.username,
-    portfolio: data.Portfolio_link ? data.Portfolio_link : "",
-  }
-}
-
-// export function parseUsersExperts(datas) {
-//   let members = datas.map(data => {
-//     return parseUserMember(data.attributes)
-//   }).filter(member => member.show_in_directory)
-
-//   let currentIndex = members.length
-//   let randomIndex = null
-//   while (currentIndex > 0) {
-//     randomIndex = Math.floor(Math.random() * currentIndex)
-//     currentIndex--
-//     [members[currentIndex], members[randomIndex]] = [members[randomIndex], members[currentIndex]]
-//   }
-  
-//   // let spotlights = members.filter(member => member.type == "Premium")
-//   // const talents = [...members.filter(member => member.type == "Free"), ...members.filter(member => member.type == "Ghost")]
-//   // const posts = pagination(query.page ? query.page : 1, 6, spotlights, spotlights.length, 6)
-//   // return {
-//   //   spotlights: posts.posts,
-//   //   talents: talents,
-//   //   meta: posts.meta,
-//   // }
-//   return {
-//     spotlights: members
-//   }
-// }
-
-export function parseUsersExperts(datas, query) {
-  const members = datas.map(data => {
-    return parseUserMember(data.attributes)
-  }).filter(member => member.show_in_directory)
-  const posts = pagination(query.page ? query.page : 1, 12, members, members.length, 12)
-  return {
-    spotlights: members.sort((a, b) => 0.5 - Math.random()),
-    meta: posts.meta,
-  }
-}
-
-export function parseUserMember(data, categories = null) {
-  let expertises = data.Expertises ? data.Expertises.data.map(expertise => {
-    return expertise.attributes.Title
-  }) : null
-  if (categories) {
-    categories.map(category => {
-      category.checked = data.Expertises.data.some(expertise => {
-        return expertise.attributes.Title == category.title
-      })
-      return category
-    })
-    expertises = categories
-  }
-  return {
-    name: data.username ? data.username : "",
-    slug: data.Slug ? data.Slug : null,
-    email: data.email ? data.email : "",
-    show_in_membership: data.Show_in_membership ? data.Show_in_membership : false,
-    show_in_directory: data.Show_in_directory ? data.Show_in_directory : false,
-    description: data.Description ? data.Description : "",
-    image: data.Image.data ? getImage(data.Image) : { url:"/images/profile-default.jpg", alt: "Default profile picture" },
-    portfolio: data.Portfolio_link ? data.Portfolio_link : "",
-    behance_account: data.Behance_account ? data.Behance_account : "",
-    twitter_account: data.Twitter_account ? data.Twitter_account : "",
-    instagram_account: data.Instagram_account ? data.Instagram_account : "",
-    expertises: expertises,
-    bookmarked: {
-      spotlights: data.Bookmarked_spotlights ? data.Bookmarked_spotlights.data.map(spotlight => {
-        return { id: spotlight.id, ...parsePostSpotlight(spotlight.attributes) }
-      }) : null,
-      insights: data.Bookmarked_insights ? data.Bookmarked_insights.data.map(insight => {
-        return { id: insight.id, ...parsePostInsight(insight.attributes) }
-      }) : null,
-      resources: data.Bookmarked_resources ? data.Bookmarked_resources.data.map(resource => {
-        return { id: resource.id, ...parsePostResource(resource.attributes) }
-      }) : null,
-    },
-    liked: {
-      spotlights: data.Liked_spotlights ? data.Liked_spotlights.data.map(spotlights => {
-        return { id: spotlights.id }
-      }) : null,
-    },
-    voted: {
-      spotlights: data.Voted_effectiveness_spotlights ? data.Voted_effectiveness_spotlights.data.map(spotlights => {
-        return { id: spotlights.id }
-      }) : null,
-    },
-    meta: {
-      title: `Buried Signals - ${ data.username ? data.username : "Profile" }`
-    }
-  }
-}
-
-export function parseExpertisesMembers(datas) {
-  const expertises = datas.map(data => {
-    const expertise = parseExpertiseMembers(data.attributes)
-    expertise.id = data.id
-    return expertise
-  })
-  return expertises
-}
-
-export function parseExpertiseMembers(data) {
-  return {
-    title: data.Title ? data.Title : ""
-  }
-}
-
-
-
-export function parsePostsInvestigations(datas) {
+export function parsePostsProjects(datas) {
   let posts = datas.map(data => {
-    return { id: data.id, ...parsePostInvestigation(data.attributes) }
+    return { id: data.id, ...parsePostProject(data.attributes) }
   })
   return posts
 }
 
-export function parsePostInvestigation(data) {
+export function parsePostProject(data) {
   return {
-    bookmarked: USER.bookmarked.investigations ? USER.bookmarked.investigations.filter(investigation => investigation.slug === data.Slug).length > 0 : false, // Get by user
     description: data.Description ? data.Description : "",
     image: getImage(data.Image),
     slug: data.Slug ? data.Slug : null,
@@ -403,7 +187,7 @@ export function parsePostInvestigation(data) {
     },
     title: data.Title ? data.Title : "",
     meta: {
-      title: data.Meta_title ? data.Meta_title : data.Title ? `Buried Signals - ${ data.Title }` : "",
+      title: data.Meta_title ? data.Meta_title : data.Title ? `Tom Vaillant - ${ data.Title }` : "",
       description: data.Meta_description ? data.Meta_description : data.Description ? data.Description : "",
       keywords: data.Meta_keywords ? data.Meta_keywords : "",
       image: data.Meta_image ? data.Meta_image.data ? getImage(data.Meta_image) : getImage(data.Image) : getImage(data.Image)
@@ -449,34 +233,6 @@ export async function createFile(url, title) {
 
 // ---
 
-function getTaxonomiesPosts(datas, type) {
-  let taxonomies = [].concat(...datas.map(data => {
-    if (data.attributes[type]) {
-      if (Array.isArray(data.attributes[type].data)) {    
-        return data.attributes[type].data.map(type => { 
-          // return type.attributes.Title
-          return { 
-            title: type.attributes.Title,
-            slug: type.attributes.Slug
-          }
-        })
-      } else {
-        // return data.attributes[type].data ? data.attributes[type].data.attributes.Title : null
-        return data.attributes[type].data ? { 
-          title: data.attributes[type].data.attributes.Title,
-          slug: data.attributes[type].data.attributes.Slug
-        } : null
-      }
-    } else {
-      return null
-    }
-  }))
-  taxonomies = taxonomies.filter((taxonomy, index) => {
-    return taxonomies.map(e => e && e.slug).indexOf(taxonomy && taxonomy.slug) === index && taxonomy !== null
-  })
-  return taxonomies
-}
-
 function transformToSlug(text) {
   return text.toString() .normalize( 'NFD' ).replace( /[\u0300-\u036f]/g, '' ).toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-')
 }
@@ -506,32 +262,6 @@ function getDynamicContent(datas) {
           link: data.Link,
           type: "EmbedVideo"
         }
-      case "ComponentListIncludesListIncludes":
-        const items = []
-        data.Items.forEach(item => {
-          items.push({
-            text: item.Text,
-            soon: item.Soon
-          })
-        });
-        return {
-          title: data.Title,
-          items: items,
-        }
-      case "ComponentMetricsMetrics":
-        return {
-          effectiveness: {
-            title: data.Title_effectiveness,
-            type: "effectiveness",
-            description_information: data.Description_effectiveness_information,
-            description_vote: data.Description_effectiveness_vote
-          },
-          virality: {
-            title: data.Title_virality,
-            type: "virality",
-            description_information: data.Description_virality_information
-          }
-        }
     }
     switch (data.__component) {
       case "body.body":
@@ -548,32 +278,6 @@ function getDynamicContent(datas) {
         return {
           link: data.Link,
           type: "EmbedVideo"
-        }
-      case "list-includes.list-includes":
-        const items = []
-        data.Items.forEach(item => {
-          items.push({
-            text: item.Text,
-            soon: item.Soon
-          })
-        });
-        return {
-          title: data.Title,
-          items: items,
-        }
-      case "metrics.metrics":
-        return {
-          effectiveness: {
-            title: data.Title_effectiveness,
-            type: "effectiveness",
-            description_information: data.Description_effectiveness_information,
-            description_vote: data.Description_effectiveness_vote
-          },
-          virality: {
-            title: data.Title_virality,
-            type: "virality",
-            description_information: data.Description_virality_information
-          }
         }
     }
   })

@@ -1,7 +1,6 @@
 # Block all crawlers for /api
 User-agent: *
 Disallow: /api
-Disallow: /archives
 Disallow: /profiles
 
 # Allow all crawlers
@@ -10,4 +9,4 @@ Allow: /
 Allow: /profiles/signin$
 Allow: /profiles/signup$
 
-Sitemap: https://buriedsignals.com/sitemap.xml
+Sitemap: https://tomvaillant.com/sitemap.xml

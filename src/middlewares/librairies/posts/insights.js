@@ -92,13 +92,3 @@ export async function createPostInsight(slug, data) {
   return response
 }
 
-export async function updatePostInsightLikes(slug, likes) {
-  const apolloClient = getApolloClient()
-  const response = await apolloClient.query({
-    mutation: UPDATE_POST_INSIGHTS_LIKES,
-    variables: { slug, likes }
-  })
-  if (!response) return null
-  return response
-}
-

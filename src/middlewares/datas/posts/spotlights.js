@@ -32,10 +32,6 @@ export const QUERY_POSTS_SPOTLIGHTS_LITE = ({ categories, award, geography }) =>
               }
             }
           }
-          Metrics_effectiveness_votes
-          Metrics_effectiveness_value
-          Metrics_virality_backlinks
-          Metrics_virality_value
         }
       }
     }
@@ -89,11 +85,6 @@ export const QUERY_POSTS_SPOTLIGHTS = ({ categories, award, geography, page, pag
               }
             }
           }
-          Likes
-          Metrics_effectiveness_votes
-          Metrics_effectiveness_value
-          Metrics_virality_backlinks
-          Metrics_virality_value
         }
       }
     }
@@ -140,7 +131,6 @@ export const QUERY_POST_SPOTLIGHT = gql`
               }
             }
           }
-          Likes
           Submited_by_external
           Submited_by {
             data {
@@ -169,17 +159,6 @@ export const QUERY_POST_SPOTLIGHT = gql`
               }
             }
           }
-          Archive {
-            data {
-              attributes {
-                Slug
-              }
-            }
-          }
-          Metrics_effectiveness_votes
-          Metrics_effectiveness_value
-          Metrics_virality_backlinks
-          Metrics_virality_value
         }
       }
     }
@@ -226,7 +205,6 @@ export const QUERY_POSTS_SPOTLIGHTS_LATEST = gql`
               }
             }
           }
-          Likes
           Submited_by_external
           Submited_by {
             data {
@@ -290,7 +268,6 @@ export const QUERY_POSTS_SPOTLIGHTS_WEEK = gql`
               }
             }
           }
-          Likes
           Submited_by_external
           Submited_by {
             data {
@@ -354,7 +331,6 @@ export const QUERY_POSTS_SPOTLIGHTS_MONTH = gql`
               }
             }
           }
-          Likes
           Submited_by_external
           Submited_by {
             data {
@@ -388,155 +364,9 @@ export const CREATE_POST_SPOTLIGHT = gql`
   }
 `
 
-export const UPDATE_POST_SPOTLIGHT_LIKES = gql`
-  mutation MutationPostSpotlightLikes($id: ID!, $likes: Int) {
-    updateSpotlightsPost(id: $id, data: { Likes: $likes }) {
-      data {
-        id
-      }
-    }
-  }
-`
-
-export const UPDATE_POST_SPOTLIGHT_VOTES = gql`
-  mutation MutationPostSpotlightVotes($id: ID!, $votes: String) {
-    updateSpotlightsPost(id: $id, data: { Metrics_effectiveness_votes: $votes }) {
-      data {
-        id
-      }
-    }
-  }
-`
-
 export const UPDATE_POST_SPOTLIGHT_AWARDS = gql`
   mutation MutationPostSpotlightAwards($id: ID!, $awardId: ID) {
     updateSpotlightsPost(id: $id, data: { Award: $awardId }) {
-      data {
-        id
-      }
-    }
-  }
-`
-
-export const UPDATE_POST_SPOTLIGHT_METRICS_VALUE = gql`
-  mutation MutationPostSpotlightMetricsValue($id: ID!, $metricsEffectivenessValue: Float $metricsViralityValue: Float) {
-    updateSpotlightsPost(id: $id, data: { Metrics_effectiveness_value: $metricsEffectivenessValue, Metrics_virality_value: $metricsViralityValue }) {
-      data {
-        id
-      }
-    }
-  }
-`
-
-export const CREATE_SPOTLIGHT_COMMENT = gql`
-  mutation CreateCommentSpotlight($datas: CreateComment!) {
-    createComment(input: $datas) {
-      id
-    }
-  }
-`
-
-export const QUERY_SPOTLIGHT_COMMENTS = gql`
-  query QuerySpotlightsComments($relation: String!) {
-    findAllFlat(relation: $relation, sort: "createdAt:asc") {
-      data {
-        id
-        content
-        createdAt
-        blocked
-        threadOf {
-          id
-        }
-        author {
-          id
-          name
-        }
-      }
-    }
-  }
-`
-
-export const UPDATE_SPOTLIGHT_COMMENT = gql`
-mutation UpdateSpotlightComment($datas: UpdateComment!) {
-  updateComment(input: $datas) {
-    id
-  }
-}
-`
-
-export const DELETE_SPOTLIGHT_COMMENT = gql`
-mutation DeleteSpotlightComment($datas: RemoveComment!) {
-  removeComment(input: $datas) {
-    id
-    removed
-  }
-}
-`
-
-export const QUERY_POSTS_SPOTLIGHTS_ARCHIVES = gql`
-  query QueryPostsSpotlightsArchives {
-    spotlightsArchives(sort: "publishedAt:desc", pagination: { limit: 99999999 }) {
-      data {
-        id
-        attributes {
-          Slug
-        }
-      }
-    }
-  }
-`
-
-export const QUERY_POST_SPOTLIGHT_ARCHIVE = gql`
-  query QueryPostSpotlightArchive($slug: String) {
-    spotlightsArchives(filters: { Slug: { eq: $slug } }) {
-      data {
-        id
-        attributes {
-          Title
-          Slug
-          File_wacz {
-            data {
-              attributes {
-                url
-              }
-            }
-          }
-          Spotlight {
-            data {
-              attributes {
-                Image {
-                  data {
-                    attributes {
-                      alternativeText
-                      url
-                    }
-                  }
-                }
-                Description
-                Source_link
-                Meta_title
-                Meta_description
-                Meta_keywords
-                Meta_image {
-                  data {
-                    attributes {
-                      alternativeText
-                      url
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
-
-export const CREATE_POST_SPOTLIGHT_ARCHIVE = gql`
-  mutation CreatePostSpotlightsArchive($data: SpotlightsArchiveInput!) {
-    createSpotlightsArchive(data: $data) {
       data {
         id
       }

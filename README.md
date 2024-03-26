@@ -1,15 +1,15 @@
-# Buried Signals
-> Buried Signals's website
+# Tom Vaillant
+> Tom Vaillant's website
 
 ## URLs
 | Name              | URL | Informations |
 | ----------------- | --- | ------------ |
 | **Developement**  | [http://localhost:3000](http://localhost:3000) | `N/A` |
-| **Production**    | [https://buriedsignals.com](https://buriedsignals.com) | `N/A` |
+| **Production**    | [https://tomvaillant.com](https://tomvaillant.com) | `N/A` |
 
 #### Others :
-- 🔠 [API repository](https://github.com/buriedsignalsmag/buriedsignals-api-vps)
-- 📡 [Vercel deployment](https://vercel.com/buried-signals/buriedsignalsv2)
+- 🔠 [API repository](https://github.com/buriedsignalsmag/buriedsignals-api)
+- 📡 [Vercel deployment](https://vercel.com/buried-signals/tomvaillant)
 
 ## Setup
 * Install dependencies & launch the project:
@@ -40,4 +40,4 @@ For detailed explanation on how things work, checkout the [guide](https://nextjs
 | [`/src/scripts`](src/scripts/) | All the global scripts are located here. |
 | [`/src/styles`](src/styles/) | All the global styles are located here. |
 
-<font style="font-size: 12px; color: #c0c0c0;">Developed with :heart: by <a href="https://buriedsignals.com/" target="_blank" style="text-decoration: none; color: #111111;">Buried Signals</a></font>
+<font style="font-size: 12px; color: #c0c0c0;">Developed with :heart: by <a href="https://tomvaillant.com/" target="_blank" style="text-decoration: none; color: #111111;">Tom Vaillant</a></font>

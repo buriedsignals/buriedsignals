@@ -107,13 +107,6 @@ export const SpotlightStyle = styled.a`
           // }
         }
       }
-      .actions-container {
-        button {
-          &:not(:last-child) {
-            margin-right: 7.5px;
-          }
-        }
-      }
     }
   }
 `

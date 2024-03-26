@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { down } from "styled-breakpoints";
 
-export const SpotlightsTemplateStyle = styled.div`
+export const PortfolioTemplateStyle = styled.div`
   padding: 115px 0 85px;
   & > .title {
     width: auto;
@@ -28,6 +28,25 @@ export const SpotlightsTemplateStyle = styled.div`
     p {
       max-width: 640px;
       color: var(--color-grey03);
+    }
+    .socials {
+      display: flex;
+      gap: 16px;
+      padding-top: 40px;
+      svg {
+        width: 18px;
+        height: 18px;
+        path {
+          fill: var(--color-white);
+          transition: fill 0.25s ease-in;
+        }
+        &:hover {
+          path {
+            fill: var(--color-green);
+            transition: fill 0.25s ease-out;
+          }
+        }
+      }
     }
   }
 `
