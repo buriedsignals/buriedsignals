@@ -20,7 +20,7 @@ const url = 'https://tomvaillant.com/'
 const description = "Discover the world's best visual narratives. Inspiration, insights and resources for interactive storytelling."
 const keywords = 'dataviz, information, design, visualisation, narrative, interactive, visual, journalism, awards, resources, insights, courses, community, data'
 const author = 'Tom Vaillant'
-const image = url + 'images/img-meta.png'
+const image = url + 'images/img-meta.jpg'
 
 function App({ Component, pageProps }) {
   // Nodes
