@@ -75,7 +75,7 @@ export default function HeaderDesktop() {
               <a href="https://www.linkedin.com/in/tomvaillant" className="network" target="_blank" rel="noopener noreferrer"><LinkedinIcon /></a>
             </div>
             <li className="action" onMouseEnter={ () => setDropdown(false) }>
-              <SupportButton href="https://informationplusconference.com/" title="Support" text="Buy me a coffee" icon={ () => <SupportIcon /> } />
+              <SupportButton href="https://www.buymeacoffee.com/tomvaillant" title="Support" text="Buy me a coffee" icon={ () => <SupportIcon /> } />
             </li>
             {/* <li className="action" onMouseEnter={ () => setDropdown(false) }>
               <PrimaryLink href="https://t1ipnnn9dzv.typeform.com/to/YrFFaQjA" intern={ false }>

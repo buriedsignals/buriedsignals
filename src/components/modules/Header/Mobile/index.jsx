@@ -127,7 +127,7 @@ export default function HeaderMobile() {
                 <a href="https://www.instagram.com/_tomvaillant" className="network" target="_blank" rel="noopener noreferrer"><InstagramIcon /></a>
                 <a href="https://www.linkedin.com/in/tomvaillant" className="network" target="_blank" rel="noopener noreferrer"><LinkedinIcon /></a>
               </div>
-              <SupportButton href="https://informationplusconference.com/" title="Support" text="Buy me a coffee" icon={ () => <SupportIcon /> } />
+              <SupportButton href="https://www.buymeacoffee.com/tomvaillant" title="Support" text="Buy me a coffee" icon={ () => <SupportIcon /> } />
             </div>
           </div>
       }
