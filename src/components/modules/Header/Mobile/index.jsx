@@ -104,13 +104,8 @@ export default function HeaderMobile() {
                   </Link>
                 </li>
                 <li className="page">
-                  <a href="https://www.studio.tomvaillant.com">
+                  <a href="https://studio.tomvaillant.com">
                     <p className="typography-01">Studio</p>
-                  </a>
-                </li>
-                <li className="page">
-                  <a href="https://www.youtube.com/@_tomvaillant">
-                    <p className="typography-01">Channel</p>
                   </a>
                 </li>
                 <li className="page">
