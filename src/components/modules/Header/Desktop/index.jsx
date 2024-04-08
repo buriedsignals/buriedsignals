@@ -53,6 +53,11 @@ export default function HeaderDesktop() {
               </a>
             </li>
             <li className="page">
+              <a href="https://www.youtube.com/@_tomvaillant" target="_blank" rel="noopener noreferrer" onMouseEnter={ () => setDropdown(false) }>
+                <p className="typography-01">Channel</p>
+              </a>
+            </li>
+            <li className="page">
               <Link href="/about">
                 <a className={ router.pathname == "/about" ? "is-active" : "" } onMouseEnter={ () => setDropdown(false) }>
                   <p className="typography-01">About</p>

@@ -34,6 +34,7 @@ export default function Footer() {
             <Link href="/"><a className="typography-01">Blog</a></Link>
             <Link href="/portfolio"><a className="typography-01">Portfolio</a></Link>
             <a href="https://studio.tomvaillant.com" className="typography-01" target="_blank" rel="noopener noreferrer">Studio</a>
+            <a href="https://www.youtube.com/@_tomvaillant" className="typography-01" target="_blank" rel="noopener noreferrer">Channel</a>
             <Link href="/about"><a className="typography-01">About</a></Link>
           </div>
         </div>

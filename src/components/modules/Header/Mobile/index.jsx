@@ -109,6 +109,11 @@ export default function HeaderMobile() {
                   </a>
                 </li>
                 <li className="page">
+                  <a href="https://www.youtube.com/@_tomvaillant">
+                    <p className="typography-01">Channel</p>
+                  </a>
+                </li>
+                <li className="page">
                   <Link href="/about">
                     <a className={ router.pathname == "/about" ? "is-active" : "" }>
                       <p className="typography-01">About</p>
