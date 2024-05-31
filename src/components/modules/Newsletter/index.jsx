@@ -14,8 +14,8 @@ export default function Newsletter({ ...props }) {
         <div className="logo">
           <BuriedSignalsIcon />
         </div>
-        <p className="typography-09 details">Independent journalist helping you find signal in the noise with data-driven investigations.</p>
-        <ThirstyLink color="black02" colorHover="white" href="https://buriedsignals.substack.com/" target="_blank" rel="noopener noreferrer">{ "Subscribe" }</ThirstyLink>
+        <p className="typography-09 details">The monthly newsletter for journalists who want to tell stories visually. Interviews about the making of exceptional graphics and investigations.</p>
+        <ThirstyLink color="black02" colorHover="white" href="https://tomvaillant.substack.com/" target="_blank" rel="noopener noreferrer">{ "Subscribe" }</ThirstyLink>
       </div>
     </NewsletterStyle>
   )
