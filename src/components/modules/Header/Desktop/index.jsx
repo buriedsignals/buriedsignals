@@ -51,6 +51,11 @@ export default function HeaderDesktop() {
               </a>
             </li>
             <li className="page">
+              <a href="https://www.nuanced.ch" target="_blank" rel="noopener noreferrer" onMouseEnter={ () => setDropdown(false) }>
+                <p className="typography-01">Newsletter</p>
+              </a>
+            </li>
+            <li className="page">
               <Link href="/about">
                 <a className={ router.pathname == "/about" ? "is-active" : "" } onMouseEnter={ () => setDropdown(false) }>
                   <p className="typography-01">About</p>
