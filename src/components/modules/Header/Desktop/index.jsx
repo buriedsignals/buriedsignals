@@ -41,8 +41,18 @@ export default function HeaderDesktop() {
               </Link>
             </li>
             <li className="page">
+              <a href="https://www.youtube.com/@_tomvaillant" target="_blank" rel="noopener noreferrer" onMouseEnter={ () => setDropdown(false) }>
+                <p className="typography-01">Channel</p>
+              </a>
+            </li>
+            <li className="page">
               <a href="https://studio.tomvaillant.com" target="_blank" rel="noopener noreferrer" onMouseEnter={ () => setDropdown(false) }>
                 <p className="typography-01">Studio</p>
+              </a>
+            </li>
+            <li className="page">
+              <a href="https://www.nuanced.ch" target="_blank" rel="noopener noreferrer" onMouseEnter={ () => setDropdown(false) }>
+                <p className="typography-01">Newsletter</p>
               </a>
             </li>
             <li className="page">
@@ -62,14 +72,6 @@ export default function HeaderDesktop() {
               <a href="https://www.instagram.com/_tomvaillant" className="network" target="_blank" rel="noopener noreferrer"><InstagramIcon /></a>
               <a href="https://www.linkedin.com/in/tomvaillant" className="network" target="_blank" rel="noopener noreferrer"><LinkedinIcon /></a>
             </div>
-            <li className="action" onMouseEnter={ () => setDropdown(false) }>
-              <SupportButton href="https://www.buymeacoffee.com/tomvaillant" title="Support" text="Buy me a coffee" icon={ () => <SupportIcon /> } />
-            </li>
-            {/* <li className="action" onMouseEnter={ () => setDropdown(false) }>
-              <PrimaryLink href="https://t1ipnnn9dzv.typeform.com/to/YrFFaQjA" intern={ false }>
-                <p className="typography-03">{ useBreakpoint(down('xl')) ? "Submit" : "Submit a project" }</p>
-              </PrimaryLink>
-            </li> */}
           </ul>
         </div>
       </div>

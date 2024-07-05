@@ -97,8 +97,18 @@ export default function HeaderMobile() {
                   }
                 </li>
                 <li className="page">
+                  <a href="https://www.youtube.com/@_tomvaillant">
+                    <p className="typography-01">Channel</p>
+                  </a>
+                </li>
+                <li className="page">
                   <a href="https://studio.tomvaillant.com">
                     <p className="typography-01">Studio</p>
+                  </a>
+                </li>
+                <li className="page">
+                  <a href="https://www.nuanced.ch">
+                    <p className="typography-01">Newsletter</p>
                   </a>
                 </li>
                 <li className="page">
@@ -115,7 +125,6 @@ export default function HeaderMobile() {
                 <a href="https://www.instagram.com/_tomvaillant" className="network" target="_blank" rel="noopener noreferrer"><InstagramIcon /></a>
                 <a href="https://www.linkedin.com/in/tomvaillant" className="network" target="_blank" rel="noopener noreferrer"><LinkedinIcon /></a>
               </div>
-              <SupportButton href="https://www.buymeacoffee.com/tomvaillant" title="Support" text="Buy me a coffee" icon={ () => <SupportIcon /> } />
             </div>
           </div>
       }
