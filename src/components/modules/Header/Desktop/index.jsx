@@ -41,13 +41,6 @@ export default function HeaderDesktop() {
               </Link>
             </li>
             <li className="page">
-              <Link href="/portfolio">
-                <a className={ router.pathname == "/portfolio" ? "is-active" : "" } onMouseEnter={ () => setDropdown(false) }>
-                  <p className="typography-01">Portfolio</p>
-                </a>
-              </Link>
-            </li>
-            <li className="page">
               <a href="https://studio.tomvaillant.com" target="_blank" rel="noopener noreferrer" onMouseEnter={ () => setDropdown(false) }>
                 <p className="typography-01">Studio</p>
               </a>

@@ -23,9 +23,6 @@ export async function getServerSideProps({ res }) {
         <loc>https://tomvaillant.com/resources</loc>
       </url>
       <url>
-        <loc>https://tomvaillant.com/portfolio</loc>
-      </url>
-      <url>
         <loc>https://tomvaillant.com/about</loc>
       </url>
       <url>
