@@ -18,8 +18,7 @@ export default function Insights({ insights, ...props }) {
 }
 
 export async function getServerSideProps({ query }) {
-  const insights = await getPostsInsights(query)
-  const page = await getPageInsights()
+  const [insights, page] = await Promise.all([getPostsInsights(query), getPageInsights()])
   if (!insights || !page) {
     return {
       notFound: true,

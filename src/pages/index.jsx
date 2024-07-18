@@ -16,8 +16,7 @@ export default function Spotlights({ spotlights, ...props }) {
 }
 
 export async function getServerSideProps({ query }) {
-  const spotlights = await getPostsSpotlights(query)
-  const page = await getPageSpotlights()
+  const [spotlights, page] = await Promise.all([getPostsSpotlights(query), getPageSpotlights()])
   if (!spotlights || !page) {
     return {
       notFound: true,

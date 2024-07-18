@@ -31,8 +31,7 @@ export default function Resources({ resources, ...props }) {
 // }
 
 export async function getServerSideProps({ query }) {
-  const resources = await getPostsResources(query)
-  const page = await getPageResources()
+  const [resources, page] = await Promise.all([getPostsResources(query), getPageResources()])
   if (!resources || !page) {
     return {
       notFound: true,

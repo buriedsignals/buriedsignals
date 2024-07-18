@@ -16,7 +16,6 @@ export async function getPostsProjects(query) {
       pageSize: maxPageSize
     }
   }, { encodeValuesOnly: true });
-  console.log(`${ STRAPI_ENDPOINT }/api/projects-posts?${ params }`)
   const responseProjects = await axios.get(`${ STRAPI_ENDPOINT }/api/projects-posts?${ params }`)
   if (!responseProjects) return null
   const posts = parsePostsProjects(responseProjects.data.data)

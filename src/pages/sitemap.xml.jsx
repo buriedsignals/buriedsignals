@@ -2,13 +2,11 @@
 import { getPostsSpotlightsLite } from '@/middlewares/librairies/posts/spotlights';
 import { getPostsInsightsLite } from '@/middlewares/librairies/posts/insights';
 
-export default function Sitemap() {
-}
+export default function Sitemap() {}
 
 export async function getServerSideProps({ res }) {
-  const spotlights = await getPostsSpotlightsLite({ page: -1 })
+  const [spotlights, insights] = await Promise.all([getPostsSpotlightsLite({ page: -1 }), getPostsInsightsLite({ page: -1 })])
   const slugsSpotlights = spotlights.filter((post) => post.attributes.Slug !== null).map((post) => (post.attributes.Slug))
-  const insights = await getPostsInsightsLite({ page: -1 })
   const slugsInsights = insights.filter((post) =>post.attributes.Slug !== null && post.attributes.Source_link == null).map((post) => (post.attributes.Slug))
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
