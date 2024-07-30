@@ -47,7 +47,7 @@ export default function HeaderDesktop() {
             </li>
             <li className="page">
               <a href="https://studio.tomvaillant.com" target="_blank" rel="noopener noreferrer" onMouseEnter={ () => setDropdown(false) }>
-                <p className="typography-01">Studio</p>
+                <p className="typography-01">Portfolio</p>
               </a>
             </li>
             <li className="page">

@@ -103,7 +103,7 @@ export default function HeaderMobile() {
                 </li>
                 <li className="page">
                   <a href="https://studio.tomvaillant.com">
-                    <p className="typography-01">Studio</p>
+                    <p className="typography-01">Portfolio</p>
                   </a>
                 </li>
                 <li className="page">
