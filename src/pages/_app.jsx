@@ -15,8 +15,8 @@ import useStore from '@/hooks/useStore'
 import Layout from '@/components/layouts';
 
 // Metas
-const title = 'Tom Vaillant'
-const url = 'https://tomvaillant.com/'
+const title = 'Nuanced'
+const url = 'https://nuanced.ch/'
 const description = "Discover the world's best visual narratives. Inspiration, insights and resources for interactive storytelling."
 const keywords = 'dataviz, information, design, visualisation, narrative, interactive, visual, journalism, awards, resources, insights, courses, community, data'
 const author = 'Tom Vaillant'

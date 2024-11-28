@@ -1,11 +1,11 @@
-# Tom Vaillant
-> Tom Vaillant's website
+# Nuanced
+> Nuanced's website
 
 ## URLs
 | Name              | URL | Informations |
 | ----------------- | --- | ------------ |
 | **Developement**  | [http://localhost:3000](http://localhost:3000) | `N/A` |
-| **Production**    | [https://tomvaillant.com](https://tomvaillant.com) | `N/A` |
+| **Production**    | [https://nuanced.ch](https://nuanced.ch) | `N/A` |
 
 #### Others :
 - 🔠 [API repository](https://github.com/buriedsignalsmag/buriedsignals-api)

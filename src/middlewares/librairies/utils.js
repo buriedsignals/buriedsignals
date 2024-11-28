@@ -13,7 +13,7 @@ export function parsePageSimple(datas) {
     slug: datas.Slug ? datas.Slug : null,
     description: datas.Description ? datas.Description : "",
     meta: {
-      title: datas.Meta_title ? datas.Meta_title : datas.Title ? `Tom Vaillant - ${ datas.Title }` : "",
+      title: datas.Meta_title ? datas.Meta_title : datas.Title ? `Nuanced - ${ datas.Title }` : "",
       description: datas.Meta_description ? datas.Meta_description : datas.Description ? datas.Description : "",
       keywords: datas.Meta_keywords ? datas.Meta_keywords : "",
       image: datas.Meta_image ? datas.Meta_image.data ? getImage(datas.Meta_image) : null : null
@@ -28,7 +28,7 @@ export function parsePageFlexible(datas) {
     description: datas.Description ? datas.Description : "",
     flexible_content: getDynamicContent(datas.Dynamic_content),
     meta: {
-      title: datas.Meta_title ? datas.Meta_title : datas.Title ? `Tom Vaillant - ${ datas.Title }` : "",
+      title: datas.Meta_title ? datas.Meta_title : datas.Title ? `Nuanced - ${ datas.Title }` : "",
       description: datas.Meta_description ? datas.Meta_description : datas.Description ? datas.Description : "",
       keywords: datas.Meta_keywords ? datas.Meta_keywords : "",
       image: datas.Meta_image ? datas.Meta_image.data ? getImage(datas.Meta_image) : null : null
@@ -62,7 +62,7 @@ export function parsePostSpotlight(data) {
     }: null,
     title: data.Title ? data.Title : "",
     meta: {
-      title: data.Meta_title ? data.Meta_title : data.Title ? `Tom Vaillant - ${ data.Title }` : "",
+      title: data.Meta_title ? data.Meta_title : data.Title ? `Nuanced - ${ data.Title }` : "",
       description: data.Meta_description ? data.Meta_description : data.Description ? data.Description : "",
       keywords: data.Meta_keywords ? data.Meta_keywords : "",
       image: data.Meta_image ? data.Meta_image.data ? getImage(data.Meta_image) : getImage(data.Image) : getImage(data.Image)
@@ -108,7 +108,7 @@ export function parsePostInsight(data) {
     },
     title: data.Title ? data.Title : "",
     meta: {
-      title: data.Meta_title ? data.Meta_title : data.Title ? `Tom Vaillant - ${ data.Title }` : "",
+      title: data.Meta_title ? data.Meta_title : data.Title ? `Nuanced - ${ data.Title }` : "",
       description: data.Meta_description ? data.Meta_description : data.Description ? data.Description : "",
       keywords: data.Meta_keywords ? data.Meta_keywords : "",
       image: data.Meta_image ? data.Meta_image.data ? getImage(data.Meta_image) : getImage(data.Image) : getImage(data.Image)
@@ -187,7 +187,7 @@ export function parsePostProject(data) {
     },
     title: data.Title ? data.Title : "",
     meta: {
-      title: data.Meta_title ? data.Meta_title : data.Title ? `Tom Vaillant - ${ data.Title }` : "",
+      title: data.Meta_title ? data.Meta_title : data.Title ? `Nuanced - ${ data.Title }` : "",
       description: data.Meta_description ? data.Meta_description : data.Description ? data.Description : "",
       keywords: data.Meta_keywords ? data.Meta_keywords : "",
       image: data.Meta_image ? data.Meta_image.data ? getImage(data.Meta_image) : getImage(data.Image) : getImage(data.Image)

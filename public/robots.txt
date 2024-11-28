@@ -9,4 +9,4 @@ Allow: /
 Allow: /profiles/signin$
 Allow: /profiles/signup$
 
-Sitemap: https://tomvaillant.com/sitemap.xml
+Sitemap: https://nuanced.ch/sitemap.xml

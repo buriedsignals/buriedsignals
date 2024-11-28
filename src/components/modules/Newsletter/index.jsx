@@ -15,7 +15,7 @@ export default function Newsletter({ ...props }) {
           <NewletterIcon />
         </div>
         <p className="typography-09 details">The monthly newsletter for journalists who want to tell stories visually. Decoding the tools and methodologies used in exceptional visual investigations.</p>
-        <ThirstyLink color="black02" colorHover="white" href="https://www.nuanced.ch/" target="_blank" rel="noopener noreferrer">{ "Subscribe" }</ThirstyLink>
+        <ThirstyLink color="black02" colorHover="white" href="https://www.tomvaillant.substack.com" target="_blank" rel="noopener noreferrer">{ "Subscribe" }</ThirstyLink>
       </div>
     </NewsletterStyle>
   )

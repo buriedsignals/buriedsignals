@@ -102,12 +102,7 @@ export default function HeaderMobile() {
                   </a>
                 </li>
                 <li className="page">
-                  <a href="https://studio.tomvaillant.com">
-                    <p className="typography-01">Portfolio</p>
-                  </a>
-                </li>
-                <li className="page">
-                  <a href="https://www.nuanced.ch">
+                  <a href="https://www.tomvaillant.substack.com">
                     <p className="typography-01">Newsletter</p>
                   </a>
                 </li>

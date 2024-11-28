@@ -98,14 +98,14 @@ export const FooterStyle = styled.footer`
       .logo {
         width: 108px;
         svg {
-          path {
+          rect, path {
             fill: var(--color-white);
             transition: fill 0.25s ease-in;
           }
         }
         &:hover {
           svg {
-            path {
+            rect, path {
               fill: var(--color-green);
               transition: fill 0.25s ease-out;
             }

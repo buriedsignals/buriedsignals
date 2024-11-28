@@ -12,7 +12,7 @@ export default async function handle(req, res) {
     });    
     const author = datas.Source_author_twitter_account ? datas.Source_author_twitter_account.startsWith('@') ? datas.Source_author_twitter_account : `@${ datas.Source_author_twitter_account }` : datas.Source_author
     const description = `\n\n${ datas.Description }\n\n•`
-    const url = datas.Source_link ? datas.Source_link :`https://tomvaillant.com/insights/${datas.Slug}`
+    const url = datas.Source_link ? datas.Source_link :`https://nuanced.ch/insights/${datas.Slug}`
     const categories = datas.Categories.length !== 0 ? ` | ${ datas.Categories[0].Title }` : ""
     const responseLink = await fetch('https://api-ssl.bitly.com/v4/shorten', {
       method: 'POST',

@@ -12,34 +12,34 @@ export async function getServerSideProps({ res }) {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <url>
-        <loc>https://tomvaillant.com</loc>
+        <loc>https://nuanced.ch</loc>
       </url>
       <url>
-        <loc>https://tomvaillant.com/insights</loc>
+        <loc>https://nuanced.ch/insights</loc>
       </url>
       <url>
-        <loc>https://tomvaillant.com/resources</loc>
+        <loc>https://nuanced.ch/resources</loc>
       </url>
       <url>
-        <loc>https://tomvaillant.com/about</loc>
+        <loc>https://nuanced.ch/about</loc>
       </url>
       <url>
-        <loc>https://tomvaillant.com/privacy</loc>
+        <loc>https://nuanced.ch/privacy</loc>
       </url>
       <url>
-        <loc>https://tomvaillant.com/notice</loc>
+        <loc>https://nuanced.ch/notice</loc>
       </url>
       <url>
-        <loc>https://tomvaillant.com/terms</loc>
+        <loc>https://nuanced.ch/terms</loc>
       </url>
       <url>
-        <loc>https://tomvaillant.com/404</loc>
+        <loc>https://nuanced.ch/404</loc>
       </url>
       ${slugsSpotlights.map(
         (slug) => {
           return `
               <url>
-                <loc>https://tomvaillant.com/spotlights/${slug}</loc>
+                <loc>https://nuanced.ch/spotlights/${slug}</loc>
               </url>
             `
           }).join('')
@@ -48,7 +48,7 @@ export async function getServerSideProps({ res }) {
         (slug) => {
           return `
               <url>
-                <loc>https://tomvaillant.com/insights/${slug}</loc>
+                <loc>https://nuanced.ch/insights/${slug}</loc>
               </url>
             `
           }).join('')
