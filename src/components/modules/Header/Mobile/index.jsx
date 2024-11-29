@@ -102,7 +102,7 @@ export default function HeaderMobile() {
                   </a>
                 </li>
                 <li className="page">
-                  <a href="https://www.tomvaillant.substack.com">
+                  <a href="https://tomvaillant.substack.com">
                     <p className="typography-01">Newsletter</p>
                   </a>
                 </li>
