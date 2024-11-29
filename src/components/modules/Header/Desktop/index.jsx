@@ -42,7 +42,7 @@ export default function HeaderDesktop() {
             </li>
             <li className="page">
               <a href="https://www.youtube.com/@_tomvaillant" target="_blank" rel="noopener noreferrer" onMouseEnter={ () => setDropdown(false) }>
-                <p className="typography-01">Channel</p>
+                <p className="typography-01">Video Channel</p>
               </a>
             </li>
             <li className="page">
