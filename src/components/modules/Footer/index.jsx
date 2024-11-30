@@ -32,7 +32,7 @@ export default function Footer() {
           </div>
           <div className="buried">
             <Link href="/"><a className="typography-01">Blog</a></Link>
-            <a href="https://www.youtube.com/@_tomvaillant" className="typography-01" target="_blank" rel="noopener noreferrer">Channel</a>
+            <a href="https://www.youtube.com/@_tomvaillant" className="typography-01" target="_blank" rel="noopener noreferrer">Video Channel</a>
             <Link href="/about"><a className="typography-01">About</a></Link>
           </div>
         </div>
